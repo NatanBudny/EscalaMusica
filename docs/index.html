@@ -51,8 +51,8 @@
     background-color: #222;
     color: white;
     position: sticky;
-    top: 0;
-    z-index: 1;
+    top: 40px; /* space for filter inputs */
+    z-index: 2;
   }
   tr:last-child td {
     border-bottom: none;
@@ -62,6 +62,35 @@
     background: transparent;
     border: none;
     pointer-events: none;
+  }
+  /* Linha de filtros */
+  tr.filters-row input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px 6px;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: #fff;
+    color: #222;
+  }
+  tr.filters-row input:focus {
+    outline: none;
+    border-color: #666;
+  }
+  /* ajuste para filtro select do dia da semana */
+  tr.filters-row select {
+    width: 100%;
+    padding: 5px 6px;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: #fff;
+    color: #222;
+  }
+  tr.filters-row select:focus {
+    outline: none;
+    border-color: #666;
   }
   @keyframes fadeInUp {
     from {opacity: 0; transform: translateY(10px);}
@@ -75,8 +104,22 @@
     table, thead, tbody, th, td, tr {
       display: block;
     }
-    thead {
+    thead tr:not(.filters-row) {
       display: none;
+    }
+    tr.filters-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #ddd;
+      background: #f7f7f7;
+      position: sticky;
+      top: 0;
+      z-index: 3;
+    }
+    tr.filters-row input, tr.filters-row select {
+      flex: 1 1 150px;
     }
     tr {
       margin-bottom: 15px;
@@ -105,8 +148,7 @@
 </style>
 </head>
 <body>
-<h1>ESCALA MÚSICA</h1>
-<h3>Junho de 2025</h3>
+<h1>Escala de Louvor</h1>
 <div class="loader" id="carregando"></div>
 
 <table id="tabela-escala" aria-label="Tabela com escala de louvor">
@@ -125,6 +167,34 @@
       <th>SUPORTE</th>
       <th>OBS</th>
     </tr>
+    <tr class="filters-row">
+      <th><input type="date" id="filter-data" /></th>
+      <th>
+        <select id="filter-diaSemana">
+          <option value="">Todos</option>
+          <option value="domingo">domingo</option>
+          <option value="segunda-feira">segunda-feira</option>
+          <option value="terça-feira">terça-feira</option>
+          <option value="quarta-feira">quarta-feira</option>
+          <option value="quinta-feira">quinta-feira</option>
+          <option value="sexta-feira">sexta-feira</option>
+          <option value="sábado">sábado</option>
+          <option value="sábado/tarde">sábado/tarde</option>
+          <option value="batismo">batismo</option>
+          <!-- pode ajustar opções conforme dados -->
+        </select>
+      </th>
+      <th><input type="text" id="filter-regente" placeholder="Regente" /></th>
+      <th><input type="text" id="filter-acomp" placeholder="Acomp" /></th>
+      <th><input type="text" id="filter-equipeLouvor" placeholder="Equipe Louvor" /></th>
+      <th><input type="text" id="filter-msgMuscal" placeholder="Mensagem Musical" /></th>
+      <th><!-- coluna vazia --></th>
+      <th><input type="text" id="filter-pregador" placeholder="Pregador" /></th>
+      <th><input type="text" id="filter-anciao" placeholder="Ancião" /></th>
+      <th><input type="text" id="filter-audiovisual" placeholder="Audiovisual" /></th>
+      <th><input type="text" id="filter-suporte" placeholder="Suporte" /></th>
+      <th><input type="text" id="filter-obs" placeholder="Obs" /></th>
+    </tr>
   </thead>
   <tbody>
     <!-- Conteúdo gerado via JS -->
@@ -132,6 +202,8 @@
 </table>
 
 <script>
+  let linhasDados = [];
+
   async function carregarCSV() {
     try {
       const resposta = await fetch('atual.csv', { headers: { 'Content-Type': 'text/plain' } });
@@ -155,14 +227,10 @@
         'OBS'
       ];
 
-      const corpoTabela = document.querySelector('#tabela-escala tbody');
-      corpoTabela.innerHTML = '';
-
-      linhas.forEach((linha, i) => {
+      linhasDados = linhas.map(linha => {
         const colunasOriginais = linha.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g)
           .map(c => c.replace(/^"|"$/g, '').trim());
-
-        // Insere coluna vazia na posição 6 (índice 6)
+        // Insere coluna vazia na posição 6
         const colunas = [];
         for (let idx = 0; idx < colunasOriginais.length + 1; idx++) {
           if (idx === 6) {
@@ -173,24 +241,13 @@
             colunas.push(colunasOriginais[idx]);
           }
         }
-
-        // garante o tamanho correto
         while (colunas.length < cabecalhos.length) {
           colunas.push('');
         }
-
-        const tr = document.createElement('tr');
-        colunas.forEach((col, idx) => {
-          const td = document.createElement('td');
-          td.textContent = col;
-          td.setAttribute('data-label', cabecalhos[idx] || '');
-          tr.appendChild(td);
-        });
-
-        tr.classList.add('animada');
-        tr.style.animationDelay = `${i * 0.05}s`;
-        corpoTabela.appendChild(tr);
+        return colunas;
       });
+
+      montarTabela(linhasDados);
 
       setTimeout(() => {
         document.getElementById('carregando').style.display = 'none';
@@ -207,7 +264,107 @@
       document.body.appendChild(pErro);
     }
   }
-  carregarCSV();
+
+  function montarTabela(dados) {
+    const corpoTabela = document.querySelector('#tabela-escala tbody');
+    corpoTabela.innerHTML = '';
+    dados.forEach((colunas, i) => {
+      const tr = document.createElement('tr');
+      colunas.forEach((col, idx) => {
+        const td = document.createElement('td');
+        td.textContent = col;
+        td.setAttribute('data-label', [
+          'DATA',
+          'DIA SEMANA',
+          'REGENTE',
+          'ACOMP',
+          'EQUIPE LOUVOR',
+          'MENSAGEM MUSCAL',
+          '',
+          'PREGADOR',
+          'ANCIÃO',
+          'AUDIOVISUAL',
+          'SUPORTE',
+          'OBS'
+        ][idx] || '');
+        tr.appendChild(td);
+      });
+      tr.classList.add('animada');
+      tr.style.animationDelay = `${i * 0.05}s`;
+      corpoTabela.appendChild(tr);
+    });
+  }
+
+  function filtrarTabela() {
+    // pega os valores dos filtros
+    const filtroData = document.getElementById('filter-data').value; // yyyy-mm-dd
+    const filtroDiaSemana = document.getElementById('filter-diaSemana').value.trim().toLowerCase();
+    const filtroRegente = document.getElementById('filter-regente').value.trim().toLowerCase();
+    const filtroAcomp = document.getElementById('filter-acomp').value.trim().toLowerCase();
+    const filtroEquipeLouvor = document.getElementById('filter-equipeLouvor').value.trim().toLowerCase();
+    const filtroMsgMuscal = document.getElementById('filter-msgMuscal').value.trim().toLowerCase();
+    const filtroPregador = document.getElementById('filter-pregador').value.trim().toLowerCase();
+    const filtroAnciao = document.getElementById('filter-anciao').value.trim().toLowerCase();
+    const filtroAudiovisual = document.getElementById('filter-audiovisual').value.trim().toLowerCase();
+    const filtroSuporte = document.getElementById('filter-suporte').value.trim().toLowerCase();
+    const filtroObs = document.getElementById('filter-obs').value.trim().toLowerCase();
+
+    const dadosFiltrados = linhasDados.filter(cols => {
+      // cols: array das colunas da linha
+
+      // filtro data: comparar formato do csv dd/mm/yyyy com input yyyy-mm-dd
+      if (filtroData) {
+        const partes = cols[0].split('/');
+        if (partes.length !== 3) return false;
+        const dataFormatada = `${partes[2]}-${partes[1].padStart(2,'0')}-${partes[0].padStart(2,'0')}`;
+        if (dataFormatada !== filtroData) return false;
+      }
+      // outros filtros: comparar texto contém (case insensitive)
+      if (filtroDiaSemana && !cols[1].toLowerCase().includes(filtroDiaSemana)) return false;
+      if (filtroRegente && !cols[2].toLowerCase().includes(filtroRegente)) return false;
+      if (filtroAcomp && !cols[3].toLowerCase().includes(filtroAcomp)) return false;
+      if (filtroEquipeLouvor && !cols[4].toLowerCase().includes(filtroEquipeLouvor)) return false;
+      if (filtroMsgMuscal && !cols[5].toLowerCase().includes(filtroMsgMuscal)) return false;
+      // coluna 6 é vazia, ignorar
+      if (filtroPregador && !cols[7].toLowerCase().includes(filtroPregador)) return false;
+      if (filtroAnciao && !cols[8].toLowerCase().includes(filtroAnciao)) return false;
+      if (filtroAudiovisual && !cols[9].toLowerCase().includes(filtroAudiovisual)) return false;
+      if (filtroSuporte && !cols[10].toLowerCase().includes(filtroSuporte)) return false;
+      if (filtroObs && !cols[11].toLowerCase().includes(filtroObs)) return false;
+
+      return true;
+    });
+
+    montarTabela(dadosFiltrados);
+  }
+
+  // adiciona listeners para todos os filtros
+  function ativarFiltros() {
+    const filtros = [
+      'filter-data',
+      'filter-diaSemana',
+      'filter-regente',
+      'filter-acomp',
+      'filter-equipeLouvor',
+      'filter-msgMuscal',
+      'filter-pregador',
+      'filter-anciao',
+      'filter-audiovisual',
+      'filter-suporte',
+      'filter-obs',
+    ];
+    filtros.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('input', filtrarTabela);
+        if(el.tagName === 'SELECT') {
+          el.addEventListener('change', filtrarTabela);
+        }
+      }
+    });
+  }
+
+  carregarCSV().then(() => ativarFiltros());
 </script>
 </body>
 </html>
