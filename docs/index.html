@@ -19,6 +19,8 @@
     text-align: center;
     margin-bottom: 20px;
   }
+
+  /* Loader */
   .loader {
     border: 6px solid #eee;
     border-top: 6px solid #444;
@@ -32,96 +34,19 @@
     0% {transform: rotate(0deg);}
     100% {transform: rotate(360deg);}
   }
-  /* Estilo dos filtros */
-  #filtros {
-    background: white;
-    border-radius: 10px;
-    padding: 20px 24px 24px 24px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-    max-width: 960px;
-    margin: 0 auto 24px auto;
-    font-family: system-ui, sans-serif;
-  }
-  #filtros summary {
-    font-weight: 700;
-    cursor: pointer;
-    font-size: 1.2em;
-    margin-bottom: 18px;
-    outline: none;
-  }
-  #filtros[open] {
-    padding-bottom: 24px;
-  }
-  #filtros details[open] {
-    animation: expand 0.3s ease forwards;
-  }
-  @keyframes expand {
-    from { max-height: 0; opacity: 0; }
-    to { max-height: 100vh; opacity: 1; }
-  }
-  /* Grid dos filtros */
-  #filtros > div.filtros-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
-    gap: 16px 18px;
-    align-items: center;
-  }
-  label {
-    font-weight: 600;
-    font-size: 13px;
-    color: #444;
-    user-select: none;
-    display: block;
-    margin-bottom: 6px;
-  }
-  input[type="text"], select {
-    width: 100%;
-    padding: 9px 14px;
-    border-radius: 8px;
-    border: 1.8px solid #ccc;
-    font-size: 14px;
-    transition: border-color 0.25s ease, box-shadow 0.25s ease;
-    font-family: system-ui, sans-serif;
-    box-shadow: none;
-    outline-offset: 2px;
-  }
-  input[type="text"]::placeholder {
-    color: #999;
-    font-style: italic;
-  }
-  input[type="text"]:focus, select:focus {
-    border-color: #0078d4;
-    box-shadow: 0 0 6px #0078d4aa;
-    outline: none;
-  }
-  button#btnLimpar {
-    grid-column: 1 / -1;
-    background-color: #0078d4;
-    color: white;
-    font-weight: 600;
-    padding: 12px 18px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 15px;
-    transition: background-color 0.3s ease;
-  }
-  button#btnLimpar:hover {
-    background-color: #005ea3;
-  }
 
   /* Tabela */
   table {
     width: 100%;
     border-collapse: collapse;
     background: white;
-    border-radius: 8px;
+    border-radius: 6px;
     overflow: hidden;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     display: none;
   }
   th, td {
-    padding: 11px 10px;
+    padding: 10px 8px;
     text-align: center;
     border-bottom: 1px solid #eee;
     font-size: 14px;
@@ -136,14 +61,12 @@
   tr:last-child td {
     border-bottom: none;
   }
-  /* Linha zebrada */
+  /* Zebra */
   tbody tr:nth-child(odd) {
-    background-color: #fafafa;
-  }
-  tbody tr:nth-child(even) {
-    background-color: #fff;
+    background-color: #f9f9f9;
   }
 
+  /* Linha animada */
   @keyframes fadeInUp {
     from {opacity: 0; transform: translateY(10px);}
     to {opacity: 1; transform: translateY(0);}
@@ -152,35 +75,75 @@
     opacity: 0;
     animation: fadeInUp 0.3s ease forwards;
   }
+
+  /* Filtros container */
+  #filtros {
+    max-width: 1000px;
+    margin: 0 auto 20px auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px 16px;
+    background-color: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    user-select: none;
+  }
+  #filtros.collapsed {
+    height: 40px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  #filtros h2 {
+    margin: 0;
+    font-size: 18px;
+    line-height: 40px;
+    font-weight: 600;
+    color: #222;
+    user-select: none;
+  }
+  #filtros h2::after {
+    content: '▼';
+    float: right;
+    transition: transform 0.3s ease;
+  }
+  #filtros.collapsed h2::after {
+    transform: rotate(-90deg);
+  }
+
+  /* Campos de filtro */
+  #filtros .campos {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px 16px;
+  }
+  #filtros.collapsed .campos {
+    display: none;
+  }
+
+  #filtros input[type="text"],
+  #filtros select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #333;
+    transition: border-color 0.2s ease;
+  }
+  #filtros input[type="text"]::placeholder {
+    color: #999;
+  }
+  #filtros input[type="text"]:focus,
+  #filtros select:focus {
+    border-color: #444;
+    outline: none;
+  }
+
+  /* Responsivo */
   @media (max-width: 768px) {
-    table, thead, tbody, th, td, tr {
-      display: block;
-    }
-    thead {
-      display: none;
-    }
-    tr {
-      margin-bottom: 15px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      background: white;
-      padding: 14px;
-    }
-    td {
-      text-align: left;
-      padding: 7px 12px;
-      font-size: 13px;
-      border: none;
-      position: relative;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-    }
-    td::before {
-      content: attr(data-label);
-      font-weight: 700;
-      display: block;
-      color: #555;
-      margin-bottom: 8px;
+    #filtros .campos {
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 10px;
     }
   }
 </style>
@@ -188,56 +151,27 @@
 <body>
 <h1>Escala de Louvor</h1>
 
-<details id="filtros" open>
-  <summary>Filtros de Visualização</summary>
-  <div class="filtros-grid">
-    <div>
-      <label for="filtrarData">Data</label>
-      <select id="filtrarData" aria-label="Filtrar por data">
-        <option value="">Todas as datas</option>
-      </select>
-    </div>
-    <div>
-      <label for="filtrarDiaSemana">Dia Semana</label>
-      <input type="text" id="filtrarDiaSemana" placeholder="ex: sábado" aria-label="Filtrar por dia da semana" />
-    </div>
-    <div>
-      <label for="filtrarRegente">Regente</label>
-      <input type="text" id="filtrarRegente" placeholder="nome regente" aria-label="Filtrar por regente" />
-    </div>
-    <div>
-      <label for="filtrarAcomp">Acomp</label>
-      <input type="text" id="filtrarAcomp" placeholder="ex: PB, BANDA" aria-label="Filtrar por acompanhamento" />
-    </div>
-    <div>
-      <label for="filtrarMensagem">Mensagem Musical</label>
-      <input type="text" id="filtrarMensagem" placeholder="nome da mensagem" aria-label="Filtrar por mensagem musical" />
-    </div>
-    <div>
-      <label for="filtrarPregador">Pregador</label>
-      <input type="text" id="filtrarPregador" placeholder="nome do pregador" aria-label="Filtrar por pregador" />
-    </div>
-    <div>
-      <label for="filtrarAnciao">Ancião</label>
-      <input type="text" id="filtrarAnciao" placeholder="nome do ancião" aria-label="Filtrar por ancião" />
-    </div>
-    <div>
-      <label for="filtrarAudiovisual">Audiovisual</label>
-      <input type="text" id="filtrarAudiovisual" placeholder="nome do audiovisual" aria-label="Filtrar por audiovisual" />
-    </div>
-    <div>
-      <label for="filtrarSuporte">Suporte</label>
-      <input type="text" id="filtrarSuporte" placeholder="nome do suporte" aria-label="Filtrar por suporte" />
-    </div>
-    <div>
-      <label for="filtrarObs">Obs</label>
-      <input type="text" id="filtrarObs" placeholder="observações" aria-label="Filtrar por observações" />
-    </div>
-    <div>
-      <button id="btnLimpar" aria-label="Limpar todos os filtros">Limpar filtros</button>
-    </div>
+<div id="filtros" class="collapsed" title="Clique para expandir/recolher filtros">
+  <h2>Filtros</h2>
+  <div class="campos">
+    <input type="text" id="filtrarData" placeholder="Filtrar por Data" />
+    <select id="filtrarDiaSemana" aria-label="Filtrar por Dia da Semana">
+      <option value="">Filtrar por Dia Semana</option>
+      <option value="domingo">domingo</option>
+      <option value="sexta-feira">sexta-feira</option>
+      <option value="sábado">sábado</option>
+      <option value="sábado/tarde">sábado/tarde</option>
+    </select>
+    <input type="text" id="filtrarRegente" placeholder="Filtrar por Regente" />
+    <input type="text" id="filtrarAcomp" placeholder="Filtrar por Acompanhamento" />
+    <input type="text" id="filtrarMensagem" placeholder="Filtrar por Mensagem Musical" />
+    <input type="text" id="filtrarPregador" placeholder="Filtrar por Pregador" />
+    <input type="text" id="filtrarAnciao" placeholder="Filtrar por Ancião" />
+    <input type="text" id="filtrarAudiovisual" placeholder="Filtrar por Audiovisual" />
+    <input type="text" id="filtrarSuporte" placeholder="Filtrar por Suporte" />
+    <input type="text" id="filtrarObs" placeholder="Filtrar por Observação" />
   </div>
-</details>
+</div>
 
 <div class="loader" id="carregando"></div>
 
@@ -249,7 +183,7 @@
       <th>REGENTE</th>
       <th>ACOMP</th>
       <th>EQUIPE LOUVOR</th>
-      <th>MENSAGEM MUSCAL</th>
+      <th>MENSAGEM MUSICAL</th>
       <th>PREGADOR</th>
       <th>ANCIÃO</th>
       <th>AUDIOVISUAL</th>
@@ -263,31 +197,8 @@
 </table>
 
 <script>
-  const cabecalhos = [
-    'DATA',
-    'DIA SEMANA',
-    'REGENTE',
-    'ACOMP',
-    'EQUIPE LOUVOR',
-    'MENSAGEM MUSCAL',
-    'PREGADOR',
-    'ANCIÃO',
-    'AUDIOVISUAL',
-    'SUPORTE',
-    'OBS'
-  ];
-
-  const diasAbrev = {
-    domingo: 'dom',
-    segunda: 'seg',
-    terça: 'ter',
-    terca: 'ter',
-    quarta: 'qua',
-    quinta: 'qui',
-    sexta: 'sex',
-    sábado: 'sab',
-    sabado: 'sab',
-  };
+  // Variável global para armazenar linhas carregadas do CSV
+  let linhasCSV = [];
 
   async function carregarCSV() {
     try {
@@ -297,64 +208,24 @@
 
       const linhas = texto.trim().split('\n').filter(l => l.trim() !== '');
 
-      const corpoTabela = document.querySelector('#tabela-escala tbody');
-      corpoTabela.innerHTML = '';
-
-      const datasUnicas = new Map();
-
-      linhas.forEach((linha, i) => {
+      linhasCSV = linhas.map(linha => {
+        // separa por vírgula, respeitando aspas duplas
         const colunas = linha.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g)
           .map(c => c.replace(/^"|"$/g, '').trim());
 
-        while (colunas.length < cabecalhos.length) {
+        // completa com vazios se faltar colunas
+        while (colunas.length < 11) {
           colunas.push('');
         }
-
-        const tr = document.createElement('tr');
-        colunas.forEach((col, idx) => {
-          const td = document.createElement('td');
-          td.textContent = col;
-          td.setAttribute('data-label', cabecalhos[idx] || '');
-          tr.appendChild(td);
-        });
-
-        tr.classList.add('animada');
-        tr.style.animationDelay = `${i * 0.05}s`;
-        corpoTabela.appendChild(tr);
-
-        const data = colunas[0];
-        const diaSemana = colunas[1].toLowerCase();
-        if (data && diaSemana) {
-          const dataFormatada = data.slice(0,5);
-          const diaAbrev = diasAbrev[diaSemana] || diaSemana.slice(0,3);
-          const chave = `${dataFormatada} (${diaAbrev})`;
-          if (!datasUnicas.has(chave)) {
-            datasUnicas.set(chave, data);
-          }
-        }
+        return colunas;
       });
 
-      const selectData = document.getElementById('filtrarData');
-      selectData.options.length = 1;
+      popularSelects(); // Popular opções dos selects (se precisar)
 
-      const arrDatas = Array.from(datasUnicas.entries());
-      arrDatas.sort((a,b) => {
-        const dataA = a[1].split('/').reverse().join('');
-        const dataB = b[1].split('/').reverse().join('');
-        return dataA.localeCompare(dataB);
-      });
-      arrDatas.forEach(([label, valor]) => {
-        const opt = document.createElement('option');
-        opt.value = valor;
-        opt.textContent = label;
-        selectData.appendChild(opt);
-      });
+      montarTabela(linhasCSV);
 
-      setTimeout(() => {
-        document.getElementById('carregando').style.display = 'none';
-        document.getElementById('tabela-escala').style.display = 'table';
-      }, 100);
-
+      document.getElementById('carregando').style.display = 'none';
+      document.getElementById('tabela-escala').style.display = 'table';
     } catch (e) {
       console.error('Erro ao carregar CSV:', e);
       document.getElementById('carregando').style.display = 'none';
@@ -366,75 +237,112 @@
     }
   }
 
-  function aplicarFiltros() {
-    const filtros = {
-      DATA: document.getElementById('filtrarData').value.toLowerCase(),
-      'DIA SEMANA': document.getElementById('filtrarDiaSemana').value.toLowerCase(),
-      REGENTE: document.getElementById('filtrarRegente').value.toLowerCase(),
-      ACOMP: document.getElementById('filtrarAcomp').value.toLowerCase(),
-      'MENSAGEM MUSCAL': document.getElementById('filtrarMensagem').value.toLowerCase(),
-      PREGADOR: document.getElementById('filtrarPregador').value.toLowerCase(),
-      ANCIÃO: document.getElementById('filtrarAnciao').value.toLowerCase(),
-      AUDIOVISUAL: document.getElementById('filtrarAudiovisual').value.toLowerCase(),
-      SUPORTE: document.getElementById('filtrarSuporte').value.toLowerCase(),
-      OBS: document.getElementById('filtrarObs').value.toLowerCase(),
-    };
+  function montarTabela(dados) {
+    const corpoTabela = document.querySelector('#tabela-escala tbody');
+    corpoTabela.innerHTML = '';
 
-    const linhas = document.querySelectorAll('#tabela-escala tbody tr');
-    linhas.forEach(linha => {
-      let mostra = true;
-
-      Object.entries(filtros).forEach(([col, filtro]) => {
-        if (filtro) {
-          const indiceCol = cabecalhos.indexOf(col);
-          let textoCelula = linha.cells[indiceCol]?.textContent.toLowerCase() || '';
-          if (col === 'DATA' && filtro) {
-            if (textoCelula !== filtro) {
-              mostra = false;
-            }
-          } else {
-            if (!textoCelula.includes(filtro)) {
-              mostra = false;
-            }
-          }
-        }
+    dados.forEach((colunas, i) => {
+      const tr = document.createElement('tr');
+      colunas.forEach((col, idx) => {
+        const td = document.createElement('td');
+        td.textContent = col;
+        const cabecalhos = ['DATA','DIA SEMANA','REGENTE','ACOMP','EQUIPE LOUVOR','MENSAGEM MUSICAL','PREGADOR','ANCIÃO','AUDIOVISUAL','SUPORTE','OBS'];
+        td.setAttribute('data-label', cabecalhos[idx]);
+        tr.appendChild(td);
       });
-
-      linha.style.display = mostra ? '' : 'none';
+      tr.classList.add('animada');
+      tr.style.animationDelay = `${i * 0.05}s`;
+      corpoTabela.appendChild(tr);
     });
   }
 
-  function limparFiltros() {
-    [
+  function aplicarFiltros() {
+    const filtros = {
+      filtrarData: document.getElementById('filtrarData').value.trim().toLowerCase(),
+      filtrarDiaSemana: document.getElementById('filtrarDiaSemana').value.trim().toLowerCase(),
+      filtrarRegente: document.getElementById('filtrarRegente').value.trim().toLowerCase(),
+      filtrarAcomp: document.getElementById('filtrarAcomp').value.trim().toLowerCase(),
+      filtrarMensagem: document.getElementById('filtrarMensagem').value.trim().toLowerCase(),
+      filtrarPregador: document.getElementById('filtrarPregador').value.trim().toLowerCase(),
+      filtrarAnciao: document.getElementById('filtrarAnciao').value.trim().toLowerCase(),
+      filtrarAudiovisual: document.getElementById('filtrarAudiovisual').value.trim().toLowerCase(),
+      filtrarSuporte: document.getElementById('filtrarSuporte').value.trim().toLowerCase(),
+      filtrarObs: document.getElementById('filtrarObs').value.trim().toLowerCase(),
+    };
+
+    const dadosFiltrados = linhasCSV.filter(colunas => {
+      return (
+        (filtros.filtrarData === '' || colunas[0].toLowerCase().includes(filtros.filtrarData)) &&
+        (filtros.filtrarDiaSemana === '' || colunas[1].toLowerCase() === filtros.filtrarDiaSemana) &&
+        (filtros.filtrarRegente === '' || colunas[2].toLowerCase().includes(filtros.filtrarRegente)) &&
+        (filtros.filtrarAcomp === '' || colunas[3].toLowerCase().includes(filtros.filtrarAcomp)) &&
+        (filtros.filtrarMensagem === '' || colunas[5].toLowerCase().includes(filtros.filtrarMensagem)) &&
+        (filtros.filtrarPregador === '' || colunas[6].toLowerCase().includes(filtros.filtrarPregador)) &&
+        (filtros.filtrarAnciao === '' || colunas[7].toLowerCase().includes(filtros.filtrarAnciao)) &&
+        (filtros.filtrarAudiovisual === '' || colunas[8].toLowerCase().includes(filtros.filtrarAudiovisual)) &&
+        (filtros.filtrarSuporte === '' || colunas[9].toLowerCase().includes(filtros.filtrarSuporte)) &&
+        (filtros.filtrarObs === '' || colunas[10].toLowerCase().includes(filtros.filtrarObs))
+      );
+    });
+
+    montarTabela(dadosFiltrados);
+  }
+
+  function pegarFiltrosDaURL() {
+    const params = new URLSearchParams(window.location.search);
+    const camposFiltro = [
       'filtrarData', 'filtrarDiaSemana', 'filtrarRegente', 'filtrarAcomp',
       'filtrarMensagem', 'filtrarPregador', 'filtrarAnciao',
       'filtrarAudiovisual', 'filtrarSuporte', 'filtrarObs'
-    ].forEach(id => {
-      const el = document.getElementById(id);
-      if (el.tagName === 'SELECT') {
-        el.selectedIndex = 0;
-      } else {
-        el.value = '';
+    ];
+
+    camposFiltro.forEach(id => {
+      const valor = params.get(id);
+      if (valor !== null) {
+        const el = document.getElementById(id);
+        if (el) {
+          el.value = decodeURIComponent(valor);
+        }
       }
     });
-    aplicarFiltros();
   }
+
+  // Adiciona listeners para filtros
+  function adicionarListenersFiltros() {
+    const filtrosIds = [
+      'filtrarData', 'filtrarDiaSemana', 'filtrarRegente', 'filtrarAcomp',
+      'filtrarMensagem', 'filtrarPregador', 'filtrarAnciao',
+      'filtrarAudiovisual', 'filtrarSuporte', 'filtrarObs'
+    ];
+
+    filtrosIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('input', aplicarFiltros);
+        el.addEventListener('change', aplicarFiltros);
+      }
+    });
+  }
+
+  // Popular selects (exemplo para dia semana)
+  function popularSelects() {
+    // No momento só o dia da semana é select, já preenchido no html.
+    // Se quiser, pode gerar opções dinamicamente aqui
+  }
+
+  // Filtro recolhível
+  const filtrosDiv = document.getElementById('filtros');
+  filtrosDiv.addEventListener('click', () => {
+    filtrosDiv.classList.toggle('collapsed');
+  });
 
   document.addEventListener('DOMContentLoaded', () => {
     carregarCSV().then(() => {
-      [
-        'filtrarData', 'filtrarDiaSemana', 'filtrarRegente', 'filtrarAcomp',
-        'filtrarMensagem', 'filtrarPregador', 'filtrarAnciao',
-        'filtrarAudiovisual', 'filtrarSuporte', 'filtrarObs'
-      ].forEach(id => {
-        document.getElementById(id).addEventListener('input', aplicarFiltros);
-      });
-      document.getElementById('filtrarData').addEventListener('change', aplicarFiltros);
-
-      document.getElementById('btnLimpar').addEventListener('click', limparFiltros);
+      pegarFiltrosDaURL();
+      aplicarFiltros();
+      adicionarListenersFiltros();
     });
   });
 </script>
-
 </body>
 </html>
