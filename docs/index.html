@@ -1,445 +1,319 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Escala música 06-2025</title>
-  <style>
-    * {
-      box-sizing: border-box;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Escala música 06-2025</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: #fafafa;
+    padding: 20px;
+    color: #222;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .loader {
+    border: 6px solid #eee;
+    border-top: 6px solid #444;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 40px auto;
+  }
+  @keyframes spin {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+  }
+  /* Estilo dos filtros */
+  #filtros {
+    background: white;
+    border-radius: 8px;
+    padding: 12px 20px 20px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    max-width: 960px;
+    margin: 0 auto 20px auto;
+    font-family: system-ui, sans-serif;
+  }
+  #filtros summary {
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1.1em;
+    margin-bottom: 12px;
+    outline: none;
+  }
+  #filtros[open] {
+    padding-bottom: 20px;
+  }
+  #filtros details[open] {
+    animation: expand 0.25s ease forwards;
+  }
+  @keyframes expand {
+    from { max-height: 0; opacity: 0; }
+    to { max-height: 100vh; opacity: 1; }
+  }
+  #filtros input[type="text"] {
+    width: 180px;
+    margin: 6px 12px 12px 0;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+  }
+  #filtros input[type="text"]:focus {
+    border-color: #555;
+    outline: none;
+  }
+  #filtros label {
+    font-weight: 500;
+    font-size: 13px;
+    color: #444;
+    margin-right: 6px;
+    user-select: none;
+  }
+
+  /* Tabela */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    display: none;
+  }
+  th, td {
+    padding: 10px 8px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+  }
+  th {
+    background-color: #222;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  tr:last-child td {
+    border-bottom: none;
+  }
+  /* Linha zebrada */
+  tbody tr:nth-child(odd) {
+    background-color: #fafafa;
+  }
+  tbody tr:nth-child(even) {
+    background-color: #fff;
+  }
+
+  @keyframes fadeInUp {
+    from {opacity: 0; transform: translateY(10px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+  tr.animada {
+    opacity: 0;
+    animation: fadeInUp 0.3s ease forwards;
+  }
+  @media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+      display: block;
     }
-    body {
-      margin: 0;
-      font-family: system-ui, sans-serif;
-      background: #fafafa;
-      padding: 20px;
-      color: #222;
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .loader {
-      border: 6px solid #eee;
-      border-top: 6px solid #444;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-      margin: 40px auto;
-    }
-    @keyframes spin {
-      0% {transform: rotate(0deg);}
-      100% {transform: rotate(360deg);}
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: white;
-      border-radius: 6px;
-      overflow: hidden;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    thead {
       display: none;
     }
-    th, td {
-      padding: 10px 8px;
-      text-align: center;
-      border-bottom: 1px solid #eee;
-      font-size: 14px;
-      vertical-align: middle;
-    }
-    th {
-      background-color: #222;
-      color: white;
-      position: sticky;
-      top: 0;
-      z-index: 1;
-    }
-    tr:last-child td {
-      border-bottom: none;
-    }
-    @keyframes fadeInUp {
-      from {opacity: 0; transform: translateY(10px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-    tr.animada {
-      opacity: 0;
-      animation: fadeInUp 0.3s ease forwards;
-    }
-    /* Filtros container */
-    #filtros-container {
-      max-width: 1200px;
-      margin: 0 auto 20px;
+    tr {
+      margin-bottom: 15px;
       border: 1px solid #ddd;
-      border-radius: 8px;
+      border-radius: 6px;
       background: white;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      padding: 12px;
     }
-    #filtros-header {
-      background: #222;
-      color: white;
-      padding: 12px 20px;
-      cursor: pointer;
-      user-select: none;
-      font-weight: 600;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    td {
+      text-align: left;
+      padding: 6px 10px;
+      font-size: 13px;
+      border: none;
+      position: relative;
+      white-space: pre-wrap;
+      word-wrap: break-word;
     }
-    #filtros-header span {
-      font-size: 16px;
+    td::before {
+      content: attr(data-label);
+      font-weight: bold;
+      display: block;
+      color: #555;
+      margin-bottom: 6px;
     }
-    #filtros-toggle {
-      font-size: 20px;
-      line-height: 1;
-      transition: transform 0.3s ease;
-    }
-    #filtros-toggle.expanded {
-      transform: rotate(180deg);
-    }
-    #filtros-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.35s ease;
-      padding: 0 20px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px 16px;
-    }
-    #filtros-content.expanded {
-      max-height: 400px;
-      padding-top: 12px;
-      padding-bottom: 20px;
-    }
-    .filtro {
-      flex: 1 1 150px;
-      min-width: 120px;
-    }
-    .filtro input {
-      width: 100%;
-      padding: 8px 12px;
-      font-size: 14px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-      transition: border-color 0.25s ease;
-    }
-    .filtro input::placeholder {
-      color: #999;
-      font-style: italic;
-    }
-    .filtro input:focus {
-      outline: none;
-      border-color: #444;
-      box-shadow: 0 0 4px rgba(68,68,68,0.3);
-    }
-    @media (max-width: 768px) {
-      table, thead, tbody, th, td, tr {
-        display: block;
-      }
-      thead {
-        display: none;
-      }
-      tr {
-        margin-bottom: 15px;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-        background: white;
-        padding: 12px;
-      }
-      td {
-        text-align: left;
-        padding: 6px 10px;
-        font-size: 13px;
-        border: none;
-        position: relative;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-      }
-      td::before {
-        content: attr(data-label);
-        font-weight: bold;
-        display: block;
-        color: #555;
-        margin-bottom: 6px;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <h1>Escala de Louvor</h1>
+<h1>Escala de Louvor</h1>
 
-  <div id="filtros-container" aria-expanded="false" aria-label="Filtros para a escala de louvor">
-    <div
-      id="filtros-header"
-      role="button"
-      tabindex="0"
-      aria-controls="filtros-content"
-      aria-expanded="false"
-    >
-      <span>Filtros</span>
-      <span id="filtros-toggle" aria-hidden="true">▼</span>
-    </div>
-    <div id="filtros-content" aria-hidden="true">
-      <div class="filtro">
-        <input
-          type="text"
-          id="filtro-data"
-          placeholder="Filtrar por Data"
-          aria-label="Filtrar por Data"
-        />
-      </div>
-      <div class="filtro">
-        <input
-          type="text"
-          id="filtro-dia"
-          placeholder="Filtrar por Dia da Semana"
-          aria-label="Filtrar por Dia da Semana"
-        />
-      </div>
-      <div class="filtro">
-        <input
-          type="text"
-          id="filtro-regente"
-          placeholder="Filtrar por Regente"
-          aria-label="Filtrar por Regente"
-        />
-      </div>
-      <div class="filtro">
-        <input
-          type="text"
-          id="filtro-acomp"
-          placeholder="Filtrar por Acompanhamento"
-          aria-label="Filtrar por Acompanhamento"
-        />
-      </div>
-      <div class="filtro">
-        <input
-          type="text"
-          id="filtro-msgmuscal"
-          placeholder="Filtrar por Mensagem Musical"
-          aria-label="Filtrar por Mensagem Musical"
-        />
-      </div>
-      <div class="filtro">
-        <input
-          type="text"
-          id="filtro-pregador"
-          placeholder="Filtrar por Pregador"
-          aria-label="Filtrar por Pregador"
-        />
-      </div>
-      <div class="filtro">
-        <input
-          type="text"
-          id="filtro-anciao"
-          placeholder="Filtrar por Ancião"
-          aria-label="Filtrar por Ancião"
-        />
-      </div>
-      <div class="filtro">
-        <input
-          type="text"
-          id="filtro-audiovisual"
-          placeholder="Filtrar por Audiovisual"
-          aria-label="Filtrar por Audiovisual"
-        />
-      </div>
-      <div class="filtro">
-        <input
-          type="text"
-          id="filtro-suporte"
-          placeholder="Filtrar por Suporte"
-          aria-label="Filtrar por Suporte"
-        />
-      </div>
-      <div class="filtro" style="flex: 2 1 300px;">
-        <input
-          type="text"
-          id="filtro-obs"
-          placeholder="Filtrar por Observações"
-          aria-label="Filtrar por Observações"
-        />
-      </div>
-    </div>
-  </div>
+<details id="filtros" open>
+  <summary>Filtros de Visualização</summary>
+  <label for="filtrarData">Data</label>
+  <input type="text" id="filtrarData" placeholder="dd/mm/aaaa" />
+  <label for="filtrarDiaSemana">Dia Semana</label>
+  <input type="text" id="filtrarDiaSemana" placeholder="ex: sábado" />
+  <label for="filtrarRegente">Regente</label>
+  <input type="text" id="filtrarRegente" placeholder="nome regente" />
+  <label for="filtrarAcomp">Acomp</label>
+  <input type="text" id="filtrarAcomp" placeholder="ex: PB, BANDA" />
+  <label for="filtrarMensagem">Mensagem Musical</label>
+  <input type="text" id="filtrarMensagem" placeholder="nome da mensagem" />
+  <label for="filtrarPregador">Pregador</label>
+  <input type="text" id="filtrarPregador" placeholder="nome do pregador" />
+  <label for="filtrarAnciao">Ancião</label>
+  <input type="text" id="filtrarAnciao" placeholder="nome do ancião" />
+  <label for="filtrarAudiovisual">Audiovisual</label>
+  <input type="text" id="filtrarAudiovisual" placeholder="nome do audiovisual" />
+  <label for="filtrarSuporte">Suporte</label>
+  <input type="text" id="filtrarSuporte" placeholder="nome do suporte" />
+  <label for="filtrarObs">Obs</label>
+  <input type="text" id="filtrarObs" placeholder="observações" />
+</details>
 
-  <div class="loader" id="carregando"></div>
+<div class="loader" id="carregando"></div>
 
-  <table id="tabela-escala" aria-label="Tabela com escala de louvor">
-    <thead>
-      <tr>
-        <th>DATA</th>
-        <th>DIA SEMANA</th>
-        <th>REGENTE</th>
-        <th>ACOMP</th>
-        <th>EQUIPE LOUVOR</th>
-        <th>MENSAGEM MUSCAL</th>
-        <th>PREGADOR</th>
-        <th>ANCIÃO</th>
-        <th>AUDIOVISUAL</th>
-        <th>SUPORTE</th>
-        <th>OBS</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Conteúdo gerado via JS -->
-    </tbody>
-  </table>
+<table id="tabela-escala" aria-label="Tabela com escala de louvor">
+  <thead>
+    <tr>
+      <th>DATA</th>
+      <th>DIA SEMANA</th>
+      <th>REGENTE</th>
+      <th>ACOMP</th>
+      <th>EQUIPE LOUVOR</th>
+      <th>MENSAGEM MUSCAL</th>
+      <th>PREGADOR</th>
+      <th>ANCIÃO</th>
+      <th>AUDIOVISUAL</th>
+      <th>SUPORTE</th>
+      <th>OBS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Conteúdo gerado via JS -->
+  </tbody>
+</table>
 
-  <script>
-    // Atualização dos índices das colunas para os filtros
-    const colunasFiltro = {
-      'filtro-data': 0,
-      'filtro-dia': 1,
-      'filtro-regente': 2,
-      'filtro-acomp': 3,
-      'filtro-msgmuscal': 5,
-      'filtro-pregador': 6,
-      'filtro-anciao': 7,
-      'filtro-audiovisual': 8,
-      'filtro-suporte': 9,
-      'filtro-obs': 10
+<script>
+  async function carregarCSV() {
+    try {
+      const resposta = await fetch('atual.csv', { headers: { 'Content-Type': 'text/plain' } });
+      if (!resposta.ok) throw new Error('Arquivo não encontrado');
+      const texto = await resposta.text();
+
+      const linhas = texto.trim().split('\n').filter(l => l.trim() !== '');
+
+      const cabecalhos = [
+        'DATA',
+        'DIA SEMANA',
+        'REGENTE',
+        'ACOMP',
+        'EQUIPE LOUVOR',
+        'MENSAGEM MUSCAL',
+        'PREGADOR',
+        'ANCIÃO',
+        'AUDIOVISUAL',
+        'SUPORTE',
+        'OBS'
+      ];
+
+      const corpoTabela = document.querySelector('#tabela-escala tbody');
+      corpoTabela.innerHTML = '';
+
+      linhas.forEach((linha, i) => {
+        // separa por vírgula, respeitando as aspas duplas
+        const colunas = linha.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g)
+          .map(c => c.replace(/^"|"$/g, '').trim());
+
+        // completa com vazios se faltar colunas
+        while (colunas.length < cabecalhos.length) {
+          colunas.push('');
+        }
+
+        const tr = document.createElement('tr');
+        colunas.forEach((col, idx) => {
+          const td = document.createElement('td');
+          td.textContent = col;
+          td.setAttribute('data-label', cabecalhos[idx] || '');
+          tr.appendChild(td);
+        });
+
+        tr.classList.add('animada');
+        tr.style.animationDelay = `${i * 0.05}s`;
+        corpoTabela.appendChild(tr);
+      });
+
+      setTimeout(() => {
+        document.getElementById('carregando').style.display = 'none';
+        document.getElementById('tabela-escala').style.display = 'table';
+      }, 100);
+
+    } catch (e) {
+      console.error('Erro ao carregar CSV:', e);
+      document.getElementById('carregando').style.display = 'none';
+      const pErro = document.createElement('p');
+      pErro.style.color = 'red';
+      pErro.style.textAlign = 'center';
+      pErro.textContent = 'Erro ao carregar os dados. Verifique se "atual.csv" está na mesma pasta.';
+      document.body.appendChild(pErro);
+    }
+  }
+
+  // Função para filtro dos inputs
+  function aplicarFiltros() {
+    const filtros = {
+      DATA: document.getElementById('filtrarData').value.toLowerCase(),
+      'DIA SEMANA': document.getElementById('filtrarDiaSemana').value.toLowerCase(),
+      REGENTE: document.getElementById('filtrarRegente').value.toLowerCase(),
+      ACOMP: document.getElementById('filtrarAcomp').value.toLowerCase(),
+      'MENSAGEM MUSCAL': document.getElementById('filtrarMensagem').value.toLowerCase(),
+      PREGADOR: document.getElementById('filtrarPregador').value.toLowerCase(),
+      ANCIÃO: document.getElementById('filtrarAnciao').value.toLowerCase(),
+      AUDIOVISUAL: document.getElementById('filtrarAudiovisual').value.toLowerCase(),
+      SUPORTE: document.getElementById('filtrarSuporte').value.toLowerCase(),
+      OBS: document.getElementById('filtrarObs').value.toLowerCase(),
     };
 
-    async function carregarCSV() {
-      try {
-        const resposta = await fetch('atual.csv', {
-          headers: { 'Content-Type': 'text/plain' },
-        });
-        if (!resposta.ok) throw new Error('Arquivo não encontrado');
-        const texto = await resposta.text();
-
-        const linhas = texto.trim().split('\n').filter((l) => l.trim() !== '');
-
-        const cabecalhos = [
-          'DATA',
-          'DIA SEMANA',
-          'REGENTE',
-          'ACOMP',
-          'EQUIPE LOUVOR',
-          'MENSAGEM MUSCAL',
-          'PREGADOR',
-          'ANCIÃO',
-          'AUDIOVISUAL',
-          'SUPORTE',
-          'OBS',
-        ];
-
-        const corpoTabela = document.querySelector('#tabela-escala tbody');
-        corpoTabela.innerHTML = '';
-
-        linhas.forEach((linha, i) => {
-          // separa por vírgula, respeitando as aspas duplas
-          const colunas = linha
-            .match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g)
-            .map((c) => c.replace(/^"|"$/g, '').trim());
-
-          // Completar colunas até cabecalhos
-          while (colunas.length < cabecalhos.length) {
-            colunas.push('');
+    const linhas = document.querySelectorAll('#tabela-escala tbody tr');
+    linhas.forEach(linha => {
+      let mostra = true;
+      Object.entries(filtros).forEach(([col, filtro]) => {
+        if (filtro) {
+          const indiceCol = cabecalhos.indexOf(col);
+          const textoCelula = linha.cells[indiceCol].textContent.toLowerCase();
+          if (!textoCelula.includes(filtro)) {
+            mostra = false;
           }
-
-          const tr = document.createElement('tr');
-          colunas.forEach((col, idx) => {
-            const td = document.createElement('td');
-            td.setAttribute('data-label', cabecalhos[idx] || '');
-            td.textContent = col;
-            tr.appendChild(td);
-          });
-
-          tr.classList.add('animada');
-          tr.style.animationDelay = `${i * 0.05}s`;
-          corpoTabela.appendChild(tr);
-        });
-
-        setTimeout(() => {
-          document.getElementById('carregando').style.display = 'none';
-          document.getElementById('tabela-escala').style.display = 'table';
-        }, 100);
-
-        adicionarListenersFiltro();
-      } catch (e) {
-        console.error('Erro ao carregar CSV:', e);
-        document.getElementById('carregando').style.display = 'none';
-        const pErro = document.createElement('p');
-        pErro.style.color = 'red';
-        pErro.style.textAlign = 'center';
-        pErro.textContent =
-          'Erro ao carregar os dados. Verifique se "atual.csv" está na mesma pasta.';
-        document.body.appendChild(pErro);
-      }
-    }
-
-    function aplicarFiltros() {
-      const tbody = document.querySelector('#tabela-escala tbody');
-      const linhas = Array.from(tbody.querySelectorAll('tr'));
-
-      const filtros = {};
-      Object.keys(colunasFiltro).forEach((id) => {
-        const val = document.getElementById(id).value.trim().toLowerCase();
-        filtros[id] = val;
-      });
-
-      linhas.forEach((tr) => {
-        let mostrar = true;
-        Object.entries(filtros).forEach(([id, val]) => {
-          if (val) {
-            const idx = colunasFiltro[id];
-            const textoCelula = tr.cells[idx]?.textContent.toLowerCase() || '';
-            if (!textoCelula.includes(val)) {
-              mostrar = false;
-            }
-          }
-        });
-        tr.style.display = mostrar ? '' : 'none';
-      });
-    }
-
-    function adicionarListenersFiltro() {
-      Object.keys(colunasFiltro).forEach((id) => {
-        const input = document.getElementById(id);
-        input.addEventListener('input', aplicarFiltros);
-      });
-    }
-
-    function toggleFiltros() {
-      const container = document.getElementById('filtros-container');
-      const content = document.getElementById('filtros-content');
-      const toggleIcon = document.getElementById('filtros-toggle');
-      const header = document.getElementById('filtros-header');
-      const expanded = content.classList.contains('expanded');
-
-      if (expanded) {
-        content.classList.remove('expanded');
-        toggleIcon.classList.remove('expanded');
-        header.setAttribute('aria-expanded', 'false');
-        content.setAttribute('aria-hidden', 'true');
-        container.setAttribute('aria-expanded', 'false');
-      } else {
-        content.classList.add('expanded');
-        toggleIcon.classList.add('expanded');
-        header.setAttribute('aria-expanded', 'true');
-        content.setAttribute('aria-hidden', 'false');
-        container.setAttribute('aria-expanded', 'true');
-      }
-    }
-
-    document
-      .getElementById('filtros-header')
-      .addEventListener('click', toggleFiltros);
-    document
-      .getElementById('filtros-header')
-      .addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          toggleFiltros();
         }
       });
-
-    window.addEventListener('load', () => {
-      carregarCSV();
+      linha.style.display = mostra ? '' : 'none';
     });
-  </script>
+  }
+
+  // Adiciona ouvintes aos filtros
+  document.addEventListener('DOMContentLoaded', () => {
+    carregarCSV().then(() => {
+      [
+        'filtrarData', 'filtrarDiaSemana', 'filtrarRegente', 'filtrarAcomp',
+        'filtrarMensagem', 'filtrarPregador', 'filtrarAnciao',
+        'filtrarAudiovisual', 'filtrarSuporte', 'filtrarObs'
+      ].forEach(id => {
+        document.getElementById(id).addEventListener('input', aplicarFiltros);
+      });
+    });
+  });
+</script>
+
 </body>
 </html>
