@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Escala música 06-2025</title>
+  <title>Escala de Louvor</title>
   <style>
+    /* Estilização original */
     * {
       box-sizing: border-box;
     }
@@ -131,17 +132,6 @@
         margin-bottom: 6px;
       }
     }
-    /* Força display table em mobile pra manter estilo tabela */
-    /*
-    @media (max-width: 768px) {
-      table, thead, tbody, th, td, tr {
-        display: table !important;
-      }
-      td::before {
-        display: none !important;
-      }
-    }
-    */
   </style>
 </head>
 <body>
@@ -150,17 +140,17 @@
   <div class="filters-container">
     <button class="filters-toggle" onclick="toggleFilters()">Mostrar Filtros</button>
     <div class="filters-box" id="filtros">
-      <select id="DATA" onchange="aplicarFiltros()" placeholder="Data"><option value="">Data</option></select>
-      <select id="DIA SEMANA" onchange="aplicarFiltros()" placeholder="Dia da Semana"><option value="">Dia da Semana</option></select>
-      <select id="REGENTE" onchange="aplicarFiltros()" placeholder="Regente"><option value="">Regente</option></select>
-      <select id="ACOMP" onchange="aplicarFiltros()" placeholder="Acomp"><option value="">Acomp</option></select>
-      <select id="EQUIPE LOUVOR" onchange="aplicarFiltros()" placeholder="Equipe Louvor"><option value="">Equipe Louvor</option></select>
-      <select id="MENSAGEM MUSCAL" onchange="aplicarFiltros()" placeholder="Mensagem Musical"><option value="">Mensagem Musical</option></select>
-      <select id="PREGADOR" onchange="aplicarFiltros()" placeholder="Pregador"><option value="">Pregador</option></select>
-      <select id="ANCIÃO" onchange="aplicarFiltros()" placeholder="Ancião"><option value="">Ancião</option></select>
-      <select id="AUDIOVISUAL" onchange="aplicarFiltros()" placeholder="Audiovisual"><option value="">Audiovisual</option></select>
-      <select id="SUPORTE" onchange="aplicarFiltros()" placeholder="Suporte"><option value="">Suporte</option></select>
-      <select id="OBS" onchange="aplicarFiltros()" placeholder="Observação"><option value="">Observação</option></select>
+      <select id="DATA" onchange="aplicarFiltros()"><option value="">Data</option></select>
+      <select id="DIA SEMANA" onchange="aplicarFiltros()"><option value="">Dia da Semana</option></select>
+      <select id="REGENTE" onchange="aplicarFiltros()"><option value="">Regente</option></select>
+      <select id="ACOMP" onchange="aplicarFiltros()"><option value="">Acomp</option></select>
+      <select id="EQUIPE LOUVOR" onchange="aplicarFiltros()"><option value="">Equipe Louvor</option></select>
+      <select id="MENSAGEM MUSCAL" onchange="aplicarFiltros()"><option value="">Mensagem Musical</option></select>
+      <select id="PREGADOR" onchange="aplicarFiltros()"><option value="">Pregador</option></select>
+      <select id="ANCIÃO" onchange="aplicarFiltros()"><option value="">Ancião</option></select>
+      <select id="AUDIOVISUAL" onchange="aplicarFiltros()"><option value="">Audiovisual</option></select>
+      <select id="SUPORTE" onchange="aplicarFiltros()"><option value="">Suporte</option></select>
+      <select id="OBS" onchange="aplicarFiltros()"><option value="">Observação</option></select>
     </div>
   </div>
 
@@ -201,7 +191,7 @@
         let mostrar = true;
 
         filtros.forEach((filtro, i) => {
-          const valor = filtro.value;
+          const valor = filtro.value.trim();
           if (valor && colunas[i].textContent.trim() !== valor) {
             mostrar = false;
           }
@@ -210,7 +200,7 @@
         linha.style.display = mostrar ? '' : 'none';
       });
 
-      // Oculta filtros após aplicação
+      // Ocultar filtros após aplicar
       document.getElementById('filtros').style.display = 'none';
     }
 
@@ -225,33 +215,28 @@
         const corpoTabela = document.querySelector('#tabela-escala tbody');
         corpoTabela.innerHTML = '';
 
-        // Usando PapaParse para parsear CSV
-        const resultados = Papa.parse(texto.trim(), {header: false, skipEmptyLines: true});
+        const resultados = Papa.parse(texto.trim(), {header: true, skipEmptyLines: true});
 
         resultados.data.forEach((linha, i) => {
-          // Linha pode ser array com 11 colunas
-          while(linha.length < cabecalhos.length) linha.push('');
-
           const tr = document.createElement('tr');
-          linha.forEach((col, idx) => {
-            filtros[cabecalhos[idx]].add(col.trim());
+          cabecalhos.forEach((coluna, idx) => {
+            const valor = linha[coluna] ? linha[coluna].trim() : '';
+            filtros[coluna].add(valor);
             const td = document.createElement('td');
-            td.textContent = col.trim();
-            td.setAttribute('data-label', cabecalhos[idx]);
+            td.textContent = valor;
+            td.setAttribute('data-label', coluna);
             tr.appendChild(td);
           });
-
           tr.classList.add('animada');
           tr.style.animationDelay = `${i * 0.05}s`;
           corpoTabela.appendChild(tr);
         });
 
-        // Preencher selects dos filtros
         cabecalhos.forEach(cab => {
           const select = document.getElementById(cab);
           if (select) {
             [...filtros[cab]]
-              .filter(v => v) // Remove valores vazios
+              .filter(v => v)
               .sort((a,b) => a.localeCompare(b, 'pt-BR', {ignorePunctuation:true}))
               .forEach(v => {
                 const opt = document.createElement('option');
