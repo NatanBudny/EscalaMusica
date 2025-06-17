@@ -1,193 +1,197 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Escala de Louvor</title>
-  <style>
-    * {
-      box-sizing: border-box;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Escala de Louvor</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: #fafafa;
+    padding: 20px;
+    color: #222;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .loader {
+    border: 6px solid #eee;
+    border-top: 6px solid #444;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 40px auto;
+  }
+  @keyframes spin {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    display: none;
+  }
+  th, td {
+    padding: 10px 8px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+  }
+  th {
+    background-color: #222;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  tr:last-child td {
+    border-bottom: none;
+  }
+  @keyframes fadeInUp {
+    from {opacity: 0; transform: translateY(10px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+  tr.animada {
+    opacity: 0;
+    animation: fadeInUp 0.3s ease forwards;
+  }
+  /* Responsivo */
+  @media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+      display: block;
     }
-
-    body {
-      margin: 0;
-      font-family: system-ui, sans-serif;
-      background: #f9f9f9;
-      padding: 20px;
-      color: #333;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .loader {
-      border: 6px solid #eee;
-      border-top: 6px solid #444;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-      margin: 40px auto;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: white;
-      border-radius: 6px;
-      overflow: hidden;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    thead {
       display: none;
     }
-
-    th, td {
-      padding: 10px 8px;
-      text-align: center;
-      border-bottom: 1px solid #eee;
-      font-size: 14px;
+    tr {
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: white;
+      padding: 12px;
     }
-
-    th {
-      background-color: #222;
-      color: white;
-      position: sticky;
-      top: 0;
-      z-index: 1;
+    td {
+      text-align: left;
+      padding: 6px 10px;
+      font-size: 13px;
+      border: none;
+      position: relative;
+      white-space: pre-wrap;
+      word-wrap: break-word;
     }
-
-    tr:last-child td {
-      border-bottom: none;
+    td::before {
+      content: attr(data-label);
+      font-weight: bold;
+      display: block;
+      color: #555;
+      margin-bottom: 6px;
     }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    tr.animada {
-      opacity: 0;
-      animation: fadeInUp 0.3s ease forwards;
-    }
-
-    /* Responsivo */
-    @media (max-width: 768px) {
-      table, thead, tbody, th, td, tr {
-        display: block;
-      }
-
-      thead {
-        display: none;
-      }
-
-      tr {
-        margin-bottom: 15px;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-        background: white;
-        padding: 10px;
-      }
-
-      td {
-        text-align: left;
-        padding: 6px 10px;
-        font-size: 13px;
-        border: none;
-        position: relative;
-      }
-
-      td::before {
-        content: attr(data-label);
-        font-weight: bold;
-        display: block;
-        color: #555;
-        margin-bottom: 4px;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
+<h1>Escala de Louvor</h1>
+<div class="loader" id="carregando"></div>
 
-  <h1>Escala de Louvor</h1>
-  <div class="loader" id="carregando"></div>
+<table id="tabela-escala" aria-label="Tabela com escala de louvor">
+  <thead>
+    <tr>
+      <th>DATA</th>
+      <th>DIA SEMANA</th>
+      <th>REGENTE</th>
+      <th>ACOMP</th>
+      <th>EQUIPE LOUVOR</th>
+      <th>MENSAGEM MUSCAL</th>
+      <th>PREGADOR</th>
+      <th>ANCIÃO</th>
+      <th>AUDIOVISUAL</th>
+      <th>SUPORTE</th>
+      <th>OBS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Conteúdo gerado via JS -->
+  </tbody>
+</table>
 
-  <table id="tabela-escala">
-    <thead>
-      <tr>
-        <th>DATA</th>
-        <th>DIA SEMANA</th>
-        <th>REGENTE</th>
-        <th>ACOMP</th>
-        <th>EQUIPE LOUVOR</th>
-        <th>MENSAGEM MUSCAL</th>
-        <th>PREGADOR</th>
-        <th>ANCIÃO</th>
-        <th>AUDIOVISUAL</th>
-        <th>SUPORTE</th>
-        <th>OBS</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Linhas serão adicionadas aqui -->
-    </tbody>
-  </table>
+<script>
+  async function carregarCSV() {
+    try {
+      const resposta = await fetch('atual.csv', { headers: { 'Content-Type': 'text/plain' } });
+      if (!resposta.ok) throw new Error('Arquivo não encontrado');
+      const texto = await resposta.text();
 
-  <script>
-    async function carregarCSV() {
-      try {
-        const resposta = await fetch('atual.csv', { headers: { 'Content-Type': 'text/plain' } });
-        const texto = await resposta.text();
-        const linhas = texto.trim().split('\n');
-        const cabecalhos = linhas[0].split(',');
-        const corpoTabela = document.querySelector('#tabela-escala tbody');
+      // Linhas do arquivo, removendo linhas vazias
+      const linhas = texto.trim().split('\n').filter(l => l.trim() !== '');
 
-        linhas.slice(1).forEach((linha, i) => {
-          const colunas = linha.split(',');
-          const tr = document.createElement('tr');
+      // Nome das colunas para o data-label do responsivo
+      const cabecalhos = [
+        'DATA',
+        'DIA SEMANA',
+        'REGENTE',
+        'ACOMP',
+        'EQUIPE LOUVOR',
+        'MENSAGEM MUSCAL',
+        'PREGADOR',
+        'ANCIÃO',
+        'AUDIOVISUAL',
+        'SUPORTE',
+        'OBS'
+      ];
 
-          colunas.forEach((coluna, j) => {
-            const td = document.createElement('td');
-            td.textContent = coluna.trim().replace(/^"|"$/g, '');
-            td.setAttribute('data-label', cabecalhos[j].trim());
-            tr.appendChild(td);
-          });
+      const corpoTabela = document.querySelector('#tabela-escala tbody');
+      corpoTabela.innerHTML = ''; // limpa antes de popular
 
-          tr.classList.add('animada');
-          tr.style.animationDelay = `${i * 0.05}s`;
-          corpoTabela.appendChild(tr);
+      linhas.forEach((linha, i) => {
+        // Considera que os campos são separados por tab (\t)
+        const colunas = linha.split('\t');
+
+        // Preenche com vazio se faltar alguma coluna
+        while (colunas.length < cabecalhos.length) {
+          colunas.push('');
+        }
+
+        const tr = document.createElement('tr');
+        colunas.forEach((col, idx) => {
+          const td = document.createElement('td');
+          td.textContent = col.trim();
+          td.setAttribute('data-label', cabecalhos[idx]);
+          tr.appendChild(td);
         });
 
-        // Aguarda 100ms e exibe a tabela
-        setTimeout(() => {
-          document.getElementById('carregando').style.display = 'none';
-          document.getElementById('tabela-escala').style.display = 'table';
-        }, 100);
+        tr.classList.add('animada');
+        tr.style.animationDelay = `${i * 0.05}s`; // atraso pra efeito cascata
+        corpoTabela.appendChild(tr);
+      });
 
-      } catch (erro) {
-        console.error('Erro ao carregar o CSV:', erro);
+      // Esconde loader e mostra tabela suavemente
+      setTimeout(() => {
         document.getElementById('carregando').style.display = 'none';
-        const erroMsg = document.createElement('p');
-        erroMsg.style.color = 'red';
-        erroMsg.style.textAlign = 'center';
-        erroMsg.textContent = 'Erro ao carregar os dados. Verifique se o arquivo "atual.csv" está presente na mesma pasta.';
-        document.body.appendChild(erroMsg);
-      }
+        const tabela = document.getElementById('tabela-escala');
+        tabela.style.display = 'table';
+      }, 100);
+
+    } catch (e) {
+      console.error('Erro ao carregar CSV:', e);
+      document.getElementById('carregando').style.display = 'none';
+      const pErro = document.createElement('p');
+      pErro.style.color = 'red';
+      pErro.style.textAlign = 'center';
+      pErro.textContent = 'Erro ao carregar os dados. Verifique se "atual.csv" está na mesma pasta.';
+      document.body.appendChild(pErro);
     }
-
-    carregarCSV();
-  </script>
-
+  }
+  carregarCSV();
+</script>
 </body>
 </html>
