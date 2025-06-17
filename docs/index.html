@@ -35,49 +35,79 @@
   /* Estilo dos filtros */
   #filtros {
     background: white;
-    border-radius: 8px;
-    padding: 12px 20px 20px 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-radius: 10px;
+    padding: 20px 24px 24px 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
     max-width: 960px;
-    margin: 0 auto 20px auto;
+    margin: 0 auto 24px auto;
     font-family: system-ui, sans-serif;
   }
   #filtros summary {
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    font-size: 1.1em;
-    margin-bottom: 12px;
+    font-size: 1.2em;
+    margin-bottom: 18px;
     outline: none;
   }
   #filtros[open] {
-    padding-bottom: 20px;
+    padding-bottom: 24px;
   }
   #filtros details[open] {
-    animation: expand 0.25s ease forwards;
+    animation: expand 0.3s ease forwards;
   }
   @keyframes expand {
     from { max-height: 0; opacity: 0; }
     to { max-height: 100vh; opacity: 1; }
   }
-  #filtros input[type="text"], #filtros select {
-    width: 180px;
-    margin: 6px 12px 12px 0;
-    padding: 8px 10px;
-    border-radius: 6px;
-    border: 1px solid #ddd;
-    font-size: 14px;
-    transition: border-color 0.2s ease;
+  /* Grid dos filtros */
+  #filtros > div.filtros-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
+    gap: 16px 18px;
+    align-items: center;
   }
-  #filtros input[type="text"]:focus, #filtros select:focus {
-    border-color: #555;
-    outline: none;
-  }
-  #filtros label {
-    font-weight: 500;
+  label {
+    font-weight: 600;
     font-size: 13px;
     color: #444;
-    margin-right: 6px;
     user-select: none;
+    display: block;
+    margin-bottom: 6px;
+  }
+  input[type="text"], select {
+    width: 100%;
+    padding: 9px 14px;
+    border-radius: 8px;
+    border: 1.8px solid #ccc;
+    font-size: 14px;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    font-family: system-ui, sans-serif;
+    box-shadow: none;
+    outline-offset: 2px;
+  }
+  input[type="text"]::placeholder {
+    color: #999;
+    font-style: italic;
+  }
+  input[type="text"]:focus, select:focus {
+    border-color: #0078d4;
+    box-shadow: 0 0 6px #0078d4aa;
+    outline: none;
+  }
+  button#btnLimpar {
+    grid-column: 1 / -1;
+    background-color: #0078d4;
+    color: white;
+    font-weight: 600;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.3s ease;
+  }
+  button#btnLimpar:hover {
+    background-color: #005ea3;
   }
 
   /* Tabela */
@@ -85,13 +115,13 @@
     width: 100%;
     border-collapse: collapse;
     background: white;
-    border-radius: 6px;
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
     display: none;
   }
   th, td {
-    padding: 10px 8px;
+    padding: 11px 10px;
     text-align: center;
     border-bottom: 1px solid #eee;
     font-size: 14px;
@@ -132,13 +162,13 @@
     tr {
       margin-bottom: 15px;
       border: 1px solid #ddd;
-      border-radius: 6px;
+      border-radius: 8px;
       background: white;
-      padding: 12px;
+      padding: 14px;
     }
     td {
       text-align: left;
-      padding: 6px 10px;
+      padding: 7px 12px;
       font-size: 13px;
       border: none;
       position: relative;
@@ -147,10 +177,10 @@
     }
     td::before {
       content: attr(data-label);
-      font-weight: bold;
+      font-weight: 700;
       display: block;
       color: #555;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
   }
 </style>
@@ -160,28 +190,53 @@
 
 <details id="filtros" open>
   <summary>Filtros de Visualização</summary>
-  <label for="filtrarData">Data</label>
-  <select id="filtrarData">
-    <option value="">Todas as datas</option>
-  </select>
-  <label for="filtrarDiaSemana">Dia Semana</label>
-  <input type="text" id="filtrarDiaSemana" placeholder="ex: sábado" />
-  <label for="filtrarRegente">Regente</label>
-  <input type="text" id="filtrarRegente" placeholder="nome regente" />
-  <label for="filtrarAcomp">Acomp</label>
-  <input type="text" id="filtrarAcomp" placeholder="ex: PB, BANDA" />
-  <label for="filtrarMensagem">Mensagem Musical</label>
-  <input type="text" id="filtrarMensagem" placeholder="nome da mensagem" />
-  <label for="filtrarPregador">Pregador</label>
-  <input type="text" id="filtrarPregador" placeholder="nome do pregador" />
-  <label for="filtrarAnciao">Ancião</label>
-  <input type="text" id="filtrarAnciao" placeholder="nome do ancião" />
-  <label for="filtrarAudiovisual">Audiovisual</label>
-  <input type="text" id="filtrarAudiovisual" placeholder="nome do audiovisual" />
-  <label for="filtrarSuporte">Suporte</label>
-  <input type="text" id="filtrarSuporte" placeholder="nome do suporte" />
-  <label for="filtrarObs">Obs</label>
-  <input type="text" id="filtrarObs" placeholder="observações" />
+  <div class="filtros-grid">
+    <div>
+      <label for="filtrarData">Data</label>
+      <select id="filtrarData" aria-label="Filtrar por data">
+        <option value="">Todas as datas</option>
+      </select>
+    </div>
+    <div>
+      <label for="filtrarDiaSemana">Dia Semana</label>
+      <input type="text" id="filtrarDiaSemana" placeholder="ex: sábado" aria-label="Filtrar por dia da semana" />
+    </div>
+    <div>
+      <label for="filtrarRegente">Regente</label>
+      <input type="text" id="filtrarRegente" placeholder="nome regente" aria-label="Filtrar por regente" />
+    </div>
+    <div>
+      <label for="filtrarAcomp">Acomp</label>
+      <input type="text" id="filtrarAcomp" placeholder="ex: PB, BANDA" aria-label="Filtrar por acompanhamento" />
+    </div>
+    <div>
+      <label for="filtrarMensagem">Mensagem Musical</label>
+      <input type="text" id="filtrarMensagem" placeholder="nome da mensagem" aria-label="Filtrar por mensagem musical" />
+    </div>
+    <div>
+      <label for="filtrarPregador">Pregador</label>
+      <input type="text" id="filtrarPregador" placeholder="nome do pregador" aria-label="Filtrar por pregador" />
+    </div>
+    <div>
+      <label for="filtrarAnciao">Ancião</label>
+      <input type="text" id="filtrarAnciao" placeholder="nome do ancião" aria-label="Filtrar por ancião" />
+    </div>
+    <div>
+      <label for="filtrarAudiovisual">Audiovisual</label>
+      <input type="text" id="filtrarAudiovisual" placeholder="nome do audiovisual" aria-label="Filtrar por audiovisual" />
+    </div>
+    <div>
+      <label for="filtrarSuporte">Suporte</label>
+      <input type="text" id="filtrarSuporte" placeholder="nome do suporte" aria-label="Filtrar por suporte" />
+    </div>
+    <div>
+      <label for="filtrarObs">Obs</label>
+      <input type="text" id="filtrarObs" placeholder="observações" aria-label="Filtrar por observações" />
+    </div>
+    <div>
+      <button id="btnLimpar" aria-label="Limpar todos os filtros">Limpar filtros</button>
+    </div>
+  </div>
 </details>
 
 <div class="loader" id="carregando"></div>
@@ -222,7 +277,6 @@
     'OBS'
   ];
 
-  // Mapeamento abreviação dias
   const diasAbrev = {
     domingo: 'dom',
     segunda: 'seg',
@@ -246,11 +300,9 @@
       const corpoTabela = document.querySelector('#tabela-escala tbody');
       corpoTabela.innerHTML = '';
 
-      // Criar set para datas únicas para o select
       const datasUnicas = new Map();
 
       linhas.forEach((linha, i) => {
-        // separa por vírgula, respeitando as aspas duplas
         const colunas = linha.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g)
           .map(c => c.replace(/^"|"$/g, '').trim());
 
@@ -258,7 +310,6 @@
           colunas.push('');
         }
 
-        // Preenche a tabela
         const tr = document.createElement('tr');
         colunas.forEach((col, idx) => {
           const td = document.createElement('td');
@@ -271,12 +322,9 @@
         tr.style.animationDelay = `${i * 0.05}s`;
         corpoTabela.appendChild(tr);
 
-        // Montar opção para o filtro de data
-        // Formato dd/mm (diaAbrev)
         const data = colunas[0];
         const diaSemana = colunas[1].toLowerCase();
         if (data && diaSemana) {
-          // extrai só dd/mm da data (formato dd/mm/aaaa)
           const dataFormatada = data.slice(0,5);
           const diaAbrev = diasAbrev[diaSemana] || diaSemana.slice(0,3);
           const chave = `${dataFormatada} (${diaAbrev})`;
@@ -286,15 +334,11 @@
         }
       });
 
-      // Preenche select Data
       const selectData = document.getElementById('filtrarData');
-      // Limpa opções anteriores, mantém a primeira (Todas as datas)
       selectData.options.length = 1;
-      // Ordena por data real ascendente para melhor UX
+
       const arrDatas = Array.from(datasUnicas.entries());
       arrDatas.sort((a,b) => {
-        // Compara datas completas (yyyy-mm-dd) para ordenar
-        // as datas originais estão no formato dd/mm/aaaa
         const dataA = a[1].split('/').reverse().join('');
         const dataB = b[1].split('/').reverse().join('');
         return dataA.localeCompare(dataB);
@@ -345,7 +389,6 @@
           const indiceCol = cabecalhos.indexOf(col);
           let textoCelula = linha.cells[indiceCol]?.textContent.toLowerCase() || '';
           if (col === 'DATA' && filtro) {
-            // filtro exato para data (valor do select é no formato dd/mm/aaaa)
             if (textoCelula !== filtro) {
               mostra = false;
             }
@@ -361,6 +404,22 @@
     });
   }
 
+  function limparFiltros() {
+    [
+      'filtrarData', 'filtrarDiaSemana', 'filtrarRegente', 'filtrarAcomp',
+      'filtrarMensagem', 'filtrarPregador', 'filtrarAnciao',
+      'filtrarAudiovisual', 'filtrarSuporte', 'filtrarObs'
+    ].forEach(id => {
+      const el = document.getElementById(id);
+      if (el.tagName === 'SELECT') {
+        el.selectedIndex = 0;
+      } else {
+        el.value = '';
+      }
+    });
+    aplicarFiltros();
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     carregarCSV().then(() => {
       [
@@ -370,9 +429,9 @@
       ].forEach(id => {
         document.getElementById(id).addEventListener('input', aplicarFiltros);
       });
-
-      // para o select usar change (não input)
       document.getElementById('filtrarData').addEventListener('change', aplicarFiltros);
+
+      document.getElementById('btnLimpar').addEventListener('click', limparFiltros);
     });
   });
 </script>
