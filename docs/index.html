@@ -59,7 +59,7 @@
     from { max-height: 0; opacity: 0; }
     to { max-height: 100vh; opacity: 1; }
   }
-  #filtros input[type="text"] {
+  #filtros input[type="text"], #filtros select {
     width: 180px;
     margin: 6px 12px 12px 0;
     padding: 8px 10px;
@@ -68,7 +68,7 @@
     font-size: 14px;
     transition: border-color 0.2s ease;
   }
-  #filtros input[type="text"]:focus {
+  #filtros input[type="text"]:focus, #filtros select:focus {
     border-color: #555;
     outline: none;
   }
@@ -161,7 +161,9 @@
 <details id="filtros" open>
   <summary>Filtros de Visualização</summary>
   <label for="filtrarData">Data</label>
-  <input type="text" id="filtrarData" placeholder="dd/mm/aaaa" />
+  <select id="filtrarData">
+    <option value="">Todas as datas</option>
+  </select>
   <label for="filtrarDiaSemana">Dia Semana</label>
   <input type="text" id="filtrarDiaSemana" placeholder="ex: sábado" />
   <label for="filtrarRegente">Regente</label>
@@ -206,6 +208,33 @@
 </table>
 
 <script>
+  const cabecalhos = [
+    'DATA',
+    'DIA SEMANA',
+    'REGENTE',
+    'ACOMP',
+    'EQUIPE LOUVOR',
+    'MENSAGEM MUSCAL',
+    'PREGADOR',
+    'ANCIÃO',
+    'AUDIOVISUAL',
+    'SUPORTE',
+    'OBS'
+  ];
+
+  // Mapeamento abreviação dias
+  const diasAbrev = {
+    domingo: 'dom',
+    segunda: 'seg',
+    terça: 'ter',
+    terca: 'ter',
+    quarta: 'qua',
+    quinta: 'qui',
+    sexta: 'sex',
+    sábado: 'sab',
+    sabado: 'sab',
+  };
+
   async function carregarCSV() {
     try {
       const resposta = await fetch('atual.csv', { headers: { 'Content-Type': 'text/plain' } });
@@ -214,33 +243,22 @@
 
       const linhas = texto.trim().split('\n').filter(l => l.trim() !== '');
 
-      const cabecalhos = [
-        'DATA',
-        'DIA SEMANA',
-        'REGENTE',
-        'ACOMP',
-        'EQUIPE LOUVOR',
-        'MENSAGEM MUSCAL',
-        'PREGADOR',
-        'ANCIÃO',
-        'AUDIOVISUAL',
-        'SUPORTE',
-        'OBS'
-      ];
-
       const corpoTabela = document.querySelector('#tabela-escala tbody');
       corpoTabela.innerHTML = '';
+
+      // Criar set para datas únicas para o select
+      const datasUnicas = new Map();
 
       linhas.forEach((linha, i) => {
         // separa por vírgula, respeitando as aspas duplas
         const colunas = linha.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g)
           .map(c => c.replace(/^"|"$/g, '').trim());
 
-        // completa com vazios se faltar colunas
         while (colunas.length < cabecalhos.length) {
           colunas.push('');
         }
 
+        // Preenche a tabela
         const tr = document.createElement('tr');
         colunas.forEach((col, idx) => {
           const td = document.createElement('td');
@@ -252,6 +270,40 @@
         tr.classList.add('animada');
         tr.style.animationDelay = `${i * 0.05}s`;
         corpoTabela.appendChild(tr);
+
+        // Montar opção para o filtro de data
+        // Formato dd/mm (diaAbrev)
+        const data = colunas[0];
+        const diaSemana = colunas[1].toLowerCase();
+        if (data && diaSemana) {
+          // extrai só dd/mm da data (formato dd/mm/aaaa)
+          const dataFormatada = data.slice(0,5);
+          const diaAbrev = diasAbrev[diaSemana] || diaSemana.slice(0,3);
+          const chave = `${dataFormatada} (${diaAbrev})`;
+          if (!datasUnicas.has(chave)) {
+            datasUnicas.set(chave, data);
+          }
+        }
+      });
+
+      // Preenche select Data
+      const selectData = document.getElementById('filtrarData');
+      // Limpa opções anteriores, mantém a primeira (Todas as datas)
+      selectData.options.length = 1;
+      // Ordena por data real ascendente para melhor UX
+      const arrDatas = Array.from(datasUnicas.entries());
+      arrDatas.sort((a,b) => {
+        // Compara datas completas (yyyy-mm-dd) para ordenar
+        // as datas originais estão no formato dd/mm/aaaa
+        const dataA = a[1].split('/').reverse().join('');
+        const dataB = b[1].split('/').reverse().join('');
+        return dataA.localeCompare(dataB);
+      });
+      arrDatas.forEach(([label, valor]) => {
+        const opt = document.createElement('option');
+        opt.value = valor;
+        opt.textContent = label;
+        selectData.appendChild(opt);
       });
 
       setTimeout(() => {
@@ -270,7 +322,6 @@
     }
   }
 
-  // Função para filtro dos inputs
   function aplicarFiltros() {
     const filtros = {
       DATA: document.getElementById('filtrarData').value.toLowerCase(),
@@ -288,20 +339,28 @@
     const linhas = document.querySelectorAll('#tabela-escala tbody tr');
     linhas.forEach(linha => {
       let mostra = true;
+
       Object.entries(filtros).forEach(([col, filtro]) => {
         if (filtro) {
           const indiceCol = cabecalhos.indexOf(col);
-          const textoCelula = linha.cells[indiceCol].textContent.toLowerCase();
-          if (!textoCelula.includes(filtro)) {
-            mostra = false;
+          let textoCelula = linha.cells[indiceCol]?.textContent.toLowerCase() || '';
+          if (col === 'DATA' && filtro) {
+            // filtro exato para data (valor do select é no formato dd/mm/aaaa)
+            if (textoCelula !== filtro) {
+              mostra = false;
+            }
+          } else {
+            if (!textoCelula.includes(filtro)) {
+              mostra = false;
+            }
           }
         }
       });
+
       linha.style.display = mostra ? '' : 'none';
     });
   }
 
-  // Adiciona ouvintes aos filtros
   document.addEventListener('DOMContentLoaded', () => {
     carregarCSV().then(() => {
       [
@@ -311,6 +370,9 @@
       ].forEach(id => {
         document.getElementById(id).addEventListener('input', aplicarFiltros);
       });
+
+      // para o select usar change (não input)
+      document.getElementById('filtrarData').addEventListener('change', aplicarFiltros);
     });
   });
 </script>
