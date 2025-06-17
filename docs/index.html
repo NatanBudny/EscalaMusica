@@ -138,7 +138,7 @@
   <h1>Escala de Louvor</h1>
 
   <div class="filters-container">
-    <button class="filters-toggle" onclick="toggleFilters()">Mostrar Filtros</button>
+    <button class="filters-toggle" id="btnToggleFilters">Mostrar Filtros</button>
     <div class="filters-box" id="filtros">
       <select id="DATA" onchange="aplicarFiltros()"><option value="">Data</option></select>
       <select id="DIA SEMANA" onchange="aplicarFiltros()"><option value="">Dia da Semana</option></select>
@@ -177,11 +177,19 @@
 
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <script>
+    // Função para alternar exibição dos filtros
     function toggleFilters() {
       const box = document.getElementById('filtros');
-      box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
+      if (box.style.display === 'flex') {
+        box.style.display = 'none';
+        btnToggleFilters.textContent = 'Mostrar Filtros';
+      } else {
+        box.style.display = 'flex';
+        btnToggleFilters.textContent = 'Ocultar Filtros';
+      }
     }
 
+    // Aplicar filtros à tabela
     function aplicarFiltros() {
       const filtros = [...document.querySelectorAll('.filters-box select')];
       const linhas = document.querySelectorAll('#tabela-escala tbody tr');
@@ -200,10 +208,11 @@
         linha.style.display = mostrar ? '' : 'none';
       });
 
-      // Ocultar filtros após aplicar
-      document.getElementById('filtros').style.display = 'none';
+      // Após aplicar filtro, opcionalmente ocultar filtro
+      // document.getElementById('filtros').style.display = 'none';
     }
 
+    // Carregar CSV e popular tabela e filtros
     async function carregarCSV() {
       try {
         const resposta = await fetch('atual.csv', { headers: { 'Content-Type': 'text/plain' } });
@@ -235,6 +244,9 @@
         cabecalhos.forEach(cab => {
           const select = document.getElementById(cab);
           if (select) {
+            // Limpar opções além da primeira
+            select.options.length = 1;
+
             [...filtros[cab]]
               .filter(v => v)
               .sort((a,b) => a.localeCompare(b, 'pt-BR', {ignorePunctuation:true}))
@@ -262,6 +274,7 @@
       }
     }
 
+    // Aplicar filtros via parâmetros URL (ex: ?DATA=2025-06-21)
     function aplicarParametrosURL() {
       const url = new URL(window.location);
       const params = new URLSearchParams(url.search);
@@ -276,6 +289,11 @@
       aplicarFiltros();
     }
 
+    // Botão toggle filtros
+    const btnToggleFilters = document.getElementById('btnToggleFilters');
+    btnToggleFilters.addEventListener('click', toggleFilters);
+
+    // Iniciar carregamento CSV
     carregarCSV();
   </script>
 </body>
