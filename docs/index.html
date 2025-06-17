@@ -4,9 +4,144 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Escala música 06-2025</title>
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <style>
-    /* (Seu CSS original, sem mudanças) */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: #fafafa;
+      padding: 20px;
+      color: #222;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .loader {
+      border: 6px solid #eee;
+      border-top: 6px solid #444;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 40px auto;
+    }
+    @keyframes spin {
+      0% {transform: rotate(0deg);}
+      100% {transform: rotate(360deg);}
+    }
+    .filters-container {
+      margin-bottom: 20px;
+    }
+    .filters-toggle {
+      background: #333;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+    .filters-box {
+      display: none;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 15px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      margin-top: 10px;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+    .filters-box select {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      min-width: 160px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      display: none;
+    }
+    th, td {
+      padding: 10px 8px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+    th {
+      background-color: #222;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    tr:nth-child(even) {
+      background-color: #f6f6f6;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    tr.animada {
+      opacity: 0;
+      animation: fadeInUp 0.3s ease forwards;
+    }
+    @keyframes fadeInUp {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    @media (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+      thead {
+        display: none;
+      }
+      tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background: white;
+        padding: 12px;
+      }
+      td {
+        text-align: left;
+        padding: 6px 10px;
+        font-size: 13px;
+        border: none;
+        position: relative;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+      td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: block;
+        color: #555;
+        margin-bottom: 6px;
+      }
+    }
+    /* Força display table em mobile pra manter estilo tabela */
+    /*
+    @media (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: table !important;
+      }
+      td::before {
+        display: none !important;
+      }
+    }
+    */
   </style>
 </head>
 <body>
@@ -15,16 +150,17 @@
   <div class="filters-container">
     <button class="filters-toggle" onclick="toggleFilters()">Mostrar Filtros</button>
     <div class="filters-box" id="filtros">
-      <select id="DATA" onchange="aplicarFiltros()"><option value="">Data</option></select>
-      <select id="DIA SEMANA" onchange="aplicarFiltros()"><option value="">Dia da Semana</option></select>
-      <select id="REGENTE" onchange="aplicarFiltros()"><option value="">Regente</option></select>
-      <select id="ACOMP" onchange="aplicarFiltros()"><option value="">Acomp</option></select>
-      <select id="MENSAGEM MUSCAL" onchange="aplicarFiltros()"><option value="">Mensagem Musical</option></select>
-      <select id="PREGADOR" onchange="aplicarFiltros()"><option value="">Pregador</option></select>
-      <select id="ANCIÃO" onchange="aplicarFiltros()"><option value="">Ancião</option></select>
-      <select id="AUDIOVISUAL" onchange="aplicarFiltros()"><option value="">Audiovisual</option></select>
-      <select id="SUPORTE" onchange="aplicarFiltros()"><option value="">Suporte</option></select>
-      <select id="OBS" onchange="aplicarFiltros()"><option value="">Observação</option></select>
+      <select id="DATA" onchange="aplicarFiltros()" placeholder="Data"><option value="">Data</option></select>
+      <select id="DIA SEMANA" onchange="aplicarFiltros()" placeholder="Dia da Semana"><option value="">Dia da Semana</option></select>
+      <select id="REGENTE" onchange="aplicarFiltros()" placeholder="Regente"><option value="">Regente</option></select>
+      <select id="ACOMP" onchange="aplicarFiltros()" placeholder="Acomp"><option value="">Acomp</option></select>
+      <select id="EQUIPE LOUVOR" onchange="aplicarFiltros()" placeholder="Equipe Louvor"><option value="">Equipe Louvor</option></select>
+      <select id="MENSAGEM MUSCAL" onchange="aplicarFiltros()" placeholder="Mensagem Musical"><option value="">Mensagem Musical</option></select>
+      <select id="PREGADOR" onchange="aplicarFiltros()" placeholder="Pregador"><option value="">Pregador</option></select>
+      <select id="ANCIÃO" onchange="aplicarFiltros()" placeholder="Ancião"><option value="">Ancião</option></select>
+      <select id="AUDIOVISUAL" onchange="aplicarFiltros()" placeholder="Audiovisual"><option value="">Audiovisual</option></select>
+      <select id="SUPORTE" onchange="aplicarFiltros()" placeholder="Suporte"><option value="">Suporte</option></select>
+      <select id="OBS" onchange="aplicarFiltros()" placeholder="Observação"><option value="">Observação</option></select>
     </div>
   </div>
 
@@ -49,6 +185,7 @@
     <tbody></tbody>
   </table>
 
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <script>
     function toggleFilters() {
       const box = document.getElementById('filtros');
@@ -73,38 +210,33 @@
         linha.style.display = mostrar ? '' : 'none';
       });
 
+      // Oculta filtros após aplicação
       document.getElementById('filtros').style.display = 'none';
     }
 
     async function carregarCSV() {
       try {
-        const resposta = await fetch('atual.csv');
+        const resposta = await fetch('atual.csv', { headers: { 'Content-Type': 'text/plain' } });
         if (!resposta.ok) throw new Error('Arquivo não encontrado');
         const texto = await resposta.text();
 
-        const resultado = Papa.parse(texto.trim(), {
-          header: false,
-          skipEmptyLines: true
-        });
-
-        const dados = resultado.data;
         const cabecalhos = ['DATA','DIA SEMANA','REGENTE','ACOMP','EQUIPE LOUVOR','MENSAGEM MUSCAL','PREGADOR','ANCIÃO','AUDIOVISUAL','SUPORTE','OBS'];
-
-        const corpoTabela = document.querySelector('#tabela-escala tbody');
         const filtros = cabecalhos.reduce((acc, cur) => ({ ...acc, [cur]: new Set() }), {});
-
+        const corpoTabela = document.querySelector('#tabela-escala tbody');
         corpoTabela.innerHTML = '';
 
-        dados.forEach((linha, i) => {
-          if (linha.length === 0 || linha.every(cell => cell.trim() === '')) return;
+        // Usando PapaParse para parsear CSV
+        const resultados = Papa.parse(texto.trim(), {header: false, skipEmptyLines: true});
 
-          while (linha.length < cabecalhos.length) linha.push('');
+        resultados.data.forEach((linha, i) => {
+          // Linha pode ser array com 11 colunas
+          while(linha.length < cabecalhos.length) linha.push('');
 
           const tr = document.createElement('tr');
           linha.forEach((col, idx) => {
-            filtros[cabecalhos[idx]].add(col);
+            filtros[cabecalhos[idx]].add(col.trim());
             const td = document.createElement('td');
-            td.textContent = col;
+            td.textContent = col.trim();
             td.setAttribute('data-label', cabecalhos[idx]);
             tr.appendChild(td);
           });
@@ -114,15 +246,19 @@
           corpoTabela.appendChild(tr);
         });
 
+        // Preencher selects dos filtros
         cabecalhos.forEach(cab => {
           const select = document.getElementById(cab);
           if (select) {
-            [...filtros[cab]].sort().forEach(v => {
-              const opt = document.createElement('option');
-              opt.value = v;
-              opt.textContent = v;
-              select.appendChild(opt);
-            });
+            [...filtros[cab]]
+              .filter(v => v) // Remove valores vazios
+              .sort((a,b) => a.localeCompare(b, 'pt-BR', {ignorePunctuation:true}))
+              .forEach(v => {
+                const opt = document.createElement('option');
+                opt.value = v;
+                opt.textContent = v;
+                select.appendChild(opt);
+              });
           }
         });
 
@@ -144,12 +280,14 @@
     function aplicarParametrosURL() {
       const url = new URL(window.location);
       const params = new URLSearchParams(url.search);
+
       params.forEach((valor, chave) => {
         const select = document.getElementById(chave.toUpperCase());
         if (select) {
           select.value = valor;
         }
       });
+
       aplicarFiltros();
     }
 
