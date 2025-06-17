@@ -58,19 +58,6 @@
     tr:last-child td {
       border-bottom: none;
     }
-    /* Coluna vazia do cabeçalho: só espaço visual, sem borda e sem conteúdo */
-    th.empty {
-      background: transparent;
-      border: none;
-      pointer-events: none;
-      width: 30px;
-    }
-    td.empty {
-      background: transparent;
-      border: none;
-      pointer-events: none;
-      width: 30px;
-    }
     @keyframes fadeInUp {
       from {opacity: 0; transform: translateY(10px);}
       to {opacity: 1; transform: translateY(0);}
@@ -121,7 +108,7 @@
       gap: 12px 16px;
     }
     #filtros-content.expanded {
-      max-height: 400px; /* suficiente para todos os filtros expandidos */
+      max-height: 400px;
       padding-top: 12px;
       padding-bottom: 20px;
     }
@@ -175,10 +162,6 @@
         display: block;
         color: #555;
         margin-bottom: 6px;
-      }
-      /* hide empty column on small screens */
-      td.empty {
-        display: none;
       }
     }
   </style>
@@ -292,8 +275,6 @@
         <th>ACOMP</th>
         <th>EQUIPE LOUVOR</th>
         <th>MENSAGEM MUSCAL</th>
-        <th class="empty" aria-hidden="true"></th>
-        <!-- coluna vazia -->
         <th>PREGADOR</th>
         <th>ANCIÃO</th>
         <th>AUDIOVISUAL</th>
@@ -307,21 +288,19 @@
   </table>
 
   <script>
-    // Colunas que serão usadas nos filtros, com índice correspondente da tabela
+    // Atualização dos índices das colunas para os filtros
     const colunasFiltro = {
       'filtro-data': 0,
       'filtro-dia': 1,
       'filtro-regente': 2,
       'filtro-acomp': 3,
       'filtro-msgmuscal': 5,
-      'filtro-pregador': 7,
-      'filtro-anciao': 8,
-      'filtro-audiovisual': 9,
-      'filtro-suporte': 10,
-      'filtro-obs': 11
+      'filtro-pregador': 6,
+      'filtro-anciao': 7,
+      'filtro-audiovisual': 8,
+      'filtro-suporte': 9,
+      'filtro-obs': 10
     };
-
-    // Coluna vazia índice 6 - nunca preenche-la para manter vazia
 
     async function carregarCSV() {
       try {
@@ -340,7 +319,6 @@
           'ACOMP',
           'EQUIPE LOUVOR',
           'MENSAGEM MUSCAL',
-          '', // coluna vazia extra no meio
           'PREGADOR',
           'ANCIÃO',
           'AUDIOVISUAL',
@@ -362,19 +340,11 @@
             colunas.push('');
           }
 
-          // Garantir que a coluna vazia no índice 6 fique sempre vazia
-          colunas[6] = '';
-
           const tr = document.createElement('tr');
           colunas.forEach((col, idx) => {
             const td = document.createElement('td');
             td.setAttribute('data-label', cabecalhos[idx] || '');
-            if (idx === 6) {
-              td.classList.add('empty');
-              td.textContent = '';
-            } else {
-              td.textContent = col;
-            }
+            td.textContent = col;
             tr.appendChild(td);
           });
 
@@ -401,12 +371,10 @@
       }
     }
 
-    // Função para aplicar os filtros na tabela
     function aplicarFiltros() {
       const tbody = document.querySelector('#tabela-escala tbody');
       const linhas = Array.from(tbody.querySelectorAll('tr'));
 
-      // Obter valores filtrados
       const filtros = {};
       Object.keys(colunasFiltro).forEach((id) => {
         const val = document.getElementById(id).value.trim().toLowerCase();
@@ -428,7 +396,6 @@
       });
     }
 
-    // Adicionar listeners aos inputs para filtrar em tempo real
     function adicionarListenersFiltro() {
       Object.keys(colunasFiltro).forEach((id) => {
         const input = document.getElementById(id);
@@ -436,7 +403,6 @@
       });
     }
 
-    // Função para toggle dos filtros
     function toggleFiltros() {
       const container = document.getElementById('filtros-container');
       const content = document.getElementById('filtros-content');
@@ -471,7 +437,6 @@
         }
       });
 
-    // Inicialmente recolhido e carregar dados
     window.addEventListener('load', () => {
       carregarCSV();
     });
