@@ -32,6 +32,50 @@
     0% {transform: rotate(0deg);}
     100% {transform: rotate(360deg);}
   }
+  /* FILTROS fora da tabela */
+  #filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 15px;
+    background: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 8px rgb(0 0 0 / 0.1);
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #filtros > * {
+    flex: 1 1 150px;
+    min-width: 140px;
+  }
+  #filtros input[type="text"],
+  #filtros input[type="date"],
+  #filtros select {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1.5px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fff;
+    color: #222;
+  }
+  #filtros input[type="text"]::placeholder,
+  #filtros input[type="date"]::placeholder {
+    color: #999;
+    font-style: italic;
+  }
+  #filtros input[type="text"]:focus,
+  #filtros input[type="date"]:focus,
+  #filtros select:focus {
+    outline: none;
+    border-color: #5a9bd5;
+    box-shadow: 0 0 6px #a9c9f5;
+  }
+  /* tabela */
   table {
     width: 100%;
     border-collapse: collapse;
@@ -40,6 +84,9 @@
     overflow: hidden;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     display: none;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
   }
   th, td {
     padding: 10px 8px;
@@ -51,46 +98,16 @@
     background-color: #222;
     color: white;
     position: sticky;
-    top: 40px; /* space for filter inputs */
+    top: 0;
     z-index: 2;
   }
   tr:last-child td {
     border-bottom: none;
   }
-  /* Coluna vazia do cabeçalho: só espaço visual, sem borda */
   th.empty {
     background: transparent;
     border: none;
     pointer-events: none;
-  }
-  /* Linha de filtros */
-  tr.filters-row input {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 5px 6px;
-    font-size: 13px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    background: #fff;
-    color: #222;
-  }
-  tr.filters-row input:focus {
-    outline: none;
-    border-color: #666;
-  }
-  /* ajuste para filtro select do dia da semana */
-  tr.filters-row select {
-    width: 100%;
-    padding: 5px 6px;
-    font-size: 13px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    background: #fff;
-    color: #222;
-  }
-  tr.filters-row select:focus {
-    outline: none;
-    border-color: #666;
   }
   @keyframes fadeInUp {
     from {opacity: 0; transform: translateY(10px);}
@@ -101,25 +118,18 @@
     animation: fadeInUp 0.3s ease forwards;
   }
   @media (max-width: 768px) {
+    #filtros {
+      gap: 10px;
+    }
+    #filtros > * {
+      flex: 1 1 100%;
+      min-width: unset;
+    }
     table, thead, tbody, th, td, tr {
       display: block;
     }
-    thead tr:not(.filters-row) {
+    thead tr {
       display: none;
-    }
-    tr.filters-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid #ddd;
-      background: #f7f7f7;
-      position: sticky;
-      top: 0;
-      z-index: 3;
-    }
-    tr.filters-row input, tr.filters-row select {
-      flex: 1 1 150px;
     }
     tr {
       margin-bottom: 15px;
@@ -149,7 +159,31 @@
 </head>
 <body>
 <h1>Escala de Louvor</h1>
-<div class="loader" id="carregando"></div>
+
+<div id="filtros" role="search" aria-label="Filtros para busca na tabela">
+  <input type="date" id="filter-data" aria-label="Filtro por data" placeholder="Data" />
+  <select id="filter-diaSemana" aria-label="Filtro por dia da semana" title="Dia da semana">
+    <option value="">Dia Semana (Todos)</option>
+    <option value="domingo">domingo</option>
+    <option value="segunda-feira">segunda-feira</option>
+    <option value="terça-feira">terça-feira</option>
+    <option value="quarta-feira">quarta-feira</option>
+    <option value="quinta-feira">quinta-feira</option>
+    <option value="sexta-feira">sexta-feira</option>
+    <option value="sábado">sábado</option>
+    <option value="sábado/tarde">sábado/tarde</option>
+    <option value="batismo">batismo</option>
+  </select>
+  <input type="text" id="filter-regente" placeholder="Regente" aria-label="Filtro por regente" />
+  <input type="text" id="filter-acomp" placeholder="Acompanhamento" aria-label="Filtro por acompanhamento" />
+  <input type="text" id="filter-equipeLouvor" placeholder="Equipe Louvor" aria-label="Filtro por equipe louvor" />
+  <input type="text" id="filter-msgMuscal" placeholder="Mensagem Musical" aria-label="Filtro por mensagem musical" />
+  <input type="text" id="filter-pregador" placeholder="Pregador" aria-label="Filtro por pregador" />
+  <input type="text" id="filter-anciao" placeholder="Ancião" aria-label="Filtro por ancião" />
+  <input type="text" id="filter-audiovisual" placeholder="Audiovisual" aria-label="Filtro por audiovisual" />
+  <input type="text" id="filter-suporte" placeholder="Suporte" aria-label="Filtro por suporte" />
+  <input type="text" id="filter-obs" placeholder="Observações" aria-label="Filtro por observações" />
+</div>
 
 <table id="tabela-escala" aria-label="Tabela com escala de louvor">
   <thead>
@@ -166,34 +200,6 @@
       <th>AUDIOVISUAL</th>
       <th>SUPORTE</th>
       <th>OBS</th>
-    </tr>
-    <tr class="filters-row">
-      <th><input type="date" id="filter-data" /></th>
-      <th>
-        <select id="filter-diaSemana">
-          <option value="">Todos</option>
-          <option value="domingo">domingo</option>
-          <option value="segunda-feira">segunda-feira</option>
-          <option value="terça-feira">terça-feira</option>
-          <option value="quarta-feira">quarta-feira</option>
-          <option value="quinta-feira">quinta-feira</option>
-          <option value="sexta-feira">sexta-feira</option>
-          <option value="sábado">sábado</option>
-          <option value="sábado/tarde">sábado/tarde</option>
-          <option value="batismo">batismo</option>
-          <!-- pode ajustar opções conforme dados -->
-        </select>
-      </th>
-      <th><input type="text" id="filter-regente" placeholder="Regente" /></th>
-      <th><input type="text" id="filter-acomp" placeholder="Acomp" /></th>
-      <th><input type="text" id="filter-equipeLouvor" placeholder="Equipe Louvor" /></th>
-      <th><input type="text" id="filter-msgMuscal" placeholder="Mensagem Musical" /></th>
-      <th><!-- coluna vazia --></th>
-      <th><input type="text" id="filter-pregador" placeholder="Pregador" /></th>
-      <th><input type="text" id="filter-anciao" placeholder="Ancião" /></th>
-      <th><input type="text" id="filter-audiovisual" placeholder="Audiovisual" /></th>
-      <th><input type="text" id="filter-suporte" placeholder="Suporte" /></th>
-      <th><input type="text" id="filter-obs" placeholder="Obs" /></th>
     </tr>
   </thead>
   <tbody>
@@ -296,7 +302,6 @@
   }
 
   function filtrarTabela() {
-    // pega os valores dos filtros
     const filtroData = document.getElementById('filter-data').value; // yyyy-mm-dd
     const filtroDiaSemana = document.getElementById('filter-diaSemana').value.trim().toLowerCase();
     const filtroRegente = document.getElementById('filter-regente').value.trim().toLowerCase();
@@ -310,22 +315,17 @@
     const filtroObs = document.getElementById('filter-obs').value.trim().toLowerCase();
 
     const dadosFiltrados = linhasDados.filter(cols => {
-      // cols: array das colunas da linha
-
-      // filtro data: comparar formato do csv dd/mm/yyyy com input yyyy-mm-dd
       if (filtroData) {
         const partes = cols[0].split('/');
         if (partes.length !== 3) return false;
         const dataFormatada = `${partes[2]}-${partes[1].padStart(2,'0')}-${partes[0].padStart(2,'0')}`;
         if (dataFormatada !== filtroData) return false;
       }
-      // outros filtros: comparar texto contém (case insensitive)
       if (filtroDiaSemana && !cols[1].toLowerCase().includes(filtroDiaSemana)) return false;
       if (filtroRegente && !cols[2].toLowerCase().includes(filtroRegente)) return false;
       if (filtroAcomp && !cols[3].toLowerCase().includes(filtroAcomp)) return false;
       if (filtroEquipeLouvor && !cols[4].toLowerCase().includes(filtroEquipeLouvor)) return false;
       if (filtroMsgMuscal && !cols[5].toLowerCase().includes(filtroMsgMuscal)) return false;
-      // coluna 6 é vazia, ignorar
       if (filtroPregador && !cols[7].toLowerCase().includes(filtroPregador)) return false;
       if (filtroAnciao && !cols[8].toLowerCase().includes(filtroAnciao)) return false;
       if (filtroAudiovisual && !cols[9].toLowerCase().includes(filtroAudiovisual)) return false;
@@ -338,7 +338,6 @@
     montarTabela(dadosFiltrados);
   }
 
-  // adiciona listeners para todos os filtros
   function ativarFiltros() {
     const filtros = [
       'filter-data',
