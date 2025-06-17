@@ -9,29 +9,51 @@
       padding: 20px;
       background: #f7f7f7;
     }
+
     h1 {
       text-align: center;
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 20px;
       background: white;
     }
+
     th, td {
       padding: 10px;
       border: 1px solid #ccc;
       text-align: center;
     }
+
     th {
       background-color: #444;
       color: white;
+    }
+
+    /* Animação de entrada */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    tr.animada {
+      opacity: 0;
+      animation: fadeInUp 0.3s ease forwards;
     }
   </style>
 </head>
 <body>
 
 <h1>Escala de Louvor</h1>
+
 <table id="tabela-escala">
   <thead>
     <tr>
@@ -49,31 +71,37 @@
     </tr>
   </thead>
   <tbody>
-    <!-- Dados serão inseridos aqui -->
+    <!-- As linhas da tabela serão inseridas aqui -->
   </tbody>
 </table>
 
 <script>
 async function carregarCSV() {
   try {
-    const resposta = await fetch('atual.csv');
+    const resposta = await fetch('atual.csv', { headers: { 'Content-Type': 'text/plain' } });
     const texto = await resposta.text();
     const linhas = texto.trim().split('\n');
     const corpoTabela = document.querySelector('#tabela-escala tbody');
 
-    linhas.slice(1).forEach(linha => {
+    linhas.slice(1).forEach((linha, i) => {
       const colunas = linha.split(',');
       const tr = document.createElement('tr');
+
       colunas.forEach(coluna => {
         const td = document.createElement('td');
         td.textContent = coluna.trim().replace(/^"|"$/g, '');
         tr.appendChild(td);
       });
+
+      // Adiciona animação com atraso em cascata
+      tr.classList.add('animada');
+      tr.style.animationDelay = `${0.05 * i}s`;
       corpoTabela.appendChild(tr);
     });
+
   } catch (erro) {
     console.error('Erro ao carregar o CSV:', erro);
-    document.body.innerHTML += "<p style='color: red;'>Erro ao carregar os dados. Verifique se o arquivo <code>atual.csv</code> está presente.</p>";
+    document.body.innerHTML += "<p style='color: red;'>Erro ao carregar os dados. Verifique se o arquivo <code>atual.csv</code> está presente na mesma pasta.</p>";
   }
 }
 
