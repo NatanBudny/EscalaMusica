@@ -17,10 +17,8 @@
   }
   h1 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
-
-  /* Loader */
   .loader {
     border: 6px solid #eee;
     border-top: 6px solid #444;
@@ -34,8 +32,6 @@
     0% {transform: rotate(0deg);}
     100% {transform: rotate(360deg);}
   }
-
-  /* Tabela */
   table {
     width: 100%;
     border-collapse: collapse;
@@ -61,89 +57,84 @@
   tr:last-child td {
     border-bottom: none;
   }
-  /* Zebra */
-  tbody tr:nth-child(odd) {
-    background-color: #f9f9f9;
-  }
-
-  /* Linha animada */
-  @keyframes fadeInUp {
-    from {opacity: 0; transform: translateY(10px);}
-    to {opacity: 1; transform: translateY(0);}
+  tr:nth-child(even) {
+    background-color: #f8f8f8;
   }
   tr.animada {
     opacity: 0;
     animation: fadeInUp 0.3s ease forwards;
   }
-
-  /* Filtros container */
-  #filtros {
+  @keyframes fadeInUp {
+    from {opacity: 0; transform: translateY(10px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+  .filtros-container {
     max-width: 1000px;
-    margin: 0 auto 20px auto;
-    border: 1px solid #ddd;
+    margin: 0 auto 20px;
+    background: #fff;
     border-radius: 8px;
-    padding: 12px 16px;
-    background-color: white;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    user-select: none;
-  }
-  #filtros.collapsed {
-    height: 40px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    padding: 10px 20px;
+    transition: max-height 0.3s ease;
     overflow: hidden;
-    cursor: pointer;
   }
-  #filtros h2 {
-    margin: 0;
-    font-size: 18px;
-    line-height: 40px;
-    font-weight: 600;
-    color: #222;
-    user-select: none;
+  .filtros-container.collapsed {
+    max-height: 0;
+    padding: 0 20px;
   }
-  #filtros h2::after {
-    content: '▼';
-    float: right;
-    transition: transform 0.3s ease;
-  }
-  #filtros.collapsed h2::after {
-    transform: rotate(-90deg);
-  }
-
-  /* Campos de filtro */
-  #filtros .campos {
-    margin-top: 12px;
+  .filtros-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 12px 16px;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
   }
-  #filtros.collapsed .campos {
-    display: none;
-  }
-
-  #filtros input[type="text"],
-  #filtros select {
-    width: 100%;
-    padding: 8px 10px;
+  .filtros-grid input {
+    padding: 6px 10px;
+    font-size: 13px;
     border: 1px solid #ccc;
     border-radius: 6px;
+    width: 100%;
+  }
+  .toggle-filtros {
+    display: block;
+    margin: 0 auto 10px;
+    padding: 8px 16px;
     font-size: 14px;
-    color: #333;
-    transition: border-color 0.2s ease;
+    background: #444;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
   }
-  #filtros input[type="text"]::placeholder {
-    color: #999;
-  }
-  #filtros input[type="text"]:focus,
-  #filtros select:focus {
-    border-color: #444;
-    outline: none;
-  }
-
-  /* Responsivo */
   @media (max-width: 768px) {
-    #filtros .campos {
-      grid-template-columns: 1fr 1fr;
-      gap: 10px 10px;
+    table, thead, tbody, th, td, tr {
+      display: block;
+    }
+    thead {
+      display: none;
+    }
+    tr {
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: white;
+      padding: 12px;
+    }
+    td {
+      text-align: left;
+      padding: 6px 10px;
+      font-size: 13px;
+      border: none;
+      position: relative;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    td::before {
+      content: attr(data-label);
+      font-weight: bold;
+      display: block;
+      color: #555;
+      margin-bottom: 6px;
     }
   }
 </style>
@@ -151,198 +142,21 @@
 <body>
 <h1>Escala de Louvor</h1>
 
-<div id="filtros" class="collapsed" title="Clique para expandir/recolher filtros">
-  <h2>Filtros</h2>
-  <div class="campos">
-    <input type="text" id="filtrarData" placeholder="Filtrar por Data" />
-    <select id="filtrarDiaSemana" aria-label="Filtrar por Dia da Semana">
-      <option value="">Filtrar por Dia Semana</option>
-      <option value="domingo">domingo</option>
-      <option value="sexta-feira">sexta-feira</option>
-      <option value="sábado">sábado</option>
-      <option value="sábado/tarde">sábado/tarde</option>
-    </select>
-    <input type="text" id="filtrarRegente" placeholder="Filtrar por Regente" />
-    <input type="text" id="filtrarAcomp" placeholder="Filtrar por Acompanhamento" />
-    <input type="text" id="filtrarMensagem" placeholder="Filtrar por Mensagem Musical" />
-    <input type="text" id="filtrarPregador" placeholder="Filtrar por Pregador" />
-    <input type="text" id="filtrarAnciao" placeholder="Filtrar por Ancião" />
-    <input type="text" id="filtrarAudiovisual" placeholder="Filtrar por Audiovisual" />
-    <input type="text" id="filtrarSuporte" placeholder="Filtrar por Suporte" />
-    <input type="text" id="filtrarObs" placeholder="Filtrar por Observação" />
+<button class="toggle-filtros" onclick="toggleFiltros()">Mostrar filtros</button>
+
+<div class="filtros-container collapsed" id="filtros-container">
+  <div class="filtros-grid">
+    <input type="text" placeholder="Data" id="filtro-data" />
+    <input type="text" placeholder="Dia Semana" id="filtro-dia" />
+    <input type="text" placeholder="Regente" id="filtro-regente" />
+    <input type="text" placeholder="Acomp" id="filtro-acomp" />
+    <input type="text" placeholder="Mensagem Musical" id="filtro-msg" />
+    <input type="text" placeholder="Pregador" id="filtro-pregador" />
+    <input type="text" placeholder="Ancião" id="filtro-anciao" />
+    <input type="text" placeholder="Audiovisual" id="filtro-audiovisual" />
+    <input type="text" placeholder="Suporte" id="filtro-suporte" />
+    <input type="text" placeholder="Obs" id="filtro-obs" />
   </div>
 </div>
 
-<div class="loader" id="carregando"></div>
-
-<table id="tabela-escala" aria-label="Tabela com escala de louvor">
-  <thead>
-    <tr>
-      <th>DATA</th>
-      <th>DIA SEMANA</th>
-      <th>REGENTE</th>
-      <th>ACOMP</th>
-      <th>EQUIPE LOUVOR</th>
-      <th>MENSAGEM MUSICAL</th>
-      <th>PREGADOR</th>
-      <th>ANCIÃO</th>
-      <th>AUDIOVISUAL</th>
-      <th>SUPORTE</th>
-      <th>OBS</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Conteúdo gerado via JS -->
-  </tbody>
-</table>
-
-<script>
-  // Variável global para armazenar linhas carregadas do CSV
-  let linhasCSV = [];
-
-  async function carregarCSV() {
-    try {
-      const resposta = await fetch('atual.csv', { headers: { 'Content-Type': 'text/plain' } });
-      if (!resposta.ok) throw new Error('Arquivo não encontrado');
-      const texto = await resposta.text();
-
-      const linhas = texto.trim().split('\n').filter(l => l.trim() !== '');
-
-      linhasCSV = linhas.map(linha => {
-        // separa por vírgula, respeitando aspas duplas
-        const colunas = linha.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g)
-          .map(c => c.replace(/^"|"$/g, '').trim());
-
-        // completa com vazios se faltar colunas
-        while (colunas.length < 11) {
-          colunas.push('');
-        }
-        return colunas;
-      });
-
-      popularSelects(); // Popular opções dos selects (se precisar)
-
-      montarTabela(linhasCSV);
-
-      document.getElementById('carregando').style.display = 'none';
-      document.getElementById('tabela-escala').style.display = 'table';
-    } catch (e) {
-      console.error('Erro ao carregar CSV:', e);
-      document.getElementById('carregando').style.display = 'none';
-      const pErro = document.createElement('p');
-      pErro.style.color = 'red';
-      pErro.style.textAlign = 'center';
-      pErro.textContent = 'Erro ao carregar os dados. Verifique se "atual.csv" está na mesma pasta.';
-      document.body.appendChild(pErro);
-    }
-  }
-
-  function montarTabela(dados) {
-    const corpoTabela = document.querySelector('#tabela-escala tbody');
-    corpoTabela.innerHTML = '';
-
-    dados.forEach((colunas, i) => {
-      const tr = document.createElement('tr');
-      colunas.forEach((col, idx) => {
-        const td = document.createElement('td');
-        td.textContent = col;
-        const cabecalhos = ['DATA','DIA SEMANA','REGENTE','ACOMP','EQUIPE LOUVOR','MENSAGEM MUSICAL','PREGADOR','ANCIÃO','AUDIOVISUAL','SUPORTE','OBS'];
-        td.setAttribute('data-label', cabecalhos[idx]);
-        tr.appendChild(td);
-      });
-      tr.classList.add('animada');
-      tr.style.animationDelay = `${i * 0.05}s`;
-      corpoTabela.appendChild(tr);
-    });
-  }
-
-  function aplicarFiltros() {
-    const filtros = {
-      filtrarData: document.getElementById('filtrarData').value.trim().toLowerCase(),
-      filtrarDiaSemana: document.getElementById('filtrarDiaSemana').value.trim().toLowerCase(),
-      filtrarRegente: document.getElementById('filtrarRegente').value.trim().toLowerCase(),
-      filtrarAcomp: document.getElementById('filtrarAcomp').value.trim().toLowerCase(),
-      filtrarMensagem: document.getElementById('filtrarMensagem').value.trim().toLowerCase(),
-      filtrarPregador: document.getElementById('filtrarPregador').value.trim().toLowerCase(),
-      filtrarAnciao: document.getElementById('filtrarAnciao').value.trim().toLowerCase(),
-      filtrarAudiovisual: document.getElementById('filtrarAudiovisual').value.trim().toLowerCase(),
-      filtrarSuporte: document.getElementById('filtrarSuporte').value.trim().toLowerCase(),
-      filtrarObs: document.getElementById('filtrarObs').value.trim().toLowerCase(),
-    };
-
-    const dadosFiltrados = linhasCSV.filter(colunas => {
-      return (
-        (filtros.filtrarData === '' || colunas[0].toLowerCase().includes(filtros.filtrarData)) &&
-        (filtros.filtrarDiaSemana === '' || colunas[1].toLowerCase() === filtros.filtrarDiaSemana) &&
-        (filtros.filtrarRegente === '' || colunas[2].toLowerCase().includes(filtros.filtrarRegente)) &&
-        (filtros.filtrarAcomp === '' || colunas[3].toLowerCase().includes(filtros.filtrarAcomp)) &&
-        (filtros.filtrarMensagem === '' || colunas[5].toLowerCase().includes(filtros.filtrarMensagem)) &&
-        (filtros.filtrarPregador === '' || colunas[6].toLowerCase().includes(filtros.filtrarPregador)) &&
-        (filtros.filtrarAnciao === '' || colunas[7].toLowerCase().includes(filtros.filtrarAnciao)) &&
-        (filtros.filtrarAudiovisual === '' || colunas[8].toLowerCase().includes(filtros.filtrarAudiovisual)) &&
-        (filtros.filtrarSuporte === '' || colunas[9].toLowerCase().includes(filtros.filtrarSuporte)) &&
-        (filtros.filtrarObs === '' || colunas[10].toLowerCase().includes(filtros.filtrarObs))
-      );
-    });
-
-    montarTabela(dadosFiltrados);
-  }
-
-  function pegarFiltrosDaURL() {
-    const params = new URLSearchParams(window.location.search);
-    const camposFiltro = [
-      'filtrarData', 'filtrarDiaSemana', 'filtrarRegente', 'filtrarAcomp',
-      'filtrarMensagem', 'filtrarPregador', 'filtrarAnciao',
-      'filtrarAudiovisual', 'filtrarSuporte', 'filtrarObs'
-    ];
-
-    camposFiltro.forEach(id => {
-      const valor = params.get(id);
-      if (valor !== null) {
-        const el = document.getElementById(id);
-        if (el) {
-          el.value = decodeURIComponent(valor);
-        }
-      }
-    });
-  }
-
-  // Adiciona listeners para filtros
-  function adicionarListenersFiltros() {
-    const filtrosIds = [
-      'filtrarData', 'filtrarDiaSemana', 'filtrarRegente', 'filtrarAcomp',
-      'filtrarMensagem', 'filtrarPregador', 'filtrarAnciao',
-      'filtrarAudiovisual', 'filtrarSuporte', 'filtrarObs'
-    ];
-
-    filtrosIds.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) {
-        el.addEventListener('input', aplicarFiltros);
-        el.addEventListener('change', aplicarFiltros);
-      }
-    });
-  }
-
-  // Popular selects (exemplo para dia semana)
-  function popularSelects() {
-    // No momento só o dia da semana é select, já preenchido no html.
-    // Se quiser, pode gerar opções dinamicamente aqui
-  }
-
-  // Filtro recolhível
-  const filtrosDiv = document.getElementById('filtros');
-  filtrosDiv.addEventListener('click', () => {
-    filtrosDiv.classList.toggle('collapsed');
-  });
-
-  document.addEventListener('DOMContentLoaded', () => {
-    carregarCSV().then(() => {
-      pegarFiltrosDaURL();
-      aplicarFiltros();
-      adicionarListenersFiltros();
-    });
-  });
-</script>
-</body>
-</html>
+<div class="loader" id="carregando">
