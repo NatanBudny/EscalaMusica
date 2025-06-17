@@ -19,19 +19,78 @@
     text-align: center;
     margin-bottom: 20px;
   }
-  .loader {
-    border: 6px solid #eee;
-    border-top: 6px solid #444;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-    margin: 40px auto;
+
+  /* Botão toggle dos filtros */
+  #btnToggleFiltros {
+    display: block;
+    margin: 0 auto 10px auto;
+    padding: 10px 18px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 2px solid #222;
+    background: white;
+    color: #222;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
-  @keyframes spin {
-    0% {transform: rotate(0deg);}
-    100% {transform: rotate(360deg);}
+  #btnToggleFiltros:hover {
+    background-color: #222;
+    color: white;
   }
+
+  /* Container dos filtros */
+  #filtros {
+    max-width: 1200px;
+    margin: 0 auto 20px;
+    background: white;
+    padding: 0 20px; /* padding vertical zero quando fechado */
+    border-radius: 8px;
+    box-shadow: 0 1px 8px rgb(0 0 0 / 0.1);
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    max-height: 0;
+  }
+  #filtros.aberto {
+    padding: 15px 20px 30px 20px; /* mais espaço quando aberto, especialmente embaixo */
+    max-height: 1000px; /* valor alto pra garantir abertura total */
+    overflow: visible;
+  }
+
+  /* Layout dos filtros - flexível e responsivo */
+  #filtros form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 24px;
+    justify-content: center;
+  }
+  #filtros label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+    width: 180px;
+  }
+  #filtros input[type="text"] {
+    margin-top: 6px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1.5px solid #aaa;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+  }
+  #filtros input[type="text"]:focus {
+    border-color: #222;
+    outline: none;
+  }
+  /* Para responsividade */
+  @media (max-width: 768px) {
+    #filtros label {
+      width: 100%;
+    }
+  }
+
+  /* Tabela */
   table {
     width: 100%;
     border-collapse: collapse;
@@ -71,58 +130,6 @@
     opacity: 0;
     animation: fadeInUp 0.3s ease forwards;
   }
-  /* Layout filtros */
-  #filtros {
-    max-width: 1200px;
-    margin: 0 auto 20px;
-    background: white;
-    padding: 15px 20px;
-    border-radius: 8px;
-    box-shadow: 0 1px 8px rgb(0 0 0 / 0.1);
-    overflow: hidden;
-    transition: max-height 0.4s ease, padding 0.4s ease;
-  }
-  #filtros input[type="text"],
-  #filtros input[type="date"],
-  #filtros select {
-    width: 180px;
-    margin: 6px 8px 6px 0;
-    padding: 8px 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-    color: #333;
-    transition: border-color 0.3s ease;
-  }
-  #filtros input[type="text"]::placeholder,
-  #filtros input[type="date"]::placeholder {
-    color: #999;
-    font-style: italic;
-  }
-  #filtros input[type="text"]:focus,
-  #filtros input[type="date"]:focus,
-  #filtros select:focus {
-    border-color: #5a9bd5;
-    outline: none;
-  }
-  #btnToggleFiltros {
-    background: #5a9bd5;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    box-shadow: 0 2px 8px rgb(90 155 213 / 0.3);
-    transition: background-color 0.3s ease;
-    max-width: 200px;
-    margin: 0 auto 10px;
-    display: block;
-  }
-  #btnToggleFiltros:hover {
-    background: #4477cc;
-  }
-  /* Responsivo */
   @media (max-width: 768px) {
     table, thead, tbody, th, td, tr {
       display: block;
@@ -153,43 +160,58 @@
       color: #555;
       margin-bottom: 6px;
     }
-    #filtros input[type="text"],
-    #filtros input[type="date"],
-    #filtros select {
-      width: 100%;
-      margin: 6px 0;
-    }
   }
 </style>
 </head>
 <body>
+
 <h1>Escala de Louvor</h1>
 
-<button id="btnToggleFiltros" aria-expanded="false" aria-controls="filtros" aria-label="Mostrar filtros da tabela">Mostrar filtros</button>
+<button id="btnToggleFiltros" aria-expanded="false" aria-controls="filtros">Mostrar filtros</button>
 
-<div id="filtros" role="search" aria-label="Filtros para busca na tabela" style="display:none; max-height: 0; padding: 0 20px;">
-  <input type="date" id="filter-data" aria-label="Filtro por data" placeholder="Data" />
-  <select id="filter-diaSemana" aria-label="Filtro por dia da semana" title="Dia da semana">
-    <option value="">Dia Semana (Todos)</option>
-    <option value="domingo">domingo</option>
-    <option value="segunda-feira">segunda-feira</option>
-    <option value="terça-feira">terça-feira</option>
-    <option value="quarta-feira">quarta-feira</option>
-    <option value="quinta-feira">quinta-feira</option>
-    <option value="sexta-feira">sexta-feira</option>
-    <option value="sábado">sábado</option>
-    <option value="sábado/tarde">sábado/tarde</option>
-    <option value="batismo">batismo</option>
-  </select>
-  <input type="text" id="filter-regente" placeholder="Regente" aria-label="Filtro por regente" />
-  <input type="text" id="filter-acomp" placeholder="Acompanhamento" aria-label="Filtro por acompanhamento" />
-  <input type="text" id="filter-equipeLouvor" placeholder="Equipe Louvor" aria-label="Filtro por equipe louvor" />
-  <input type="text" id="filter-msgMuscal" placeholder="Mensagem Musical" aria-label="Filtro por mensagem musical" />
-  <input type="text" id="filter-pregador" placeholder="Pregador" aria-label="Filtro por pregador" />
-  <input type="text" id="filter-anciao" placeholder="Ancião" aria-label="Filtro por ancião" />
-  <input type="text" id="filter-audiovisual" placeholder="Audiovisual" aria-label="Filtro por audiovisual" />
-  <input type="text" id="filter-suporte" placeholder="Suporte" aria-label="Filtro por suporte" />
-  <input type="text" id="filter-obs" placeholder="Observações" aria-label="Filtro por observações" />
+<div id="filtros" aria-hidden="true">
+  <form id="formFiltros" autocomplete="off" aria-label="Filtros da tabela escala">
+    <label>
+      Data
+      <input type="text" id="filterData" placeholder="Ex: 07/06/2025" />
+    </label>
+    <label>
+      Dia semana
+      <input type="text" id="filterDia" placeholder="Ex: sábado" />
+    </label>
+    <label>
+      Regente
+      <input type="text" id="filterRegente" placeholder="Nome do regente" />
+    </label>
+    <label>
+      Acomp
+      <input type="text" id="filterAcomp" placeholder="Acompanhamento" />
+    </label>
+    <label>
+      Mensagem musical
+      <input type="text" id="filterMensagemMuscal" placeholder="Mensagem musical" />
+    </label>
+    <label>
+      Pregador
+      <input type="text" id="filterPregador" placeholder="Nome do pregador" />
+    </label>
+    <label>
+      Ancião
+      <input type="text" id="filterAnciao" placeholder="Nome do ancião" />
+    </label>
+    <label>
+      Audiovisual
+      <input type="text" id="filterAudiovisual" placeholder="Nome audiovisual" />
+    </label>
+    <label>
+      Suporte
+      <input type="text" id="filterSuporte" placeholder="Nome suporte" />
+    </label>
+    <label>
+      Obs
+      <input type="text" id="filterObs" placeholder="Observações" />
+    </label>
+  </form>
 </div>
 
 <div class="loader" id="carregando"></div>
@@ -220,27 +242,38 @@
   const btnToggle = document.getElementById('btnToggleFiltros');
   const filtrosDiv = document.getElementById('filtros');
   const tabela = document.getElementById('tabela-escala');
-  const carregando = document.getElementById('carregando');
+  const corpoTabela = tabela.querySelector('tbody');
 
+  const inputsFiltro = {
+    data: document.getElementById('filterData'),
+    dia: document.getElementById('filterDia'),
+    regente: document.getElementById('filterRegente'),
+    acomp: document.getElementById('filterAcomp'),
+    mensagemMuscal: document.getElementById('filterMensagemMuscal'),
+    pregador: document.getElementById('filterPregador'),
+    anciao: document.getElementById('filterAnciao'),
+    audiovisual: document.getElementById('filterAudiovisual'),
+    suporte: document.getElementById('filterSuporte'),
+    obs: document.getElementById('filterObs'),
+  };
+
+  // Toggle filtros recolhidos/expandidos
   btnToggle.addEventListener('click', () => {
-    const aberto = filtrosDiv.style.display === 'block';
+    const aberto = filtrosDiv.classList.contains('aberto');
     if (aberto) {
-      // fechar
-      filtrosDiv.style.maxHeight = '0';
-      filtrosDiv.style.padding = '0 20px';
-      setTimeout(() => filtrosDiv.style.display = 'none', 400);
+      filtrosDiv.classList.remove('aberto');
+      filtrosDiv.setAttribute('aria-hidden', 'true');
       btnToggle.textContent = 'Mostrar filtros';
       btnToggle.setAttribute('aria-expanded', 'false');
     } else {
-      // abrir
-      filtrosDiv.style.display = 'block';
-      filtrosDiv.style.maxHeight = filtrosDiv.scrollHeight + 'px';
-      filtrosDiv.style.padding = '15px 20px';
+      filtrosDiv.classList.add('aberto');
+      filtrosDiv.setAttribute('aria-hidden', 'false');
       btnToggle.textContent = 'Ocultar filtros';
       btnToggle.setAttribute('aria-expanded', 'true');
     }
   });
 
+  // Função para carregar CSV e montar tabela
   async function carregarCSV() {
     try {
       const resposta = await fetch('atual.csv', { headers: { 'Content-Type': 'text/plain' } });
@@ -264,11 +297,9 @@
         'OBS'
       ];
 
-      const corpoTabela = tabela.querySelector('tbody');
       corpoTabela.innerHTML = '';
 
       linhas.forEach((linha, i) => {
-        // separa por vírgula, respeitando as aspas duplas
         const colunas = linha.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g)
           .map(c => c.replace(/^"|"$/g, '').trim());
 
@@ -289,13 +320,14 @@
         corpoTabela.appendChild(tr);
       });
 
-      carregando.style.display = 'none';
-      tabela.style.display = 'table';
+      setTimeout(() => {
+        document.getElementById('carregando').style.display = 'none';
+        tabela.style.display = 'table';
+      }, 100);
 
-      adicionarFiltros();
     } catch (e) {
       console.error('Erro ao carregar CSV:', e);
-      carregando.style.display = 'none';
+      document.getElementById('carregando').style.display = 'none';
       const pErro = document.createElement('p');
       pErro.style.color = 'red';
       pErro.style.textAlign = 'center';
@@ -304,96 +336,54 @@
     }
   }
 
-  function adicionarFiltros() {
-    const filtros = {
-      data: document.getElementById('filter-data'),
-      diaSemana: document.getElementById('filter-diaSemana'),
-      regente: document.getElementById('filter-regente'),
-      acomp: document.getElementById('filter-acomp'),
-      equipeLouvor: document.getElementById('filter-equipeLouvor'),
-      msgMuscal: document.getElementById('filter-msgMuscal'),
-      pregador: document.getElementById('filter-pregador'),
-      anciao: document.getElementById('filter-anciao'),
-      audiovisual: document.getElementById('filter-audiovisual'),
-      suporte: document.getElementById('filter-suporte'),
-      obs: document.getElementById('filter-obs')
-    };
+  // Função que faz filtro da tabela conforme inputs
+  function aplicarFiltros() {
+    const linhas = Array.from(corpoTabela.querySelectorAll('tr'));
+    linhas.forEach(tr => {
+      const td = tr.querySelectorAll('td');
 
-    Object.values(filtros).forEach(input => {
-      input.addEventListener('input', filtrarTabela);
-      input.addEventListener('change', filtrarTabela);
+      const valores = {
+        data: td[0].textContent.toLowerCase(),
+        dia: td[1].textContent.toLowerCase(),
+        regente: td[2].textContent.toLowerCase(),
+        acomp: td[3].textContent.toLowerCase(),
+        mensagemMuscal: td[5].textContent.toLowerCase(),
+        pregador: td[7].textContent.toLowerCase(),
+        anciao: td[8].textContent.toLowerCase(),
+        audiovisual: td[9].textContent.toLowerCase(),
+        suporte: td[10].textContent.toLowerCase(),
+        obs: td[11].textContent.toLowerCase(),
+      };
+
+      // Verifica cada filtro - se input vazio, ignora
+      const condicoes = [
+        !inputsFiltro.data.value || valores.data.includes(inputsFiltro.data.value.toLowerCase()),
+        !inputsFiltro.dia.value || valores.dia.includes(inputsFiltro.dia.value.toLowerCase()),
+        !inputsFiltro.regente.value || valores.regente.includes(inputsFiltro.regente.value.toLowerCase()),
+        !inputsFiltro.acomp.value || valores.acomp.includes(inputsFiltro.acomp.value.toLowerCase()),
+        !inputsFiltro.mensagemMuscal.value || valores.mensagemMuscal.includes(inputsFiltro.mensagemMuscal.value.toLowerCase()),
+        !inputsFiltro.pregador.value || valores.pregador.includes(inputsFiltro.pregador.value.toLowerCase()),
+        !inputsFiltro.anciao.value || valores.anciao.includes(inputsFiltro.anciao.value.toLowerCase()),
+        !inputsFiltro.audiovisual.value || valores.audiovisual.includes(inputsFiltro.audiovisual.value.toLowerCase()),
+        !inputsFiltro.suporte.value || valores.suporte.includes(inputsFiltro.suporte.value.toLowerCase()),
+        !inputsFiltro.obs.value || valores.obs.includes(inputsFiltro.obs.value.toLowerCase()),
+      ];
+
+      if (condicoes.every(c => c)) {
+        tr.style.display = '';
+      } else {
+        tr.style.display = 'none';
+      }
     });
-
-    function filtrarTabela() {
-      const trs = tabela.querySelectorAll('tbody tr');
-
-      trs.forEach(tr => {
-        const tds = tr.querySelectorAll('td');
-
-        // pega os textos das colunas da linha
-        const linha = {
-          data: tds[0].textContent.toLowerCase(),
-          diaSemana: tds[1].textContent.toLowerCase(),
-          regente: tds[2].textContent.toLowerCase(),
-          acomp: tds[3].textContent.toLowerCase(),
-          equipeLouvor: tds[4].textContent.toLowerCase(),
-          msgMuscal: tds[5].textContent.toLowerCase(),
-          // 6 = coluna vazia, ignorar
-          pregador: tds[7].textContent.toLowerCase(),
-          anciao: tds[8].textContent.toLowerCase(),
-          audiovisual: tds[9].textContent.toLowerCase(),
-          suporte: tds[10].textContent.toLowerCase(),
-          obs: tds[11].textContent.toLowerCase()
-        };
-
-        // filtros
-        const filtroData = filtros.data.value; // yyyy-mm-dd
-        const filtroDia = filtros.diaSemana.value.toLowerCase();
-        const filtroRegente = filtros.regente.value.toLowerCase();
-        const filtroAcomp = filtros.acomp.value.toLowerCase();
-        const filtroEquipe = filtros.equipeLouvor.value.toLowerCase();
-        const filtroMsg = filtros.msgMuscal.value.toLowerCase();
-        const filtroPregador = filtros.pregador.value.toLowerCase();
-        const filtroAnciao = filtros.anciao.value.toLowerCase();
-        const filtroAudiovisual = filtros.audiovisual.value.toLowerCase();
-        const filtroSuporte = filtros.suporte.value.toLowerCase();
-        const filtroObs = filtros.obs.value.toLowerCase();
-
-        // converter data da linha para yyyy-mm-dd para comparar
-        let linhaData = '';
-        if (linha.data) {
-          // converter dd/mm/yyyy para yyyy-mm-dd
-          const parts = linha.data.split('/');
-          if(parts.length === 3) {
-            linhaData = `${parts[2]}-${parts[1].padStart(2,'0')}-${parts[0].padStart(2,'0')}`;
-          }
-        }
-
-        // checar cada filtro (se filtro vazio, ignora)
-        const condicoes = [
-          filtroData ? linhaData === filtroData : true,
-          filtroDia ? linha.diaSemana.includes(filtroDia) : true,
-          filtroRegente ? linha.regente.includes(filtroRegente) : true,
-          filtroAcomp ? linha.acomp.includes(filtroAcomp) : true,
-          filtroEquipe ? linha.equipeLouvor.includes(filtroEquipe) : true,
-          filtroMsg ? linha.msgMuscal.includes(filtroMsg) : true,
-          filtroPregador ? linha.pregador.includes(filtroPregador) : true,
-          filtroAnciao ? linha.anciao.includes(filtroAnciao) : true,
-          filtroAudiovisual ? linha.audiovisual.includes(filtroAudiovisual) : true,
-          filtroSuporte ? linha.suporte.includes(filtroSuporte) : true,
-          filtroObs ? linha.obs.includes(filtroObs) : true,
-        ];
-
-        if (condicoes.every(c => c)) {
-          tr.style.display = '';
-        } else {
-          tr.style.display = 'none';
-        }
-      });
-    }
   }
+
+  // Associa eventos para filtros
+  Object.values(inputsFiltro).forEach(input => {
+    input.addEventListener('input', aplicarFiltros);
+  });
 
   carregarCSV();
 </script>
+
 </body>
 </html>
