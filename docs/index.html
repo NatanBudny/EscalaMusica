@@ -2,37 +2,70 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Escala de Louvor</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: #f9f9f9;
       padding: 20px;
-      background: #f7f7f7;
+      color: #333;
     }
 
     h1 {
       text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .loader {
+      border: 6px solid #eee;
+      border-top: 6px solid #444;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 40px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
       background: white;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      display: none;
     }
 
     th, td {
-      padding: 10px;
-      border: 1px solid #ccc;
+      padding: 10px 8px;
       text-align: center;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
     }
 
     th {
-      background-color: #444;
+      background-color: #222;
       color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1;
     }
 
-    /* Animação de entrada */
+    tr:last-child td {
+      border-bottom: none;
+    }
+
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -48,65 +81,113 @@
       opacity: 0;
       animation: fadeInUp 0.3s ease forwards;
     }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background: white;
+        padding: 10px;
+      }
+
+      td {
+        text-align: left;
+        padding: 6px 10px;
+        font-size: 13px;
+        border: none;
+        position: relative;
+      }
+
+      td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: block;
+        color: #555;
+        margin-bottom: 4px;
+      }
+    }
   </style>
 </head>
 <body>
 
-<h1>Escala de Louvor</h1>
+  <h1>Escala de Louvor</h1>
+  <div class="loader" id="carregando"></div>
 
-<table id="tabela-escala">
-  <thead>
-    <tr>
-      <th>DATA</th>
-      <th>DIA SEMANA</th>
-      <th>REGENTE</th>
-      <th>ACOMP</th>
-      <th>EQUIPE LOUVOR</th>
-      <th>MENSAGEM MUSCAL</th>
-      <th>PREGADOR</th>
-      <th>ANCIÃO</th>
-      <th>AUDIOVISUAL</th>
-      <th>SUPORTE</th>
-      <th>OBS</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- As linhas da tabela serão inseridas aqui -->
-  </tbody>
-</table>
+  <table id="tabela-escala">
+    <thead>
+      <tr>
+        <th>DATA</th>
+        <th>DIA SEMANA</th>
+        <th>REGENTE</th>
+        <th>ACOMP</th>
+        <th>EQUIPE LOUVOR</th>
+        <th>MENSAGEM MUSCAL</th>
+        <th>PREGADOR</th>
+        <th>ANCIÃO</th>
+        <th>AUDIOVISUAL</th>
+        <th>SUPORTE</th>
+        <th>OBS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Linhas serão adicionadas aqui -->
+    </tbody>
+  </table>
 
-<script>
-async function carregarCSV() {
-  try {
-    const resposta = await fetch('atual.csv', { headers: { 'Content-Type': 'text/plain' } });
-    const texto = await resposta.text();
-    const linhas = texto.trim().split('\n');
-    const corpoTabela = document.querySelector('#tabela-escala tbody');
+  <script>
+    async function carregarCSV() {
+      try {
+        const resposta = await fetch('atual.csv', { headers: { 'Content-Type': 'text/plain' } });
+        const texto = await resposta.text();
+        const linhas = texto.trim().split('\n');
+        const cabecalhos = linhas[0].split(',');
+        const corpoTabela = document.querySelector('#tabela-escala tbody');
 
-    linhas.slice(1).forEach((linha, i) => {
-      const colunas = linha.split(',');
-      const tr = document.createElement('tr');
+        linhas.slice(1).forEach((linha, i) => {
+          const colunas = linha.split(',');
+          const tr = document.createElement('tr');
 
-      colunas.forEach(coluna => {
-        const td = document.createElement('td');
-        td.textContent = coluna.trim().replace(/^"|"$/g, '');
-        tr.appendChild(td);
-      });
+          colunas.forEach((coluna, j) => {
+            const td = document.createElement('td');
+            td.textContent = coluna.trim().replace(/^"|"$/g, '');
+            td.setAttribute('data-label', cabecalhos[j].trim());
+            tr.appendChild(td);
+          });
 
-      // Adiciona animação com atraso em cascata
-      tr.classList.add('animada');
-      tr.style.animationDelay = `${0.05 * i}s`;
-      corpoTabela.appendChild(tr);
-    });
+          tr.classList.add('animada');
+          tr.style.animationDelay = `${i * 0.05}s`;
+          corpoTabela.appendChild(tr);
+        });
 
-  } catch (erro) {
-    console.error('Erro ao carregar o CSV:', erro);
-    document.body.innerHTML += "<p style='color: red;'>Erro ao carregar os dados. Verifique se o arquivo <code>atual.csv</code> está presente na mesma pasta.</p>";
-  }
-}
+        // Aguarda 100ms e exibe a tabela
+        setTimeout(() => {
+          document.getElementById('carregando').style.display = 'none';
+          document.getElementById('tabela-escala').style.display = 'table';
+        }, 100);
 
-carregarCSV();
-</script>
+      } catch (erro) {
+        console.error('Erro ao carregar o CSV:', erro);
+        document.getElementById('carregando').style.display = 'none';
+        const erroMsg = document.createElement('p');
+        erroMsg.style.color = 'red';
+        erroMsg.style.textAlign = 'center';
+        erroMsg.textContent = 'Erro ao carregar os dados. Verifique se o arquivo "atual.csv" está presente na mesma pasta.';
+        document.body.appendChild(erroMsg);
+      }
+    }
+
+    carregarCSV();
+  </script>
 
 </body>
 </html>
