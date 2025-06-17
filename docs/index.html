@@ -158,11 +158,22 @@
       corpoTabela.innerHTML = '';
 
       linhas.forEach((linha, i) => {
-        // separa por vírgula, respeitando as aspas duplas
-        const colunas = linha.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g)
+        const colunasOriginais = linha.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g)
           .map(c => c.replace(/^"|"$/g, '').trim());
 
-        // completa com vazios se faltar colunas
+        // Insere coluna vazia na posição 6 (índice 6)
+        const colunas = [];
+        for (let idx = 0; idx < colunasOriginais.length + 1; idx++) {
+          if (idx === 6) {
+            colunas.push(''); // coluna vazia extra
+          } else if (idx > 6) {
+            colunas.push(colunasOriginais[idx - 1]);
+          } else {
+            colunas.push(colunasOriginais[idx]);
+          }
+        }
+
+        // garante o tamanho correto
         while (colunas.length < cabecalhos.length) {
           colunas.push('');
         }
@@ -199,4 +210,3 @@
 </script>
 </body>
 </html>
- 
