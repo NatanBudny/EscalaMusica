@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Escala de Louvor</title>
+
+  <!-- Desativa cache do navegador -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
   <style>
     /* Estilização original */
     * {
@@ -180,7 +186,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <script>
-    // Função para alternar exibição dos filtros
     function toggleFilters() {
       const box = document.getElementById('filtros');
       if (box.style.display === 'flex') {
@@ -192,7 +197,6 @@
       }
     }
 
-    // Aplicar filtros à tabela
     function aplicarFiltros() {
       const filtros = [...document.querySelectorAll('.filters-box select')];
       const linhas = document.querySelectorAll('#tabela-escala tbody tr');
@@ -210,15 +214,13 @@
 
         linha.style.display = mostrar ? '' : 'none';
       });
-
-      // Após aplicar filtro, opcionalmente ocultar filtro
-      // document.getElementById('filtros').style.display = 'none';
     }
 
-    // Carregar CSV e popular tabela e filtros
     async function carregarCSV() {
       try {
-        const resposta = await fetch('atual.csv', { headers: { 'Content-Type': 'text/plain' } });
+        // EVITA CACHE: adiciona timestamp na URL
+        const url = 'atual.csv?t=' + new Date().getTime();
+        const resposta = await fetch(url, { headers: { 'Content-Type': 'text/plain' } });
         if (!resposta.ok) throw new Error('Arquivo não encontrado');
         const texto = await resposta.text();
 
@@ -247,9 +249,7 @@
         cabecalhos.forEach(cab => {
           const select = document.getElementById(cab);
           if (select) {
-            // Limpar opções além da primeira
             select.options.length = 1;
-
             [...filtros[cab]]
               .filter(v => v)
               .sort((a,b) => a.localeCompare(b, 'pt-BR', {ignorePunctuation:true}))
@@ -277,26 +277,21 @@
       }
     }
 
-    // Aplicar filtros via parâmetros URL (ex: ?DATA=2025-06-21)
     function aplicarParametrosURL() {
       const url = new URL(window.location);
       const params = new URLSearchParams(url.search);
-
       params.forEach((valor, chave) => {
         const select = document.getElementById(chave.toUpperCase());
         if (select) {
           select.value = valor;
         }
       });
-
       aplicarFiltros();
     }
 
-    // Botão toggle filtros
     const btnToggleFilters = document.getElementById('btnToggleFilters');
     btnToggleFilters.addEventListener('click', toggleFilters);
 
-    // Iniciar carregamento CSV
     carregarCSV();
   </script>
 </body>
