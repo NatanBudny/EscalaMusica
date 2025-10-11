@@ -173,7 +173,7 @@
         <th>REGENTE</th>
         <th>ACOMP</th>
         <th>EQUIPE LOUVOR</th>
-        <th>MENSAGEM MUSCAL</th>
+        <th>MENSAGEM MUSICAL</th>
         <th>PREGADOR</th>
         <th>ANCIÃO</th>
         <th>AUDIOVISUAL</th>
@@ -224,7 +224,7 @@
         if (!resposta.ok) throw new Error('Arquivo não encontrado');
         const texto = await resposta.text();
 
-        const cabecalhos = ['DATA','DIA SEMANA','REGENTE','ACOMP','EQUIPE LOUVOR','MENSAGEM MUSCAL','PREGADOR','ANCIÃO','AUDIOVISUAL','SUPORTE','OBS'];
+        const cabecalhos = ['DATA','DIA SEMANA','REGENTE','ACOMP','EQUIPE LOUVOR','MENSAGEM MUSICAL','PREGADOR','ANCIÃO','AUDIOVISUAL','SUPORTE','OBS'];
         const filtros = cabecalhos.reduce((acc, cur) => ({ ...acc, [cur]: new Set() }), {});
         const corpoTabela = document.querySelector('#tabela-escala tbody');
         corpoTabela.innerHTML = '';
