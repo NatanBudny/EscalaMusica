@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Escala Geral</title>
 
-  <!-- Desativa cache do navegador -->
+  
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
@@ -248,18 +248,68 @@
 
         cabecalhos.forEach(cab => {
           const select = document.getElementById(cab);
-          if (select) {
-            select.options.length = 1;
-            [...filtros[cab]]
-              .filter(v => v)
-              .sort((a,b) => a.localeCompare(b, 'pt-BR', {ignorePunctuation:true}))
-              .forEach(v => {
-                const opt = document.createElement('option');
-                opt.value = v;
-                opt.textContent = v;
-                select.appendChild(opt);
-              });
+          if (!select) return;
+
+          // transforma o Set em array
+          const values = [...filtros[cab]].filter(v => v !== undefined && v !== null);
+
+          // função robusta para parsear datas comuns
+          function parseDateStr(s) {
+            if (!s) return NaN;
+            s = s.trim();
+            // ISO yyyy-mm-dd
+            const isoMatch = /^\d{4}-\d{2}-\d{2}$/.test(s);
+            if (isoMatch) {
+              // Interpretamos como UTC midnight para consistência
+              const d = new Date(s + 'T00:00:00Z');
+              return isNaN(d.getTime()) ? NaN : d.getTime();
+            }
+            // dd/mm/yyyy ou d/m/yyyy
+            const dm = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(s);
+            if (dm) {
+              const day = parseInt(dm[1], 10);
+              const month = parseInt(dm[2], 10) - 1;
+              const year = parseInt(dm[3], 10);
+              const ts = Date.UTC(year, month, day);
+              return ts;
+            }
+            // tentativa de parse genérica (fallback)
+            const d = new Date(s);
+            return isNaN(d.getTime()) ? NaN : d.getTime();
           }
+
+          // ordenar diferente se for coluna DATA
+          let sorted;
+          if (cab.toUpperCase() === 'DATA') {
+            // manter strings originais, ordenar por timestamp (valores vazios no final)
+            sorted = values
+              .filter(v => v && v.trim() !== '')
+              .sort((a, b) => {
+                const ta = parseDateStr(a);
+                const tb = parseDateStr(b);
+                if (isNaN(ta) && isNaN(tb)) return a.localeCompare(b, 'pt-BR');
+                if (isNaN(ta)) return 1;
+                if (isNaN(tb)) return -1;
+                return ta - tb;
+              });
+            // colocar valores vazios (se existirem) no final
+            if (values.some(v => !v || v.trim() === '')) sorted.push('');
+          } else {
+            // ordenação padrão para strings com localeCompare
+            sorted = values
+              .filter(v => v && v.trim() !== '')
+              .sort((a, b) => a.localeCompare(b, 'pt-BR', {ignorePunctuation:true}));
+            if (values.some(v => !v || v.trim() === '')) sorted.push('');
+          }
+
+          // rebuild select options
+          select.options.length = 1; // mantém a opção vazia inicial
+          sorted.forEach(v => {
+            const opt = document.createElement('option');
+            opt.value = v;
+            opt.textContent = v;
+            select.appendChild(opt);
+          });
         });
 
         aplicarParametrosURL();
