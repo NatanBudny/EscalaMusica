@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Editor Privado - Escala CSV</title>
+<style>
+  :root{--bg:#fafafa;--panel:#fff;--accent:#333;--muted:#666}
+  *{box-sizing:border-box}body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;padding:18px;background:var(--bg);color:#111}
+  h1{margin:0 0 12px;text-align:center}
+  .wrap{max-width:1100px;margin:0 auto}
+  .controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
+  .btn{background:var(--accent);color:#fff;padding:8px 12px;border-radius:6px;border:none;cursor:pointer}
+  .btn.secondary{background:var(--muted)}
+  .small{font-size:13px;padding:6px 8px}
+  .panel{background:var(--panel);padding:12px;border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,.06);margin-bottom:14px}
+  .inputs{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center}
+  input[type="text"], input[type="password"], select {padding:8px;border-radius:6px;border:1px solid #ddd;min-width:200px}
+  table{width:100%;border-collapse:collapse;background:var(--panel);border-radius:6px;overflow:hidden}
+  th,td{padding:8px 6px;border-bottom:1px solid #eee;text-align:left;font-size:14px}
+  thead th{background:var(--accent);color:#fff;position:sticky;top:0}
+  td[contenteditable]{min-width:80px}
+  tr:nth-child(even) td{background:#fbfbfb}
+  .actions-row{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
+  .danger{background:#c0392b}
+  .muted{color:#666;font-size:13px}
+  @media(max-width:800px){table,thead,tbody,th,td,tr{display:block}thead{display:none}tr{margin-bottom:10px;border:1px solid #eee;padding:8px}td{border:none;padding:6px}td::before{content:attr(data-label);font-weight:600;display:block;margin-bottom:6px;color:#555}}
+  .toast{position:fixed;right:16px;bottom:16px;background:#111;color:#fff;padding:10px 14px;border-radius:8px;opacity:0.95}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Editor Privado — Escala CSV</h1>
+
+    <div class="panel">
+      <div class="inputs">
+        <label class="muted">Caminho do CSV (no repo / relative)</label>
+        <input id="csvPath" type="text" placeholder="ex.: atual.csv ou data/atual.csv" value="atual.csv" />
+        <label class="muted">Origem (raw) — deixe vazio para relativo</label>
+        <input id="rawBase" type="text" placeholder="ex.: https://raw.githubusercontent.com/usuario/repo/branch/" />
+        <button class="btn small" id="btnReload">Recarregar CSV</button>
+        <button class="btn small secondary" id="btnDownload">Salvar (Download CSV)</button>
+      </div>
+
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center">
+        <button class="btn" id="btnAddRow">Adicionar linha</button>
+        <button class="btn secondary" id="btnDelRow">Excluir linha selecionada</button>
+      </div>
+
+      <div style="margin-top:8px" class="muted">Selecione uma linha clicando nela. Edições são feitas inline — clique na célula para editar.</div>
+    </div>
+
+    <div class="panel">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center;margin-bottom:8px">
+        <input id="ghOwner" type="text" placeholder="owner (usuario ou org)" />
+        <input id="ghRepo" type="text" placeholder="repo" />
+        <input id="ghBranch" type="text" placeholder="branch (ex.: main)" value="main" />
+        <input id="ghFilePath" type="text" placeholder="caminho do arquivo no repo (ex.: atual.csv)" />
+        <input id="ghToken" type="password" placeholder="Personal Access Token (cole aqui para commit)" style="min-width:220px" />
+        <input id="commitMsg" type="text" placeholder="Mensagem do commit" value="Atualiza escala via editor privado" style="min-width:220px" />
+        <button class="btn" id="btnCommit">Commit to GitHub</button>
+      </div>
+      <div class="muted">Obs: token NÃO é armazenado. Crie PAT com <code>public_repo</code> (público) ou <code>repo</code> (privado).</div>
+    </div>
+
+    <div id="tablePanel" class="panel" style="overflow:auto">
+      <table id="csvTable" aria-label="Tabela CSV">
+        <thead><tr id="theadRow"></tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+
+      <div class="actions-row">
+        <div class="muted" id="rowsInfo">0 linhas</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" style="display:none"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script>
+  (function(){
+    // ---------- util ----------
+    function toast(msg, t=3000){ const el=document.getElementById('toast'); el.textContent=msg; el.style.display='block'; setTimeout(()=>el.style.display='none', t) }
+    function toBase64Unicode(str) {
+      // UTF-8 -> base64
+      const utf8 = new TextEncoder().encode(str);
+      let binary = '';
+      const len = utf8.byteLength;
+      for (let i = 0; i < len; i++) binary += String.fromCharCode(utf8[i]);
+      return btoa(binary);
+    }
+    function fromBase64Unicode(b64) {
+      const bin = atob(b64);
+      const arr = new Uint8Array(bin.length);
+      for (let i=0;i<bin.length;i++) arr[i]=bin.charCodeAt(i);
+      return new TextDecoder().decode(arr);
+    }
+
+    // ---------- elementos ----------
+    const csvPathInput = document.getElementById('csvPath');
+    const rawBaseInput = document.getElementById('rawBase');
+    const btnReload = document.getElementById('btnReload');
+    const btnDownload = document.getElementById('btnDownload');
+    const btnAddRow = document.getElementById('btnAddRow');
+    const btnDelRow = document.getElementById('btnDelRow');
+    const tbody = document.getElementById('tbody');
+    const theadRow = document.getElementById('theadRow');
+    const rowsInfo = document.getElementById('rowsInfo');
+
+    const ghOwner = document.getElementById('ghOwner');
+    const ghRepo = document.getElementById('ghRepo');
+    const ghBranch = document.getElementById('ghBranch');
+    const ghFilePath = document.getElementById('ghFilePath');
+    const ghToken = document.getElementById('ghToken');
+    const commitMsg = document.getElementById('commitMsg');
+    const btnCommit = document.getElementById('btnCommit');
+
+    let currentData = []; // array of objects
+    let headers = [];
+    let selectedRowIndex = null;
+    let lastSha = null; // sha from GitHub for commit updates
+
+    // ---------- carregamento ----------
+    async function fetchCSVText() {
+      const path = csvPathInput.value.trim() || 'atual.csv';
+      const rawBase = rawBaseInput.value.trim();
+      let url;
+      if (rawBase) {
+        // ensure trailing slash
+        url = rawBase.endsWith('/') ? rawBase + path : rawBase + '/' + path;
+      } else {
+        url = path + '?t=' + Date.now();
+      }
+      const res = await fetch(url, { cache:'no-store' });
+      if (!res.ok) throw new Error('Falha ao buscar CSV: ' + res.status);
+      return await res.text();
+    }
+
+    async function loadCSV() {
+      try {
+        tbody.innerHTML = '';
+        theadRow.innerHTML = '';
+        selectedRowIndex = null;
+        toast('Carregando CSV...');
+        const text = await fetchCSVText();
+        const parsed = Papa.parse(text.trim(), { header: true, skipEmptyLines: false });
+        headers = parsed.meta.fields || [];
+        currentData = parsed.data || [];
+
+        // If no headers, try to infer first row
+        if (!headers || headers.length === 0) {
+          if (currentData.length > 0) {
+            headers = Object.keys(currentData[0]);
+          } else {
+            headers = ['DATA','DIA SEMANA','REGENTE','ACOMP','EQUIPE LOUVOR','MENSAGEM MUSICAL','PREGADOR','ANCIÃO','AUDIOVISUAL','SUPORTE','OBS'];
+          }
+        }
+
+        // fill table head
+        headers.forEach(h => {
+          const th = document.createElement('th');
+          th.textContent = h;
+          theadRow.appendChild(th);
+        });
+
+        // fill rows
+        currentData.forEach((rowObj, idx) => {
+          appendRow(rowObj, idx);
+        });
+
+        updateRowsInfo();
+        toast('CSV carregado');
+      } catch (err) {
+        console.error(err);
+        toast('Erro ao carregar CSV: ' + (err.message || err));
+        // create empty template
+        headers = ['DATA','DIA SEMANA','REGENTE','ACOMP','EQUIPE LOUVOR','MENSAGEM MUSICAL','PREGADOR','ANCIÃO','AUDIOVISUAL','SUPORTE','OBS'];
+        currentData = [];
+        theadRow.innerHTML = '';
+        headers.forEach(h => {
+          const th = document.createElement('th'); th.textContent = h; theadRow.appendChild(th);
+        });
+      }
+    }
+
+    // ---------- manipulação de linhas ----------
+    function createCell(content='') {
+      const td = document.createElement('td');
+      td.contentEditable = 'true';
+      td.classList.add('editable');
+      td.textContent = content || '';
+      return td;
+    }
+
+    function appendRow(rowObj = {}, idx = null) {
+      const tr = document.createElement('tr');
+      tr.dataset.index = idx !== null ? idx : currentData.length;
+      headers.forEach(h => {
+        const val = rowObj[h] !== undefined ? rowObj[h] : '';
+        const td = createCell(val);
+        td.setAttribute('data-label', h);
+        tr.appendChild(td);
+      });
+      tr.addEventListener('click', () => {
+        // select row
+        const prev = tbody.querySelector('tr.selected');
+        if (prev) prev.classList.remove('selected');
+        tr.classList.add('selected');
+        selectedRowIndex = parseInt(tr.dataset.index, 10);
+      });
+      tbody.appendChild(tr);
+    }
+
+    function addEmptyRow() {
+      const emptyObj = {};
+      headers.forEach(h => emptyObj[h]='');
+      currentData.push(emptyObj);
+      appendRow(emptyObj, currentData.length - 1);
+      updateIndexes();
+      updateRowsInfo();
+    }
+
+    function deleteSelectedRow() {
+      if (selectedRowIndex === null) { toast('Selecione uma linha primeiro'); return; }
+      currentData.splice(selectedRowIndex, 1);
+      const tr = tbody.querySelector('tr.selected');
+      if (tr) tr.remove();
+      selectedRowIndex = null;
+      updateIndexes();
+      updateRowsInfo();
+    }
+
+    function updateIndexes() {
+      const rows = tbody.querySelectorAll('tr');
+      rows.forEach((tr, i) => {
+        tr.dataset.index = i;
+      });
+    }
+
+    function updateRowsInfo() {
+      rowsInfo.textContent = `${tbody.querySelectorAll('tr').length} linhas`;
+    }
+
+    // ---------- export / download ----------
+    function tableToCSVString() {
+      const rows = tbody.querySelectorAll('tr');
+      const dataOut = [];
+      rows.forEach(tr => {
+        const tds = tr.querySelectorAll('td');
+        const obj = {};
+        tds.forEach((td, i) => {
+          const key = headers[i] || `col${i+1}`;
+          obj[key] = td.textContent.trim();
+        });
+        dataOut.push(obj);
+      });
+      // Use Papa to unparse with headers
+      return Papa.unparse(dataOut, { columns: headers });
+    }
+
+    function downloadCSV() {
+      const csv = tableToCSVString();
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = (csvPathInput.value.trim() || 'atual.csv').split('/').pop();
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      toast('Download iniciado');
+    }
+
+    // ---------- commit to GitHub ----------
+    async function getFileSHA(owner, repo, path, branch='main', token) {
+      const url = `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(branch)}`;
+      const res = await fetch(url, {
+        headers: token ? { Authorization: 'token ' + token, Accept: 'application/vnd.github.v3+json' } : { Accept: 'application/vnd.github.v3+json' }
+      });
+      if (res.status === 404) return null; // file doesn't exist
+      if (!res.ok) throw new Error('Erro ao obter arquivo: ' + res.status + ' ' + await res.text());
+      const json = await res.json();
+      return json.sha;
+    }
+
+    async function commitToGitHub() {
+      try {
+        const owner = ghOwner.value.trim();
+        const repo = ghRepo.value.trim();
+        const branch = ghBranch.value.trim() || 'main';
+        const filePath = ghFilePath.value.trim() || csvPathInput.value.trim() || 'atual.csv';
+        const token = ghToken.value.trim();
+        const message = commitMsg.value.trim() || 'Atualiza CSV via editor';
+
+        if (!owner || !repo || !filePath) { toast('Preencha owner, repo e caminho do arquivo'); return; }
+        if (!token) {
+          if (!confirm('Você não forneceu um token. Sem token não é possível commitar. Deseja apenas baixar o CSV?')) { return; }
+          downloadCSV(); return;
+        }
+
+        toast('Preparando commit para GitHub...');
+
+        // get current sha (if exists)
+        const sha = await getFileSHA(owner, repo, filePath, branch, token);
+        // build new content
+        const csv = tableToCSVString();
+        const b64 = toBase64Unicode(csv);
+
+        const putUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(filePath)}`;
+        const body = {
+          message,
+          content: b64,
+          branch
+        };
+        if (sha) body.sha = sha;
+
+        const res = await fetch(putUrl, {
+          method: 'PUT',
+          headers: {
+            Authorization: 'token ' + token,
+            Accept: 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(body)
+        });
+
+        if (!res.ok) {
+          const text = await res.text();
+          throw new Error('Erro no commit: ' + res.status + ' ' + text);
+        }
+        const json = await res.json();
+        toast('Commit realizado: ' + (json.commit && json.commit.sha ? json.commit.sha.slice(0,7) : 'ok'));
+      } catch (err) {
+        console.error(err);
+        toast('Erro ao commitar: ' + (err.message || err));
+        alert('Erro ao commitar: ' + (err.message || err));
+      }
+    }
+
+    // ---------- eventos UI ----------
+    btnReload.addEventListener('click', async () => {
+      tbody.innerHTML = ''; theadRow.innerHTML = '';
+      await loadCSV();
+    });
+
+    btnDownload.addEventListener('click', downloadCSV);
+    btnAddRow.addEventListener('click', () => { addEmptyRow(); });
+    btnDelRow.addEventListener('click', deleteSelectedRow);
+    btnCommit.addEventListener('click', async () => {
+      if (!confirm('Confirma commit no GitHub com os dados atualmente visíveis na tabela?')) return;
+      await commitToGitHub();
+    });
+
+    // inicializa
+    loadCSV();
+
+    // ao clicar fora da tabela, atualiza currentData automaticamente (optional)
+    // not strictly necessary; export reads DOM
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+        downloadCSV();
+      }
+    });
+
+  })();
+  </script>
+</body>
+</html>
