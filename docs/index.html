@@ -279,7 +279,7 @@ function montarCards(dados){
         card.innerHTML=`
             <div class="card-header"><div class="date-pill">${d["DATA"]} — ${d["DIA SEMANA"]}</div></div>
             <div class="block responsaveis"><h4>${icons.resp} RESPONSÁVEIS</h4><p><span class="label">Ancião:</span> ${d["ANCIÃO"]}</p><p><span class="label">Regente:</span> ${d["REGENTE LOUVOR"]}</p></div>
-            <div class="block equipe"><h4>${icons.band} EQUIPE</h4><p><span class="label">Acompanhamento:</span> ${d["ACOMP"]}</p><p><span class="label">Louvor:</span> ${d["EQUIPE LOUVOR"]}</p><p><span class="label">Mensagem:</span> ${d["MENSAGEM MUSICAL"]||""}</p><p><span class="label">Pregador:</span> ${d["PREGADOR"]}</p><p><span class="label">Audiovisual:</span> ${d["AUDIOVISUAL"]}</p></div>
+            <div class="block equipe"><h4>${icons.band} EQUIPE</h4><p><span class="label">Acompanhamento:</span> ${d["ACOMP"]}</p><p><span class="label">Louvor:</span> ${d["EQUIPE LOUVOR"]}</p><p><span class="label">Mensagem Musical:</span> ${d["MENSAGEM MUSICAL"]||""}</p><p><span class="label">Pregador:</span> ${d["PREGADOR"]}</p><p><span class="label">Audiovisual:</span> ${d["AUDIOVISUAL"]}</p></div>
             <div class="block culto"><h4>${icons.church} CULTO E ES</h4><p><span class="label">Tema:</span> ${d["TEMA CULTO"]}</p><p><span class="label">Músicas ES:</span><br>${lES}</p><p><span class="label">Músicas Culto:</span><br>${lC}</p></div>
             ${d["OBS"] ? `<div class="block"><h4>${icons.obs} OBSERVAÇÕES</h4><p>${d["OBS"]}</p></div>` : ''}`;
         
