@@ -1,184 +1,344 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Escala Geral</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Escala de Louvor</title>
 
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
+    <style>
+        *{box-sizing:border-box}
+        body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:#f0f2f5;padding:16px;color:#222}
 
-  <style>
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: system-ui, sans-serif; background: #fafafa; padding: 20px; color: #222; }
-    h1 { text-align: center; margin-bottom: 20px; }
-    .loader { border: 6px solid #eee; border-top: 6px solid #444; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 40px auto; }
-    @keyframes spin { 0% {transform: rotate(0deg);} 100% {transform: rotate(360deg);} }
+        h1{ text-align:center; margin: 10px 0 20px 0; font-size: 28px; color: #1a1a1a; font-weight: 800; text-transform: uppercase; }
 
-    .filters-container { margin-bottom: 20px; }
-    .filters-toggle { background: #333; color: white; padding: 10px 16px; border: none; border-radius: 6px; cursor: pointer; font-size: 15px; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto; }
-    .filters-box { display: none; flex-wrap: wrap; gap: 12px; padding: 15px; background: white; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); margin-top: 10px; max-height: 280px; overflow-y: auto; }
-    .filters-box select { padding: 6px 10px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px; min-width: 160px; }
+        /* ===== ÁREA DE BOTÕES SUPERIORES ===== */
+        .top-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
 
-    table { width: 100%; border-collapse: collapse; background: white; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.05); display: none; }
-    th, td { padding: 10px 8px; text-align: center; border-bottom: 1px solid #eee; font-size: 14px; }
-    th { background-color: #222; color: white; position: sticky; top: 0; z-index: 1; }
-    tr:nth-child(even) { background-color: #f6f6f6; }
-    tr:last-child td { border-bottom: none; }
+        .filters-toggle {
+            background:#222; color:#fff; padding:0 20px; border:none; border-radius:8px;
+            cursor:pointer; font-size:14px; font-weight: 700; height: 45px;
+            text-transform: uppercase; flex-grow: 1; max-width: 250px;
+        }
 
-    tr.animada { opacity: 0; animation: fadeInUp 0.3s ease forwards; }
-    @keyframes fadeInUp { from {opacity: 0; transform: translateY(10px);} to {opacity: 1; transform: translateY(0);} }
+        .past-toggle {
+            background:#e2e4e7; color:#555; width: 45px; height: 45px; border:none; border-radius:8px;
+            cursor:pointer; display: flex; align-items: center; justify-content: center;
+        }
+        .past-toggle svg { width: 22px; height: 22px; fill: currentColor; }
+        .past-toggle.active { background: #d1d5db; color: #000; }
 
-    @media (max-width: 768px) {
-      table, thead, tbody, th, td, tr { display: block; }
-      thead { display: none; }
-      tr { margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; background: white; padding: 12px; }
-      td { text-align: left; padding: 6px 10px; font-size: 13px; border: none; position: relative; white-space: pre-wrap; word-wrap: break-word; }
-      td::before { content: attr(data-label); font-weight: bold; display: block; color: #555; margin-bottom: 6px; }
-    }
-  </style>
+        /* ===== CAIXA DE FILTROS ULTRA COMPACTA ===== */
+        .filters-box {
+            display:none; 
+            background:#fff; 
+            border-radius: 12px; 
+            box-shadow:0 4px 12px rgba(0,0,0,0.1); 
+            padding: 12px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .filters-box.active { display: block; }
+
+        .filter-group { 
+            margin-bottom: 12px; 
+        }
+        .filter-group:last-of-type { margin-bottom: 0; }
+        
+        .filter-group h4 { 
+            margin: 0 0 6px 0; 
+            font-size:11px; 
+            text-transform: uppercase; 
+            color:#bbb; 
+            border-bottom:1px solid #f0f0f0; 
+            padding-bottom:2px;
+            font-weight: 700;
+        }
+        
+        .select-container {
+            display: flex;
+            flex-direction: column;
+            gap: 6px; 
+        }
+
+        .filters-box select { 
+            padding:10px; 
+            border-radius:8px; 
+            border:1px solid #ddd; 
+            font-size:15px; 
+            width: 100%; 
+            background-color: #fcfcfc;
+            color: #333;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 1em;
+        }
+
+        .btn-clear {
+            width: 100%; padding: 12px; margin-top: 15px; background: #fff0f0;
+            color: #d93025; border: 1px solid #fad2cf; border-radius: 8px;
+            cursor: pointer; font-weight: 700; font-size: 13px; text-transform: uppercase;
+        }
+
+        /* ===== CARDS ===== */
+        .cards { display: none; }
+        #containerPassado { display: none; margin-bottom: 20px; }
+        #containerPassado.show { display: flex; flex-direction: column; gap: 15px; }
+        .past-divider { text-align: center; color: #999; font-size: 11px; margin: 10px 0; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
+
+        .day-card {
+            background: #fff; border-radius: 15px; padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #e0e0e0; margin-bottom: 15px;
+        }
+        .card-header { display: flex; justify-content: center; margin-bottom: 12px; }
+        .date-pill { background:#222; color:#fff; padding:6px 15px; border-radius:999px; font-size:13px; font-weight:700; }
+        
+        .block { border:1px solid #f2f2f2; border-radius:10px; padding:12px; background:#fafafa; margin-bottom: 10px; }
+        .block:last-child { margin-bottom: 0; }
+
+        .block h4 { 
+            margin:0 0 8px 0; font-size: 14px; color:#333; 
+            border-bottom: 1px solid #eee; padding-bottom:4px; 
+            text-transform: uppercase; font-weight: 800;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .block h4 svg { width: 16px; height: 16px; fill: #666; }
+
+        .block p { margin: 6px 0; font-size: 13px; line-height: 1.4; color: #444; }
+        .label { font-weight: 700; color: #111; margin-right: 4px; }
+
+        .block.responsaveis { border-left: 5px solid #2e7d32; } 
+        .block.equipe { border-left: 5px solid #1b5e20; }       
+        .block.culto { border-left: 5px solid #0d3b13; }        
+        .past-card { opacity: 0.6; filter: grayscale(0.5); }
+
+        /* ===== DESKTOP TABLE ===== */
+        .table-wrap { overflow-x:auto; margin-top:10px; }
+        table { width:100%; border-collapse:collapse; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.05) }
+        th,td { padding:12px 10px; border-bottom:1px solid #eee; text-align:center; font-size:13px }
+        th { background:#222; color:#fff; font-weight:600 }
+
+        /* ===== MOBILE FIXES ===== */
+        @media(max-width:768px){
+            body { padding: 10px; }
+            h1 { font-size: 24px; }
+            .table-wrap { display: none !important; }
+            .cards { display: flex !important; flex-direction: column; }
+            
+            /* DESTAQUE PARA OS GRUPOS EM NEGRITO NO MOBILE */
+            .filter-group h4 { 
+                font-weight: 800; 
+                color: #444; 
+                font-size: 12px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .filters-box.active { display: block; }
+        }
+    </style>
 </head>
 
 <body>
-<h1>Escala de Louvor</h1>
+
+<h1>Escala 2026</h1>
 
 <div class="filters-container">
-  <button class="filters-toggle" id="btnToggleFilters">Mostrar Filtros</button>
-  <div class="filters-box" id="filtros">
-    <select id="DATA" onchange="aplicarFiltros()"><option value="">Data</option></select>
-    <select id="DIA SEMANA" onchange="aplicarFiltros()"><option value="">Dia da Semana</option></select>
-    <select id="REGENTE LOUVOR" onchange="aplicarFiltros()"><option value="">Regente Louvor</option></select>
-    <select id="EQUIPE LOUVOR" onchange="aplicarFiltros()"><option value="">Equipe Louvor</option></select>
-    <select id="ACOMP" onchange="aplicarFiltros()"><option value="">Acomp</option></select>
-    <select id="LOUVORES ES" onchange="aplicarFiltros()"><option value="">Louvores ES</option></select>
-    <select id="LOUVORES CULTO" onchange="aplicarFiltros()"><option value="">Louvores Culto</option></select>
-    <select id="MENSAGEM MUSICAL" onchange="aplicarFiltros()"><option value="">Mensagem Musical</option></select>
-    <select id="PREGADOR" onchange="aplicarFiltros()"><option value="">Pregador</option></select>
-    <select id="ANCIÃO" onchange="aplicarFiltros()"><option value="">Ancião</option></select>
-    <select id="AUDIOVISUAL" onchange="aplicarFiltros()"><option value="">Audiovisual</option></select>
-    <select id="SUPORTE" onchange="aplicarFiltros()"><option value="">Suporte</option></select>
-    <select id="OBS" onchange="aplicarFiltros()"><option value="">Observação</option></select>
-  </div>
+    <div class="top-controls">
+        <button class="filters-toggle" id="btnToggleFilters">Mostrar Filtros</button>
+        <button class="past-toggle" id="btnTogglePast" title="Histórico">
+            <svg viewBox="0 0 24 24"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
+        </button>
+    </div>
+
+    <div class="filters-box" id="filtros">
+        <div class="filter-group">
+            <h4>Responsáveis</h4>
+            <div class="select-container">
+                <select data-col="ANCIÃO"><option value="">Ancião</option></select>
+                <select data-col="REGENTE LOUVOR"><option value="">Regente</option></select>
+            </div>
+        </div>
+
+        <div class="filter-group">
+            <h4>Equipe</h4>
+            <div class="select-container">
+                <select data-col="EQUIPE LOUVOR"><option value="">Equipe de Louvor</option></select>
+                <select data-col="PREGADOR"><option value="">Pregador</option></select>
+                <select data-col="AUDIOVISUAL"><option value="">Audiovisual</option></select>
+            </div>
+        </div>
+
+        <div class="filter-group">
+            <h4>Culto</h4>
+            <div class="select-container">
+                <select data-col="DATA"><option value="">Data</option></select>
+                <select data-col="DIA SEMANA"><option value="">Dia da Semana</option></select>
+                <select data-col="ACOMP"><option value="">Acompanhamento</option></select>
+            </div>
+        </div>
+
+        <button class="btn-clear" id="btnClearFilters">Limpar Filtros</button>
+    </div>
 </div>
 
-<div class="loader" id="carregando"></div>
+<div class="table-wrap">
+    <table>
+        <thead>
+            <tr>
+                <th>DATA</th><th>DIA</th><th>ACOMP</th><th>REGENTE</th><th>EQUIPE</th><th>MENSAGEM</th>
+                <th>ES</th><th>CULTO</th><th>TEMA</th><th>AUDIOVISUAL</th><th>ANCIÃO</th><th>PREGADOR</th><th>SUPORTE</th><th>OBS</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+</div>
 
-<table id="tabela-escala">
-  <thead>
-  <tr>
-    <th>DATA</th>
-    <th>DIA SEMANA</th>
-    <th>REGENTE LOUVOR</th>
-    <th>EQUIPE LOUVOR</th>
-    <th>ACOMP</th>
-    <th>LOUVORES ES</th>
-    <th>LOUVORES CULTO</th>
-    <th>MENSAGEM MUSICAL</th>
-    <th>PREGADOR</th>
-    <th>ANCIÃO</th>
-    <th>AUDIOVISUAL</th>
-    <th>SUPORTE</th>
-    <th>OBS</th>
-  </tr>
-  </thead>
-  <tbody></tbody>
-</table>
+<div class="cards">
+    <div id="containerPassado"></div>
+    <div id="pastDivider" class="past-divider" style="display:none">Escalas Recentes</div>
+    <div id="containerFuturo"></div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-
 <script>
-function toggleFilters() {
-  const box = document.getElementById('filtros');
-  if (box.style.display === 'flex') {
-    box.style.display = 'none';
-    btnToggleFilters.textContent = 'Mostrar Filtros';
-  } else {
-    box.style.display = 'flex';
-    btnToggleFilters.textContent = 'Ocultar Filtros';
-  }
+const icons = {
+    resp: `<svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>`,
+    band: `<svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>`,
+    church: `<svg viewBox="0 0 24 24"><path d="M12 2L5 9v11a2 2 0 002 2h10a2 2 0 002-2V9l-7-7zm-1 18h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V8h2v2zm4 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V8h2v2z"/></svg>`,
+    obs: `<svg viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm0 15H7v-2h5v2zm3-4H7v-2h8v2zm0-4H7V8h8v2z"/></svg>`
+};
+
+let dadosGlobais = [];
+
+function parseDate(dateStr) {
+    const parts = dateStr.split('/');
+    return new Date(parts[2], parts[1]-1, parts[0]);
 }
 
-function aplicarFiltros() {
-  const filtros = [...document.querySelectorAll('.filters-box select')];
-  const linhas = document.querySelectorAll('#tabela-escala tbody tr');
-
-  linhas.forEach(linha => {
-    const colunas = linha.querySelectorAll('td');
-    let mostrar = true;
-
-    filtros.forEach((filtro, i) => {
-      const valor = filtro.value.trim();
-      if (valor && colunas[i].textContent.trim() !== valor) {
-        mostrar = false;
-      }
-    });
-
-    linha.style.display = mostrar ? '' : 'none';
-  });
+function isPastDate(dateStr){
+    if(!dateStr) return false;
+    const d = parseDate(dateStr);
+    const today = new Date(); 
+    today.setHours(0,0,0,0);
+    return d < today;
 }
 
-async function carregarCSV() {
-  try {
-    const url = 'atual.csv?t=' + new Date().getTime();
-    const resposta = await fetch(url, { headers: { 'Content-Type': 'text/plain' } });
-    if (!resposta.ok) throw new Error('Arquivo não encontrado');
-    const texto = await resposta.text();
-
-    const cabecalhos = [
-      'DATA','DIA SEMANA','REGENTE LOUVOR','EQUIPE LOUVOR','ACOMP',
-      'LOUVORES ES','LOUVORES CULTO','MENSAGEM MUSICAL','PREGADOR',
-      'ANCIÃO','AUDIOVISUAL','SUPORTE','OBS'
-    ];
-
-    const filtros = cabecalhos.reduce((acc, cur) => ({ ...acc, [cur]: new Set() }), {});
-    const corpoTabela = document.querySelector('#tabela-escala tbody');
-    corpoTabela.innerHTML = '';
-
-    const resultados = Papa.parse(texto.trim(), { header: true, skipEmptyLines: true });
-
-    resultados.data.forEach((linha, i) => {
-      const tr = document.createElement('tr');
-      cabecalhos.forEach(coluna => {
-        const valor = linha[coluna] ? linha[coluna].trim() : '';
-        filtros[coluna].add(valor);
-        const td = document.createElement('td');
-        td.textContent = valor;
-        td.setAttribute('data-label', coluna);
-        tr.appendChild(td);
-      });
-      tr.classList.add('animada');
-      tr.style.animationDelay = `${i * 0.05}s`;
-      corpoTabela.appendChild(tr);
-    });
-
-    cabecalhos.forEach(cab => {
-      const select = document.getElementById(cab);
-      if (!select) return;
-
-      const values = [...filtros[cab]].filter(v => v !== undefined && v !== null && v !== '');
-      values.sort((a, b) => a.localeCompare(b, 'pt-BR', { ignorePunctuation: true }));
-
-      select.options.length = 1;
-      values.forEach(v => {
-        const opt = document.createElement('option');
-        opt.value = v;
-        opt.textContent = v;
-        select.appendChild(opt);
-      });
-    });
-
-    document.getElementById('carregando').style.display = 'none';
-    document.getElementById('tabela-escala').style.display = 'table';
-  } catch (e) {
-    console.error(e);
-    document.getElementById('carregando').style.display = 'none';
-    alert('Erro ao carregar atual.csv');
-  }
+async function carregarCSV(){
+    try {
+        const url = 'atual.csv?t=' + new Date().getTime();
+        const r = await fetch(url);
+        const t = await r.text();
+        const res = Papa.parse(t, { header: true, skipEmptyLines: true, transformHeader: h => h.replace(/^\uFEFF/, '').trim() });
+        dadosGlobais = res.data;
+        renderizar(dadosGlobais);
+        montarFiltros(dadosGlobais);
+    } catch (e) { console.error(e); }
 }
 
-const btnToggleFilters = document.getElementById('btnToggleFilters');
-btnToggleFilters.addEventListener('click', toggleFilters);
+function renderizar(dados) {
+    montarTabela(dados);
+    montarCards(dados);
+}
+
+function montarTabela(dados){
+    const tbody = document.getElementById("tableBody");
+    if(!tbody) return;
+    tbody.innerHTML = "";
+    dados.forEach(d=>{
+        const tr = document.createElement("tr");
+        if(isPastDate(d["DATA"])) tr.style.opacity = "0.5";
+        tr.innerHTML=`<td>${d["DATA"]}</td><td>${d["DIA SEMANA"]}</td><td>${d["ACOMP"]}</td><td>${d["REGENTE LOUVOR"]}</td><td>${d["EQUIPE LOUVOR"]}</td><td>${d["MENSAGEM MUSICAL"]||""}</td><td>${d["LOUVORES ES"]||""}</td><td>${d["LOUVORES CULTO"]||""}</td><td>${d["TEMA CULTO"]}</td><td>${d["AUDIOVISUAL"]}</td><td>${d["ANCIÃO"]}</td><td>${d["PREGADOR"]}</td><td>${d["SUPORTE"]}</td><td>${d["OBS"]}</td>`;
+        tbody.appendChild(tr);
+    });
+}
+
+function montarCards(dados){
+    const cFuturo = document.getElementById("containerFuturo");
+    const cPassado = document.getElementById("containerPassado");
+    const divider = document.getElementById("pastDivider");
+    
+    cFuturo.innerHTML = "";
+    cPassado.innerHTML = "";
+    let temPassado = false;
+
+    dados.forEach(d=>{
+        const passado = isPastDate(d["DATA"]);
+        const card = document.createElement("div");
+        card.className = "day-card" + (passado ? " past-card" : "");
+        
+        const lES = (d["LOUVORES ES"] || "").replace(/\|/g, "<br>");
+        const lC = (d["LOUVORES CULTO"] || "").replace(/\|/g, "<br>");
+        
+        card.innerHTML=`
+            <div class="card-header"><div class="date-pill">${d["DATA"]} — ${d["DIA SEMANA"]}</div></div>
+            <div class="block responsaveis"><h4>${icons.resp} RESPONSÁVEIS</h4><p><span class="label">Ancião:</span> ${d["ANCIÃO"]}</p><p><span class="label">Regente:</span> ${d["REGENTE LOUVOR"]}</p></div>
+            <div class="block equipe"><h4>${icons.band} EQUIPE</h4><p><span class="label">Acompanhamento:</span> ${d["ACOMP"]}</p><p><span class="label">Louvor:</span> ${d["EQUIPE LOUVOR"]}</p><p><span class="label">Mensagem:</span> ${d["MENSAGEM MUSICAL"]||""}</p><p><span class="label">Pregador:</span> ${d["PREGADOR"]}</p><p><span class="label">Audiovisual:</span> ${d["AUDIOVISUAL"]}</p></div>
+            <div class="block culto"><h4>${icons.church} CULTO E ES</h4><p><span class="label">Tema:</span> ${d["TEMA CULTO"]}</p><p><span class="label">Músicas ES:</span><br>${lES}</p><p><span class="label">Músicas Culto:</span><br>${lC}</p></div>
+            ${d["OBS"] ? `<div class="block"><h4>${icons.obs} OBSERVAÇÕES</h4><p>${d["OBS"]}</p></div>` : ''}`;
+        
+        if(passado) {
+            cPassado.appendChild(card);
+            temPassado = true;
+        } else {
+            cFuturo.appendChild(card);
+        }
+    });
+    divider.style.display = (temPassado && cPassado.classList.contains("show")) ? "block" : "none";
+}
+
+function montarFiltros(dados){
+    const selects = document.querySelectorAll('#filtros select');
+    selects.forEach(select => {
+        const col = select.dataset.col;
+        let vals = [...new Set(dados.map(d => d[col]).filter(v => v && v.trim() !== ""))];
+        col === "DATA" ? vals.sort((a,b)=>parseDate(a)-parseDate(b)) : vals.sort();
+        vals.forEach(v => {
+            const opt = document.createElement("option"); opt.value = v; opt.textContent = v;
+            select.appendChild(opt);
+        });
+        select.addEventListener('change', aplicarFiltros);
+    });
+}
+
+function aplicarFiltros(){
+    const selects = document.querySelectorAll("#filtros select");
+    let filtrados = [...dadosGlobais];
+    selects.forEach(s => { if(s.value) filtrados = filtrados.filter(d => d[s.dataset.col] === s.value); });
+    renderizar(filtrados);
+}
+
+const fBox = document.getElementById("filtros");
+const btnToggle = document.getElementById("btnToggleFilters");
+const btnClear = document.getElementById("btnClearFilters");
+const btnPast = document.getElementById("btnTogglePast");
+const cPassado = document.getElementById("containerPassado");
+const divider = document.getElementById("pastDivider");
+
+btnToggle.onclick = () => {
+    fBox.classList.toggle("active");
+    btnToggle.textContent = fBox.classList.contains("active") ? "Ocultar Filtros" : "Mostrar Filtros";
+}
+
+btnClear.onclick = () => {
+    document.querySelectorAll("#filtros select").forEach(s => s.value = "");
+    renderizar(dadosGlobais);
+    fBox.classList.remove("active");
+    btnToggle.textContent = "Mostrar Filtros";
+}
+
+btnPast.onclick = () => {
+    cPassado.classList.toggle("show");
+    btnPast.classList.toggle("active");
+    divider.style.display = cPassado.classList.contains("show") ? "block" : "none";
+}
+
 carregarCSV();
 </script>
 
