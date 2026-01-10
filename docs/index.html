@@ -11,8 +11,15 @@ body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:#f0f2f5;
 h1{text-align:center;margin:10px 0 20px;font-size:28px;font-weight:800;text-transform:uppercase}
 
 .top-controls{display:flex;gap:10px;margin-bottom:20px}
-.filters-toggle{flex:1;background:#222;color:#fff;border:none;border-radius:8px;height:45px;font-weight:700;cursor:pointer}
-.past-toggle{width:45px;border:none;border-radius:8px;cursor:pointer}
+.filters-toggle{
+    flex:1;background:#222;color:#fff;border:none;border-radius:8px;height:45px;
+    font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px
+}
+.past-toggle{
+    width:45px;border:none;border-radius:8px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;background:#e2e4e7;color:#555
+}
+.past-toggle.active{background:#d1d5db;color:#000}
 
 .filters-box{display:none;background:#fff;border-radius:12px;padding:12px;margin-bottom:20px}
 .filters-box.active{display:block}
@@ -54,7 +61,7 @@ table{width:100%;border-collapse:collapse;background:#fff;border-radius:10px;ove
 th,td{padding:12px 10px;border-bottom:1px solid #eee;text-align:center;font-size:13px}
 th{background:#222;color:#fff;font-weight:600}
 
-/* ===== LINKS ===== */
+/* LINKS */
 a.whats{color:#1b5e20;font-weight:700;text-decoration:none}
 a.whats:hover{text-decoration:underline}
 
@@ -65,7 +72,7 @@ a.whats:hover{text-decoration:underline}
     text-decoration:none !important;
 }
 
-/* MOBILE: mantém destaque */
+/* MOBILE */
 @media(max-width:768px){
     body{padding:10px}
     h1{font-size:24px}
@@ -86,9 +93,17 @@ a.whats:hover{text-decoration:underline}
 <h1>Escala 2026</h1>
 
 <div class="top-controls">
-    <button class="filters-toggle" id="btnToggleFilters">Mostrar Filtros</button>
-    <button class="past-toggle" id="btnTogglePast">
-        <svg viewBox="0 0 24 24" width="22" height="22">
+    <button class="filters-toggle" id="btnToggleFilters">
+        <!-- ícone filtro -->
+        <svg width="18" height="18" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M3 5h18v2H3V5zm4 6h10v2H7v-2zm4 6h2v2h-2v-2z"/>
+        </svg>
+        Filtros
+    </button>
+
+    <button class="past-toggle" id="btnTogglePast" title="Exibir passados">
+        <!-- ícone histórico -->
+        <svg width="22" height="22" viewBox="0 0 24 24">
             <path fill="currentColor"
             d="M13 3c-4.97 0-9 4.03-9 9H1l4 4 4-4H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/>
         </svg>
@@ -215,21 +230,39 @@ function montarCards(d){
 
         card.innerHTML=`
         <div class="card-header"><div class="date-pill">${x["DATA"]} — ${x["DIA SEMANA"]}</div></div>
+
         <div class="block responsaveis">
-            <h4>RESPONSÁVEIS</h4>
+            <h4>
+                <svg width="16" height="16" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+                </svg>
+                RESPONSÁVEIS
+            </h4>
             <p><span class="label">Ancião:</span> ${linkarNome(x["ANCIÃO"]||"-")}</p>
             <p><span class="label">Regente:</span> ${linkarNome(x["REGENTE LOUVOR"]||"-")}</p>
         </div>
+
         <div class="block equipe">
-            <h4>EQUIPE</h4>
+            <h4>
+                <svg width="16" height="16" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M16 11c1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3 1.3 3 3 3zm-8 0c1.7 0 3-1.3 3-3S9.7 5 8 5 5 6.3 5 8s1.3 3 3 3zm0 2c-2.7 0-8 1.3-8 4v3h10v-3c0-1.5.8-2.8 2.1-3.7C11.2 13.1 9.1 13 8 13zm8 0c-.3 0-.6 0-.9.1 1.2.9 1.9 2.2 1.9 3.6v3h6v-3c0-2.7-5.3-4-7-4z"/>
+                </svg>
+                EQUIPE
+            </h4>
             <p><span class="label">Louvor:</span> ${linkarLista(x["EQUIPE LOUVOR"]||"-")}</p>
             <p><span class="label">Acompanhamento:</span> ${x["ACOMP"]||"-"}</p>
             <p><span class="label">Pregador:</span> ${linkarNome(x["PREGADOR"]||"-")}</p>
             <p><span class="label">Mensagem Musical:</span> ${linkarNome(x["MENSAGEM MUSICAL"]||"-")}</p>
             <p><span class="label">Audiovisual:</span> ${linkarNome(x["AUDIOVISUAL"]||"-")}${x["SUPORTE"] ? " e "+linkarNome(x["SUPORTE"])+" (suporte)" : ""}</p>
         </div>
+
         <div class="block culto">
-            <h4>CULTO E ES</h4>
+            <h4>
+                <svg width="16" height="16" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M12 2L5 8v12h4v-6h6v6h4V8l-7-6zm-1 7h2v3h-2V9z"/>
+                </svg>
+                CULTO E ES
+            </h4>
             <p><span class="label">Tema:</span> ${x["TEMA CULTO"]||"-"}</p>
             <p><span class="label">Músicas ES:</span><br>${(x["LOUVORES ES"]||"").replace(/\|/g,"<br>")}</p>
             <p><span class="label">Músicas Culto:</span><br>${(x["LOUVORES CULTO"]||"").replace(/\|/g,"<br>")}</p>
@@ -258,7 +291,7 @@ function aplicarFiltros(){
     renderizar(f);
 }
 
-btnToggleFilters.onclick=()=>{filtros.classList.toggle("active");btnToggleFilters.textContent=filtros.classList.contains("active")?"Ocultar Filtros":"Mostrar Filtros";}
+btnToggleFilters.onclick=()=>{filtros.classList.toggle("active");}
 btnClearFilters.onclick=()=>{document.querySelectorAll("#filtros select").forEach(s=>s.value="");renderizar(dadosGlobais);}
 btnTogglePast.onclick=()=>{containerPassado.classList.toggle("show");btnTogglePast.classList.toggle("active");pastDivider.style.display=containerPassado.classList.contains("show")?"block":"none";}
 
