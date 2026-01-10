@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <title>Escala de Louvor</title>
 
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:#f0f2f5;padding:16px;color:#222}
+
 h1{text-align:center;margin:10px 0 20px;font-size:28px;font-weight:800;text-transform:uppercase}
 
 .top-controls{display:flex;gap:10px;margin-bottom:20px}
@@ -17,28 +18,32 @@ h1{text-align:center;margin:10px 0 20px;font-size:28px;font-weight:800;text-tran
 .filters-box{display:none;background:#fff;border-radius:12px;padding:12px;margin-bottom:20px}
 .filters-box.active{display:block}
 .filters-box select{width:100%;padding:10px;margin-bottom:8px;border-radius:8px;border:1px solid #ddd}
-.btn-clear{width:100%;padding:10px;border-radius:8px;border:none;background:#ffecec;color:#c00;font-weight:700}
+
+.cards{display:none}
+#containerPassado{display:none;margin-bottom:20px}
+#containerPassado.show{display:flex;flex-direction:column;gap:15px}
+
+.day-card{background:#fff;border-radius:15px;padding:15px;margin-bottom:15px;box-shadow:0 4px 15px rgba(0,0,0,.06)}
+.past-card{opacity:.5}
+
+.card-header{text-align:center;margin-bottom:10px}
+.date-pill{background:#222;color:#fff;padding:6px 15px;border-radius:999px;font-size:13px;font-weight:700}
+
+.block{border:1px solid #eee;border-radius:10px;padding:10px;background:#fafafa;margin-bottom:10px}
+.block h4{margin:0 0 6px;font-size:13px;font-weight:800}
+.block p{margin:4px 0;font-size:13px}
 
 .table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;background:#fff;border-radius:10px}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:10px;overflow:hidden}
 th,td{padding:10px;border-bottom:1px solid #eee;text-align:center;font-size:13px}
 th{background:#222;color:#fff}
 
-.cards{display:none}
-.day-card{background:#fff;border-radius:14px;padding:14px;margin-bottom:12px}
-.past-card{opacity:.6;filter:grayscale(.4)}
-.date-pill{background:#222;color:#fff;padding:6px 14px;border-radius:999px;text-align:center;margin-bottom:10px;font-size:13px}
-
-.block{background:#fafafa;border-radius:10px;padding:10px;margin-bottom:8px}
-.block h4{margin:0 0 6px;font-size:13px;font-weight:800}
-.label{font-weight:700}
-
-a.whatsapp{color:#1a73e8;font-weight:700;text-decoration:none}
-a.whatsapp:hover{text-decoration:underline}
+a.whats{color:#1b5e20;font-weight:700;text-decoration:none}
+a.whats:hover{text-decoration:underline}
 
 @media(max-width:768px){
-.table-wrap{display:none}
-.cards{display:block}
+  .table-wrap{display:none}
+  .cards{display:flex;flex-direction:column}
 }
 </style>
 </head>
@@ -48,143 +53,173 @@ a.whatsapp:hover{text-decoration:underline}
 <h1>Escala 2026</h1>
 
 <div class="top-controls">
-<button class="filters-toggle" id="btnFilters">Filtros</button>
-<button class="past-toggle" id="btnPast">⏱</button>
+  <button class="filters-toggle" id="btnToggleFilters">Mostrar Filtros</button>
+  <button class="past-toggle" id="btnTogglePast">⟳</button>
 </div>
 
-<div class="filters-box" id="filters">
-<select data-col="ANCIÃO"><option value="">Ancião</option></select>
-<select data-col="REGENTE LOUVOR"><option value="">Regente</option></select>
-<select data-col="EQUIPE LOUVOR"><option value="">Equipe</option></select>
-<button class="btn-clear" id="btnClear">Limpar</button>
+<div class="filters-box" id="filtros">
+  <select data-col="DATA"><option value="">Data</option></select>
+  <select data-col="DIA SEMANA"><option value="">Dia</option></select>
+  <select data-col="REGENTE LOUVOR"><option value="">Regente</option></select>
+  <select data-col="ANCIÃO"><option value="">Ancião</option></select>
+  <select data-col="PREGADOR"><option value="">Pregador</option></select>
+  <button id="btnClearFilters">Limpar</button>
 </div>
 
 <div class="table-wrap">
 <table>
 <thead>
 <tr>
-<th>DATA</th><th>DIA</th><th>ACOMP</th><th>REGENTE</th><th>EQUIPE</th><th>ES</th><th>ANCIÃO</th><th>PREGADOR</th><th>OBS</th>
+<th>DATA</th><th>DIA</th><th>ACOMP</th><th>REGENTE</th><th>EQUIPE</th>
+<th>MENSAGEM</th><th>ES</th><th>CULTO</th><th>TEMA</th>
+<th>AUDIO</th><th>ANCIÃO</th><th>PREGADOR</th><th>SUPORTE</th><th>OBS</th>
 </tr>
 </thead>
 <tbody id="tableBody"></tbody>
 </table>
 </div>
 
-<div class="cards" id="cards"></div>
+<div class="cards">
+  <div id="containerPassado"></div>
+  <div id="containerFuturo"></div>
+</div>
 
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script>
-/* ================= WHATSAPP ================= */
-const whatsappLinks = {
-  catherine:"https://wa.me/554391360091",
-  luiz:"https://wa.me/5543999609883",
-  andre:"https://wa.me/5543920008370",
-  fabricio:"https://wa.me/554396670568",
-  giovana:"https://wa.me/5543984876102",
-  emily:"https://wa.me/554391240309",
-  nilsinho:"https://wa.me/554396557195",
-  suellen:"https://wa.me/554398488720",
-  suelen:"https://wa.me/554398488720",
-  marcos:"https://wa.me/554396589712",
-  ricardo:"https://wa.me/554396158431",
-  dulcineia:"https://wa.me/554396339940",
-  enoque:"https://wa.me/554396598684",
-  adelmo:"https://wa.me/554399512450"
-};
+let dadosGlobais = [];
+let contatosMap = {};
 
-function normalizar(t){
-  return t.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
-}
-
-function linkificar(txt){
-  if(!txt) return "";
-  let partes = txt.split(/(\s|,)/);
-  for(let i=0;i<partes.length;i++){
-    let k = normalizar(partes[i]);
-    if(whatsappLinks[k]){
-      partes[i]=`<a class="whatsapp" href="${whatsappLinks[k]}" target="_blank">${partes[i]}</a>`;
-    }
-  }
-  return partes.join("");
-}
-
-/* ================= CSV ================= */
-let dados=[];
-
-function parseDate(d){
-  const p=d.split("/");
+function parseDate(s){
+  const p=s.split('/');
   return new Date(p[2],p[1]-1,p[0]);
 }
-function isPast(d){
-  const t=new Date();t.setHours(0,0,0,0);
-  return parseDate(d)<t;
+
+function isPastDate(s){
+  const d=parseDate(s);
+  const t=new Date(); t.setHours(0,0,0,0);
+  return d<t;
+}
+
+function normalizarNome(n){
+  return n.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase().trim();
+}
+
+function buscarContato(nome){
+  const alvo=normalizarNome(nome);
+  for(const base in contatosMap){
+    if(normalizarNome(base)===alvo) return contatosMap[base];
+    const aps=contatosMap[base].apelidos||[];
+    for(const ap of aps){
+      if(normalizarNome(ap)===alvo) return contatosMap[base];
+    }
+  }
+  return null;
+}
+
+function linkarNome(nome){
+  if(!nome||nome==="-" ) return nome;
+  const c=buscarContato(nome);
+  if(c && c.telefone){
+    return `<a class="whats" target="_blank" href="${c.telefone}">${nome}</a>`;
+  }
+  return nome;
+}
+
+function linkarLista(txt){
+  if(!txt) return "";
+  return txt.split(",").map(n=>linkarNome(n.trim())).join(", ");
 }
 
 async function carregar(){
-  const r=await fetch("atual.csv?t="+Date.now());
-  const t=await r.text();
-  dados=Papa.parse(t,{header:true,skipEmptyLines:true}).data;
-  render(dados);
-  filtros();
+  const [r1,r2]=await Promise.all([
+    fetch('atual.json?t='+Date.now()),
+    fetch('contatos.json?t='+Date.now())
+  ]);
+  dadosGlobais=await r1.json();
+  contatosMap=await r2.json();
+  renderizar(dadosGlobais);
+  montarFiltros(dadosGlobais);
 }
 
-function render(lista){
-  const tb=document.getElementById("tableBody");
-  const cards=document.getElementById("cards");
-  tb.innerHTML="";cards.innerHTML="";
-  lista.forEach(d=>{
-    const tr=document.createElement("tr");
-    if(isPast(d.DATA)) tr.style.opacity=.5;
-    tr.innerHTML=`
-<td>${d.DATA}</td>
-<td>${d["DIA SEMANA"]}</td>
-<td>${d.ACOMP||""}</td>
-<td>${linkificar(d["REGENTE LOUVOR"])}</td>
-<td>${linkificar(d["EQUIPE LOUVOR"])}</td>
-<td>${d["LOUVORES ES"]||""}</td>
-<td>${linkificar(d["ANCIÃO"])}</td>
-<td>${linkificar(d["PREGADOR"])}</td>
-<td>${d.OBS||""}</td>`;
-    tb.appendChild(tr);
+function renderizar(d){
+  montarTabela(d);
+  montarCards(d);
+}
 
-    const c=document.createElement("div");
-    c.className="day-card"+(isPast(d.DATA)?" past-card":"");
-    c.innerHTML=`
-<div class="date-pill">${d.DATA} — ${d["DIA SEMANA"]}</div>
-<div class="block"><h4>Equipe</h4>${linkificar(d["EQUIPE LOUVOR"])}</div>
-<div class="block"><h4>ES</h4>${d["LOUVORES ES"]||""}</div>
-<div class="block"><h4>Liderança</h4>
-<span class="label">Ancião:</span> ${linkificar(d["ANCIÃO"])}<br>
-<span class="label">Pregador:</span> ${linkificar(d["PREGADOR"])}
-</div>
-${d.OBS?`<div class="block"><h4>Obs</h4>${d.OBS}</div>`:""}
-`;
-    cards.appendChild(c);
+function montarTabela(d){
+  const tb=document.getElementById("tableBody");
+  tb.innerHTML="";
+  d.forEach(x=>{
+    const tr=document.createElement("tr");
+    if(isPastDate(x["DATA"])) tr.style.opacity=".5";
+    tr.innerHTML=`
+<td>${x["DATA"]}</td>
+<td>${x["DIA SEMANA"]}</td>
+<td>${x["ACOMP"]}</td>
+<td>${linkarNome(x["REGENTE LOUVOR"])}</td>
+<td>${linkarLista(x["EQUIPE LOUVOR"])}</td>
+<td>${linkarNome(x["MENSAGEM MUSICAL"]||"")}</td>
+<td>${x["LOUVORES ES"]||""}</td>
+<td>${x["LOUVORES CULTO"]||""}</td>
+<td>${x["TEMA CULTO"]||""}</td>
+<td>${linkarNome(x["AUDIOVISUAL"]||"")}</td>
+<td>${linkarNome(x["ANCIÃO"]||"")}</td>
+<td>${linkarNome(x["PREGADOR"]||"")}</td>
+<td>${linkarNome(x["SUPORTE"]||"")}</td>
+<td>${x["OBS"]||""}</td>`;
+    tb.appendChild(tr);
   });
 }
 
-function filtros(){
-  document.querySelectorAll("#filters select").forEach(s=>{
-    const c=s.dataset.col;
-    [...new Set(dados.map(d=>d[c]).filter(Boolean))].sort().forEach(v=>{
+function montarCards(d){
+  const f=document.getElementById("containerFuturo");
+  const p=document.getElementById("containerPassado");
+  f.innerHTML=""; p.innerHTML="";
+  d.forEach(x=>{
+    const past=isPastDate(x["DATA"]);
+    const c=document.createElement("div");
+    c.className="day-card"+(past?" past-card":"");
+    c.innerHTML=`
+<div class="card-header"><div class="date-pill">${x["DATA"]} — ${x["DIA SEMANA"]}</div></div>
+<div class="block">
+  <h4>Responsáveis</h4>
+  <p>Ancião: ${linkarNome(x["ANCIÃO"]||"-")}</p>
+  <p>Regente: ${linkarNome(x["REGENTE LOUVOR"]||"-")}</p>
+</div>
+<div class="block">
+  <h4>Equipe</h4>
+  <p>Louvor: ${linkarLista(x["EQUIPE LOUVOR"]||"-")}</p>
+  <p>Pregador: ${linkarNome(x["PREGADOR"]||"-")}</p>
+  <p>Mensagem: ${linkarNome(x["MENSAGEM MUSICAL"]||"-")}</p>
+  <p>Audiovisual: ${linkarNome(x["AUDIOVISUAL"]||"-")} ${x["SUPORTE"]? " e "+linkarNome(x["SUPORTE"])+" (suporte)":""}</p>
+</div>`;
+    past?p.appendChild(c):f.appendChild(c);
+  });
+}
+
+function montarFiltros(d){
+  document.querySelectorAll("#filtros select").forEach(s=>{
+    const col=s.dataset.col;
+    let vals=[...new Set(d.map(x=>x[col]).filter(v=>v))];
+    col==="DATA"?vals.sort((a,b)=>parseDate(a)-parseDate(b)):vals.sort();
+    vals.forEach(v=>{
       const o=document.createElement("option");
       o.value=v;o.textContent=v;s.appendChild(o);
     });
-    s.onchange=()=>filtrar();
+    s.onchange=aplicarFiltros;
   });
 }
 
-function filtrar(){
-  let f=[...dados];
-  document.querySelectorAll("#filters select").forEach(s=>{
-    if(s.value) f=f.filter(d=>d[s.dataset.col]===s.value);
+function aplicarFiltros(){
+  let f=[...dadosGlobais];
+  document.querySelectorAll("#filtros select").forEach(s=>{
+    if(s.value) f=f.filter(x=>x[s.dataset.col]===s.value);
   });
-  render(f);
+  renderizar(f);
 }
 
-/* ================= UI ================= */
-document.getElementById("btnFilters").onclick=()=>document.getElementById("filters").classList.toggle("active");
-document.getElementById("btnClear").onclick=()=>{document.querySelectorAll("#filters select").forEach(s=>s.value="");render(dados);};
+btnToggleFilters.onclick=()=>filtros.classList.toggle("active");
+btnClearFilters.onclick=()=>{document.querySelectorAll("#filtros select").forEach(s=>s.value="");renderizar(dadosGlobais);}
+btnTogglePast.onclick=()=>containerPassado.classList.toggle("show");
 
 carregar();
 </script>
