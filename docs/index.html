@@ -1,345 +1,192 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>Escala de Louvor</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escala de Louvor</title>
 
-    <style>
-        *{box-sizing:border-box}
-        body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:#f0f2f5;padding:16px;color:#222}
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:#f0f2f5;padding:16px;color:#222}
+h1{text-align:center;margin:10px 0 20px;font-size:28px;font-weight:800;text-transform:uppercase}
 
-        h1{ text-align:center; margin: 10px 0 20px 0; font-size: 28px; color: #1a1a1a; font-weight: 800; text-transform: uppercase; }
+.top-controls{display:flex;gap:10px;margin-bottom:20px}
+.filters-toggle{flex:1;background:#222;color:#fff;border:none;border-radius:8px;height:45px;font-weight:700;cursor:pointer}
+.past-toggle{width:45px;border:none;border-radius:8px;cursor:pointer}
 
-        /* ===== ÁREA DE BOTÕES SUPERIORES ===== */
-        .top-controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
+.filters-box{display:none;background:#fff;border-radius:12px;padding:12px;margin-bottom:20px}
+.filters-box.active{display:block}
+.filters-box select{width:100%;padding:10px;margin-bottom:8px;border-radius:8px;border:1px solid #ddd}
+.btn-clear{width:100%;padding:10px;border-radius:8px;border:none;background:#ffecec;color:#c00;font-weight:700}
 
-        .filters-toggle {
-            background:#222; color:#fff; padding:0 20px; border:none; border-radius:8px;
-            cursor:pointer; font-size:14px; font-weight: 700; height: 45px;
-            text-transform: uppercase; flex-grow: 1; max-width: 250px;
-        }
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:10px}
+th,td{padding:10px;border-bottom:1px solid #eee;text-align:center;font-size:13px}
+th{background:#222;color:#fff}
 
-        .past-toggle {
-            background:#e2e4e7; color:#555; width: 45px; height: 45px; border:none; border-radius:8px;
-            cursor:pointer; display: flex; align-items: center; justify-content: center;
-        }
-        .past-toggle svg { width: 22px; height: 22px; fill: currentColor; }
-        .past-toggle.active { background: #d1d5db; color: #000; }
+.cards{display:none}
+.day-card{background:#fff;border-radius:14px;padding:14px;margin-bottom:12px}
+.past-card{opacity:.6;filter:grayscale(.4)}
+.date-pill{background:#222;color:#fff;padding:6px 14px;border-radius:999px;text-align:center;margin-bottom:10px;font-size:13px}
 
-        /* ===== CAIXA DE FILTROS ULTRA COMPACTA ===== */
-        .filters-box {
-            display:none; 
-            background:#fff; 
-            border-radius: 12px; 
-            box-shadow:0 4px 12px rgba(0,0,0,0.1); 
-            padding: 12px;
-            width: 100%;
-            margin-bottom: 20px;
-        }
-        .filters-box.active { display: block; }
+.block{background:#fafafa;border-radius:10px;padding:10px;margin-bottom:8px}
+.block h4{margin:0 0 6px;font-size:13px;font-weight:800}
+.label{font-weight:700}
 
-        .filter-group { 
-            margin-bottom: 12px; 
-        }
-        .filter-group:last-of-type { margin-bottom: 0; }
-        
-        .filter-group h4 { 
-            margin: 0 0 6px 0; 
-            font-size:11px; 
-            text-transform: uppercase; 
-            color:#bbb; 
-            border-bottom:1px solid #f0f0f0; 
-            padding-bottom:2px;
-            font-weight: 700;
-        }
-        
-        .select-container {
-            display: flex;
-            flex-direction: column;
-            gap: 6px; 
-        }
+a.whatsapp{color:#1a73e8;font-weight:700;text-decoration:none}
+a.whatsapp:hover{text-decoration:underline}
 
-        .filters-box select { 
-            padding:10px; 
-            border-radius:8px; 
-            border:1px solid #ddd; 
-            font-size:15px; 
-            width: 100%; 
-            background-color: #fcfcfc;
-            color: #333;
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            background-size: 1em;
-        }
-
-        .btn-clear {
-            width: 100%; padding: 12px; margin-top: 15px; background: #fff0f0;
-            color: #d93025; border: 1px solid #fad2cf; border-radius: 8px;
-            cursor: pointer; font-weight: 700; font-size: 13px; text-transform: uppercase;
-        }
-
-        /* ===== CARDS ===== */
-        .cards { display: none; }
-        #containerPassado { display: none; margin-bottom: 20px; }
-        #containerPassado.show { display: flex; flex-direction: column; gap: 15px; }
-        .past-divider { text-align: center; color: #999; font-size: 11px; margin: 10px 0; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
-
-        .day-card {
-            background: #fff; border-radius: 15px; padding: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #e0e0e0; margin-bottom: 15px;
-        }
-        .card-header { display: flex; justify-content: center; margin-bottom: 12px; }
-        .date-pill { background:#222; color:#fff; padding:6px 15px; border-radius:999px; font-size:13px; font-weight:700; }
-        
-        .block { border:1px solid #f2f2f2; border-radius:10px; padding:12px; background:#fafafa; margin-bottom: 10px; }
-        .block:last-child { margin-bottom: 0; }
-
-        .block h4 { 
-            margin:0 0 8px 0; font-size: 14px; color:#333; 
-            border-bottom: 1px solid #eee; padding-bottom:4px; 
-            text-transform: uppercase; font-weight: 800;
-            display: flex; align-items: center; gap: 8px;
-        }
-        .block h4 svg { width: 16px; height: 16px; fill: #666; }
-
-        .block p { margin: 6px 0; font-size: 13px; line-height: 1.4; color: #444; }
-        .label { font-weight: 700; color: #111; margin-right: 4px; }
-
-        .block.responsaveis { border-left: 5px solid #2e7d32; } 
-        .block.equipe { border-left: 5px solid #1b5e20; }       
-        .block.culto { border-left: 5px solid #0d3b13; }        
-        .past-card { opacity: 0.6; filter: grayscale(0.5); }
-
-        /* ===== DESKTOP TABLE ===== */
-        .table-wrap { overflow-x:auto; margin-top:10px; }
-        table { width:100%; border-collapse:collapse; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.05) }
-        th,td { padding:12px 10px; border-bottom:1px solid #eee; text-align:center; font-size:13px }
-        th { background:#222; color:#fff; font-weight:600 }
-
-        /* ===== MOBILE FIXES ===== */
-        @media(max-width:768px){
-            body { padding: 10px; }
-            h1 { font-size: 24px; }
-            .table-wrap { display: none !important; }
-            .cards { display: flex !important; flex-direction: column; }
-            
-            /* DESTAQUE PARA OS GRUPOS EM NEGRITO NO MOBILE */
-            .filter-group h4 { 
-                font-weight: 800; 
-                color: #444; 
-                font-size: 12px;
-                border-bottom: 1px solid #ddd;
-            }
-
-            .filters-box.active { display: block; }
-        }
-    </style>
+@media(max-width:768px){
+.table-wrap{display:none}
+.cards{display:block}
+}
+</style>
 </head>
 
 <body>
 
 <h1>Escala 2026</h1>
 
-<div class="filters-container">
-    <div class="top-controls">
-        <button class="filters-toggle" id="btnToggleFilters">Mostrar Filtros</button>
-        <button class="past-toggle" id="btnTogglePast" title="Histórico">
-            <svg viewBox="0 0 24 24"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
-        </button>
-    </div>
+<div class="top-controls">
+<button class="filters-toggle" id="btnFilters">Filtros</button>
+<button class="past-toggle" id="btnPast">⏱</button>
+</div>
 
-    <div class="filters-box" id="filtros">
-        <div class="filter-group">
-            <h4>Responsáveis</h4>
-            <div class="select-container">
-                <select data-col="ANCIÃO"><option value="">Ancião</option></select>
-                <select data-col="REGENTE LOUVOR"><option value="">Regente</option></select>
-            </div>
-        </div>
-
-        <div class="filter-group">
-            <h4>Equipe</h4>
-            <div class="select-container">
-                <select data-col="EQUIPE LOUVOR"><option value="">Equipe de Louvor</option></select>
-                <select data-col="PREGADOR"><option value="">Pregador</option></select>
-                <select data-col="AUDIOVISUAL"><option value="">Audiovisual</option></select>
-            </div>
-        </div>
-
-        <div class="filter-group">
-            <h4>Culto</h4>
-            <div class="select-container">
-                <select data-col="DATA"><option value="">Data</option></select>
-                <select data-col="DIA SEMANA"><option value="">Dia da Semana</option></select>
-                <select data-col="ACOMP"><option value="">Acompanhamento</option></select>
-            </div>
-        </div>
-
-        <button class="btn-clear" id="btnClearFilters">Limpar Filtros</button>
-    </div>
+<div class="filters-box" id="filters">
+<select data-col="ANCIÃO"><option value="">Ancião</option></select>
+<select data-col="REGENTE LOUVOR"><option value="">Regente</option></select>
+<select data-col="EQUIPE LOUVOR"><option value="">Equipe</option></select>
+<button class="btn-clear" id="btnClear">Limpar</button>
 </div>
 
 <div class="table-wrap">
-    <table>
-        <thead>
-            <tr>
-                <th>DATA</th><th>DIA</th><th>ACOMP</th><th>REGENTE</th><th>EQUIPE</th><th>MENSAGEM</th>
-                <th>ES</th><th>CULTO</th><th>TEMA</th><th>AUDIOVISUAL</th><th>ANCIÃO</th><th>PREGADOR</th><th>SUPORTE</th><th>OBS</th>
-            </tr>
-        </thead>
-        <tbody id="tableBody"></tbody>
-    </table>
+<table>
+<thead>
+<tr>
+<th>DATA</th><th>DIA</th><th>ACOMP</th><th>REGENTE</th><th>EQUIPE</th><th>ES</th><th>ANCIÃO</th><th>PREGADOR</th><th>OBS</th>
+</tr>
+</thead>
+<tbody id="tableBody"></tbody>
+</table>
 </div>
 
-<div class="cards">
-    <div id="containerPassado"></div>
-    <div id="pastDivider" class="past-divider" style="display:none">Escalas Recentes</div>
-    <div id="containerFuturo"></div>
-</div>
+<div class="cards" id="cards"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script>
-const icons = {
-    resp: `<svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>`,
-    band: `<svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>`,
-    church: `<svg viewBox="0 0 24 24"><path d="M12 2L5 9v11a2 2 0 002 2h10a2 2 0 002-2V9l-7-7zm-1 18h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V8h2v2zm4 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V8h2v2z"/></svg>`,
-    obs: `<svg viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm0 15H7v-2h5v2zm3-4H7v-2h8v2zm0-4H7V8h8v2z"/></svg>`
+/* ================= WHATSAPP ================= */
+const whatsappLinks = {
+  catherine:"https://wa.me/554391360091",
+  luiz:"https://wa.me/5543999609883",
+  andre:"https://wa.me/5543920008370",
+  fabricio:"https://wa.me/554396670568",
+  giovana:"https://wa.me/5543984876102",
+  emily:"https://wa.me/554391240309",
+  nilsinho:"https://wa.me/554396557195",
+  suellen:"https://wa.me/554398488720",
+  suelen:"https://wa.me/554398488720",
+  marcos:"https://wa.me/554396589712",
+  ricardo:"https://wa.me/554396158431",
+  dulcineia:"https://wa.me/554396339940",
+  enoque:"https://wa.me/554396598684",
+  adelmo:"https://wa.me/554399512450"
 };
 
-let dadosGlobais = [];
-
-function parseDate(dateStr) {
-    const parts = dateStr.split('/');
-    return new Date(parts[2], parts[1]-1, parts[0]);
+function normalizar(t){
+  return t.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
 }
 
-function isPastDate(dateStr){
-    if(!dateStr) return false;
-    const d = parseDate(dateStr);
-    const today = new Date(); 
-    today.setHours(0,0,0,0);
-    return d < today;
+function linkificar(txt){
+  if(!txt) return "";
+  let partes = txt.split(/(\s|,)/);
+  for(let i=0;i<partes.length;i++){
+    let k = normalizar(partes[i]);
+    if(whatsappLinks[k]){
+      partes[i]=`<a class="whatsapp" href="${whatsappLinks[k]}" target="_blank">${partes[i]}</a>`;
+    }
+  }
+  return partes.join("");
 }
 
-async function carregarCSV(){
-    try {
-        const url = 'atual.csv?t=' + new Date().getTime();
-        const r = await fetch(url);
-        const t = await r.text();
-        const res = Papa.parse(t, { header: true, skipEmptyLines: true, transformHeader: h => h.replace(/^\uFEFF/, '').trim() });
-        dadosGlobais = res.data;
-        renderizar(dadosGlobais);
-        montarFiltros(dadosGlobais);
-    } catch (e) { console.error(e); }
+/* ================= CSV ================= */
+let dados=[];
+
+function parseDate(d){
+  const p=d.split("/");
+  return new Date(p[2],p[1]-1,p[0]);
+}
+function isPast(d){
+  const t=new Date();t.setHours(0,0,0,0);
+  return parseDate(d)<t;
 }
 
-function renderizar(dados) {
-    montarTabela(dados);
-    montarCards(dados);
+async function carregar(){
+  const r=await fetch("atual.csv?t="+Date.now());
+  const t=await r.text();
+  dados=Papa.parse(t,{header:true,skipEmptyLines:true}).data;
+  render(dados);
+  filtros();
 }
 
-function montarTabela(dados){
-    const tbody = document.getElementById("tableBody");
-    if(!tbody) return;
-    tbody.innerHTML = "";
-    dados.forEach(d=>{
-        const tr = document.createElement("tr");
-        if(isPastDate(d["DATA"])) tr.style.opacity = "0.5";
-        tr.innerHTML=`<td>${d["DATA"]}</td><td>${d["DIA SEMANA"]}</td><td>${d["ACOMP"]}</td><td>${d["REGENTE LOUVOR"]}</td><td>${d["EQUIPE LOUVOR"]}</td><td>${d["MENSAGEM MUSICAL"]||""}</td><td>${d["LOUVORES ES"]||""}</td><td>${d["LOUVORES CULTO"]||""}</td><td>${d["TEMA CULTO"]}</td><td>${d["AUDIOVISUAL"]}</td><td>${d["ANCIÃO"]}</td><td>${d["PREGADOR"]}</td><td>${d["SUPORTE"]}</td><td>${d["OBS"]}</td>`;
-        tbody.appendChild(tr);
+function render(lista){
+  const tb=document.getElementById("tableBody");
+  const cards=document.getElementById("cards");
+  tb.innerHTML="";cards.innerHTML="";
+  lista.forEach(d=>{
+    const tr=document.createElement("tr");
+    if(isPast(d.DATA)) tr.style.opacity=.5;
+    tr.innerHTML=`
+<td>${d.DATA}</td>
+<td>${d["DIA SEMANA"]}</td>
+<td>${d.ACOMP||""}</td>
+<td>${linkificar(d["REGENTE LOUVOR"])}</td>
+<td>${linkificar(d["EQUIPE LOUVOR"])}</td>
+<td>${d["LOUVORES ES"]||""}</td>
+<td>${linkificar(d["ANCIÃO"])}</td>
+<td>${linkificar(d["PREGADOR"])}</td>
+<td>${d.OBS||""}</td>`;
+    tb.appendChild(tr);
+
+    const c=document.createElement("div");
+    c.className="day-card"+(isPast(d.DATA)?" past-card":"");
+    c.innerHTML=`
+<div class="date-pill">${d.DATA} — ${d["DIA SEMANA"]}</div>
+<div class="block"><h4>Equipe</h4>${linkificar(d["EQUIPE LOUVOR"])}</div>
+<div class="block"><h4>ES</h4>${d["LOUVORES ES"]||""}</div>
+<div class="block"><h4>Liderança</h4>
+<span class="label">Ancião:</span> ${linkificar(d["ANCIÃO"])}<br>
+<span class="label">Pregador:</span> ${linkificar(d["PREGADOR"])}
+</div>
+${d.OBS?`<div class="block"><h4>Obs</h4>${d.OBS}</div>`:""}
+`;
+    cards.appendChild(c);
+  });
+}
+
+function filtros(){
+  document.querySelectorAll("#filters select").forEach(s=>{
+    const c=s.dataset.col;
+    [...new Set(dados.map(d=>d[c]).filter(Boolean))].sort().forEach(v=>{
+      const o=document.createElement("option");
+      o.value=v;o.textContent=v;s.appendChild(o);
     });
+    s.onchange=()=>filtrar();
+  });
 }
 
-function montarCards(dados){
-    const cFuturo = document.getElementById("containerFuturo");
-    const cPassado = document.getElementById("containerPassado");
-    const divider = document.getElementById("pastDivider");
-    
-    cFuturo.innerHTML = "";
-    cPassado.innerHTML = "";
-    let temPassado = false;
-
-    dados.forEach(d=>{
-        const passado = isPastDate(d["DATA"]);
-        const card = document.createElement("div");
-        card.className = "day-card" + (passado ? " past-card" : "");
-        
-        const lES = (d["LOUVORES ES"] || "").replace(/\|/g, "<br>");
-        const lC = (d["LOUVORES CULTO"] || "").replace(/\|/g, "<br>");
-        
-        card.innerHTML=`
-            <div class="card-header"><div class="date-pill">${d["DATA"]} — ${d["DIA SEMANA"]}</div></div>
-            <div class="block responsaveis"><h4>${icons.resp} RESPONSÁVEIS</h4><p><span class="label">Ancião:</span> ${d["ANCIÃO"]}</p><p><span class="label">Regente:</span> ${d["REGENTE LOUVOR"]}</p></div>
-            <div class="block equipe"><h4>${icons.band} EQUIPE</h4><p><span class="label">Acompanhamento:</span> ${d["ACOMP"]}</p><p><span class="label">Louvor:</span> ${d["EQUIPE LOUVOR"]}</p><p><span class="label">Mensagem Musical:</span> ${d["MENSAGEM MUSICAL"]||""}</p><p><span class="label">Pregador:</span> ${d["PREGADOR"]}</p><p><span class="label">Audiovisual:</span> ${d["AUDIOVISUAL"]}</p></div>
-            <div class="block culto"><h4>${icons.church} CULTO E ES</h4><p><span class="label">Tema:</span> ${d["TEMA CULTO"]}</p><p><span class="label">Músicas ES:</span><br>${lES}</p><p><span class="label">Músicas Culto:</span><br>${lC}</p></div>
-            ${d["OBS"] ? `<div class="block"><h4>${icons.obs} OBSERVAÇÕES</h4><p>${d["OBS"]}</p></div>` : ''}`;
-        
-        if(passado) {
-            cPassado.appendChild(card);
-            temPassado = true;
-        } else {
-            cFuturo.appendChild(card);
-        }
-    });
-    divider.style.display = (temPassado && cPassado.classList.contains("show")) ? "block" : "none";
+function filtrar(){
+  let f=[...dados];
+  document.querySelectorAll("#filters select").forEach(s=>{
+    if(s.value) f=f.filter(d=>d[s.dataset.col]===s.value);
+  });
+  render(f);
 }
 
-function montarFiltros(dados){
-    const selects = document.querySelectorAll('#filtros select');
-    selects.forEach(select => {
-        const col = select.dataset.col;
-        let vals = [...new Set(dados.map(d => d[col]).filter(v => v && v.trim() !== ""))];
-        col === "DATA" ? vals.sort((a,b)=>parseDate(a)-parseDate(b)) : vals.sort();
-        vals.forEach(v => {
-            const opt = document.createElement("option"); opt.value = v; opt.textContent = v;
-            select.appendChild(opt);
-        });
-        select.addEventListener('change', aplicarFiltros);
-    });
-}
+/* ================= UI ================= */
+document.getElementById("btnFilters").onclick=()=>document.getElementById("filters").classList.toggle("active");
+document.getElementById("btnClear").onclick=()=>{document.querySelectorAll("#filters select").forEach(s=>s.value="");render(dados);};
 
-function aplicarFiltros(){
-    const selects = document.querySelectorAll("#filtros select");
-    let filtrados = [...dadosGlobais];
-    selects.forEach(s => { if(s.value) filtrados = filtrados.filter(d => d[s.dataset.col] === s.value); });
-    renderizar(filtrados);
-}
-
-const fBox = document.getElementById("filtros");
-const btnToggle = document.getElementById("btnToggleFilters");
-const btnClear = document.getElementById("btnClearFilters");
-const btnPast = document.getElementById("btnTogglePast");
-const cPassado = document.getElementById("containerPassado");
-const divider = document.getElementById("pastDivider");
-
-btnToggle.onclick = () => {
-    fBox.classList.toggle("active");
-    btnToggle.textContent = fBox.classList.contains("active") ? "Ocultar Filtros" : "Mostrar Filtros";
-}
-
-btnClear.onclick = () => {
-    document.querySelectorAll("#filtros select").forEach(s => s.value = "");
-    renderizar(dadosGlobais);
-    fBox.classList.remove("active");
-    btnToggle.textContent = "Mostrar Filtros";
-}
-
-btnPast.onclick = () => {
-    cPassado.classList.toggle("show");
-    btnPast.classList.toggle("active");
-    divider.style.display = cPassado.classList.contains("show") ? "block" : "none";
-}
-
-carregarCSV();
+carregar();
 </script>
 
 </body>
