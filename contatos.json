@@ -109,7 +109,7 @@
   },
   "DIEGO": {
     "telefone": "https://wa.me/554388168906",
-    "apelidos": []
+    "apelidos": ["DIEGO"]
   },
   "KHEYCI": {
     "telefone": "https://wa.me/554388586342",
@@ -141,6 +141,6 @@
   },
   "FAMILIA JOÁS":{
     "telefone": "https://wa.me/554399234367",
-    "apelidos": ["FAMILIA JOÁS"]
+    "apelidos": ["FAMILIA JOÁS", "JOÁS"]
   }
 }
