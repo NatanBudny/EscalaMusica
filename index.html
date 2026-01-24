@@ -4,72 +4,529 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ESCALA DE LOUVOR</title>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:#f0f2f5;padding:16px;color:#222}
-h1{text-align:center;margin:10px 0 20px;font-size:28px;font-weight:800;text-transform:uppercase}
-
-.top-controls{display:flex;gap:10px;margin-bottom:20px}
-.filters-toggle{
-    flex:1;background:#222;color:#fff;border:none;border-radius:8px;height:45px;
-    font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+    --primary:#007AFF;
+    --success:#34C759;
+    --warning:#FF9500;
+    --danger:#FF3B30;
+    --bg:#F2F2F7;
+    --card:#FFFFFF;
+    --text:#000000;
+    --text-secondary:#8E8E93;
+    --border:#E5E5EA;
+    --shadow:0 2px 10px rgba(0,0,0,0.08);
+    --radius:12px;
+    --transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.past-toggle{
-    width:45px;border:none;border-radius:8px;cursor:pointer;
-    display:flex;align-items:center;justify-content:center;background:#e2e4e7;color:#555
-}
-.past-toggle.active{background:#d1d5db;color:#000}
-
-.filters-box{display:none;background:#fff;border-radius:12px;padding:12px;margin-bottom:20px}
-.filters-box.active{display:block}
-.filters-box select{width:100%;padding:10px;margin-bottom:8px;border-radius:8px;border:1px solid #ddd}
-
-.btn-clear{
-    width:100%;padding:12px;margin-top:10px;background:#fff0f0;color:#d93025;
-    border:1px solid #fad2cf;border-radius:8px;cursor:pointer;font-weight:700
+body.dark-mode{
+    --bg:#000000;
+    --card:#1C1C1E;
+    --text:#FFFFFF;
+    --text-secondary:#98989D;
+    --border:#38383A;
+    --shadow:0 2px 10px rgba(0,0,0,0.3);
 }
 
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    padding:16px;
+    transition:var(--transition);
+    min-height:100vh;
+}
+
+/* HEADER */
+.header{
+    text-align:center;
+    margin-bottom:24px;
+    position:relative;
+}
+h1{
+    font-size:28px;
+    font-weight:700;
+    margin-bottom:8px;
+    letter-spacing:-0.5px;
+}
+.user-info{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    margin-top:12px;
+    padding:8px 16px;
+    border-radius:20px;
+    background:var(--card);
+    box-shadow:var(--shadow);
+    animation:slideDown 0.4s ease-out;
+}
+.user-avatar{
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    object-fit:cover;
+}
+.user-name{
+    font-size:14px;
+    font-weight:500;
+    color:var(--text);
+}
+.logout-btn{
+    background:none;
+    border:none;
+    color:var(--text-secondary);
+    cursor:pointer;
+    padding:4px 8px;
+    border-radius:6px;
+    font-size:12px;
+    transition:var(--transition);
+}
+.logout-btn:hover{background:var(--border);color:var(--text)}
+
+/* AUTH */
+.auth-container{
+    max-width:400px;
+    margin:60px auto;
+    padding:32px;
+    background:var(--card);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    text-align:center;
+    animation:fadeIn 0.5s ease-out;
+}
+.auth-title{
+    font-size:24px;
+    font-weight:600;
+    margin-bottom:8px;
+}
+.auth-subtitle{
+    color:var(--text-secondary);
+    font-size:14px;
+    margin-bottom:24px;
+}
+#googleSignIn{
+    width:100%;
+    margin-top:16px;
+}
+
+/* CONTROLS */
+.top-controls{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+    animation:slideDown 0.4s ease-out 0.1s both;
+}
+.search-input{
+    flex:1;
+    min-width:150px;
+    padding:12px 16px;
+    border-radius:var(--radius);
+    border:1px solid var(--border);
+    font-size:15px;
+    background:var(--card);
+    color:var(--text);
+    transition:var(--transition);
+    font-family:inherit;
+}
+.search-input:focus{
+    outline:none;
+    border-color:var(--primary);
+    box-shadow:0 0 0 3px rgba(0,122,255,0.1);
+}
+.control-btn{
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:var(--radius);
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--card);
+    color:var(--text);
+    box-shadow:var(--shadow);
+    transition:var(--transition);
+}
+.control-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 4px 12px rgba(0,0,0,0.12);
+}
+.control-btn.active{
+    background:var(--primary);
+    color:#fff;
+}
+.my-scales-btn.active{background:var(--success)}
+.notifications-btn.active{background:var(--warning)}
+
+/* BADGES */
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    padding:4px 10px;
+    border-radius:12px;
+    font-size:11px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    animation:scaleIn 0.3s ease-out;
+}
+.badge.confirmed{
+    background:#D4EDDA;
+    color:#155724;
+}
+.badge.pending{
+    background:#FFF3CD;
+    color:#856404;
+}
+.badge.my-scale{
+    background:#D1ECF1;
+    color:#0C5460;
+}
+body.dark-mode .badge.confirmed{
+    background:rgba(52,199,89,0.2);
+    color:#34C759;
+}
+body.dark-mode .badge.pending{
+    background:rgba(255,149,0,0.2);
+    color:#FF9500;
+}
+body.dark-mode .badge.my-scale{
+    background:rgba(0,122,255,0.2);
+    color:#007AFF;
+}
+
+/* CARDS */
 .cards{display:none}
 #containerPassado{display:none;margin-bottom:20px}
 #containerPassado.show{display:flex;flex-direction:column;gap:15px}
-.past-divider{text-align:center;color:#999;font-size:11px;margin:10px 0;text-transform:uppercase;letter-spacing:2px;font-weight:700}
+.past-divider{
+    text-align:center;
+    color:var(--text-secondary);
+    font-size:11px;
+    margin:10px 0;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-weight:600;
+}
 
 .day-card{
-    background:#fff;border-radius:15px;padding:15px;
-    box-shadow:0 4px 15px rgba(0,0,0,0.06);border:1px solid #e0e0e0;margin-bottom:15px
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:20px;
+    box-shadow:var(--shadow);
+    border:1px solid var(--border);
+    margin-bottom:16px;
+    transition:var(--transition);
+    animation:slideUp 0.4s ease-out both;
+    position:relative;
+    overflow:hidden;
 }
-.card-header{display:flex;justify-content:center;margin-bottom:12px}
-.date-pill{background:#222;color:#fff;padding:6px 15px;border-radius:999px;font-size:13px;font-weight:700}
+.day-card::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    width:4px;
+    height:100%;
+    background:var(--border);
+    transition:var(--transition);
+}
+.day-card.my-scale::before{
+    background:var(--success);
+    width:4px;
+}
+.day-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 4px 20px rgba(0,0,0,0.12);
+}
+.day-card.past-card{
+    opacity:0.6;
+    filter:grayscale(0.3);
+}
+.day-card.highlight{
+    border:2px solid var(--warning);
+    box-shadow:0 0 0 3px rgba(255,149,0,0.1);
+}
 
-.block{border:1px solid #f2f2f2;border-radius:10px;padding:12px;background:#fafafa;margin-bottom:10px}
+.card-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:16px;
+}
+.date-pill{
+    background:var(--text);
+    color:var(--bg);
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:600;
+}
+.confirm-btn{
+    padding:6px 14px;
+    border-radius:20px;
+    border:none;
+    font-size:12px;
+    font-weight:600;
+    cursor:pointer;
+    transition:var(--transition);
+    font-family:inherit;
+}
+.confirm-btn.confirmed{
+    background:var(--success);
+    color:#fff;
+}
+.confirm-btn.pending{
+    background:var(--border);
+    color:var(--text);
+}
+.confirm-btn:hover{
+    transform:scale(1.05);
+}
+
+.block{
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:16px;
+    background:var(--bg);
+    margin-bottom:12px;
+    transition:var(--transition);
+}
 .block:last-child{margin-bottom:0}
 .block h4{
-    margin:0 0 8px;font-size:14px;color:#333;border-bottom:1px solid #eee;padding-bottom:4px;
-    text-transform:uppercase;font-weight:800;display:flex;align-items:center;gap:8px
+    margin:0 0 12px;
+    font-size:13px;
+    color:var(--text);
+    border-bottom:1px solid var(--border);
+    padding-bottom:8px;
+    text-transform:uppercase;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    letter-spacing:0.5px;
 }
-.block p{margin:6px 0;font-size:13px;line-height:1.4;color:#444}
-.label{font-weight:700;color:#111;margin-right:4px}
+.block p{
+    margin:8px 0;
+    font-size:14px;
+    line-height:1.5;
+    color:var(--text);
+}
+.label{
+    font-weight:600;
+    color:var(--text);
+    margin-right:6px;
+}
 
-.block.responsaveis{border-left:5px solid #2e7d32}
-.block.equipe{border-left:5px solid #1b5e20}
-.block.culto{border-left:5px solid #0d3b13}
-.past-card{opacity:.6;filter:grayscale(.5)}
+.block.responsaveis{border-left:4px solid var(--success)}
+.block.equipe{border-left:4px solid var(--primary)}
+.block.culto{border-left:4px solid var(--warning)}
 
-.table-wrap{overflow-x:auto;margin-top:10px}
-table{width:100%;border-collapse:collapse;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.05)}
-th,td{padding:12px 10px;border-bottom:1px solid #eee;text-align:center;font-size:13px}
-th{background:#222;color:#fff;font-weight:600}
+/* FILTERS */
+.filters-box{
+    display:none;
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:16px;
+    margin-bottom:20px;
+    box-shadow:var(--shadow);
+    animation:slideDown 0.3s ease-out;
+}
+.filters-box.active{display:block}
+.filters-box select{
+    width:100%;
+    padding:12px;
+    margin-bottom:10px;
+    border-radius:var(--radius);
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    font-size:14px;
+    font-family:inherit;
+    transition:var(--transition);
+}
+.filters-box select:focus{
+    outline:none;
+    border-color:var(--primary);
+}
+.btn-clear{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    background:var(--danger);
+    color:#fff;
+    border:none;
+    border-radius:var(--radius);
+    cursor:pointer;
+    font-weight:600;
+    font-size:14px;
+    transition:var(--transition);
+    font-family:inherit;
+}
+.btn-clear:hover{
+    background:#E6342A;
+    transform:translateY(-1px);
+}
+
+/* NOTIFICATIONS SETTINGS */
+.notifications-settings{
+    display:none;
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:20px;
+    margin-bottom:20px;
+    box-shadow:var(--shadow);
+    animation:slideDown 0.3s ease-out;
+}
+.notifications-settings.active{display:block}
+.notification-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 0;
+    border-bottom:1px solid var(--border);
+}
+.notification-item:last-child{border-bottom:none}
+.notification-label{
+    font-size:14px;
+    font-weight:500;
+    color:var(--text);
+}
+.toggle-switch{
+    position:relative;
+    width:44px;
+    height:26px;
+    background:var(--border);
+    border-radius:13px;
+    cursor:pointer;
+    transition:var(--transition);
+}
+.toggle-switch.active{
+    background:var(--success);
+}
+.toggle-switch::after{
+    content:'';
+    position:absolute;
+    width:20px;
+    height:20px;
+    background:#fff;
+    border-radius:50%;
+    top:3px;
+    left:3px;
+    transition:var(--transition);
+    box-shadow:0 2px 4px rgba(0,0,0,0.2);
+}
+.toggle-switch.active::after{
+    left:21px;
+}
+
+/* ALERTS */
+.alert-banner{
+    background:var(--warning);
+    color:#fff;
+    padding:12px 16px;
+    border-radius:var(--radius);
+    margin-bottom:16px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    animation:slideDown 0.4s ease-out;
+    box-shadow:var(--shadow);
+}
+.alert-banner.danger{
+    background:var(--danger);
+}
+.alert-banner.success{
+    background:var(--success);
+}
+.alert-icon{
+    font-size:20px;
+}
+.alert-text{
+    flex:1;
+    font-size:14px;
+    font-weight:500;
+}
 
 /* LINKS */
-a.whats{color:#1b5e20;font-weight:700;text-decoration:none}
-a.whats:hover{text-decoration:underline}
+a.whats{
+    color:var(--success);
+    font-weight:600;
+    text-decoration:none;
+    transition:var(--transition);
+}
+a.whats:hover{
+    text-decoration:underline;
+    opacity:0.8;
+}
 
-/* DESKTOP: link parece texto normal */
+/* TABLE */
+.table-wrap{overflow-x:auto;margin-top:10px}
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--card);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:var(--shadow);
+}
+th,td{
+    padding:12px 10px;
+    border-bottom:1px solid var(--border);
+    text-align:center;
+    font-size:13px;
+}
+th{
+    background:var(--text);
+    color:var(--bg);
+    font-weight:600;
+}
 .table-wrap a.whats{
     color:inherit !important;
     font-weight:normal !important;
     text-decoration:none !important;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn{
+    from{opacity:0}
+    to{opacity:1}
+}
+@keyframes slideDown{
+    from{
+        opacity:0;
+        transform:translateY(-10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+@keyframes slideUp{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+@keyframes scaleIn{
+    from{
+        opacity:0;
+        transform:scale(0.8);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
 }
 
 /* MOBILE */
@@ -78,10 +535,12 @@ a.whats:hover{text-decoration:underline}
     h1{font-size:24px}
     .table-wrap{display:none!important}
     .cards{display:flex!important;flex-direction:column}
-
+    .top-controls{flex-wrap:wrap}
+    .search-input{min-width:100%;order:1}
+    .control-btn{flex:1;min-width:45px}
     .cards a.whats{
-        color:#1b5e20;
-        font-weight:700;
+        color:var(--success);
+        font-weight:600;
         text-decoration:none;
     }
 }
@@ -89,67 +548,455 @@ a.whats:hover{text-decoration:underline}
 </head>
 
 <body>
-
-<h1>Escala 2026</h1>
-
-<div class="top-controls">
-    <button class="filters-toggle" id="btnToggleFilters">
-        <!-- ícone filtro -->
-        <svg width="18" height="18" viewBox="0 0 24 24">
-            <path fill="currentColor" d="M3 5h18v2H3V5zm4 6h10v2H7v-2zm4 6h2v2h-2v-2z"/>
-        </svg>
-        Filtros
-    </button>
-
-    <button class="past-toggle" id="btnTogglePast" title="Exibir passados">
-        <!-- ícone histórico -->
-        <svg width="22" height="22" viewBox="0 0 24 24">
-            <path fill="currentColor"
-            d="M13 3c-4.97 0-9 4.03-9 9H1l4 4 4-4H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/>
-        </svg>
-    </button>
+<div id="authContainer" class="auth-container" style="display:none">
+    <h2 class="auth-title">Escala de Louvor</h2>
+    <p class="auth-subtitle">Faça login para acessar sua escala</p>
+    <div id="googleSignIn"></div>
 </div>
 
-<div class="filters-box" id="filtros">
-    <select data-col="ANCIÃO"><option value="">Ancião</option></select>
-    <select data-col="REGENTE LOUVOR"><option value="">Regente</option></select>
-    <select data-col="EQUIPE LOUVOR"><option value="">Equipe</option></select>
-    <select data-col="PREGADOR"><option value="">Pregador</option></select>
-    <select data-col="AUDIOVISUAL"><option value="">Audiovisual</option></select>
-    <select data-col="DATA"><option value="">Data</option></select>
-    <select data-col="DIA SEMANA"><option value="">Dia</option></select>
-    <select data-col="ACOMP"><option value="">Acompanhamento</option></select>
+<div id="appContainer" style="display:none">
+    <div class="header">
+        <h1>Escala 2026</h1>
+        <div class="user-info" id="userInfo" style="display:none">
+            <img id="userAvatar" class="user-avatar" src="" alt="">
+            <span class="user-name" id="userName"></span>
+            <button class="logout-btn" id="logoutBtn">Sair</button>
+        </div>
+    </div>
 
-    <button class="btn-clear" id="btnClearFilters">Limpar Filtros</button>
-</div>
+    <div id="alertContainer"></div>
 
-<div class="table-wrap">
-<table>
-<thead>
-<tr>
-<th>DATA</th><th>DIA</th><th>ACOMP</th><th>REGENTE</th><th>EQUIPE</th><th>MENSAGEM</th>
-<th>ES</th><th>CULTO</th><th>TEMA</th><th>AUDIOVISUAL</th><th>ANCIÃO</th><th>PREGADOR</th><th>SUPORTE</th><th>OBS</th>
-</tr>
-</thead>
-<tbody id="tableBody"></tbody>
-</table>
-</div>
+    <div class="top-controls">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar por nome...">
+        <button class="control-btn my-scales-btn" id="btnMyScales" title="Minhas Escalas">
+            <svg width="18" height="18" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+            </svg>
+        </button>
+        <button class="control-btn notifications-btn" id="btnNotifications" title="Notificações">
+            <svg width="18" height="18" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+            </svg>
+        </button>
+        <button class="control-btn" id="btnToggleFilters" title="Filtros">
+            <svg width="18" height="18" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M3 5h18v2H3V5zm4 6h10v2H7v-2zm4 6h2v2h-2v-2z"/>
+            </svg>
+        </button>
+        <button class="control-btn" id="btnTogglePast" title="Exibir passados">
+            <svg width="22" height="22" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M13 3c-4.97 0-9 4.03-9 9H1l4 4 4-4H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/>
+            </svg>
+        </button>
+    </div>
 
-<div class="cards">
-    <div id="containerPassado"></div>
-    <div id="pastDivider" class="past-divider" style="display:none">Escalas Recentes</div>
-    <div id="containerFuturo"></div>
+    <div class="notifications-settings" id="notificationsSettings">
+        <h3 style="margin-bottom:16px;font-size:16px;font-weight:600">Configurações de Notificações</h3>
+        <div class="notification-item">
+            <span class="notification-label">Receber notificações das minhas escalas</span>
+            <div class="toggle-switch" id="toggleMyScales"></div>
+        </div>
+        <div class="notification-item">
+            <span class="notification-label">Lembrete 2 dias antes</span>
+            <div class="toggle-switch" id="toggleReminder2Days"></div>
+        </div>
+        <div class="notification-item">
+            <span class="notification-label">Lembrete 1 dia antes</span>
+            <div class="toggle-switch" id="toggleReminder1Day"></div>
+        </div>
+    </div>
+
+    <div class="filters-box" id="filtros">
+        <select data-col="ANCIÃO"><option value="">Ancião</option></select>
+        <select data-col="REGENTE LOUVOR"><option value="">Regente</option></select>
+        <select data-col="EQUIPE LOUVOR"><option value="">Equipe</option></select>
+        <select data-col="PREGADOR"><option value="">Pregador</option></select>
+        <select data-col="AUDIOVISUAL"><option value="">Audiovisual</option></select>
+        <select data-col="DATA"><option value="">Data</option></select>
+        <select data-col="DIA SEMANA"><option value="">Dia</option></select>
+        <select data-col="ACOMP"><option value="">Acompanhamento</option></select>
+        <button class="btn-clear" id="btnClearFilters">Limpar Filtros</button>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>DATA</th><th>DIA</th><th>ACOMP</th><th>REGENTE</th><th>EQUIPE</th><th>MENSAGEM</th>
+                    <th>ES</th><th>CULTO</th><th>TEMA</th><th>AUDIOVISUAL</th><th>ANCIÃO</th><th>PREGADOR</th><th>SUPORTE</th><th>OBS</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+
+    <div class="cards">
+        <div id="containerPassado"></div>
+        <div id="pastDivider" class="past-divider" style="display:none">Escalas Recentes</div>
+        <div id="containerFuturo"></div>
+    </div>
 </div>
 
 <script>
+// Estado global
 let dadosGlobais=[];
 let contatosMap={};
+let usuarioAtual=null;
+let confirmacoes={};
+let notificacoesConfig={notificacoesAtivas:false,reminder2Days:false,reminder1Day:false};
+let modoEscuro=false;
 
+// Inicialização
+function init(){
+    try{
+        carregarPreferencias();
+        verificarAutenticacao();
+        solicitarPermissaoNotificacoes();
+        verificarNotificacoesPendentes();
+        setInterval(verificarNotificacoesPendentes,60000); // Verifica a cada minuto
+    }catch(error){
+        console.error('Erro na inicialização:',error);
+        // Em caso de erro, mostrar tela de auth
+        mostrarAuth();
+    }
+}
+
+// Autenticação Google
+function verificarAutenticacao(){
+    const token=localStorage.getItem('googleToken');
+    const userData=localStorage.getItem('userData');
+    
+    if(token && userData){
+        try{
+            usuarioAtual=JSON.parse(userData);
+            mostrarApp();
+            return;
+        }catch(e){
+            console.error('Erro ao carregar dados do usuário:',e);
+            // Limpar dados inválidos
+            localStorage.removeItem('googleToken');
+            localStorage.removeItem('userData');
+        }
+    }
+    
+    // Sempre mostrar tela de login se não estiver autenticado
+    mostrarAuth();
+    
+    // Aguardar o script do Google carregar
+    let tentativas=0;
+    const maxTentativas=50; // 5 segundos máximo
+    
+    function inicializarGoogle(){
+        tentativas++;
+        
+        if(typeof google !== 'undefined' && google.accounts && google.accounts.id){
+            try{
+                google.accounts.id.initialize({
+                    client_id:'644626883802-8dv5caoftedv677hhiiidtff03j4ne43.apps.googleusercontent.com',
+                    callback:handleCredentialResponse
+                });
+                
+                const btnContainer=document.getElementById('googleSignIn');
+                if(btnContainer){
+                    google.accounts.id.renderButton(
+                        btnContainer,
+                        {theme:'outline',size:'large',width:'100%'}
+                    );
+                }
+            }catch(error){
+                console.error('Erro ao inicializar Google Sign-In:',error);
+                // Continuar com modo demo
+            }
+        }else if(tentativas < maxTentativas){
+            // Tentar novamente após 100ms se ainda não carregou
+            setTimeout(inicializarGoogle,100);
+        }else{
+            console.warn('Google Sign-In não carregou após 5 segundos. Usando modo demo.');
+        }
+    }
+    
+    // Aguardar um pouco para garantir que o DOM está pronto
+    setTimeout(inicializarGoogle,300);
+}
+
+function handleCredentialResponse(response){
+    fetch('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token='+response.credential)
+        .then(r=>r.json())
+        .then(data=>{
+            usuarioAtual={
+                email:data.email,
+                name:data.name,
+                picture:data.picture,
+                sub:data.sub
+            };
+            localStorage.setItem('googleToken',response.credential);
+            localStorage.setItem('userData',JSON.stringify(usuarioAtual));
+            mostrarApp();
+            aplicarFiltroAutomatico();
+        })
+        .catch(()=>{
+            // Fallback para POC - usar dados mockados
+            usuarioAtual={
+                email:'usuario@exemplo.com',
+                name:prompt('Digite seu nome:')||'Usuário',
+                picture:'',
+                sub:'mock123'
+            };
+            localStorage.setItem('userData',JSON.stringify(usuarioAtual));
+            mostrarApp();
+            aplicarFiltroAutomatico();
+        });
+}
+
+function mostrarAuth(){
+    document.getElementById('authContainer').style.display='block';
+    document.getElementById('appContainer').style.display='none';
+    
+    // Fallback: se Google não carregar após 2 segundos, mostrar modo demo
+    setTimeout(()=>{
+        const googleBtn=document.getElementById('googleSignIn');
+        if(googleBtn && googleBtn.children.length === 0){
+            // Google não carregou, adicionar botão manual
+            googleBtn.innerHTML=`
+                <button onclick="usarModoDemo()" style="
+                    width:100%;
+                    padding:12px 24px;
+                    background:#4285F4;
+                    color:#fff;
+                    border:none;
+                    border-radius:8px;
+                    font-size:16px;
+                    font-weight:500;
+                    cursor:pointer;
+                    font-family:inherit;
+                    transition:all 0.3s;
+                " onmouseover="this.style.background='#357AE8'" onmouseout="this.style.background='#4285F4'">
+                    🔐 Entrar com Google (Modo Demo)
+                </button>
+            `;
+        }
+    },2000);
+}
+
+function usarModoDemo(){
+    const nome=prompt('Digite seu nome para continuar:');
+    if(nome){
+        usuarioAtual={
+            email:'demo@exemplo.com',
+            name:nome.trim(),
+            picture:'',
+            sub:'demo_'+Date.now()
+        };
+        localStorage.setItem('userData',JSON.stringify(usuarioAtual));
+        mostrarApp();
+        aplicarFiltroAutomatico();
+    }
+}
+
+function mostrarApp(){
+    document.getElementById('authContainer').style.display='none';
+    document.getElementById('appContainer').style.display='block';
+    if(usuarioAtual){
+        document.getElementById('userInfo').style.display='flex';
+        document.getElementById('userName').textContent=usuarioAtual.name;
+        if(usuarioAtual.picture){
+            document.getElementById('userAvatar').src=usuarioAtual.picture;
+        }
+    }
+    carregarCSV();
+}
+
+document.getElementById('logoutBtn').onclick=()=>{
+    localStorage.removeItem('googleToken');
+    localStorage.removeItem('userData');
+    usuarioAtual=null;
+    mostrarAuth();
+};
+
+// Confirmações
+function carregarConfirmacoes(){
+    const saved=localStorage.getItem('confirmacoes');
+    if(saved) confirmacoes=JSON.parse(saved);
+}
+
+function salvarConfirmacoes(){
+    localStorage.setItem('confirmacoes',JSON.stringify(confirmacoes));
+}
+
+function confirmarPresenca(data,confirmado){
+    if(!confirmacoes[data]) confirmacoes[data]={};
+    confirmacoes[data][usuarioAtual.sub]=confirmado;
+    salvarConfirmacoes();
+    renderizar(dadosGlobais);
+    verificarAlertas();
+}
+
+function getStatusConfirmacao(registro){
+    if(!usuarioAtual || !estaEscalado(registro,usuarioAtual.name)) return null;
+    const data=registro.DATA;
+    if(!confirmacoes[data] || !confirmacoes[data][usuarioAtual.sub]) return 'pending';
+    return confirmacoes[data][usuarioAtual.sub] ? 'confirmed' : 'pending';
+}
+
+// Notificações
+function solicitarPermissaoNotificacoes(){
+    if('Notification' in window && Notification.permission==='default'){
+        // Não solicita automaticamente, apenas quando usuário ativar
+    }
+}
+
+function carregarConfigNotificacoes(){
+    const saved=localStorage.getItem('notificacoesConfig');
+    if(saved) notificacoesConfig=JSON.parse(saved);
+    atualizarUINotificacoes();
+}
+
+function salvarConfigNotificacoes(){
+    localStorage.setItem('notificacoesConfig',JSON.stringify(notificacoesConfig));
+}
+
+function atualizarUINotificacoes(){
+    document.getElementById('toggleMyScales').classList.toggle('active',notificacoesConfig.notificacoesAtivas);
+    document.getElementById('toggleReminder2Days').classList.toggle('active',notificacoesConfig.reminder2Days);
+    document.getElementById('toggleReminder1Day').classList.toggle('active',notificacoesConfig.reminder1Day);
+}
+
+document.getElementById('toggleMyScales').onclick=()=>{
+    notificacoesConfig.notificacoesAtivas=!notificacoesConfig.notificacoesAtivas;
+    if(notificacoesConfig.notificacoesAtivas && Notification.permission==='default'){
+        Notification.requestPermission();
+    }
+    salvarConfigNotificacoes();
+    atualizarUINotificacoes();
+};
+document.getElementById('toggleReminder2Days').onclick=()=>{
+    notificacoesConfig.reminder2Days=!notificacoesConfig.reminder2Days;
+    salvarConfigNotificacoes();
+    atualizarUINotificacoes();
+};
+document.getElementById('toggleReminder1Day').onclick=()=>{
+    notificacoesConfig.reminder1Day=!notificacoesConfig.reminder1Day;
+    salvarConfigNotificacoes();
+    atualizarUINotificacoes();
+};
+
+function verificarNotificacoesPendentes(){
+    if(!notificacoesConfig.notificacoesAtivas || !usuarioAtual) return;
+    
+    const hoje=new Date();
+    hoje.setHours(0,0,0,0);
+    
+    dadosGlobais.forEach(reg=>{
+        if(isPastDate(reg.DATA)) return;
+        if(!estaEscalado(reg,usuarioAtual.name)) return;
+        
+        const dataEvento=parseDate(reg.DATA);
+        const diffDias=Math.floor((dataEvento-hoje)/(1000*60*60*24));
+        
+        const key=`notif_${reg.DATA}_${usuarioAtual.sub}`;
+        if(localStorage.getItem(key)) return; // Já notificado
+        
+        if(diffDias===2 && notificacoesConfig.reminder2Days){
+            enviarNotificacao(`Lembrete: Você está escalado em ${reg.DATA} (2 dias)`);
+            localStorage.setItem(key,'true');
+        }else if(diffDias===1 && notificacoesConfig.reminder1Day){
+            enviarNotificacao(`Lembrete: Você está escalado amanhã (${reg.DATA})`);
+            localStorage.setItem(key,'true');
+        }
+    });
+}
+
+function enviarNotificacao(mensagem){
+    if('Notification' in window && Notification.permission==='granted'){
+        new Notification('Escala de Louvor',{
+            body:mensagem,
+            icon:'/icon.png',
+            badge:'/badge.png'
+        });
+    }
+}
+
+// Alertas
+function verificarAlertas(){
+    const container=document.getElementById('alertContainer');
+    container.innerHTML='';
+    
+    if(!usuarioAtual) return;
+    
+    const hoje=new Date();
+    hoje.setHours(0,0,0,0);
+    const escalasFuturas=dadosGlobais.filter(r=>!isPastDate(r.DATA) && estaEscalado(r,usuarioAtual.name));
+    
+    // Alerta para não confirmados
+    const naoConfirmados=escalasFuturas.filter(r=>{
+        const status=getStatusConfirmacao(r);
+        return status==='pending' || !status;
+    });
+    
+    if(naoConfirmados.length>0){
+        const alert=document.createElement('div');
+        alert.className='alert-banner';
+        alert.innerHTML=`
+            <span class="alert-icon">⚠️</span>
+            <span class="alert-text">Você tem ${naoConfirmados.length} escala(s) futura(s) sem confirmação</span>
+        `;
+        container.appendChild(alert);
+    }
+    
+    // Alerta geral para próximas escalas
+    if(escalasFuturas.length>0){
+        const proxima=escalasFuturas[0];
+        const dataEvento=parseDate(proxima.DATA);
+        const diffDias=Math.floor((dataEvento-hoje)/(1000*60*60*24));
+        
+        if(diffDias<=7){
+            const alert=document.createElement('div');
+            alert.className='alert-banner success';
+            alert.innerHTML=`
+                <span class="alert-icon">📅</span>
+                <span class="alert-text">Próxima escala: ${proxima.DATA} (${diffDias===0?'Hoje':diffDias===1?'Amanhã':`Em ${diffDias} dias`})</span>
+            `;
+            container.appendChild(alert);
+        }
+    }
+}
+
+// Utilitários
 function parseDate(s){const p=s.split('/');return new Date(p[2],p[1]-1,p[0]);}
 function isPastDate(s){if(!s)return false;const d=parseDate(s);const t=new Date();t.setHours(0,0,0,0);return d<t;}
 
 function normalizarNome(n){
     return n.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase().trim();
+}
+
+function estaEscalado(registro,nome){
+    if(!nome) return false;
+    const n=normalizarNome(nome);
+    const campos=['REGENTE LOUVOR','EQUIPE LOUVOR','PREGADOR','MENSAGEM MUSICAL','AUDIOVISUAL','ANCIÃO','SUPORTE'];
+    for(const campo of campos){
+        const valor=registro[campo]||"";
+        if(valor.includes(',')){
+            const lista=valor.split(',').map(x=>normalizarNome(x.trim()));
+            if(lista.includes(n)) return true;
+        }else if(normalizarNome(valor)===n) return true;
+    }
+    return false;
+}
+
+function buscarPorNome(dados,termo){
+    if(!termo) return dados;
+    const t=normalizarNome(termo);
+    return dados.filter(r=>{
+        const campos=['REGENTE LOUVOR','EQUIPE LOUVOR','PREGADOR','MENSAGEM MUSICAL','AUDIOVISUAL','ANCIÃO','SUPORTE','DATA','DIA SEMANA','ACOMP','TEMA CULTO','OBS'];
+        for(const campo of campos){
+            const valor=(r[campo]||"").toString();
+            if(valor.includes(',')){
+                const lista=valor.split(',').map(x=>normalizarNome(x.trim()));
+                if(lista.some(x=>x.includes(t))) return true;
+            }else if(normalizarNome(valor).includes(t)) return true;
+        }
+        return false;
+    });
 }
 
 function buscarContato(nome){
@@ -165,7 +1012,7 @@ function buscarContato(nome){
 }
 
 function linkarNome(nome){
-    if(!nome || nome==="-" ) return nome||"";
+    if(!nome || nome==="-") return nome||"";
     const c=buscarContato(nome);
     if(c && c.telefone){
         return `<a class="whats" href="${c.telefone}" target="_blank">${nome}</a>`;
@@ -178,23 +1025,40 @@ function linkarLista(txt){
     return txt.split(",").map(n=>linkarNome(n.trim())).join(", ");
 }
 
+// Carregar dados
 async function carregarCSV(){
-    const [rDados, rContatos] = await Promise.all([
-        fetch('atual.json?t=' + Date.now()),
-        fetch('contatos.json?t=' + Date.now())
-    ]);
+    try{
+        const [rDados, rContatos] = await Promise.all([
+            fetch('atual.json?t=' + Date.now()),
+            fetch('contatos.json?t=' + Date.now())
+        ]);
+        dadosGlobais = await rDados.json();
+        contatosMap = await rContatos.json();
+        aplicarFiltroAutomatico();
+    }catch(e){
+        console.error('Erro ao carregar dados:',e);
+    }
+}
 
-    dadosGlobais = await rDados.json();
-    contatosMap = await rContatos.json();
-
+function aplicarFiltroAutomatico(){
+    if(usuarioAtual){
+        const minhasEscalas=dadosGlobais.filter(x=>estaEscalado(x,usuarioAtual.name));
+        if(minhasEscalas.length>0){
+            renderizar(minhasEscalas);
+            montarFiltros(dadosGlobais);
+            document.getElementById('btnMyScales').classList.add('active');
+            return;
+        }
+    }
     renderizar(dadosGlobais);
     montarFiltros(dadosGlobais);
 }
 
-function renderizar(d){montarTabela(d);montarCards(d);}
+function renderizar(d){montarTabela(d);montarCards(d);verificarAlertas();}
 
 function montarTabela(d){
-    const tb=document.getElementById("tableBody");tb.innerHTML="";
+    const tb=document.getElementById("tableBody");
+    tb.innerHTML="";
     d.forEach(x=>{
         const tr=document.createElement("tr");
         if(isPastDate(x["DATA"])) tr.style.opacity="0.5";
@@ -223,13 +1087,37 @@ function montarCards(d){
     const div=document.getElementById("pastDivider");
     f.innerHTML="";p.innerHTML="";let tem=false;
 
-    d.forEach(x=>{
+    d.forEach((x,idx)=>{
         const past=isPastDate(x["DATA"]);
         const card=document.createElement("div");
-        card.className="day-card"+(past?" past-card":"");
+        let classes="day-card"+(past?" past-card":"");
+        
+        const isMyScale=usuarioAtual && estaEscalado(x,usuarioAtual.name);
+        if(isMyScale) classes+=" my-scale";
+        
+        const status=getStatusConfirmacao(x);
+        if(status==='pending' && !past) classes+=" highlight";
+        
+        card.className=classes;
+        card.style.animationDelay=`${idx*0.05}s`;
+
+        const statusBadge=status ? `<span class="badge ${status}">${status==='confirmed'?'✓ Confirmado':'⏳ Pendente'}</span>` : '';
+        const myScaleBadge=isMyScale ? `<span class="badge my-scale">Minha Escala</span>` : '';
+        
+        const confirmBtn=isMyScale && !past ? `
+            <button class="confirm-btn ${status||'pending'}" onclick="confirmarPresenca('${x.DATA}',${status==='confirmed'?'false':'true'})">
+                ${status==='confirmed'?'✓ Confirmado':'Confirmar'}
+            </button>
+        ` : '';
 
         card.innerHTML=`
-        <div class="card-header"><div class="date-pill">${x["DATA"]} — ${x["DIA SEMANA"]}</div></div>
+        <div class="card-header">
+            <div style="display:flex;align-items:center;gap:8px">
+                <div class="date-pill">${x["DATA"]} — ${x["DIA SEMANA"]}</div>
+                ${statusBadge}${myScaleBadge}
+            </div>
+            ${confirmBtn}
+        </div>
 
         <div class="block responsaveis">
             <h4>
@@ -287,16 +1175,73 @@ function montarFiltros(d){
 
 function aplicarFiltros(){
     let f=[...dadosGlobais];
-    document.querySelectorAll("#filtros select").forEach(s=>{if(s.value)f=f.filter(x=>x[s.dataset.col]===s.value);});
+    document.querySelectorAll("#filtros select").forEach(s=>{
+        if(s.value){
+            const col=s.dataset.col;
+            if(col==="EQUIPE LOUVOR"){
+                f=f.filter(x=>(x[col]||"").toUpperCase().includes(s.value.toUpperCase()));
+            }else{
+                f=f.filter(x=>x[col]===s.value);
+            }
+        }
+    });
+    const busca=document.getElementById("searchInput").value.trim();
+    if(busca) f=buscarPorNome(f,busca);
     renderizar(f);
 }
 
-btnToggleFilters.onclick=()=>{filtros.classList.toggle("active");}
-btnClearFilters.onclick=()=>{document.querySelectorAll("#filtros select").forEach(s=>s.value="");renderizar(dadosGlobais);}
-btnTogglePast.onclick=()=>{containerPassado.classList.toggle("show");btnTogglePast.classList.toggle("active");pastDivider.style.display=containerPassado.classList.contains("show")?"block":"none";}
+function aplicarMinhasEscalas(){
+    if(!usuarioAtual){
+        alert('Faça login para ver suas escalas');
+        return;
+    }
+    const f=dadosGlobais.filter(x=>estaEscalado(x,usuarioAtual.name));
+    document.getElementById("btnMyScales").classList.toggle("active",f.length>0);
+    renderizar(f);
+    document.getElementById("searchInput").value="";
+}
 
-carregarCSV();
+// Event listeners
+document.getElementById('btnToggleFilters').onclick=()=>{
+    document.getElementById('filtros').classList.toggle("active");
+};
+document.getElementById('btnNotifications').onclick=()=>{
+    document.getElementById('notificationsSettings').classList.toggle("active");
+    document.getElementById('btnNotifications').classList.toggle("active");
+};
+document.getElementById('btnClearFilters').onclick=()=>{
+    document.querySelectorAll("#filtros select").forEach(s=>s.value="");
+    document.getElementById("searchInput").value="";
+    document.getElementById("btnMyScales").classList.remove("active");
+    aplicarFiltroAutomatico();
+};
+document.getElementById('btnTogglePast').onclick=()=>{
+    const container=document.getElementById('containerPassado');
+    container.classList.toggle("show");
+    document.getElementById('btnTogglePast').classList.toggle("active");
+    document.getElementById('pastDivider').style.display=container.classList.contains("show")?"block":"none";
+};
+document.getElementById('btnMyScales').onclick=aplicarMinhasEscalas;
+document.getElementById("searchInput").addEventListener('input',()=>{
+    document.getElementById("btnMyScales").classList.remove("active");
+    aplicarFiltros();
+});
+
+// Preferências
+function carregarPreferencias(){
+    modoEscuro=localStorage.getItem('modoEscuro')==='true';
+    if(modoEscuro) document.body.classList.add('dark-mode');
+    carregarConfirmacoes();
+    carregarConfigNotificacoes();
+}
+
+// Inicializar quando DOM estiver pronto
+if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded',init);
+}else{
+    // DOM já está pronto
+    init();
+}
 </script>
-
 </body>
 </html>
