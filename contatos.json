@@ -1,15 +1,15 @@
 {
   "ANDRÉ": {
     "telefone": "https://wa.me/5543920008370",
-    "apelidos": ["ANDRE", "PR ANDRE"]
+    "apelidos": ["ANDRE"]
   },
   "ARIADNY": {
     "telefone": "https://wa.me/554396158329",
-    "apelidos": ["ARI", "ARIADNE"]
+    "apelidos": ["ARIADNE"]
   },
   "ALEX": {
     "telefone": "https://wa.me/554396849723",
-    "apelidos": ["ALEXANDRE"]
+    "apelidos": []
   },
   "ANISSA": {
     "telefone": "https://wa.me/554399706425",
@@ -17,23 +17,23 @@
   },
   "CATHERINE": {
     "telefone": "https://wa.me/554391360091",
-    "apelidos": ["CAT", "CATH"]
+    "apelidos": []
   },
   "CLEVERSON": {
     "telefone": "https://wa.me/554396703272",
-    "apelidos": ["CLEVER"]
+    "apelidos": []
   },
   "DANY KALLAS": {
     "telefone": "https://wa.me/554399830142",
-    "apelidos": ["DANY", "DANIELA"]
+    "apelidos": ["DANY"]
   },
   "DULCINEIA": {
     "telefone": "https://wa.me/554396339940",
-    "apelidos": ["DULCI", "DULCE" ]
+    "apelidos": ["DULCE"]
   },
   "EMILY": {
     "telefone": "https://wa.me/554391240309",
-    "apelidos": ["EMI"]
+    "apelidos": []
   },
   "ENOQUE": {
     "telefone": "https://wa.me/554396598684",
@@ -45,19 +45,19 @@
   },
   "GABRIEL P.": {
     "telefone": "https://wa.me/554499412470",
-    "apelidos": ["GABRIEL", "GABRIEL P", "GABRIEL PEREIRA", "GABRIELP"]
+    "apelidos": ["GABRIEL P", "GABRIEL PEREIRA"]
   },
   "GIOVANA": {
     "telefone": "https://wa.me/5543984876102",
-    "apelidos": ["GIO"]
+    "apelidos": []
   },
   "HELOISE": {
     "telefone": "https://wa.me/554388020838",
-    "apelidos": ["HELO"]
+    "apelidos": []
   },
   "JEMELLI": {
     "telefone": "https://wa.me/554499552532",
-    "apelidos": ["JEME"]
+    "apelidos": []
   },
   "LUAN": {
     "telefone": "https://wa.me/556699941638",
@@ -69,7 +69,7 @@
   },
   "LUIS DA SILVA": {
     "telefone": "https://wa.me/5543997222921",
-    "apelidos": ["LUIS SILVA"]
+    "apelidos": []
   },
   "MARCELA": {
     "telefone": "https://wa.me/554396557195",
@@ -81,7 +81,7 @@
   },
   "NILSINHO": {
     "telefone": "https://wa.me/554396557195",
-    "apelidos": ["NILSON", "FAMILIA NILSINHO"]
+    "apelidos": []
   },
   "RICARDO": {
     "telefone": "https://wa.me/554396158431",
@@ -89,13 +89,13 @@
   },
   "SIRLENE": {
     "telefone": "https://wa.me/554398333496",
-    "apelidos": ["SIR"]
+    "apelidos": []
   },
   "SILVANA": {
     "telefone": "https://wa.me/5511931474998",
     "apelidos": []
   },
-    "ADELMO": {
+  "ADELMO": {
     "telefone": "https://wa.me/554399512450",
     "apelidos": []
   },
@@ -105,11 +105,11 @@
   },
   "M. MULHER": {
     "telefone": "https://wa.me/554396485823",
-    "apelidos": ["M MULHER", "MULHERES", "MINISTERIO MULHER"]
+    "apelidos": []
   },
   "JUNIOR": {
     "telefone": "https://wa.me/554399053835",
-    "apelidos": ["JR", "JÚNIOR"]
+    "apelidos": ["JÚNIOR"]
   },
   "DIEGO": {
     "telefone": "https://wa.me/554388168906",
@@ -117,9 +117,9 @@
   },
   "KHEYCI": {
     "telefone": "https://wa.me/554388586342",
-    "apelidos": ["KEYCI", "KEICI"]
+    "apelidos": []
   },
-  "SUELLEN":{
+  "SUELLEN": {
     "telefone": "https://wa.me/554398488720",
     "apelidos": ["SUELEN"]
   },
@@ -129,22 +129,30 @@
   },
   "ROBERTO KOCH": {
     "telefone": "https://wa.me/554399191480",
-    "apelidos": ["ROBERTO"]
+    "apelidos": []
   },
-  "DANI HERREIRA":{
+  "DANI HERREIRA": {
     "telefone": "https://wa.me/5543999189819",
     "apelidos": ["DANI HERREIRA"]
   },
-  "IGOR DUARTE":{
+  "IGOR DUARTE": {
     "telefone": "https://wa.me/554398451640",
     "apelidos": ["IGOR DUARTE"]
   },
-  "FAMILIA JESSÉ":{
+  "FAMILIA JESSÉ": {
     "telefone": "https://wa.me/554396181993",
     "apelidos": ["FAMILIA JESSÉ"]
   },
-  "FAMILIA JOÁS":{
+  "FAMILIA JOÁS": {
     "telefone": "https://wa.me/554399234367",
     "apelidos": ["FAMILIA JOÁS", "JOÁS"]
+  },
+  "BRUNA": {
+    "telefone": "https://wa.me/5543986868206",
+    "apelidos": []
+  },
+  "BANDA": {
+    "telefone": "https://wa.me/554399261005",
+    "apelidos": ["BANDA", "ADELAIDE"]
   }
 }
