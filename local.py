@@ -9,10 +9,10 @@ FILE = "index.html"
 
 class Handler(http.server.SimpleHTTPRequestHandler):
     def log_message(self, format, *args):
-        pass  # silencia logs chatos
+        pass 
 
-def open_browser():
-    webbrowser.open(f"http://localhost:{PORT}/{FILE}")
+def open_browser(): 
+    webbrowser.open(f"http://localhost:{PORT}/{FILE}") 
 
 if __name__ == "__main__":
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
