@@ -20,7 +20,7 @@ Sistema de gerenciamento de escala musical com contatos, histórico e interface 
 
 - **dezembro.csv** - Arquivo de escala do mês (dados históricos)
 
-- **old/** - Pasta com arquivo históricos de escala (06-2025.csv, 07-2025.csv, 08-2025.csv)
+- **old/** - Pasta com arquivo históricos de escala
 
 ## Tarefas Comuns
 
@@ -45,7 +45,7 @@ Sistema de gerenciamento de escala musical com contatos, histórico e interface 
 ## Padrões e Convenções
 - **Nomes**: SEMPRE MAIÚSCULAS (ex: BRUNA, ANDRÉ, JOÃO)
 - **Apelidos**: Array strings em minúsculas ou padrão do projeto
-- **Telefones WhatsApp**: Formato `https://wa.me/[DDD+NÚMERO]` sem espaços ou hífens
+- **Telefones WhatsApp**: Formato `https://wa.me/[55DDD+número]` sem espaços ou hífens
 - **Arquivos CSV**: Histórico de escalas por período
 - **JSON**: Estrutura principal para dados persistentes
 
