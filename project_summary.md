@@ -37,13 +37,14 @@ Este projeto gerencia a escala de louvor de uma igreja. O objetivo é usar o his
   - Para a escala atual, priorizar que `LUIZ DA SILVA`, `RAISSA`, e `MARAIR` apareçam em dias distintos (apenas um dia para cada).
 
 ### D. Prioridades de Escalação
-- Os seguintes nomes devem ser priorizados nas sugestões, respeitando suas disponibilidades:
+- Os seguintes nomes devem ser priorizados nas sugestões de louvor, respeitando suas disponibilidades:
   - `EMILY`
   - `KHEYCIANE`
   - `FABRICIO`
   - `GIOVANA`
   - `ARIADNY`
   - `LUIS`
+  - `FABRÍCIO`
   - `ANISSA` (respeitando a regra do sábado)
   - `CATHERINE` (somente após 20/02/2026)
 
