@@ -35,7 +35,7 @@ Este projeto gerencia a escala de louvor de uma igreja. O objetivo é usar o his
   - `FABÍOLA`: Frequência ocasional (membro de outra igreja).
   - `LUIZ DA SILVA` e `ARIADNY`: Alta disponibilidade, mas **não devem ser escalados juntos** para promover variedade.
 
-### C. Regras Específicas de Membros
+### C. Regras Específicas de Membros de equipe de lovuor 
 - `ANISSA`: Canta apenas aos **sábados** e com frequência reduzida.
 - `MIRELLA` & `MARCELLA`: Só podem ser escaladas para o louvor se `NILSON` também estiver na escala do mesmo dia (seja como regente ou na equipe). Para a mensagem musical, podem se apresentar sozinhas.
 - **Regra de Rotação Específica**:
@@ -53,5 +53,32 @@ Este projeto gerencia a escala de louvor de uma igreja. O objetivo é usar o his
   - `ANISSA` (respeitando a regra do sábado)
   - `CATHERINE` (somente após 20/02/2026)
 
+### D. Prioridades de Escalação
+- Os seguintes nomes devem ser priorizados nas sugestões de louvor, respeitando suas disponibilidades:
+  - `EMILY`
+  - `KHEYCIANE`
+  - `FABRICIO`
+  - `GIOVANA`
+  - `ARIADNY`
+  - `LUIS`
+  - `FABRÍCIO`
+  - `ANISSA` (respeitando a regra do sábado)
+  - `CATHERINE` (somente após 20/02/2026)
+
+### Prioridades de escala para mensagem musical
+- Com base nas escalas anteriores, a prioridade para mensagem musical é:
+    - `ALEX`
+    - `DANI HERREIRA`
+    - `CATHERINE`
+    - `SILVANA`
+    - `FABRICIO`
+    - `EMILY`
+    - `JEMELLI`
+    - `KHEYCIANE`
+    - `MARCELA E MIRELLA`
+    - `LAURA`
+    - `BERNARDO`
+    - `CARLA`
 ---
+
 *Este resumo deve ser a fonte primária de regras ao gerar ou modificar escalas.*
