@@ -115,9 +115,9 @@
     "telefone": "https://wa.me/554388168906",
     "apelidos": ["DIEGO"]
   },
-  "KHEYCI": {
+    "KHEYCIANE": {
     "telefone": "https://wa.me/554388586342",
-    "apelidos": []
+    "apelidos": ["KHEYCI"]
   },
   "SUELLEN": {
     "telefone": "https://wa.me/554398488720",
@@ -139,13 +139,25 @@
     "telefone": "https://wa.me/554398451640",
     "apelidos": ["IGOR DUARTE"]
   },
-  "FAMILIA JESSÉ": {
+    "JESSICA": {
+    "telefone": "",
+    "apelidos": []
+  },
+  "JESSIE": {
+    "telefone": "",
+    "apelidos": []
+  },
+  "JOÁS": {
+    "telefone": "https://wa.me/554399234367",
+    "apelidos": ["FAMILIA JOÁS"]
+  },
+  "BETE": {
+    "telefone": "",
+    "apelidos": []
+  },
+  "JESSÉ": {
     "telefone": "https://wa.me/554396181993",
     "apelidos": ["FAMILIA JESSÉ"]
-  },
-  "FAMILIA JOÁS": {
-    "telefone": "https://wa.me/554399234367",
-    "apelidos": ["FAMILIA JOÁS", "JOÁS"]
   },
   "BRUNA": {
     "telefone": "https://wa.me/5543986868206",
