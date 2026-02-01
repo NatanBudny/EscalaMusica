@@ -9,9 +9,9 @@
     "LOUVORES ES": "",
     "LOUVORES CULTO": "",
     "TEMA CULTO": "",
-    "AUDIOVISUAL": "",
-    "ANCIÃO": "",
-    "PREGADOR": "",
+    "AUDIOVISUAL": "GABRIEL",
+    "ANCIÃO": "RICARDO",
+    "PREGADOR": "ROBERTO KOCH",
     "SUPORTE": "VANDERLEY",
     "OBS": ""
   },
@@ -25,11 +25,11 @@
     "LOUVORES ES": "",
     "LOUVORES CULTO": "",
     "TEMA CULTO": "",
-    "AUDIOVISUAL": "",
-    "ANCIÃO": "",
-    "PREGADOR": "",
+    "AUDIOVISUAL": "JÚNIOR",
+    "ANCIÃO": "ROBERTO K.",
+    "PREGADOR": "NILSINHO",
     "SUPORTE": "VANDERLEY",
-    "OBS": ""
+    "OBS": "Reunião do MI na sala durante o período da tarde."
   },
   {
     "DATA": "08/02/2026",
@@ -41,11 +41,11 @@
     "LOUVORES ES": "",
     "LOUVORES CULTO": "",
     "TEMA CULTO": "",
-    "AUDIOVISUAL": "",
-    "ANCIÃO": "",
-    "PREGADOR": "",
+    "AUDIOVISUAL": "SAMUEL",
+    "ANCIÃO": "ROBERTO K.",
+    "PREGADOR": "PR. HOFNI",
     "SUPORTE": "VANDERLEY",
-    "OBS": ""
+    "OBS": "Início das atividades dos desbravadores."
   },
   {
     "DATA": "11/02/2026",
@@ -57,9 +57,9 @@
     "LOUVORES ES": "",
     "LOUVORES CULTO": "",
     "TEMA CULTO": "",
-    "AUDIOVISUAL": "",
-    "ANCIÃO": "",
-    "PREGADOR": "",
+    "AUDIOVISUAL": "GABRIEL",
+    "ANCIÃO": "ROBERTO K.",
+    "PREGADOR": "ROSANA",
     "SUPORTE": "VANDERLEY",
     "OBS": ""
   },
@@ -73,11 +73,11 @@
     "LOUVORES ES": "",
     "LOUVORES CULTO": "",
     "TEMA CULTO": "",
-    "AUDIOVISUAL": "",
-    "ANCIÃO": "",
-    "PREGADOR": "",
+    "AUDIOVISUAL": "DIEGO",
+    "ANCIÃO": "SUELLEN",
+    "PREGADOR": "MARCO LEANDRO",
     "SUPORTE": "VANDERLEY",
-    "OBS": ""
+    "OBS": "Momento Sempre em Oração do MM na sala jovem às 16:00."
   },
   {
     "DATA": "15/02/2026",
@@ -89,11 +89,11 @@
     "LOUVORES ES": "",
     "LOUVORES CULTO": "",
     "TEMA CULTO": "",
-    "AUDIOVISUAL": "",
-    "ANCIÃO": "",
-    "PREGADOR": "",
+    "AUDIOVISUAL": "LUIZ",
+    "ANCIÃO": "SUELLEN",
+    "PREGADOR": "ADOLESCENTES",
     "SUPORTE": "VANDERLEY",
-    "OBS": ""
+    "OBS": "Evento externo de saúde realizado pelo MS."
   },
   {
     "DATA": "18/02/2026",
@@ -105,9 +105,9 @@
     "LOUVORES ES": "",
     "LOUVORES CULTO": "",
     "TEMA CULTO": "",
-    "AUDIOVISUAL": "",
-    "ANCIÃO": "",
-    "PREGADOR": "",
+    "AUDIOVISUAL": "GABRIEL",
+    "ANCIÃO": "SUELLEN",
+    "PREGADOR": "MM - PODER",
     "SUPORTE": "VANDERLEY",
     "OBS": ""
   },
@@ -153,11 +153,11 @@
     "LOUVORES ES": "",
     "LOUVORES CULTO": "",
     "TEMA CULTO": "",
-    "AUDIOVISUAL": "",
-    "ANCIÃO": "",
-    "PREGADOR": "",
+    "AUDIOVISUAL": "ALEX",
+    "ANCIÃO": "YASSER",
+    "PREGADOR": "PR. WELINGTON",
     "SUPORTE": "VANDERLEY",
-    "OBS": "10 dias de oração"
+    "OBS": "10 dias de oração | Dez horas de jejum com o MM na igreja durante o dia todo."
   },
   {
     "DATA": "22/02/2026",
@@ -169,11 +169,11 @@
     "LOUVORES ES": "",
     "LOUVORES CULTO": "",
     "TEMA CULTO": "",
-    "AUDIOVISUAL": "",
-    "ANCIÃO": "",
-    "PREGADOR": "",
+    "AUDIOVISUAL": "DIEGO",
+    "ANCIÃO": "YASSER",
+    "PREGADOR": "JESSÉ",
     "SUPORTE": "VANDERLEY",
-    "OBS": "10 dias de oração"
+    "OBS": "10 dias de oração | Reunião de pais dos aventureiros na igreja pela manhã."
   },
   {
     "DATA": "23/02/2026",
@@ -217,9 +217,9 @@
     "LOUVORES ES": "",
     "LOUVORES CULTO": "",
     "TEMA CULTO": "",
-    "AUDIOVISUAL": "",
-    "ANCIÃO": "",
-    "PREGADOR": "",
+    "AUDIOVISUAL": "GABRIEL",
+    "ANCIÃO": "YASSER",
+    "PREGADOR": "PR. HOFNI",
     "SUPORTE": "VANDERLEY",
     "OBS": "10 dias de oração"
   },
@@ -265,9 +265,9 @@
     "LOUVORES ES": "",
     "LOUVORES CULTO": "",
     "TEMA CULTO": "",
-    "AUDIOVISUAL": "",
-    "ANCIÃO": "",
-    "PREGADOR": "",
+    "AUDIOVISUAL": "DIEGO",
+    "ANCIÃO": "ADELMO",
+    "PREGADOR": "YASSER",
     "SUPORTE": "VANDERLEY",
     "OBS": "10 dias de oração"
   }
