@@ -63,9 +63,9 @@
     "telefone": "https://wa.me/556699941638",
     "apelidos": []
   },
-  "LUIS": {
+  "LUIZ": {
     "telefone": "https://wa.me/5543999609883",
-    "apelidos": ["LUÍS"]
+    "apelidos": ["LUIZ"]
   },
   "LUIZ DA SILVA": {
     "telefone": "https://wa.me/5543997222921",
@@ -169,6 +169,10 @@
   },
   "BANDA": {
     "telefone": "https://wa.me/554399261005",
-    "apelidos": ["BANDA", "ADELAIDE"]
+    "apelidos": ["ADELAIDE"]
+  },
+  "SAMUEL": {
+    "telefone": "https://wa.me/554388653377",
+    "apelidos": ["SAMUEL"]
   }
 }
