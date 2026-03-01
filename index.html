@@ -656,7 +656,6 @@ function init(){
         setInterval(verificarNotificacoesPendentes,60000); // Verifica a cada minuto
     }catch(error){
         console.error('Erro na inicialização:',error);
-        // Em caso de erro, mostrar tela de auth
         mostrarAuth();
     }
 }
@@ -673,29 +672,24 @@ function verificarAutenticacao(){
             return;
         }catch(e){
             console.error('Erro ao carregar dados do usuário:',e);
-            // Limpar dados inválidos
             localStorage.removeItem('googleToken');
             localStorage.removeItem('userData');
         }
     }
     
-    // Sempre mostrar tela de login se não estiver autenticado
     mostrarAuth();
     
-    // Aguardar o script do Google carregar
     let tentativas=0;
-    const maxTentativas=50; // 5 segundos máximo
+    const maxTentativas=50;
     
     function inicializarGoogle(){
         tentativas++;
-        
         if(typeof google !== 'undefined' && google.accounts && google.accounts.id){
             try{
                 google.accounts.id.initialize({
                     client_id:'644626883802-8dv5caoftedv677hhiiidtff03j4ne43.apps.googleusercontent.com',
                     callback:handleCredentialResponse
                 });
-                
                 const btnContainer=document.getElementById('googleSignIn');
                 if(btnContainer){
                     google.accounts.id.renderButton(
@@ -705,17 +699,11 @@ function verificarAutenticacao(){
                 }
             }catch(error){
                 console.error('Erro ao inicializar Google Sign-In:',error);
-                // Continuar com modo demo
             }
         }else if(tentativas < maxTentativas){
-            // Tentar novamente após 100ms se ainda não carregou
             setTimeout(inicializarGoogle,100);
-        }else{
-            console.warn('Google Sign-In não carregou após 5 segundos. Usando modo demo.');
         }
     }
-    
-    // Aguardar um pouco para garantir que o DOM está pronto
     setTimeout(inicializarGoogle,300);
 }
 
@@ -735,7 +723,6 @@ function handleCredentialResponse(response){
             aplicarFiltroAutomatico();
         })
         .catch(()=>{
-            // Fallback para POC - usar dados mockados
             usuarioAtual={
                 email:'usuario@exemplo.com',
                 name:prompt('Digite seu nome:')||'Usuário',
@@ -751,25 +738,12 @@ function handleCredentialResponse(response){
 function mostrarAuth(){
     document.getElementById('authContainer').style.display='block';
     document.getElementById('appContainer').style.display='none';
-    
-    // Fallback: se Google não carregar após 2 segundos, mostrar modo demo
     setTimeout(()=>{
         const googleBtn=document.getElementById('googleSignIn');
         if(googleBtn && googleBtn.children.length === 0){
-            // Google não carregou, adicionar botão manual
             googleBtn.innerHTML=`
                 <button onclick="usarModoDemo()" style="
-                    width:100%;
-                    padding:12px 24px;
-                    background:#4285F4;
-                    color:#fff;
-                    border:none;
-                    border-radius:8px;
-                    font-size:16px;
-                    font-weight:500;
-                    cursor:pointer;
-                    font-family:inherit;
-                    transition:all 0.3s;
+                    width:100%;padding:12px 24px;background:#4285F4;color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:500;cursor:pointer;font-family:inherit;transition:all 0.3s;
                 " onmouseover="this.style.background='#357AE8'" onmouseout="this.style.background='#4285F4'">
                     🔐 Entrar com Google (Modo Demo)
                 </button>
@@ -841,7 +815,6 @@ function getStatusConfirmacao(registro){
 // Notificações
 function solicitarPermissaoNotificacoes(){
     if('Notification' in window && Notification.permission==='default'){
-        // Não solicita automaticamente, apenas quando usuário ativar
     }
 }
 
@@ -882,20 +855,15 @@ document.getElementById('toggleReminder1Day').onclick=()=>{
 
 function verificarNotificacoesPendentes(){
     if(!notificacoesConfig.notificacoesAtivas || !usuarioAtual) return;
-    
     const hoje=new Date();
     hoje.setHours(0,0,0,0);
-    
     dadosGlobais.forEach(reg=>{
         if(isPastDate(reg.DATA)) return;
         if(!estaEscalado(reg,usuarioAtual.name)) return;
-        
         const dataEvento=parseDate(reg.DATA);
         const diffDias=Math.floor((dataEvento-hoje)/(1000*60*60*24));
-        
         const key=`notif_${reg.DATA}_${usuarioAtual.sub}`;
-        if(localStorage.getItem(key)) return; // Já notificado
-        
+        if(localStorage.getItem(key)) return;
         if(diffDias===2 && notificacoesConfig.reminder2Days){
             enviarNotificacao(`Lembrete: Você está escalado em ${reg.DATA} (2 dias)`);
             localStorage.setItem(key,'true');
@@ -908,11 +876,7 @@ function verificarNotificacoesPendentes(){
 
 function enviarNotificacao(mensagem){
     if('Notification' in window && Notification.permission==='granted'){
-        new Notification('Escala de Louvor',{
-            body:mensagem,
-            icon:'/icon.png',
-            badge:'/badge.png'
-        });
+        new Notification('Escala de Louvor',{body:mensagem});
     }
 }
 
@@ -920,42 +884,28 @@ function enviarNotificacao(mensagem){
 function verificarAlertas(){
     const container=document.getElementById('alertContainer');
     container.innerHTML='';
-    
     if(!usuarioAtual) return;
-    
     const hoje=new Date();
     hoje.setHours(0,0,0,0);
     const escalasFuturas=dadosGlobais.filter(r=>!isPastDate(r.DATA) && estaEscalado(r,usuarioAtual.name));
-    
-    // Alerta para não confirmados
     const naoConfirmados=escalasFuturas.filter(r=>{
         const status=getStatusConfirmacao(r);
         return status==='pending' || !status;
     });
-    
     if(naoConfirmados.length>0){
         const alert=document.createElement('div');
         alert.className='alert-banner';
-        alert.innerHTML=`
-            <span class="alert-icon">⚠️</span>
-            <span class="alert-text">Você tem ${naoConfirmados.length} escala(s) futura(s) sem confirmação</span>
-        `;
+        alert.innerHTML=`<span class="alert-icon">⚠️</span><span class="alert-text">Você tem ${naoConfirmados.length} escala(s) futura(s) sem confirmação</span>`;
         container.appendChild(alert);
     }
-    
-    // Alerta geral para próximas escalas
     if(escalasFuturas.length>0){
         const proxima=escalasFuturas[0];
         const dataEvento=parseDate(proxima.DATA);
         const diffDias=Math.floor((dataEvento-hoje)/(1000*60*60*24));
-        
         if(diffDias<=7){
             const alert=document.createElement('div');
             alert.className='alert-banner success';
-            alert.innerHTML=`
-                <span class="alert-icon">📅</span>
-                <span class="alert-text">Próxima escala: ${proxima.DATA} (${diffDias===0?'Hoje':diffDias===1?'Amanhã':`Em ${diffDias} dias`})</span>
-            `;
+            alert.innerHTML=`<span class="alert-icon">📅</span><span class="alert-text">Próxima escala: ${proxima.DATA} (${diffDias===0?'Hoje':diffDias===1?'Amanhã':`Em ${diffDias} dias`})</span>`;
             container.appendChild(alert);
         }
     }
@@ -1068,7 +1018,7 @@ function montarTabela(d){
 <td>${x["ACOMP"]}</td>
 <td>${linkarNome(x["REGENTE LOUVOR"])}</td>
 <td>${linkarLista(x["EQUIPE LOUVOR"])}</td>
-<td>${linkarNome(x["MENSAGEM MUSICAL"]||"")}</td>
+<td>${linkarLista(x["MENSAGEM MUSICAL"]||"")}</td>
 <td>${x["LOUVORES ES"]||""}</td>
 <td>${x["LOUVORES CULTO"]||""}</td>
 <td>${x["TEMA CULTO"]||""}</td>
@@ -1091,24 +1041,15 @@ function montarCards(d){
         const past=isPastDate(x["DATA"]);
         const card=document.createElement("div");
         let classes="day-card"+(past?" past-card":"");
-        
         const isMyScale=usuarioAtual && estaEscalado(x,usuarioAtual.name);
         if(isMyScale) classes+=" my-scale";
-        
         const status=getStatusConfirmacao(x);
         if(status==='pending' && !past) classes+=" highlight";
-        
         card.className=classes;
         card.style.animationDelay=`${idx*0.05}s`;
-
         const statusBadge=status ? `<span class="badge ${status}">${status==='confirmed'?'✓ Confirmado':'⏳ Pendente'}</span>` : '';
         const myScaleBadge=isMyScale ? `<span class="badge my-scale">Minha Escala</span>` : '';
-        
-        const confirmBtn=isMyScale && !past ? `
-            <button class="confirm-btn ${status||'pending'}" onclick="confirmarPresenca('${x.DATA}',${status==='confirmed'?'false':'true'})">
-                ${status==='confirmed'?'✓ Confirmado':'Confirmar'}
-            </button>
-        ` : '';
+        const confirmBtn=isMyScale && !past ? `<button class="confirm-btn ${status||'pending'}" onclick="confirmarPresenca('${x.DATA}',${status==='confirmed'?'false':'true'})">${status==='confirmed'?'✓ Confirmado':'Confirmar'}</button>` : '';
 
         card.innerHTML=`
         <div class="card-header">
@@ -1128,6 +1069,7 @@ function montarCards(d){
             </h4>
             <p><span class="label">Ancião:</span> ${linkarNome(x["ANCIÃO"]||"-")}</p>
             <p><span class="label">Regente:</span> ${linkarNome(x["REGENTE LOUVOR"]||"-")}</p>
+            <p><span class="label">OBS:</span> ${x["OBS"]||"-"}</p>
         </div>
 
         <div class="block equipe">
@@ -1140,7 +1082,7 @@ function montarCards(d){
             <p><span class="label">Louvor:</span> ${linkarLista(x["EQUIPE LOUVOR"]||"-")}</p>
             <p><span class="label">Acompanhamento:</span> ${x["ACOMP"]||"-"}</p>
             <p><span class="label">Pregador:</span> ${linkarNome(x["PREGADOR"]||"-")}</p>
-            <p><span class="label">Mensagem Musical:</span> ${linkarNome(x["MENSAGEM MUSICAL"]||"-")}</p>
+            <p><span class="label">Mensagem Musical:</span> ${linkarLista(x["MENSAGEM MUSICAL"]||"-")}</p>
             <p><span class="label">Audiovisual:</span> ${linkarNome(x["AUDIOVISUAL"]||"-")}${x["SUPORTE"] ? " e "+linkarNome(x["SUPORTE"])+" (suporte)" : ""}</p>
         </div>
 
@@ -1159,7 +1101,6 @@ function montarCards(d){
 
         if(past){p.appendChild(card);tem=true;}else{f.appendChild(card);}
     });
-
     div.style.display=(tem && p.classList.contains("show"))?"block":"none";
 }
 
@@ -1235,11 +1176,9 @@ function carregarPreferencias(){
     carregarConfigNotificacoes();
 }
 
-// Inicializar quando DOM estiver pronto
 if(document.readyState === 'loading'){
     document.addEventListener('DOMContentLoaded',init);
 }else{
-    // DOM já está pronto
     init();
 }
 </script>
