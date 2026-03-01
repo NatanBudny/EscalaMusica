@@ -87,7 +87,7 @@ h1{
 }
 .logout-btn:hover{background:var(--border);color:var(--text)}
 
-/* AUTH */
+/* AUTH & NAME SELECTION */
 .auth-container{
     max-width:400px;
     margin:60px auto;
@@ -111,6 +111,64 @@ h1{
 #googleSignIn{
     width:100%;
     margin-top:16px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.auth-info {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    text-align: left;
+    animation: fadeIn 0.6s ease-out;
+}
+.auth-info h3 {
+    font-size: 15px;
+    color: var(--text);
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+.auth-info p {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+.auth-info ol {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 16px;
+    padding-left: 20px;
+}
+.auth-info li {
+    margin-bottom: 6px;
+}
+.auth-privacy {
+    font-size: 12px !important;
+    font-style: italic;
+    opacity: 0.8;
+    margin-bottom: 0 !important;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.primary-btn {
+    width: 100%;
+    padding: 14px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
+    transition: var(--transition);
+    font-family: inherit;
+}
+.primary-btn:hover {
+    background: #0062cc;
+    transform: translateY(-2px);
 }
 
 /* CONTROLS */
@@ -199,6 +257,26 @@ body.dark-mode .badge.pending{
 body.dark-mode .badge.my-scale{
     background:rgba(0,122,255,0.2);
     color:#007AFF;
+}
+
+/* DESTAQUE SUAVE PARA NOME DO USUÁRIO */
+.highlight-me {
+    background: rgba(255, 149, 0, 0.15);
+    color: #e68600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 149, 0, 0.3);
+    font-weight: 600;
+    display: inline-block;
+}
+body.dark-mode .highlight-me {
+    background: rgba(255, 149, 0, 0.2);
+    color: #FFB340;
+    border-color: rgba(255, 149, 0, 0.4);
+}
+a.whats .highlight-me {
+    color: inherit;
+    text-decoration: underline;
 }
 
 /* CARDS */
@@ -551,7 +629,39 @@ th{
 <div id="authContainer" class="auth-container" style="display:none">
     <h2 class="auth-title">Escala de Louvor</h2>
     <p class="auth-subtitle">Faça login para acessar sua escala</p>
+    
     <div id="googleSignIn"></div>
+
+    <div class="auth-info">
+        <h3>Por que preciso fazer login?</h3>
+        <p>O login serve apenas para identificar quem você é. Assim, o sistema consegue destacar as datas em que você está escalado e permite que você confirme sua presença nos cultos com um clique.</p>
+        
+        <h3>Como funciona?</h3>
+        <ol>
+            <li>Clique no botão do Google acima.</li>
+            <li>Selecione a conta Google que você já usa no celular.</li>
+            <li>Pronto! O aplicativo será aberto automaticamente.</li>
+        </ol>
+
+        <p class="auth-privacy">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            Não temos acesso à sua senha. O Google compartilha apenas seu nome para o funcionamento da escala.
+        </p>
+    </div>
+</div>
+
+<div id="nameSelectionContainer" class="auth-container" style="display:none">
+    <h2 class="auth-title">Quem é você?</h2>
+    <p class="auth-subtitle">Como é seu primeiro acesso, selecione seu nome na lista da equipe para vincular sua conta e ver suas escalas.</p>
+    
+    <select id="selectNomeContato" class="search-input" style="width:100%; margin-bottom: 24px;">
+        <option value="">Selecione seu nome...</option>
+    </select>
+    
+    <button class="primary-btn" onclick="salvarNomeVinculado()">Vincular meu nome</button>
 </div>
 
 <div id="appContainer" style="display:none">
@@ -647,9 +757,10 @@ let notificacoesConfig={notificacoesAtivas:false,reminder2Days:false,reminder1Da
 let modoEscuro=false;
 
 // Inicialização
-function init(){
+async function init(){
     try{
         carregarPreferencias();
+        await carregarCSV(); // Carrega os dados ANTES de verificar autenticação para ter os contatos
         verificarAutenticacao();
         solicitarPermissaoNotificacoes();
         verificarNotificacoesPendentes();
@@ -668,7 +779,12 @@ function verificarAutenticacao(){
     if(token && userData){
         try{
             usuarioAtual=JSON.parse(userData);
-            mostrarApp();
+            if (!usuarioAtual.nomeVinculado) {
+                mostrarSelecaoNome();
+            } else {
+                mostrarApp();
+                aplicarFiltroAutomatico();
+            }
             return;
         }catch(e){
             console.error('Erro ao carregar dados do usuário:',e);
@@ -719,8 +835,13 @@ function handleCredentialResponse(response){
             };
             localStorage.setItem('googleToken',response.credential);
             localStorage.setItem('userData',JSON.stringify(usuarioAtual));
-            mostrarApp();
-            aplicarFiltroAutomatico();
+            
+            if(!usuarioAtual.nomeVinculado) {
+                mostrarSelecaoNome();
+            } else {
+                mostrarApp();
+                aplicarFiltroAutomatico();
+            }
         })
         .catch(()=>{
             usuarioAtual={
@@ -730,13 +851,13 @@ function handleCredentialResponse(response){
                 sub:'mock123'
             };
             localStorage.setItem('userData',JSON.stringify(usuarioAtual));
-            mostrarApp();
-            aplicarFiltroAutomatico();
+            mostrarSelecaoNome();
         });
 }
 
 function mostrarAuth(){
     document.getElementById('authContainer').style.display='block';
+    document.getElementById('nameSelectionContainer').style.display='none';
     document.getElementById('appContainer').style.display='none';
     setTimeout(()=>{
         const googleBtn=document.getElementById('googleSignIn');
@@ -753,7 +874,7 @@ function mostrarAuth(){
 }
 
 function usarModoDemo(){
-    const nome=prompt('Digite seu nome para continuar:');
+    const nome=prompt('Digite um nome qualquer para login de teste:');
     if(nome){
         usuarioAtual={
             email:'demo@exemplo.com',
@@ -762,22 +883,56 @@ function usarModoDemo(){
             sub:'demo_'+Date.now()
         };
         localStorage.setItem('userData',JSON.stringify(usuarioAtual));
-        mostrarApp();
-        aplicarFiltroAutomatico();
+        mostrarSelecaoNome();
     }
+}
+
+// Seleção de Nome (Primeiro Acesso)
+function mostrarSelecaoNome() {
+    document.getElementById('authContainer').style.display='none';
+    document.getElementById('appContainer').style.display='none';
+    const container = document.getElementById('nameSelectionContainer');
+    container.style.display='block';
+
+    const select = document.getElementById('selectNomeContato');
+    select.innerHTML = '<option value="">Selecione seu nome na equipe...</option>';
+
+    // Puxa as chaves do contatos.json em ordem alfabética
+    const nomes = Object.keys(contatosMap).sort();
+    nomes.forEach(nome => {
+        const opt = document.createElement('option');
+        opt.value = nome;
+        opt.textContent = nome;
+        select.appendChild(opt);
+    });
+}
+
+function salvarNomeVinculado() {
+    const select = document.getElementById('selectNomeContato');
+    if(!select.value) {
+        alert('Por favor, selecione seu nome na lista.');
+        return;
+    }
+    usuarioAtual.nomeVinculado = select.value;
+    localStorage.setItem('userData', JSON.stringify(usuarioAtual));
+    
+    document.getElementById('nameSelectionContainer').style.display='none';
+    mostrarApp();
+    aplicarFiltroAutomatico();
 }
 
 function mostrarApp(){
     document.getElementById('authContainer').style.display='none';
+    document.getElementById('nameSelectionContainer').style.display='none';
     document.getElementById('appContainer').style.display='block';
     if(usuarioAtual){
         document.getElementById('userInfo').style.display='flex';
-        document.getElementById('userName').textContent=usuarioAtual.name;
+        // Mostra o nome vinculado (ou o do google se ainda não tem)
+        document.getElementById('userName').textContent=usuarioAtual.nomeVinculado || usuarioAtual.name;
         if(usuarioAtual.picture){
             document.getElementById('userAvatar').src=usuarioAtual.picture;
         }
     }
-    carregarCSV();
 }
 
 document.getElementById('logoutBtn').onclick=()=>{
@@ -806,7 +961,7 @@ function confirmarPresenca(data,confirmado){
 }
 
 function getStatusConfirmacao(registro){
-    if(!usuarioAtual || !estaEscalado(registro,usuarioAtual.name)) return null;
+    if(!usuarioAtual || !usuarioAtual.nomeVinculado || !estaEscalado(registro,usuarioAtual.nomeVinculado)) return null;
     const data=registro.DATA;
     if(!confirmacoes[data] || !confirmacoes[data][usuarioAtual.sub]) return 'pending';
     return confirmacoes[data][usuarioAtual.sub] ? 'confirmed' : 'pending';
@@ -854,12 +1009,12 @@ document.getElementById('toggleReminder1Day').onclick=()=>{
 };
 
 function verificarNotificacoesPendentes(){
-    if(!notificacoesConfig.notificacoesAtivas || !usuarioAtual) return;
+    if(!notificacoesConfig.notificacoesAtivas || !usuarioAtual || !usuarioAtual.nomeVinculado) return;
     const hoje=new Date();
     hoje.setHours(0,0,0,0);
     dadosGlobais.forEach(reg=>{
         if(isPastDate(reg.DATA)) return;
-        if(!estaEscalado(reg,usuarioAtual.name)) return;
+        if(!estaEscalado(reg,usuarioAtual.nomeVinculado)) return;
         const dataEvento=parseDate(reg.DATA);
         const diffDias=Math.floor((dataEvento-hoje)/(1000*60*60*24));
         const key=`notif_${reg.DATA}_${usuarioAtual.sub}`;
@@ -884,10 +1039,10 @@ function enviarNotificacao(mensagem){
 function verificarAlertas(){
     const container=document.getElementById('alertContainer');
     container.innerHTML='';
-    if(!usuarioAtual) return;
+    if(!usuarioAtual || !usuarioAtual.nomeVinculado) return;
     const hoje=new Date();
     hoje.setHours(0,0,0,0);
-    const escalasFuturas=dadosGlobais.filter(r=>!isPastDate(r.DATA) && estaEscalado(r,usuarioAtual.name));
+    const escalasFuturas=dadosGlobais.filter(r=>!isPastDate(r.DATA) && estaEscalado(r,usuarioAtual.nomeVinculado));
     const naoConfirmados=escalasFuturas.filter(r=>{
         const status=getStatusConfirmacao(r);
         return status==='pending' || !status;
@@ -970,9 +1125,23 @@ function linkarNome(nome){
     return nome;
 }
 
-function linkarLista(txt){
+// NOVA FUNÇÃO: Adiciona destaque visual se for o usuário logado
+function formatarNome(nome) {
+    if(!nome || nome==="-") return nome||"";
+    let htmlFinal = linkarNome(nome);
+    
+    // Verifica se o nome renderizado é igual ao nome vinculado ao usuário
+    if (usuarioAtual && usuarioAtual.nomeVinculado) {
+        if (normalizarNome(nome) === normalizarNome(usuarioAtual.nomeVinculado)) {
+            htmlFinal = `<span class="highlight-me">${htmlFinal}</span>`;
+        }
+    }
+    return htmlFinal;
+}
+
+function formatarLista(txt){
     if(!txt) return "";
-    return txt.split(",").map(n=>linkarNome(n.trim())).join(", ");
+    return txt.split(",").map(n=>formatarNome(n.trim())).join(", ");
 }
 
 // Carregar dados
@@ -984,15 +1153,14 @@ async function carregarCSV(){
         ]);
         dadosGlobais = await rDados.json();
         contatosMap = await rContatos.json();
-        aplicarFiltroAutomatico();
     }catch(e){
         console.error('Erro ao carregar dados:',e);
     }
 }
 
 function aplicarFiltroAutomatico(){
-    if(usuarioAtual){
-        const minhasEscalas=dadosGlobais.filter(x=>estaEscalado(x,usuarioAtual.name));
+    if(usuarioAtual && usuarioAtual.nomeVinculado){
+        const minhasEscalas=dadosGlobais.filter(x=>estaEscalado(x,usuarioAtual.nomeVinculado));
         if(minhasEscalas.length>0){
             renderizar(minhasEscalas);
             montarFiltros(dadosGlobais);
@@ -1016,16 +1184,16 @@ function montarTabela(d){
 <td>${x["DATA"]}</td>
 <td>${x["DIA SEMANA"]}</td>
 <td>${x["ACOMP"]}</td>
-<td>${linkarNome(x["REGENTE LOUVOR"])}</td>
-<td>${linkarLista(x["EQUIPE LOUVOR"])}</td>
-<td>${linkarLista(x["MENSAGEM MUSICAL"]||"")}</td>
+<td>${formatarNome(x["REGENTE LOUVOR"])}</td>
+<td>${formatarLista(x["EQUIPE LOUVOR"])}</td>
+<td>${formatarLista(x["MENSAGEM MUSICAL"]||"")}</td>
 <td>${x["LOUVORES ES"]||""}</td>
 <td>${x["LOUVORES CULTO"]||""}</td>
 <td>${x["TEMA CULTO"]||""}</td>
-<td>${linkarNome(x["AUDIOVISUAL"]||"")}</td>
-<td>${linkarNome(x["ANCIÃO"]||"")}</td>
-<td>${linkarNome(x["PREGADOR"]||"")}</td>
-<td>${linkarNome(x["SUPORTE"]||"")}</td>
+<td>${formatarNome(x["AUDIOVISUAL"]||"")}</td>
+<td>${formatarNome(x["ANCIÃO"]||"")}</td>
+<td>${formatarNome(x["PREGADOR"]||"")}</td>
+<td>${formatarNome(x["SUPORTE"]||"")}</td>
 <td>${x["OBS"]||""}</td>`;
         tb.appendChild(tr);
     });
@@ -1041,7 +1209,7 @@ function montarCards(d){
         const past=isPastDate(x["DATA"]);
         const card=document.createElement("div");
         let classes="day-card"+(past?" past-card":"");
-        const isMyScale=usuarioAtual && estaEscalado(x,usuarioAtual.name);
+        const isMyScale = usuarioAtual && usuarioAtual.nomeVinculado && estaEscalado(x,usuarioAtual.nomeVinculado);
         if(isMyScale) classes+=" my-scale";
         const status=getStatusConfirmacao(x);
         if(status==='pending' && !past) classes+=" highlight";
@@ -1067,23 +1235,23 @@ function montarCards(d){
                 </svg>
                 RESPONSÁVEIS
             </h4>
-            <p><span class="label">Ancião:</span> ${linkarNome(x["ANCIÃO"]||"-")}</p>
-            <p><span class="label">Regente:</span> ${linkarNome(x["REGENTE LOUVOR"]||"-")}</p>
+            <p><span class="label">Ancião:</span> ${formatarNome(x["ANCIÃO"]||"-")}</p>
+            <p><span class="label">Regente:</span> ${formatarNome(x["REGENTE LOUVOR"]||"-")}</p>
             <p><span class="label">OBS:</span> ${x["OBS"]||"-"}</p>
         </div>
 
         <div class="block equipe">
             <h4>
                 <svg width="16" height="16" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M16 11c1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3 1.3 3 3 3zm-8 0c1.7 0 3-1.3 3-3S9.7 5 8 5 5 6.3 5 8s1.3 3 3 3zm0 2c-2.7 0-8 1.3-8 4v3h10v-3c0-1.5.8-2.8 2.1-3.7C11.2 13.1 9.1 13 8 13zm8 0c-.3 0-.6 0-.9.1 1.2.9 1.9 2.2 1.9 3.6v3h6v-3c0-2.7-5.3-4-7-4z"/>
+                    <path fill="currentColor" d="M16 11c1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3 1.3 3 3 3zm-8 0c1.7 0 3-1.3 3-3S9.7 5 8 5 5 6.3 5 8s1.3 3 3 3zm0 2c-2.7 0-8 1.3-8 4v3h10v-3c0-1.5.8-2.8 2.1-3.7C11.2 13.1 9.1 13 8 13zm8 0c-.3 0-.6 0-.9.1 1.2.9 1.9 2.2 1.9 3.6v3h6v-3h6v-3c0-2.7-5.3-4-7-4z"/>
                 </svg>
                 EQUIPE
             </h4>
-            <p><span class="label">Louvor:</span> ${linkarLista(x["EQUIPE LOUVOR"]||"-")}</p>
+            <p><span class="label">Louvor:</span> ${formatarLista(x["EQUIPE LOUVOR"]||"-")}</p>
             <p><span class="label">Acompanhamento:</span> ${x["ACOMP"]||"-"}</p>
-            <p><span class="label">Pregador:</span> ${linkarNome(x["PREGADOR"]||"-")}</p>
-            <p><span class="label">Mensagem Musical:</span> ${linkarLista(x["MENSAGEM MUSICAL"]||"-")}</p>
-            <p><span class="label">Audiovisual:</span> ${linkarNome(x["AUDIOVISUAL"]||"-")}${x["SUPORTE"] ? " e "+linkarNome(x["SUPORTE"])+" (suporte)" : ""}</p>
+            <p><span class="label">Pregador:</span> ${formatarNome(x["PREGADOR"]||"-")}</p>
+            <p><span class="label">Mensagem Musical:</span> ${formatarLista(x["MENSAGEM MUSICAL"]||"-")}</p>
+            <p><span class="label">Audiovisual:</span> ${formatarNome(x["AUDIOVISUAL"]||"-")}${x["SUPORTE"] ? " e "+formatarNome(x["SUPORTE"])+" (suporte)" : ""}</p>
         </div>
 
         <div class="block culto">
@@ -1109,6 +1277,8 @@ function montarFiltros(d){
         const col=s.dataset.col;
         let vals=[...new Set(d.map(x=>x[col]).filter(v=>v && v.trim()!==""))];
         col==="DATA"?vals.sort((a,b)=>parseDate(a)-parseDate(b)):vals.sort();
+        // Limpa antes de preencher novamente para evitar duplicados
+        s.innerHTML = `<option value="">${s.options[0].text}</option>`;
         vals.forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;s.appendChild(o);});
         s.onchange=aplicarFiltros;
     });
@@ -1132,14 +1302,16 @@ function aplicarFiltros(){
 }
 
 function aplicarMinhasEscalas(){
-    if(!usuarioAtual){
-        alert('Faça login para ver suas escalas');
+    if(!usuarioAtual || !usuarioAtual.nomeVinculado){
+        alert('Faça login e vincule seu nome para ver suas escalas');
         return;
     }
-    const f=dadosGlobais.filter(x=>estaEscalado(x,usuarioAtual.name));
-    document.getElementById("btnMyScales").classList.toggle("active",f.length>0);
+    const f=dadosGlobais.filter(x=>estaEscalado(x,usuarioAtual.nomeVinculado));
+    document.getElementById("btnMyScales").classList.add("active");
     renderizar(f);
     document.getElementById("searchInput").value="";
+    // Reseta filtros visuais
+    document.querySelectorAll("#filtros select").forEach(s=>s.value="");
 }
 
 // Event listeners
