@@ -221,58 +221,19 @@ h1{
 .my-scales-btn.active{background:var(--success)}
 .notifications-btn.active{background:var(--warning)}
 
-/* BADGES */
-.badge{
-    display:inline-flex;
-    align-items:center;
-    gap:4px;
-    padding:4px 10px;
-    border-radius:12px;
-    font-size:11px;
-    font-weight:600;
-    text-transform:uppercase;
-    letter-spacing:0.5px;
-    animation:scaleIn 0.3s ease-out;
-}
-.badge.confirmed{
-    background:#D4EDDA;
-    color:#155724;
-}
-.badge.pending{
-    background:#FFF3CD;
-    color:#856404;
-}
-.badge.my-scale{
-    background:#D1ECF1;
-    color:#0C5460;
-}
-body.dark-mode .badge.confirmed{
-    background:rgba(52,199,89,0.2);
-    color:#34C759;
-}
-body.dark-mode .badge.pending{
-    background:rgba(255,149,0,0.2);
-    color:#FF9500;
-}
-body.dark-mode .badge.my-scale{
-    background:rgba(0,122,255,0.2);
-    color:#007AFF;
-}
-
-/* DESTAQUE SUAVE PARA NOME DO USUÁRIO */
+/* DESTAQUE ESTILO MARCA-TEXTO */
 .highlight-me {
-    background: rgba(255, 149, 0, 0.15);
-    color: #e68600;
-    padding: 2px 6px;
+    background-color: #FF9500;
+    color: #FFFFFF;
+    padding: 2px 8px;
     border-radius: 4px;
-    border: 1px solid rgba(255, 149, 0, 0.3);
-    font-weight: 600;
+    font-weight: 700;
     display: inline-block;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 body.dark-mode .highlight-me {
-    background: rgba(255, 149, 0, 0.2);
-    color: #FFB340;
-    border-color: rgba(255, 149, 0, 0.4);
+    background-color: #FF9500;
+    color: #000000;
 }
 a.whats .highlight-me {
     color: inherit;
@@ -315,10 +276,6 @@ a.whats .highlight-me {
     background:var(--border);
     transition:var(--transition);
 }
-.day-card.my-scale::before{
-    background:var(--success);
-    width:4px;
-}
 .day-card:hover{
     transform:translateY(-2px);
     box-shadow:0 4px 20px rgba(0,0,0,0.12);
@@ -326,10 +283,6 @@ a.whats .highlight-me {
 .day-card.past-card{
     opacity:0.6;
     filter:grayscale(0.3);
-}
-.day-card.highlight{
-    border:2px solid var(--warning);
-    box-shadow:0 0 0 3px rgba(255,149,0,0.1);
 }
 
 .card-header{
@@ -345,27 +298,6 @@ a.whats .highlight-me {
     border-radius:20px;
     font-size:13px;
     font-weight:600;
-}
-.confirm-btn{
-    padding:6px 14px;
-    border-radius:20px;
-    border:none;
-    font-size:12px;
-    font-weight:600;
-    cursor:pointer;
-    transition:var(--transition);
-    font-family:inherit;
-}
-.confirm-btn.confirmed{
-    background:var(--success);
-    color:#fff;
-}
-.confirm-btn.pending{
-    background:var(--border);
-    color:var(--text);
-}
-.confirm-btn:hover{
-    transform:scale(1.05);
 }
 
 .block{
@@ -476,6 +408,20 @@ a.whats .highlight-me {
     font-weight:500;
     color:var(--text);
 }
+.notification-input{
+    padding:8px 12px;
+    border-radius:8px;
+    border:1px solid var(--border);
+    background:var(--bg);
+    color:var(--text);
+    font-family:inherit;
+    font-size:14px;
+}
+.notification-input:focus{
+    outline:none;
+    border-color:var(--primary);
+}
+
 .toggle-switch{
     position:relative;
     width:44px;
@@ -516,9 +462,6 @@ a.whats .highlight-me {
     gap:12px;
     animation:slideDown 0.4s ease-out;
     box-shadow:var(--shadow);
-}
-.alert-banner.danger{
-    background:var(--danger);
 }
 .alert-banner.success{
     background:var(--success);
@@ -634,7 +577,7 @@ th{
 
     <div class="auth-info">
         <h3>Por que preciso fazer login?</h3>
-        <p>O login serve apenas para identificar quem você é. Assim, o sistema consegue destacar as datas em que você está escalado e permite que você confirme sua presença nos cultos com um clique.</p>
+        <p>O login serve apenas para identificar quem você é. Assim, o sistema consegue destacar as datas em que você está escalado para facilitar a sua visualização.</p>
         
         <h3>Como funciona?</h3>
         <ol>
@@ -678,7 +621,7 @@ th{
 
     <div class="top-controls">
         <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar por nome...">
-        <button class="control-btn my-scales-btn" id="btnMyScales" title="Minhas Escalas">
+        <button class="control-btn my-scales-btn" id="btnMyScales" title="Alternar para Minhas Escalas">
             <svg width="18" height="18" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
             </svg>
@@ -701,18 +644,21 @@ th{
     </div>
 
     <div class="notifications-settings" id="notificationsSettings">
-        <h3 style="margin-bottom:16px;font-size:16px;font-weight:600">Configurações de Notificações</h3>
+        <h3 style="margin-bottom:16px;font-size:16px;font-weight:600">Configurações de Lembretes</h3>
         <div class="notification-item">
-            <span class="notification-label">Receber notificações das minhas escalas</span>
+            <span class="notification-label">Ativar lembretes das minhas escalas</span>
             <div class="toggle-switch" id="toggleMyScales"></div>
         </div>
-        <div class="notification-item">
-            <span class="notification-label">Lembrete 2 dias antes</span>
-            <div class="toggle-switch" id="toggleReminder2Days"></div>
-        </div>
-        <div class="notification-item">
-            <span class="notification-label">Lembrete 1 dia antes</span>
-            <div class="toggle-switch" id="toggleReminder1Day"></div>
+        
+        <div id="notifPreferences" style="display:none; flex-direction:column; gap: 12px; padding-top: 16px;">
+            <div class="notification-item" style="padding:0; border:none;">
+                <span class="notification-label">Avisar quantos dias antes?</span>
+                <input type="number" id="inputDaysBefore" class="notification-input" min="0" max="30" value="1" style="width: 70px; text-align: center;">
+            </div>
+            <div class="notification-item" style="padding:0; border:none;">
+                <span class="notification-label">Qual horário?</span>
+                <input type="time" id="inputTime" class="notification-input" value="08:00">
+            </div>
         </div>
     </div>
 
@@ -752,8 +698,7 @@ th{
 let dadosGlobais=[];
 let contatosMap={};
 let usuarioAtual=null;
-let confirmacoes={};
-let notificacoesConfig={notificacoesAtivas:false,reminder2Days:false,reminder1Day:false};
+let notificacoesConfig={notificacoesAtivas:false, daysBefore: 1, time: "08:00"};
 let modoEscuro=false;
 
 // Inicialização
@@ -897,7 +842,6 @@ function mostrarSelecaoNome() {
     const select = document.getElementById('selectNomeContato');
     select.innerHTML = '<option value="">Selecione seu nome na equipe...</option>';
 
-    // Puxa as chaves do contatos.json em ordem alfabética
     const nomes = Object.keys(contatosMap).sort();
     nomes.forEach(nome => {
         const opt = document.createElement('option');
@@ -927,7 +871,6 @@ function mostrarApp(){
     document.getElementById('appContainer').style.display='block';
     if(usuarioAtual){
         document.getElementById('userInfo').style.display='flex';
-        // Mostra o nome vinculado (ou o do google se ainda não tem)
         document.getElementById('userName').textContent=usuarioAtual.nomeVinculado || usuarioAtual.name;
         if(usuarioAtual.picture){
             document.getElementById('userAvatar').src=usuarioAtual.picture;
@@ -941,31 +884,6 @@ document.getElementById('logoutBtn').onclick=()=>{
     usuarioAtual=null;
     mostrarAuth();
 };
-
-// Confirmações
-function carregarConfirmacoes(){
-    const saved=localStorage.getItem('confirmacoes');
-    if(saved) confirmacoes=JSON.parse(saved);
-}
-
-function salvarConfirmacoes(){
-    localStorage.setItem('confirmacoes',JSON.stringify(confirmacoes));
-}
-
-function confirmarPresenca(data,confirmado){
-    if(!confirmacoes[data]) confirmacoes[data]={};
-    confirmacoes[data][usuarioAtual.sub]=confirmado;
-    salvarConfirmacoes();
-    renderizar(dadosGlobais);
-    verificarAlertas();
-}
-
-function getStatusConfirmacao(registro){
-    if(!usuarioAtual || !usuarioAtual.nomeVinculado || !estaEscalado(registro,usuarioAtual.nomeVinculado)) return null;
-    const data=registro.DATA;
-    if(!confirmacoes[data] || !confirmacoes[data][usuarioAtual.sub]) return 'pending';
-    return confirmacoes[data][usuarioAtual.sub] ? 'confirmed' : 'pending';
-}
 
 // Notificações
 function solicitarPermissaoNotificacoes(){
@@ -984,75 +902,78 @@ function salvarConfigNotificacoes(){
 }
 
 function atualizarUINotificacoes(){
-    document.getElementById('toggleMyScales').classList.toggle('active',notificacoesConfig.notificacoesAtivas);
-    document.getElementById('toggleReminder2Days').classList.toggle('active',notificacoesConfig.reminder2Days);
-    document.getElementById('toggleReminder1Day').classList.toggle('active',notificacoesConfig.reminder1Day);
+    const toggle = document.getElementById('toggleMyScales');
+    toggle.classList.toggle('active', notificacoesConfig.notificacoesAtivas);
+    
+    const prefsContainer = document.getElementById('notifPreferences');
+    prefsContainer.style.display = notificacoesConfig.notificacoesAtivas ? 'flex' : 'none';
+    
+    document.getElementById('inputDaysBefore').value = notificacoesConfig.daysBefore;
+    document.getElementById('inputTime').value = notificacoesConfig.time;
 }
 
 document.getElementById('toggleMyScales').onclick=()=>{
-    notificacoesConfig.notificacoesAtivas=!notificacoesConfig.notificacoesAtivas;
+    notificacoesConfig.notificacoesAtivas = !notificacoesConfig.notificacoesAtivas;
     if(notificacoesConfig.notificacoesAtivas && Notification.permission==='default'){
         Notification.requestPermission();
     }
     salvarConfigNotificacoes();
     atualizarUINotificacoes();
 };
-document.getElementById('toggleReminder2Days').onclick=()=>{
-    notificacoesConfig.reminder2Days=!notificacoesConfig.reminder2Days;
+
+document.getElementById('inputDaysBefore').addEventListener('change', (e) => {
+    notificacoesConfig.daysBefore = e.target.value;
     salvarConfigNotificacoes();
-    atualizarUINotificacoes();
-};
-document.getElementById('toggleReminder1Day').onclick=()=>{
-    notificacoesConfig.reminder1Day=!notificacoesConfig.reminder1Day;
+});
+
+document.getElementById('inputTime').addEventListener('change', (e) => {
+    notificacoesConfig.time = e.target.value;
     salvarConfigNotificacoes();
-    atualizarUINotificacoes();
-};
+});
 
 function verificarNotificacoesPendentes(){
     if(!notificacoesConfig.notificacoesAtivas || !usuarioAtual || !usuarioAtual.nomeVinculado) return;
-    const hoje=new Date();
+    
+    const hoje = new Date();
+    const horaAtualFormatada = hoje.getHours().toString().padStart(2, '0') + ':' + hoje.getMinutes().toString().padStart(2, '0');
+    
     hoje.setHours(0,0,0,0);
-    dadosGlobais.forEach(reg=>{
+    
+    dadosGlobais.forEach(reg => {
         if(isPastDate(reg.DATA)) return;
-        if(!estaEscalado(reg,usuarioAtual.nomeVinculado)) return;
-        const dataEvento=parseDate(reg.DATA);
-        const diffDias=Math.floor((dataEvento-hoje)/(1000*60*60*24));
-        const key=`notif_${reg.DATA}_${usuarioAtual.sub}`;
+        if(!estaEscalado(reg, usuarioAtual.nomeVinculado)) return;
+        
+        const dataEvento = parseDate(reg.DATA);
+        const diffDias = Math.floor((dataEvento - hoje)/(1000*60*60*24));
+        const key = `notif_${reg.DATA}_${usuarioAtual.sub}_sent`;
+        
         if(localStorage.getItem(key)) return;
-        if(diffDias===2 && notificacoesConfig.reminder2Days){
-            enviarNotificacao(`Lembrete: Você está escalado em ${reg.DATA} (2 dias)`);
-            localStorage.setItem(key,'true');
-        }else if(diffDias===1 && notificacoesConfig.reminder1Day){
-            enviarNotificacao(`Lembrete: Você está escalado amanhã (${reg.DATA})`);
-            localStorage.setItem(key,'true');
+        
+        // Verifica se é o dia certo e se já passou da hora configurada
+        if(diffDias === parseInt(notificacoesConfig.daysBefore) && horaAtualFormatada >= notificacoesConfig.time){
+            let textoDia = diffDias === 0 ? "hoje" : diffDias === 1 ? "amanhã" : `em ${diffDias} dias`;
+            enviarNotificacao(`Lembrete: Você está escalado na equipe de louvor ${textoDia} (${reg.DATA})`);
+            localStorage.setItem(key, 'true');
         }
     });
 }
 
 function enviarNotificacao(mensagem){
     if('Notification' in window && Notification.permission==='granted'){
-        new Notification('Escala de Louvor',{body:mensagem});
+        new Notification('Escala de Louvor', {body: mensagem});
     }
 }
 
-// Alertas
+// Alertas (Apenas para mostrar a próxima escala na tela)
 function verificarAlertas(){
     const container=document.getElementById('alertContainer');
     container.innerHTML='';
     if(!usuarioAtual || !usuarioAtual.nomeVinculado) return;
+    
     const hoje=new Date();
     hoje.setHours(0,0,0,0);
     const escalasFuturas=dadosGlobais.filter(r=>!isPastDate(r.DATA) && estaEscalado(r,usuarioAtual.nomeVinculado));
-    const naoConfirmados=escalasFuturas.filter(r=>{
-        const status=getStatusConfirmacao(r);
-        return status==='pending' || !status;
-    });
-    if(naoConfirmados.length>0){
-        const alert=document.createElement('div');
-        alert.className='alert-banner';
-        alert.innerHTML=`<span class="alert-icon">⚠️</span><span class="alert-text">Você tem ${naoConfirmados.length} escala(s) futura(s) sem confirmação</span>`;
-        container.appendChild(alert);
-    }
+    
     if(escalasFuturas.length>0){
         const proxima=escalasFuturas[0];
         const dataEvento=parseDate(proxima.DATA);
@@ -1060,7 +981,7 @@ function verificarAlertas(){
         if(diffDias<=7){
             const alert=document.createElement('div');
             alert.className='alert-banner success';
-            alert.innerHTML=`<span class="alert-icon">📅</span><span class="alert-text">Próxima escala: ${proxima.DATA} (${diffDias===0?'Hoje':diffDias===1?'Amanhã':`Em ${diffDias} dias`})</span>`;
+            alert.innerHTML=`<span class="alert-icon">📅</span><span class="alert-text">Sua próxima escala é ${proxima.DATA} (${diffDias===0?'Hoje':diffDias===1?'Amanhã':`Em ${diffDias} dias`})</span>`;
             container.appendChild(alert);
         }
     }
@@ -1125,12 +1046,10 @@ function linkarNome(nome){
     return nome;
 }
 
-// NOVA FUNÇÃO: Adiciona destaque visual se for o usuário logado
 function formatarNome(nome) {
     if(!nome || nome==="-") return nome||"";
     let htmlFinal = linkarNome(nome);
     
-    // Verifica se o nome renderizado é igual ao nome vinculado ao usuário
     if (usuarioAtual && usuarioAtual.nomeVinculado) {
         if (normalizarNome(nome) === normalizarNome(usuarioAtual.nomeVinculado)) {
             htmlFinal = `<span class="highlight-me">${htmlFinal}</span>`;
@@ -1158,16 +1077,8 @@ async function carregarCSV(){
     }
 }
 
+// Agora sempre carrega a escala geral
 function aplicarFiltroAutomatico(){
-    if(usuarioAtual && usuarioAtual.nomeVinculado){
-        const minhasEscalas=dadosGlobais.filter(x=>estaEscalado(x,usuarioAtual.nomeVinculado));
-        if(minhasEscalas.length>0){
-            renderizar(minhasEscalas);
-            montarFiltros(dadosGlobais);
-            document.getElementById('btnMyScales').classList.add('active');
-            return;
-        }
-    }
     renderizar(dadosGlobais);
     montarFiltros(dadosGlobais);
 }
@@ -1209,23 +1120,14 @@ function montarCards(d){
         const past=isPastDate(x["DATA"]);
         const card=document.createElement("div");
         let classes="day-card"+(past?" past-card":"");
-        const isMyScale = usuarioAtual && usuarioAtual.nomeVinculado && estaEscalado(x,usuarioAtual.nomeVinculado);
-        if(isMyScale) classes+=" my-scale";
-        const status=getStatusConfirmacao(x);
-        if(status==='pending' && !past) classes+=" highlight";
         card.className=classes;
         card.style.animationDelay=`${idx*0.05}s`;
-        const statusBadge=status ? `<span class="badge ${status}">${status==='confirmed'?'✓ Confirmado':'⏳ Pendente'}</span>` : '';
-        const myScaleBadge=isMyScale ? `<span class="badge my-scale">Minha Escala</span>` : '';
-        const confirmBtn=isMyScale && !past ? `<button class="confirm-btn ${status||'pending'}" onclick="confirmarPresenca('${x.DATA}',${status==='confirmed'?'false':'true'})">${status==='confirmed'?'✓ Confirmado':'Confirmar'}</button>` : '';
 
         card.innerHTML=`
         <div class="card-header">
             <div style="display:flex;align-items:center;gap:8px">
                 <div class="date-pill">${x["DATA"]} — ${x["DIA SEMANA"]}</div>
-                ${statusBadge}${myScaleBadge}
             </div>
-            ${confirmBtn}
         </div>
 
         <div class="block responsaveis">
@@ -1277,7 +1179,6 @@ function montarFiltros(d){
         const col=s.dataset.col;
         let vals=[...new Set(d.map(x=>x[col]).filter(v=>v && v.trim()!==""))];
         col==="DATA"?vals.sort((a,b)=>parseDate(a)-parseDate(b)):vals.sort();
-        // Limpa antes de preencher novamente para evitar duplicados
         s.innerHTML = `<option value="">${s.options[0].text}</option>`;
         vals.forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;s.appendChild(o);});
         s.onchange=aplicarFiltros;
@@ -1301,17 +1202,29 @@ function aplicarFiltros(){
     renderizar(f);
 }
 
+// Botão que funciona como Interruptor
 function aplicarMinhasEscalas(){
     if(!usuarioAtual || !usuarioAtual.nomeVinculado){
-        alert('Faça login e vincule seu nome para ver suas escalas');
+        alert('Faça login e vincule seu nome para usar esta função');
         return;
     }
-    const f=dadosGlobais.filter(x=>estaEscalado(x,usuarioAtual.nomeVinculado));
-    document.getElementById("btnMyScales").classList.add("active");
-    renderizar(f);
-    document.getElementById("searchInput").value="";
-    // Reseta filtros visuais
-    document.querySelectorAll("#filtros select").forEach(s=>s.value="");
+    
+    const btn = document.getElementById("btnMyScales");
+    
+    if(btn.classList.contains("active")) {
+        // Se já está ativo, desativa e mostra a escala geral
+        btn.classList.remove("active");
+        renderizar(dadosGlobais);
+    } else {
+        // Se não está ativo, ativa e filtra pelas escalas do usuário
+        const f = dadosGlobais.filter(x => estaEscalado(x, usuarioAtual.nomeVinculado));
+        btn.classList.add("active");
+        renderizar(f);
+        
+        // Limpa a caixa de busca e os filtros (para não confundir a tela)
+        document.getElementById("searchInput").value = "";
+        document.querySelectorAll("#filtros select").forEach(s => s.value = "");
+    }
 }
 
 // Event listeners
@@ -1344,7 +1257,6 @@ document.getElementById("searchInput").addEventListener('input',()=>{
 function carregarPreferencias(){
     modoEscuro=localStorage.getItem('modoEscuro')==='true';
     if(modoEscuro) document.body.classList.add('dark-mode');
-    carregarConfirmacoes();
     carregarConfigNotificacoes();
 }
 
