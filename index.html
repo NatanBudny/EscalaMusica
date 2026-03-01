@@ -219,7 +219,6 @@ h1{
     color:#fff;
 }
 .my-scales-btn.active{background:var(--success)}
-.notifications-btn.active{background:var(--warning)}
 
 /* DESTAQUE ESTILO MARCA-TEXTO */
 .highlight-me {
@@ -298,6 +297,34 @@ a.whats .highlight-me {
     border-radius:20px;
     font-size:13px;
     font-weight:600;
+}
+
+/* BOTÃO AGENDA */
+.btn-agenda {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--primary);
+    background: rgba(0, 122, 255, 0.1);
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: inherit;
+}
+.btn-agenda:hover {
+    background: var(--primary);
+    color: #fff;
+}
+body.dark-mode .btn-agenda {
+    background: rgba(0, 122, 255, 0.2);
+}
+body.dark-mode .btn-agenda:hover {
+    background: var(--primary);
+    color: #fff;
 }
 
 .block{
@@ -382,72 +409,6 @@ a.whats .highlight-me {
 .btn-clear:hover{
     background:#E6342A;
     transform:translateY(-1px);
-}
-
-/* NOTIFICATIONS SETTINGS */
-.notifications-settings{
-    display:none;
-    background:var(--card);
-    border-radius:var(--radius);
-    padding:20px;
-    margin-bottom:20px;
-    box-shadow:var(--shadow);
-    animation:slideDown 0.3s ease-out;
-}
-.notifications-settings.active{display:block}
-.notification-item{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:12px 0;
-    border-bottom:1px solid var(--border);
-}
-.notification-item:last-child{border-bottom:none}
-.notification-label{
-    font-size:14px;
-    font-weight:500;
-    color:var(--text);
-}
-.notification-input{
-    padding:8px 12px;
-    border-radius:8px;
-    border:1px solid var(--border);
-    background:var(--bg);
-    color:var(--text);
-    font-family:inherit;
-    font-size:14px;
-}
-.notification-input:focus{
-    outline:none;
-    border-color:var(--primary);
-}
-
-.toggle-switch{
-    position:relative;
-    width:44px;
-    height:26px;
-    background:var(--border);
-    border-radius:13px;
-    cursor:pointer;
-    transition:var(--transition);
-}
-.toggle-switch.active{
-    background:var(--success);
-}
-.toggle-switch::after{
-    content:'';
-    position:absolute;
-    width:20px;
-    height:20px;
-    background:#fff;
-    border-radius:50%;
-    top:3px;
-    left:3px;
-    transition:var(--transition);
-    box-shadow:0 2px 4px rgba(0,0,0,0.2);
-}
-.toggle-switch.active::after{
-    left:21px;
 }
 
 /* ALERTS */
@@ -539,16 +500,6 @@ th{
         transform:translateY(0);
     }
 }
-@keyframes scaleIn{
-    from{
-        opacity:0;
-        transform:scale(0.8);
-    }
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-}
 
 /* MOBILE */
 @media(max-width:768px){
@@ -626,11 +577,6 @@ th{
                 <path fill="currentColor" d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
             </svg>
         </button>
-        <button class="control-btn notifications-btn" id="btnNotifications" title="Notificações">
-            <svg width="18" height="18" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
-            </svg>
-        </button>
         <button class="control-btn" id="btnToggleFilters" title="Filtros">
             <svg width="18" height="18" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M3 5h18v2H3V5zm4 6h10v2H7v-2zm4 6h2v2h-2v-2z"/>
@@ -641,25 +587,6 @@ th{
                 <path fill="currentColor" d="M13 3c-4.97 0-9 4.03-9 9H1l4 4 4-4H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/>
             </svg>
         </button>
-    </div>
-
-    <div class="notifications-settings" id="notificationsSettings">
-        <h3 style="margin-bottom:16px;font-size:16px;font-weight:600">Configurações de Lembretes</h3>
-        <div class="notification-item">
-            <span class="notification-label">Ativar lembretes das minhas escalas</span>
-            <div class="toggle-switch" id="toggleMyScales"></div>
-        </div>
-        
-        <div id="notifPreferences" style="display:none; flex-direction:column; gap: 12px; padding-top: 16px;">
-            <div class="notification-item" style="padding:0; border:none;">
-                <span class="notification-label">Avisar quantos dias antes?</span>
-                <input type="number" id="inputDaysBefore" class="notification-input" min="0" max="30" value="1" style="width: 70px; text-align: center;">
-            </div>
-            <div class="notification-item" style="padding:0; border:none;">
-                <span class="notification-label">Qual horário?</span>
-                <input type="time" id="inputTime" class="notification-input" value="08:00">
-            </div>
-        </div>
     </div>
 
     <div class="filters-box" id="filtros">
@@ -698,18 +625,14 @@ th{
 let dadosGlobais=[];
 let contatosMap={};
 let usuarioAtual=null;
-let notificacoesConfig={notificacoesAtivas:false, daysBefore: 1, time: "08:00"};
 let modoEscuro=false;
 
 // Inicialização
 async function init(){
     try{
         carregarPreferencias();
-        await carregarCSV(); // Carrega os dados ANTES de verificar autenticação para ter os contatos
+        await carregarCSV();
         verificarAutenticacao();
-        solicitarPermissaoNotificacoes();
-        verificarNotificacoesPendentes();
-        setInterval(verificarNotificacoesPendentes,60000); // Verifica a cada minuto
     }catch(error){
         console.error('Erro na inicialização:',error);
         mostrarAuth();
@@ -789,14 +712,8 @@ function handleCredentialResponse(response){
             }
         })
         .catch(()=>{
-            usuarioAtual={
-                email:'usuario@exemplo.com',
-                name:prompt('Digite seu nome:')||'Usuário',
-                picture:'',
-                sub:'mock123'
-            };
-            localStorage.setItem('userData',JSON.stringify(usuarioAtual));
-            mostrarSelecaoNome();
+            console.error("Falha ao processar token do Google");
+            mostrarAuth();
         });
 }
 
@@ -804,32 +721,6 @@ function mostrarAuth(){
     document.getElementById('authContainer').style.display='block';
     document.getElementById('nameSelectionContainer').style.display='none';
     document.getElementById('appContainer').style.display='none';
-    setTimeout(()=>{
-        const googleBtn=document.getElementById('googleSignIn');
-        if(googleBtn && googleBtn.children.length === 0){
-            googleBtn.innerHTML=`
-                <button onclick="usarModoDemo()" style="
-                    width:100%;padding:12px 24px;background:#4285F4;color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:500;cursor:pointer;font-family:inherit;transition:all 0.3s;
-                " onmouseover="this.style.background='#357AE8'" onmouseout="this.style.background='#4285F4'">
-                    🔐 Entrar com Google (Modo Demo)
-                </button>
-            `;
-        }
-    },2000);
-}
-
-function usarModoDemo(){
-    const nome=prompt('Digite um nome qualquer para login de teste:');
-    if(nome){
-        usuarioAtual={
-            email:'demo@exemplo.com',
-            name:nome.trim(),
-            picture:'',
-            sub:'demo_'+Date.now()
-        };
-        localStorage.setItem('userData',JSON.stringify(usuarioAtual));
-        mostrarSelecaoNome();
-    }
 }
 
 // Seleção de Nome (Primeiro Acesso)
@@ -885,84 +776,111 @@ document.getElementById('logoutBtn').onclick=()=>{
     mostrarAuth();
 };
 
-// Notificações
-function solicitarPermissaoNotificacoes(){
-    if('Notification' in window && Notification.permission==='default'){
+// ==========================================
+// LÓGICA DE EXPORTAÇÃO PARA AGENDA (.ics)
+// ==========================================
+
+function getDetalhesAgenda(registro, nome) {
+    let n = normalizarNome(nome);
+    let papel = "Escala de Louvor";
+    let descricao = "";
+    
+    let isRegente = false;
+    let isLouvor = false;
+
+    // Verifica se a pessoa é Regente
+    if (registro['REGENTE LOUVOR']) {
+        let regentes = registro['REGENTE LOUVOR'].split(',').map(x => normalizarNome(x.trim()));
+        if (regentes.includes(n)) isRegente = true;
     }
-}
-
-function carregarConfigNotificacoes(){
-    const saved=localStorage.getItem('notificacoesConfig');
-    if(saved) notificacoesConfig=JSON.parse(saved);
-    atualizarUINotificacoes();
-}
-
-function salvarConfigNotificacoes(){
-    localStorage.setItem('notificacoesConfig',JSON.stringify(notificacoesConfig));
-}
-
-function atualizarUINotificacoes(){
-    const toggle = document.getElementById('toggleMyScales');
-    toggle.classList.toggle('active', notificacoesConfig.notificacoesAtivas);
     
-    const prefsContainer = document.getElementById('notifPreferences');
-    prefsContainer.style.display = notificacoesConfig.notificacoesAtivas ? 'flex' : 'none';
-    
-    document.getElementById('inputDaysBefore').value = notificacoesConfig.daysBefore;
-    document.getElementById('inputTime').value = notificacoesConfig.time;
-}
-
-document.getElementById('toggleMyScales').onclick=()=>{
-    notificacoesConfig.notificacoesAtivas = !notificacoesConfig.notificacoesAtivas;
-    if(notificacoesConfig.notificacoesAtivas && Notification.permission==='default'){
-        Notification.requestPermission();
+    // Verifica se a pessoa é Equipe de Louvor
+    if (registro['EQUIPE LOUVOR']) {
+        let equipe = registro['EQUIPE LOUVOR'].split(',').map(x => normalizarNome(x.trim()));
+        if (equipe.includes(n)) isLouvor = true;
     }
-    salvarConfigNotificacoes();
-    atualizarUINotificacoes();
-};
 
-document.getElementById('inputDaysBefore').addEventListener('change', (e) => {
-    notificacoesConfig.daysBefore = e.target.value;
-    salvarConfigNotificacoes();
-});
-
-document.getElementById('inputTime').addEventListener('change', (e) => {
-    notificacoesConfig.time = e.target.value;
-    salvarConfigNotificacoes();
-});
-
-function verificarNotificacoesPendentes(){
-    if(!notificacoesConfig.notificacoesAtivas || !usuarioAtual || !usuarioAtual.nomeVinculado) return;
-    
-    const hoje = new Date();
-    const horaAtualFormatada = hoje.getHours().toString().padStart(2, '0') + ':' + hoje.getMinutes().toString().padStart(2, '0');
-    
-    hoje.setHours(0,0,0,0);
-    
-    dadosGlobais.forEach(reg => {
-        if(isPastDate(reg.DATA)) return;
-        if(!estaEscalado(reg, usuarioAtual.nomeVinculado)) return;
-        
-        const dataEvento = parseDate(reg.DATA);
-        const diffDias = Math.floor((dataEvento - hoje)/(1000*60*60*24));
-        const key = `notif_${reg.DATA}_${usuarioAtual.sub}_sent`;
-        
-        if(localStorage.getItem(key)) return;
-        
-        // Verifica se é o dia certo e se já passou da hora configurada
-        if(diffDias === parseInt(notificacoesConfig.daysBefore) && horaAtualFormatada >= notificacoesConfig.time){
-            let textoDia = diffDias === 0 ? "hoje" : diffDias === 1 ? "amanhã" : `em ${diffDias} dias`;
-            enviarNotificacao(`Lembrete: Você está escalado na equipe de louvor ${textoDia} (${reg.DATA})`);
-            localStorage.setItem(key, 'true');
+    if (isRegente) {
+        papel = "Regente";
+        descricao += "📋 TAREFAS DO REGENTE:\\n";
+        descricao += "- Definir músicas\\n";
+        descricao += "- Confirmar equipe\\n";
+        descricao += "- Comunicar banda\\n";
+        descricao += "- Enviar músicas para sonoplastia\\n";
+        descricao += "- Se preparar espiritualmente\\n";
+        descricao += "- Conduzir equipe de louvor à adoração e não apresentação\\n";
+        descricao += "- Definir data do ensaio\\n";
+    } else if (isLouvor) {
+        papel = "Equipe de Louvor";
+        descricao += "📋 TAREFAS DA EQUIPE:\\n";
+        descricao += "- Perguntar ao regente as músicas\\n";
+        descricao += "- Se preparar espiritualmente\\n";
+    } else {
+        // Se for outra função (Áudio, Mensagem Musical, etc)
+        let papeisEncontrados = [];
+        const camposExtras = ['PREGADOR','MENSAGEM MUSICAL','AUDIOVISUAL','ANCIÃO','SUPORTE'];
+        for(const c of camposExtras){
+            const v = registro[c]||"";
+            if(v.includes(',')){
+                if(v.split(',').map(x=>normalizarNome(x.trim())).includes(n)) papeisEncontrados.push(c);
+            } else if(normalizarNome(v)===n) {
+                papeisEncontrados.push(c);
+            }
         }
-    });
+        if (papeisEncontrados.length > 0) {
+            papel = papeisEncontrados.join(" e ");
+            descricao += "📋 PREPARAÇÃO:\\n";
+            descricao += "- Se preparar espiritualmente para o culto\\n";
+        }
+    }
+
+    // Adiciona o tema para contexto extra
+    if (registro['TEMA CULTO']) {
+        descricao += `\\n📌 Tema do Culto: ${registro['TEMA CULTO']}`;
+    }
+
+    return { papel, descricao };
 }
 
-function enviarNotificacao(mensagem){
-    if('Notification' in window && Notification.permission==='granted'){
-        new Notification('Escala de Louvor', {body: mensagem});
-    }
-}
+window.exportarParaAgenda = function(dataStr) {
+    if(!usuarioAtual || !usuarioAtual.nomeVinculado) return;
+    
+    // Encontra a escala correta pela data
+    const registro = dadosGlobais.find(r => r.DATA === dataStr);
+    if(!registro) return;
+
+    const detalhes = getDetalhesAgenda(registro, usuarioAtual.nomeVinculado);
+    
+    // Converter DD/MM/YYYY para YYYYMMDD para o padrão iCal
+    const [dia, mes, ano] = registro.DATA.split('/');
+    
+    // Cria um evento das 08:30 às 11:30 (horário padrão local na agenda)
+    const dataInicio = `${ano}${mes}${dia}T083000`;
+    const dataFim = `${ano}${mes}${dia}T113000`;
+
+    // Montagem do arquivo .ics (formatação estrita exigida pelas agendas)
+    const icsContent = 
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Escala de Louvor//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+DTSTART:${dataInicio}
+DTEND:${dataFim}
+SUMMARY:${detalhes.papel}
+DESCRIPTION:${detalhes.descricao}
+END:VEVENT
+END:VCALENDAR`;
+
+    // Cria e dispara o download do arquivo .ics
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.setAttribute('download', `Escala_${ano}${mes}${dia}.ics`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+};
 
 // Alertas (Apenas para mostrar a próxima escala na tela)
 function verificarAlertas(){
@@ -1077,7 +995,7 @@ async function carregarCSV(){
     }
 }
 
-// Agora sempre carrega a escala geral
+// Sempre carrega a escala geral
 function aplicarFiltroAutomatico(){
     renderizar(dadosGlobais);
     montarFiltros(dadosGlobais);
@@ -1120,6 +1038,16 @@ function montarCards(d){
         const past=isPastDate(x["DATA"]);
         const card=document.createElement("div");
         let classes="day-card"+(past?" past-card":"");
+        
+        // Exibir o botão da agenda SOMENTE se for escala da pessoa e estiver no futuro
+        const isMyScale = usuarioAtual && usuarioAtual.nomeVinculado && estaEscalado(x,usuarioAtual.nomeVinculado);
+        
+        const btnAgenda = (isMyScale && !past) ? 
+            `<button class="btn-agenda" onclick="exportarParaAgenda('${x.DATA}')" title="Salvar no calendário do celular">
+                <svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5z"/></svg>
+                Salvar na Agenda
+            </button>` : '';
+
         card.className=classes;
         card.style.animationDelay=`${idx*0.05}s`;
 
@@ -1128,6 +1056,7 @@ function montarCards(d){
             <div style="display:flex;align-items:center;gap:8px">
                 <div class="date-pill">${x["DATA"]} — ${x["DIA SEMANA"]}</div>
             </div>
+            ${btnAgenda}
         </div>
 
         <div class="block responsaveis">
@@ -1231,10 +1160,6 @@ function aplicarMinhasEscalas(){
 document.getElementById('btnToggleFilters').onclick=()=>{
     document.getElementById('filtros').classList.toggle("active");
 };
-document.getElementById('btnNotifications').onclick=()=>{
-    document.getElementById('notificationsSettings').classList.toggle("active");
-    document.getElementById('btnNotifications').classList.toggle("active");
-};
 document.getElementById('btnClearFilters').onclick=()=>{
     document.querySelectorAll("#filtros select").forEach(s=>s.value="");
     document.getElementById("searchInput").value="";
@@ -1257,7 +1182,6 @@ document.getElementById("searchInput").addEventListener('input',()=>{
 function carregarPreferencias(){
     modoEscuro=localStorage.getItem('modoEscuro')==='true';
     if(modoEscuro) document.body.classList.add('dark-mode');
-    carregarConfigNotificacoes();
 }
 
 if(document.readyState === 'loading'){
