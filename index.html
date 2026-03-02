@@ -4,633 +4,621 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ESCALA DE LOUVOR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-    --primary:#007AFF;
-    --success:#34C759;
-    --warning:#FF9500;
-    --danger:#FF3B30;
-    --bg:#F2F2F7;
-    --card:#FFFFFF;
-    --text:#000000;
-    --text-secondary:#8E8E93;
-    --border:#E5E5EA;
-    --shadow:0 2px 10px rgba(0,0,0,0.08);
-    --radius:12px;
-    --transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-body.dark-mode{
-    --bg:#000000;
-    --card:#1C1C1E;
-    --text:#FFFFFF;
-    --text-secondary:#98989D;
-    --border:#38383A;
-    --shadow:0 2px 10px rgba(0,0,0,0.3);
-}
-
-body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    padding:16px;
-    transition:var(--transition);
-    min-height:100vh;
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+    /* Paleta Moderna - UI/UX Premium (Apenas Modo Claro) */
+    --primary: #4F46E5;        /* Índigo sofisticado */
+    --primary-hover: #4338CA;
+    --success: #10B981;        /* Verde esmeralda */
+    --warning: #F59E0B;        /* Âmbar */
+    --danger: #EF4444;         /* Vermelho coral */
+    
+    --bg-body: #F8FAFC;        /* Cinza muito claro */
+    --bg-card: #FFFFFF;
+    --bg-subtle: #F1F5F9;      /* Fundo para blocos internos */
+    
+    --text-main: #0F172A;      /* Quase preto para melhor contraste */
+    --text-muted: #64748B;     /* Cinza médio para labels */
+    --border: #E2E8F0;
+    
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-full: 9999px;
+    
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* HEADER */
-.header{
-    text-align:center;
-    margin-bottom:24px;
-    position:relative;
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-body);
+    color: var(--text-main);
+    padding: 24px 16px;
+    min-height: 100vh;
+    transition: var(--transition);
+    line-height: 1.5;
 }
-h1{
-    font-size:28px;
-    font-weight:700;
-    margin-bottom:8px;
-    letter-spacing:-0.5px;
+
+/* CONTAINER PRINCIPAL */
+.app-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
 }
-.user-info{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:12px;
-    margin-top:12px;
-    padding:8px 16px;
-    border-radius:20px;
-    background:var(--card);
-    box-shadow:var(--shadow);
-    animation:slideDown 0.4s ease-out;
+
+/* HEADER E PERFIL */
+.header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    animation: fadeInDown 0.5s ease-out;
 }
-.user-avatar{
-    width:32px;
-    height:32px;
-    border-radius:50%;
-    object-fit:cover;
+.header-title {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-main);
 }
-.user-name{
-    font-size:14px;
-    font-weight:500;
-    color:var(--text);
+.header-title span { color: var(--primary); }
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 6px 6px 16px;
+    border-radius: var(--radius-full);
+    background: var(--bg-card);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
 }
-.logout-btn{
-    background:none;
-    border:none;
-    color:var(--text-secondary);
-    cursor:pointer;
-    padding:4px 8px;
-    border-radius:6px;
-    font-size:12px;
-    transition:var(--transition);
+.user-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
 }
-.logout-btn:hover{background:var(--border);color:var(--text)}
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.logout-btn {
+    background: var(--bg-subtle);
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: var(--radius-full);
+    font-size: 13px;
+    font-weight: 500;
+    transition: var(--transition);
+    font-family: inherit;
+}
+.logout-btn:hover {
+    background: #E2E8F0;
+    color: var(--danger);
+}
 
 /* AUTH & NAME SELECTION */
-.auth-container{
-    max-width:400px;
-    margin:60px auto;
-    padding:32px;
-    background:var(--card);
-    border-radius:var(--radius);
-    box-shadow:var(--shadow);
-    text-align:center;
-    animation:fadeIn 0.5s ease-out;
+.auth-container {
+    max-width: 440px;
+    margin: 80px auto;
+    padding: 40px;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    border: 1px solid var(--border);
+    animation: zoomIn 0.4s ease-out;
 }
-.auth-title{
-    font-size:24px;
-    font-weight:600;
-    margin-bottom:8px;
+.auth-title {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
 }
-.auth-subtitle{
-    color:var(--text-secondary);
-    font-size:14px;
-    margin-bottom:24px;
+.auth-subtitle {
+    color: var(--text-muted);
+    font-size: 15px;
+    margin-bottom: 32px;
 }
-#googleSignIn{
-    width:100%;
-    margin-top:16px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+#googleSignIn {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
 }
 .auth-info {
     margin-top: 32px;
-    padding-top: 24px;
+    padding-top: 32px;
     border-top: 1px solid var(--border);
     text-align: left;
-    animation: fadeIn 0.6s ease-out;
 }
 .auth-info h3 {
-    font-size: 15px;
-    color: var(--text);
-    margin-bottom: 8px;
-    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    font-weight: 700;
 }
-.auth-info p {
-    font-size: 13.5px;
-    color: var(--text-secondary);
-    line-height: 1.5;
-    margin-bottom: 16px;
+.auth-info p, .auth-info li {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
 }
-.auth-info ol {
-    font-size: 13.5px;
-    color: var(--text-secondary);
-    line-height: 1.5;
-    margin-bottom: 16px;
-    padding-left: 20px;
-}
-.auth-info li {
-    margin-bottom: 6px;
-}
+.auth-info ol { padding-left: 20px; margin-bottom: 24px; }
 .auth-privacy {
-    font-size: 12px !important;
-    font-style: italic;
-    opacity: 0.8;
-    margin-bottom: 0 !important;
     display: flex;
-    align-items: center;
-    gap: 6px;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12px !important;
+    background: var(--bg-subtle);
+    padding: 12px;
+    border-radius: var(--radius-md);
+    margin-bottom: 0 !important;
 }
+
 .primary-btn {
     width: 100%;
     padding: 14px;
     background: var(--primary);
     color: #fff;
     border: none;
-    border-radius: var(--radius);
+    border-radius: var(--radius-md);
     cursor: pointer;
     font-weight: 600;
     font-size: 15px;
     transition: var(--transition);
     font-family: inherit;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
 }
 .primary-btn:hover {
-    background: #0062cc;
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.3);
+}
+
+/* CONTROLS TOOLBAR */
+.toolbar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.5s ease-out 0.1s both;
+}
+.search-wrapper {
+    flex: 1;
+    min-width: 200px;
+    position: relative;
+}
+.search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+.search-input {
+    width: 100%;
+    padding: 14px 16px 14px 44px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    font-size: 15px;
+    background: var(--bg-card);
+    color: var(--text-main);
+    transition: var(--transition);
+    font-family: inherit;
+    box-shadow: var(--shadow-sm);
+}
+.search-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+.control-btn {
+    width: 50px;
+    height: 50px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-card);
+    color: var(--text-muted);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+.control-btn:hover {
+    border-color: var(--text-muted);
+    color: var(--text-main);
     transform: translateY(-2px);
 }
+.control-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+}
+.my-scales-btn.active {
+    background: var(--text-main);
+    border-color: var(--text-main);
+    color: var(--bg-card);
+}
 
-/* CONTROLS */
-.top-controls{
-    display:flex;
-    gap:10px;
-    margin-bottom:20px;
-    flex-wrap:wrap;
-    animation:slideDown 0.4s ease-out 0.1s both;
-}
-.search-input{
-    flex:1;
-    min-width:150px;
-    padding:12px 16px;
-    border-radius:var(--radius);
-    border:1px solid var(--border);
-    font-size:15px;
-    background:var(--card);
-    color:var(--text);
-    transition:var(--transition);
-    font-family:inherit;
-}
-.search-input:focus{
-    outline:none;
-    border-color:var(--primary);
-    box-shadow:0 0 0 3px rgba(0,122,255,0.1);
-}
-.control-btn{
-    width:45px;
-    height:45px;
-    border:none;
-    border-radius:var(--radius);
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:var(--card);
-    color:var(--text);
-    box-shadow:var(--shadow);
-    transition:var(--transition);
-}
-.control-btn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 4px 12px rgba(0,0,0,0.12);
-}
-.control-btn.active{
-    background:var(--primary);
-    color:#fff;
-}
-.my-scales-btn.active{background:var(--success)}
-
-/* DESTAQUE ESTILO MARCA-TEXTO */
+/* MARCA TEXTO ELEGANTE E FORTE */
 .highlight-me {
-    background-color: #FF9500;
-    color: #FFFFFF;
+    background-color: #FFB340; 
+    color: #000000;            
     padding: 2px 8px;
-    border-radius: 4px;
-    font-weight: 700;
+    border-radius: 6px;
+    font-weight: 800;
     display: inline-block;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 4px rgba(255, 149, 0, 0.2);
 }
-body.dark-mode .highlight-me {
-    background-color: #FF9500;
-    color: #000000;
+a.whats .highlight-me { color: #000; text-decoration: none; }
+
+/* FILTERS */
+.filters-box {
+    display: none;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+    animation: fadeInDown 0.3s ease-out;
 }
-a.whats .highlight-me {
-    color: inherit;
-    text-decoration: underline;
+.filters-box.active { display: block; }
+.filters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+}
+.filters-box select {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: var(--bg-subtle);
+    color: var(--text-main);
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2364748B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+}
+.filters-box select:focus { outline: none; border-color: var(--primary); }
+.btn-clear {
+    grid-column: 1 / -1;
+    padding: 12px;
+    margin-top: 8px;
+    background: transparent;
+    color: var(--danger);
+    border: 1px solid var(--danger);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: var(--transition);
+}
+.btn-clear:hover { background: var(--danger); color: #fff; }
+
+/* CARDS PREMIUM */
+.cards { display: none; }
+#containerPassado { display: none; margin-bottom: 24px; }
+#containerPassado.show { display: flex; flex-direction: column; gap: 20px; }
+.past-divider {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    margin: 32px 0 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+}
+.past-divider::before, .past-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    margin: 0 16px;
 }
 
-/* CARDS */
-.cards{display:none}
-#containerPassado{display:none;margin-bottom:20px}
-#containerPassado.show{display:flex;flex-direction:column;gap:15px}
-.past-divider{
-    text-align:center;
-    color:var(--text-secondary);
-    font-size:11px;
-    margin:10px 0;
-    text-transform:uppercase;
-    letter-spacing:2px;
-    font-weight:600;
+.day-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+    transition: var(--transition);
+    animation: fadeInUp 0.4s ease-out both;
 }
+.day-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); border-color: #CBD5E1; }
+.day-card.past-card { opacity: 0.7; filter: grayscale(0.5); }
 
-.day-card{
-    background:var(--card);
-    border-radius:var(--radius);
-    padding:20px;
-    box-shadow:var(--shadow);
-    border:1px solid var(--border);
-    margin-bottom:16px;
-    transition:var(--transition);
-    animation:slideUp 0.4s ease-out both;
-    position:relative;
-    overflow:hidden;
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
 }
-.day-card::before{
-    content:'';
-    position:absolute;
-    top:0;
-    left:0;
-    width:4px;
-    height:100%;
-    background:var(--border);
-    transition:var(--transition);
+.date-pill {
+    display: flex;
+    flex-direction: column;
 }
-.day-card:hover{
-    transform:translateY(-2px);
-    box-shadow:0 4px 20px rgba(0,0,0,0.12);
+.date-pill .day-name {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    font-weight: 700;
 }
-.day-card.past-card{
-    opacity:0.6;
-    filter:grayscale(0.3);
-}
-
-.card-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:16px;
-}
-.date-pill{
-    background:var(--text);
-    color:var(--bg);
-    padding:6px 14px;
-    border-radius:20px;
-    font-size:13px;
-    font-weight:600;
+.date-pill .full-date {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-main);
+    letter-spacing: -0.02em;
 }
 
 /* BOTÃO AGENDA */
 .btn-agenda {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
-    border-radius: 20px;
-    border: 1px solid var(--primary);
-    background: rgba(0, 122, 255, 0.1);
-    color: var(--primary);
-    font-size: 12px;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    border: none;
+    background: var(--primary);
+    color: #fff;
+    font-size: 13px;
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
-    font-family: inherit;
+    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
 }
-.btn-agenda:hover {
-    background: var(--primary);
-    color: #fff;
+.btn-agenda:hover { background: var(--primary-hover); transform: scale(1.02); }
+.btn-agenda svg { width: 16px; height: 16px; }
+
+/* BLOCOS INTERNOS DOS CARDS */
+.card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
 }
-body.dark-mode .btn-agenda {
-    background: rgba(0, 122, 255, 0.2);
-}
-body.dark-mode .btn-agenda:hover {
-    background: var(--primary);
-    color: #fff;
+@media (min-width: 768px) {
+    .card-grid { grid-template-columns: 1fr 1fr; }
+    .culto-block { grid-column: 1 / -1; }
 }
 
-.block{
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:16px;
-    background:var(--bg);
-    margin-bottom:12px;
-    transition:var(--transition);
+.block {
+    background: var(--bg-subtle);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    border-left: 4px solid var(--border);
 }
-.block:last-child{margin-bottom:0}
-.block h4{
-    margin:0 0 12px;
-    font-size:13px;
-    color:var(--text);
-    border-bottom:1px solid var(--border);
-    padding-bottom:8px;
-    text-transform:uppercase;
-    font-weight:700;
-    display:flex;
-    align-items:center;
-    gap:8px;
-    letter-spacing:0.5px;
+.block.responsaveis { border-left-color: var(--success); }
+.block.equipe { border-left-color: var(--primary); }
+.block.culto { border-left-color: var(--warning); }
+
+.block h4 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    margin-bottom: 12px;
 }
-.block p{
-    margin:8px 0;
-    font-size:14px;
-    line-height:1.5;
-    color:var(--text);
+.block h4 svg { color: inherit; }
+
+.info-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
 }
-.label{
-    font-weight:600;
-    color:var(--text);
-    margin-right:6px;
+.info-row:last-child { margin-bottom: 0; }
+.info-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+.info-value {
+    font-size: 14.5px;
+    color: var(--text-main);
+    font-weight: 600;
+    line-height: 1.4;
 }
 
-.block.responsaveis{border-left:4px solid var(--success)}
-.block.equipe{border-left:4px solid var(--primary)}
-.block.culto{border-left:4px solid var(--warning)}
+/* LINKS DO WHATSAPP */
+a.whats {
+    color: var(--success);
+    text-decoration: none;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+a.whats:hover { opacity: 0.8; }
+a.whats::after {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310B981'%3E%3Cpath d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.052 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z'/%3E%3C/svg%3E");
+    background-size: cover;
+}
 
-/* FILTERS */
-.filters-box{
-    display:none;
-    background:var(--card);
-    border-radius:var(--radius);
-    padding:16px;
-    margin-bottom:20px;
-    box-shadow:var(--shadow);
-    animation:slideDown 0.3s ease-out;
-}
-.filters-box.active{display:block}
-.filters-box select{
-    width:100%;
-    padding:12px;
-    margin-bottom:10px;
-    border-radius:var(--radius);
-    border:1px solid var(--border);
-    background:var(--card);
-    color:var(--text);
-    font-size:14px;
-    font-family:inherit;
-    transition:var(--transition);
-}
-.filters-box select:focus{
-    outline:none;
-    border-color:var(--primary);
-}
-.btn-clear{
-    width:100%;
-    padding:12px;
-    margin-top:10px;
-    background:var(--danger);
-    color:#fff;
-    border:none;
-    border-radius:var(--radius);
-    cursor:pointer;
-    font-weight:600;
-    font-size:14px;
-    transition:var(--transition);
-    font-family:inherit;
-}
-.btn-clear:hover{
-    background:#E6342A;
-    transform:translateY(-1px);
-}
+/* TABLE PARA DESKTOP */
+.table-wrap { overflow-x: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; background: var(--bg-card); text-align: left; }
+th, td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 13.5px; }
+th { background: var(--bg-subtle); color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 12px; }
+tr:hover td { background: var(--bg-body); }
+.table-wrap a.whats::after { display: none; }
 
 /* ALERTS */
-.alert-banner{
-    background:var(--warning);
-    color:#fff;
-    padding:12px 16px;
-    border-radius:var(--radius);
-    margin-bottom:16px;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    animation:slideDown 0.4s ease-out;
-    box-shadow:var(--shadow);
+.alert-banner {
+    background: var(--bg-subtle);
+    border-left: 4px solid var(--primary);
+    padding: 16px;
+    border-radius: var(--radius-md);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow-sm);
+    animation: fadeInDown 0.4s ease-out;
 }
-.alert-banner.success{
-    background:var(--success);
-}
-.alert-icon{
-    font-size:20px;
-}
-.alert-text{
-    flex:1;
-    font-size:14px;
-    font-weight:500;
-}
+.alert-banner.success { border-left-color: var(--success); }
+.alert-icon { font-size: 20px; }
+.alert-text { flex: 1; font-size: 14px; font-weight: 600; color: var(--text-main); }
 
-/* LINKS */
-a.whats{
-    color:var(--success);
-    font-weight:600;
-    text-decoration:none;
-    transition:var(--transition);
-}
-a.whats:hover{
-    text-decoration:underline;
-    opacity:0.8;
-}
+/* ANIMAÇÕES */
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes zoomIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
 
-/* TABLE */
-.table-wrap{overflow-x:auto;margin-top:10px}
-table{
-    width:100%;
-    border-collapse:collapse;
-    background:var(--card);
-    border-radius:var(--radius);
-    overflow:hidden;
-    box-shadow:var(--shadow);
+/* RESPONSIVIDADE */
+@media(max-width: 800px) {
+    .table-wrap { display: none !important; }
+    .cards { display: block !important; }
+    .search-wrapper { min-width: 100%; order: 1; }
+    .control-btn { flex: 1; }
+    .header-bar { flex-direction: column; gap: 16px; align-items: flex-start; }
+    .user-info { width: 100%; justify-content: space-between; }
 }
-th,td{
-    padding:12px 10px;
-    border-bottom:1px solid var(--border);
-    text-align:center;
-    font-size:13px;
-}
-th{
-    background:var(--text);
-    color:var(--bg);
-    font-weight:600;
-}
-.table-wrap a.whats{
-    color:inherit !important;
-    font-weight:normal !important;
-    text-decoration:none !important;
-}
-
-/* ANIMATIONS */
-@keyframes fadeIn{
-    from{opacity:0}
-    to{opacity:1}
-}
-@keyframes slideDown{
-    from{
-        opacity:0;
-        transform:translateY(-10px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-@keyframes slideUp{
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-/* MOBILE */
-@media(max-width:768px){
-    body{padding:10px}
-    h1{font-size:24px}
-    .table-wrap{display:none!important}
-    .cards{display:flex!important;flex-direction:column}
-    .top-controls{flex-wrap:wrap}
-    .search-input{min-width:100%;order:1}
-    .control-btn{flex:1;min-width:45px}
-    .cards a.whats{
-        color:var(--success);
-        font-weight:600;
-        text-decoration:none;
-    }
+@media(min-width: 801px) {
+    .cards { display: none !important; }
+    .table-wrap { display: block !important; }
 }
 </style>
 </head>
 
 <body>
-<div id="authContainer" class="auth-container" style="display:none">
-    <h2 class="auth-title">Escala de Louvor</h2>
-    <p class="auth-subtitle">Faça login para acessar sua escala</p>
-    
-    <div id="googleSignIn"></div>
+<div class="app-wrapper">
 
-    <div class="auth-info">
-        <h3>Por que preciso fazer login?</h3>
-        <p>O login serve apenas para identificar quem você é. Assim, o sistema consegue destacar as datas em que você está escalado para facilitar a sua visualização.</p>
+    <div id="authContainer" class="auth-container" style="display:none">
+        <h2 class="auth-title">Escala de Louvor</h2>
+        <p class="auth-subtitle">Acesso exclusivo para a equipe</p>
         
-        <h3>Como funciona?</h3>
-        <ol>
-            <li>Clique no botão do Google acima.</li>
-            <li>Selecione a conta Google que você já usa no celular.</li>
-            <li>Pronto! O aplicativo será aberto automaticamente.</li>
-        </ol>
+        <div id="googleSignIn"></div>
 
-        <p class="auth-privacy">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-            </svg>
-            Não temos acesso à sua senha. O Google compartilha apenas seu nome para o funcionamento da escala.
-        </p>
-    </div>
-</div>
-
-<div id="nameSelectionContainer" class="auth-container" style="display:none">
-    <h2 class="auth-title">Quem é você?</h2>
-    <p class="auth-subtitle">Como é seu primeiro acesso, selecione seu nome na lista da equipe para vincular sua conta e ver suas escalas.</p>
-    
-    <select id="selectNomeContato" class="search-input" style="width:100%; margin-bottom: 24px;">
-        <option value="">Selecione seu nome...</option>
-    </select>
-    
-    <button class="primary-btn" onclick="salvarNomeVinculado()">Vincular meu nome</button>
-</div>
-
-<div id="appContainer" style="display:none">
-    <div class="header">
-        <h1>Escala 2026</h1>
-        <div class="user-info" id="userInfo" style="display:none">
-            <img id="userAvatar" class="user-avatar" src="" alt="">
-            <span class="user-name" id="userName"></span>
-            <button class="logout-btn" id="logoutBtn">Sair</button>
+        <div class="auth-info">
+            <h3>Por que fazer login?</h3>
+            <p>O login serve para identificar quem você é. O sistema destacará automaticamente as datas em que você está escalado e habilitará opções personalizadas.</p>
+            
+            <div class="auth-privacy">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                <span>Acesso seguro. Não temos acesso à sua senha, o Google apenas confirma sua identidade.</span>
+            </div>
         </div>
     </div>
 
-    <div id="alertContainer"></div>
-
-    <div class="top-controls">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar por nome...">
-        <button class="control-btn my-scales-btn" id="btnMyScales" title="Alternar para Minhas Escalas">
-            <svg width="18" height="18" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
-            </svg>
-        </button>
-        <button class="control-btn" id="btnToggleFilters" title="Filtros">
-            <svg width="18" height="18" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M3 5h18v2H3V5zm4 6h10v2H7v-2zm4 6h2v2h-2v-2z"/>
-            </svg>
-        </button>
-        <button class="control-btn" id="btnTogglePast" title="Exibir passados">
-            <svg width="22" height="22" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M13 3c-4.97 0-9 4.03-9 9H1l4 4 4-4H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/>
-            </svg>
-        </button>
+    <div id="nameSelectionContainer" class="auth-container" style="display:none">
+        <h2 class="auth-title">Vincular Conta</h2>
+        <p class="auth-subtitle">Selecione seu nome na lista da equipe para concluir o acesso e ver suas escalas.</p>
+        
+        <select id="selectNomeContato" class="search-input" style="width:100%; margin-bottom: 24px;">
+            <option value="">Selecione seu nome...</option>
+        </select>
+        
+        <button class="primary-btn" onclick="salvarNomeVinculado()">Salvar meu nome</button>
     </div>
 
-    <div class="filters-box" id="filtros">
-        <select data-col="ANCIÃO"><option value="">Ancião</option></select>
-        <select data-col="REGENTE LOUVOR"><option value="">Regente</option></select>
-        <select data-col="EQUIPE LOUVOR"><option value="">Equipe</option></select>
-        <select data-col="PREGADOR"><option value="">Pregador</option></select>
-        <select data-col="AUDIOVISUAL"><option value="">Audiovisual</option></select>
-        <select data-col="DATA"><option value="">Data</option></select>
-        <select data-col="DIA SEMANA"><option value="">Dia</option></select>
-        <select data-col="ACOMP"><option value="">Acompanhamento</option></select>
-        <button class="btn-clear" id="btnClearFilters">Limpar Filtros</button>
-    </div>
+    <div id="appContainer" style="display:none">
+        
+        <div class="header-bar">
+            <h1 class="header-title">Escala<span>.</span></h1>
+            
+            <div class="user-info" id="userInfo" style="display:none">
+                <img id="userAvatar" class="user-avatar" src="" alt="">
+                <span class="user-name" id="userName"></span>
+                <button class="logout-btn" id="logoutBtn">Sair</button>
+            </div>
+        </div>
 
-    <div class="table-wrap">
-        <table>
-            <thead>
-                <tr>
-                    <th>DATA</th><th>DIA</th><th>ACOMP</th><th>REGENTE</th><th>EQUIPE</th><th>MENSAGEM</th>
-                    <th>ES</th><th>CULTO</th><th>TEMA</th><th>AUDIOVISUAL</th><th>ANCIÃO</th><th>PREGADOR</th><th>SUPORTE</th><th>OBS</th>
-                </tr>
-            </thead>
-            <tbody id="tableBody"></tbody>
-        </table>
-    </div>
+        <div id="alertContainer"></div>
 
-    <div class="cards">
-        <div id="containerPassado"></div>
-        <div id="pastDivider" class="past-divider" style="display:none">Escalas Recentes</div>
-        <div id="containerFuturo"></div>
+        <div class="toolbar">
+            <div class="search-wrapper">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="searchInput" class="search-input" placeholder="Buscar por pessoa, função ou data...">
+            </div>
+            
+            <button class="control-btn my-scales-btn" id="btnMyScales" title="Ver Minhas Escalas">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </button>
+            <button class="control-btn" id="btnToggleFilters" title="Filtros Avançados">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+            </button>
+            <button class="control-btn" id="btnTogglePast" title="Mostrar Escalas Anteriores">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </button>
+        </div>
+
+        <div class="filters-box" id="filtros">
+            <div class="filters-grid">
+                <select data-col="ANCIÃO"><option value="">Ancião</option></select>
+                <select data-col="REGENTE LOUVOR"><option value="">Regente</option></select>
+                <select data-col="EQUIPE LOUVOR"><option value="">Equipe</option></select>
+                <select data-col="PREGADOR"><option value="">Pregador</option></select>
+                <select data-col="AUDIOVISUAL"><option value="">Audiovisual</option></select>
+                <select data-col="DATA"><option value="">Data</option></select>
+                <select data-col="DIA SEMANA"><option value="">Dia da Semana</option></select>
+                <button class="btn-clear" id="btnClearFilters">Limpar Todos os Filtros</button>
+            </div>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>DATA</th><th>ACOMP</th><th>REGENTE</th><th>EQUIPE</th><th>MENSAGEM</th>
+                        <th>ES</th><th>CULTO</th><th>TEMA</th><th>AUDIOVISUAL</th><th>ANCIÃO</th><th>PREGADOR</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+
+        <div class="cards">
+            <div id="containerPassado"></div>
+            <div id="pastDivider" class="past-divider" style="display:none">Próximas Escalas</div>
+            <div id="containerFuturo"></div>
+        </div>
+        
     </div>
 </div>
 
 <script>
-// Estado global
+// ESTADO GLOBAL
 let dadosGlobais=[];
 let contatosMap={};
 let usuarioAtual=null;
-let modoEscuro=false;
 
-// Inicialização
+// INICIALIZAÇÃO
 async function init(){
     try{
-        carregarPreferencias();
         await carregarCSV();
         verificarAutenticacao();
     }catch(error){
@@ -639,7 +627,7 @@ async function init(){
     }
 }
 
-// Autenticação Google
+// GOOGLE AUTH
 function verificarAutenticacao(){
     const token=localStorage.getItem('googleToken');
     const userData=localStorage.getItem('userData');
@@ -647,74 +635,47 @@ function verificarAutenticacao(){
     if(token && userData){
         try{
             usuarioAtual=JSON.parse(userData);
-            if (!usuarioAtual.nomeVinculado) {
-                mostrarSelecaoNome();
-            } else {
-                mostrarApp();
-                aplicarFiltroAutomatico();
-            }
+            if (!usuarioAtual.nomeVinculado) mostrarSelecaoNome();
+            else { mostrarApp(); aplicarFiltroAutomatico(); }
             return;
         }catch(e){
-            console.error('Erro ao carregar dados do usuário:',e);
             localStorage.removeItem('googleToken');
             localStorage.removeItem('userData');
         }
     }
-    
     mostrarAuth();
-    
-    let tentativas=0;
-    const maxTentativas=50;
-    
-    function inicializarGoogle(){
+    inicializarGoogleComTentativas();
+}
+
+function inicializarGoogleComTentativas() {
+    let tentativas = 0;
+    function checar() {
         tentativas++;
         if(typeof google !== 'undefined' && google.accounts && google.accounts.id){
-            try{
-                google.accounts.id.initialize({
-                    client_id:'644626883802-8dv5caoftedv677hhiiidtff03j4ne43.apps.googleusercontent.com',
-                    callback:handleCredentialResponse
-                });
-                const btnContainer=document.getElementById('googleSignIn');
-                if(btnContainer){
-                    google.accounts.id.renderButton(
-                        btnContainer,
-                        {theme:'outline',size:'large',width:'100%'}
-                    );
-                }
-            }catch(error){
-                console.error('Erro ao inicializar Google Sign-In:',error);
-            }
-        }else if(tentativas < maxTentativas){
-            setTimeout(inicializarGoogle,100);
+            google.accounts.id.initialize({
+                client_id:'644626883802-8dv5caoftedv677hhiiidtff03j4ne43.apps.googleusercontent.com',
+                callback:handleCredentialResponse
+            });
+            const btnContainer=document.getElementById('googleSignIn');
+            if(btnContainer) google.accounts.id.renderButton(btnContainer, {theme:'outline', size:'large', width:'100%'});
+        }else if(tentativas < 50){
+            setTimeout(checar, 100);
         }
     }
-    setTimeout(inicializarGoogle,300);
+    setTimeout(checar, 300);
 }
 
 function handleCredentialResponse(response){
     fetch('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token='+response.credential)
         .then(r=>r.json())
         .then(data=>{
-            usuarioAtual={
-                email:data.email,
-                name:data.name,
-                picture:data.picture,
-                sub:data.sub
-            };
+            usuarioAtual={ email:data.email, name:data.name, picture:data.picture, sub:data.sub };
             localStorage.setItem('googleToken',response.credential);
             localStorage.setItem('userData',JSON.stringify(usuarioAtual));
             
-            if(!usuarioAtual.nomeVinculado) {
-                mostrarSelecaoNome();
-            } else {
-                mostrarApp();
-                aplicarFiltroAutomatico();
-            }
-        })
-        .catch(()=>{
-            console.error("Falha ao processar token do Google");
-            mostrarAuth();
-        });
+            if(!usuarioAtual.nomeVinculado) mostrarSelecaoNome();
+            else { mostrarApp(); aplicarFiltroAutomatico(); }
+        }).catch(()=>mostrarAuth());
 }
 
 function mostrarAuth(){
@@ -723,34 +684,25 @@ function mostrarAuth(){
     document.getElementById('appContainer').style.display='none';
 }
 
-// Seleção de Nome (Primeiro Acesso)
 function mostrarSelecaoNome() {
     document.getElementById('authContainer').style.display='none';
     document.getElementById('appContainer').style.display='none';
     const container = document.getElementById('nameSelectionContainer');
     container.style.display='block';
-
     const select = document.getElementById('selectNomeContato');
     select.innerHTML = '<option value="">Selecione seu nome na equipe...</option>';
-
-    const nomes = Object.keys(contatosMap).sort();
-    nomes.forEach(nome => {
+    Object.keys(contatosMap).sort().forEach(nome => {
         const opt = document.createElement('option');
-        opt.value = nome;
-        opt.textContent = nome;
+        opt.value = opt.textContent = nome;
         select.appendChild(opt);
     });
 }
 
 function salvarNomeVinculado() {
     const select = document.getElementById('selectNomeContato');
-    if(!select.value) {
-        alert('Por favor, selecione seu nome na lista.');
-        return;
-    }
+    if(!select.value) return alert('Por favor, selecione seu nome na lista.');
     usuarioAtual.nomeVinculado = select.value;
     localStorage.setItem('userData', JSON.stringify(usuarioAtual));
-    
     document.getElementById('nameSelectionContainer').style.display='none';
     mostrarApp();
     aplicarFiltroAutomatico();
@@ -762,184 +714,161 @@ function mostrarApp(){
     document.getElementById('appContainer').style.display='block';
     if(usuarioAtual){
         document.getElementById('userInfo').style.display='flex';
-        document.getElementById('userName').textContent=usuarioAtual.nomeVinculado || usuarioAtual.name;
-        if(usuarioAtual.picture){
-            document.getElementById('userAvatar').src=usuarioAtual.picture;
-        }
+        document.getElementById('userName').textContent = usuarioAtual.nomeVinculado || usuarioAtual.name;
+        if(usuarioAtual.picture) document.getElementById('userAvatar').src = usuarioAtual.picture;
     }
 }
 
 document.getElementById('logoutBtn').onclick=()=>{
-    localStorage.removeItem('googleToken');
-    localStorage.removeItem('userData');
-    usuarioAtual=null;
-    mostrarAuth();
+    localStorage.removeItem('googleToken'); localStorage.removeItem('userData');
+    usuarioAtual=null; mostrarAuth();
 };
 
 // ==========================================
-// LÓGICA DE EXPORTAÇÃO PARA AGENDA (.ics)
+// EXPORTAR PARA AGENDA COM HORÁRIOS E ALERTAS
 // ==========================================
-
 function getDetalhesAgenda(registro, nome) {
     let n = normalizarNome(nome);
-    let papel = "Escala de Louvor";
-    let descricao = "";
-    
-    let isRegente = false;
-    let isLouvor = false;
+    let papeis = [];
+    let descricoes = [];
 
-    // Verifica se a pessoa é Regente
-    if (registro['REGENTE LOUVOR']) {
-        let regentes = registro['REGENTE LOUVOR'].split(',').map(x => normalizarNome(x.trim()));
-        if (regentes.includes(n)) isRegente = true;
-    }
-    
-    // Verifica se a pessoa é Equipe de Louvor
-    if (registro['EQUIPE LOUVOR']) {
-        let equipe = registro['EQUIPE LOUVOR'].split(',').map(x => normalizarNome(x.trim()));
-        if (equipe.includes(n)) isLouvor = true;
-    }
-
-    if (isRegente) {
-        papel = "Regente";
-        descricao += "📋 TAREFAS DO REGENTE:\\n";
-        descricao += "- Definir músicas\\n";
-        descricao += "- Confirmar equipe\\n";
-        descricao += "- Comunicar banda\\n";
-        descricao += "- Enviar músicas para sonoplastia\\n";
-        descricao += "- Se preparar espiritualmente\\n";
-        descricao += "- Conduzir equipe de louvor à adoração e não apresentação\\n";
-        descricao += "- Definir data do ensaio\\n";
-    } else if (isLouvor) {
-        papel = "Equipe de Louvor";
-        descricao += "📋 TAREFAS DA EQUIPE:\\n";
-        descricao += "- Perguntar ao regente as músicas\\n";
-        descricao += "- Se preparar espiritualmente\\n";
-    } else {
-        // Se for outra função (Áudio, Mensagem Musical, etc)
-        let papeisEncontrados = [];
-        const camposExtras = ['PREGADOR','MENSAGEM MUSICAL','AUDIOVISUAL','ANCIÃO','SUPORTE'];
-        for(const c of camposExtras){
-            const v = registro[c]||"";
-            if(v.includes(',')){
-                if(v.split(',').map(x=>normalizarNome(x.trim())).includes(n)) papeisEncontrados.push(c);
-            } else if(normalizarNome(v)===n) {
-                papeisEncontrados.push(c);
-            }
+    // Função auxiliar para verificar o cargo
+    const verificarPapel = (campo, titulo, descricaoExtra) => {
+        let v = registro[campo] || "";
+        let escalado = false;
+        if (v.includes(',')) {
+            escalado = v.split(',').map(x => normalizarNome(x.trim())).includes(n);
+        } else {
+            escalado = normalizarNome(v) === n;
         }
-        if (papeisEncontrados.length > 0) {
-            papel = papeisEncontrados.join(" e ");
-            descricao += "📋 PREPARAÇÃO:\\n";
-            descricao += "- Se preparar espiritualmente para o culto\\n";
+        
+        if (escalado) {
+            papeis.push(titulo);
+            if (descricaoExtra) descricoes.push(descricaoExtra);
         }
-    }
+    };
 
-    // Adiciona o tema para contexto extra
+    verificarPapel('PREGADOR', 'PREGAR NA CENTRAL', '');
+    verificarPapel('REGENTE LOUVOR', 'REGÊNCIA NA CENTRAL', '📋 TAREFAS DO REGENTE:\\n- Definir músicas\\n- Confirmar equipe\\n- Comunicar banda\\n- Enviar músicas para sonoplastia\\n- Se preparar espiritualmente\\n- Conduzir equipe de louvor à adoração e não apresentação\\n- Definir data do ensaio');
+    verificarPapel('EQUIPE LOUVOR', 'CANTAR LOUVOR', '📋 TAREFAS DA EQUIPE:\\n- Perguntar ao regente as músicas\\n- Se preparar espiritualmente');
+    verificarPapel('MENSAGEM MUSICAL', 'MENSAGEM MUSICAL NA CENTRAL', '');
+    verificarPapel('AUDIOVISUAL', 'FAZER A MÍDIA DO CULTO', '');
+    verificarPapel('SUPORTE', 'DAR SUPORTE NA CENTRAL', '');
+    verificarPapel('ANCIÃO', 'SOU ANCIÃO', '');
+
+    let papelFinal = papeis.length > 0 ? papeis.join(" E ") : "ESCALA NA CENTRAL";
+    let descricaoFinal = descricoes.join("\\n\\n");
+    
+    // Fallback caso seja um cargo sem descrição específica
+    if(descricaoFinal === "") descricaoFinal = "📋 PREPARAÇÃO:\\n- Se preparar espiritualmente para o culto";
+
     if (registro['TEMA CULTO']) {
-        descricao += `\\n📌 Tema do Culto: ${registro['TEMA CULTO']}`;
+        descricaoFinal += `\\n\\n📌 Tema do Culto: ${registro['TEMA CULTO']}`;
     }
 
-    return { papel, descricao };
+    return { papel: papelFinal, descricao: descricaoFinal };
 }
 
 window.exportarParaAgenda = function(dataStr) {
     if(!usuarioAtual || !usuarioAtual.nomeVinculado) return;
-    
-    // Encontra a escala correta pela data
     const registro = dadosGlobais.find(r => r.DATA === dataStr);
     if(!registro) return;
-
+    
     const detalhes = getDetalhesAgenda(registro, usuarioAtual.nomeVinculado);
     
-    // Converter DD/MM/YYYY para YYYYMMDD para o padrão iCal
+    // Tratamento de Horários com base no Dia da Semana
     const [dia, mes, ano] = registro.DATA.split('/');
+    const diaSemana = (registro['DIA SEMANA'] || "").toUpperCase();
     
-    // Cria um evento das 08:30 às 11:30 (horário padrão local na agenda)
-    const dataInicio = `${ano}${mes}${dia}T083000`;
-    const dataFim = `${ano}${mes}${dia}T113000`;
+    let horaInicio = "194500"; // Padrão: 19:45
+    let horaFim = "210000";    // Padrão: 21:00
 
-    // Montagem do arquivo .ics (formatação estrita exigida pelas agendas)
-    const icsContent = 
-`BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//Escala de Louvor//PT
-CALSCALE:GREGORIAN
-BEGIN:VEVENT
-DTSTART:${dataInicio}
-DTEND:${dataFim}
-SUMMARY:${detalhes.papel}
-DESCRIPTION:${detalhes.descricao}
-END:VEVENT
-END:VCALENDAR`;
+    if (diaSemana.includes("SÁBADO") || diaSemana.includes("SABADO")) {
+        horaInicio = "083000";
+        horaFim = "120000";
+    } else if (diaSemana.includes("DOMINGO")) {
+        horaInicio = "184500";
+        horaFim = "200000";
+    }
 
-    // Cria e dispara o download do arquivo .ics
+    const dataInicio = `${ano}${mes}${dia}T${horaInicio}`;
+    const dataFim = `${ano}${mes}${dia}T${horaFim}`;
+    
+    // Configuração dos Alertas (VALARM)
+    const alarmes = `
+BEGIN:VALARM
+TRIGGER:-PT12H
+ACTION:DISPLAY
+DESCRIPTION:Lembrete de Escala
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Lembrete de Escala
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P3D
+ACTION:DISPLAY
+DESCRIPTION:Lembrete de Escala
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P1W
+ACTION:DISPLAY
+DESCRIPTION:Lembrete de Escala
+END:VALARM`.trim();
+    
+    const icsContent = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Escala de Louvor//PT\nCALSCALE:GREGORIAN\nBEGIN:VEVENT\nDTSTART:${dataInicio}\nDTEND:${dataFim}\nSUMMARY:${detalhes.papel}\nDESCRIPTION:${detalhes.descricao}\n${alarmes}\nEND:VEVENT\nEND:VCALENDAR`;
+    
     const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
     const link = document.createElement('a');
     link.href = window.URL.createObjectURL(blob);
     link.setAttribute('download', `Escala_${ano}${mes}${dia}.ics`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    document.body.appendChild(link); link.click(); document.body.removeChild(link);
 };
 
-// Alertas (Apenas para mostrar a próxima escala na tela)
+// ALERTAS DA TELA
 function verificarAlertas(){
-    const container=document.getElementById('alertContainer');
-    container.innerHTML='';
+    const container=document.getElementById('alertContainer'); container.innerHTML='';
     if(!usuarioAtual || !usuarioAtual.nomeVinculado) return;
     
-    const hoje=new Date();
-    hoje.setHours(0,0,0,0);
-    const escalasFuturas=dadosGlobais.filter(r=>!isPastDate(r.DATA) && estaEscalado(r,usuarioAtual.nomeVinculado));
+    const hoje=new Date(); hoje.setHours(0,0,0,0);
+    const futuras=dadosGlobais.filter(r=>!isPastDate(r.DATA) && estaEscalado(r,usuarioAtual.nomeVinculado));
     
-    if(escalasFuturas.length>0){
-        const proxima=escalasFuturas[0];
-        const dataEvento=parseDate(proxima.DATA);
-        const diffDias=Math.floor((dataEvento-hoje)/(1000*60*60*24));
+    if(futuras.length>0){
+        const proxima=futuras[0];
+        const diffDias=Math.floor((parseDate(proxima.DATA)-hoje)/(1000*60*60*24));
         if(diffDias<=7){
             const alert=document.createElement('div');
             alert.className='alert-banner success';
-            alert.innerHTML=`<span class="alert-icon">📅</span><span class="alert-text">Sua próxima escala é ${proxima.DATA} (${diffDias===0?'Hoje':diffDias===1?'Amanhã':`Em ${diffDias} dias`})</span>`;
+            let txtDia = diffDias===0 ? 'Hoje' : diffDias===1 ? 'Amanhã' : `Em ${diffDias} dias`;
+            alert.innerHTML=`<span class="alert-icon">📅</span><span class="alert-text">Sua próxima escala é ${proxima.DATA} (${txtDia})</span>`;
             container.appendChild(alert);
         }
     }
 }
 
-// Utilitários
-function parseDate(s){const p=s.split('/');return new Date(p[2],p[1]-1,p[0]);}
-function isPastDate(s){if(!s)return false;const d=parseDate(s);const t=new Date();t.setHours(0,0,0,0);return d<t;}
-
-function normalizarNome(n){
-    return n.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase().trim();
-}
+// FORMATADORES E UTILS
+function parseDate(s){ const p=s.split('/'); return new Date(p[2],p[1]-1,p[0]); }
+function isPastDate(s){ if(!s)return false; const d=parseDate(s), t=new Date(); t.setHours(0,0,0,0); return d<t; }
+function normalizarNome(n){ return n.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase().trim(); }
 
 function estaEscalado(registro,nome){
     if(!nome) return false;
     const n=normalizarNome(nome);
-    const campos=['REGENTE LOUVOR','EQUIPE LOUVOR','PREGADOR','MENSAGEM MUSICAL','AUDIOVISUAL','ANCIÃO','SUPORTE'];
-    for(const campo of campos){
-        const valor=registro[campo]||"";
-        if(valor.includes(',')){
-            const lista=valor.split(',').map(x=>normalizarNome(x.trim()));
-            if(lista.includes(n)) return true;
-        }else if(normalizarNome(valor)===n) return true;
-    }
-    return false;
+    return ['REGENTE LOUVOR','EQUIPE LOUVOR','PREGADOR','MENSAGEM MUSICAL','AUDIOVISUAL','ANCIÃO','SUPORTE'].some(c => {
+        let v=registro[c]||"";
+        return v.includes(',') ? v.split(',').map(x=>normalizarNome(x.trim())).includes(n) : normalizarNome(v)===n;
+    });
 }
 
 function buscarPorNome(dados,termo){
     if(!termo) return dados;
     const t=normalizarNome(termo);
     return dados.filter(r=>{
-        const campos=['REGENTE LOUVOR','EQUIPE LOUVOR','PREGADOR','MENSAGEM MUSICAL','AUDIOVISUAL','ANCIÃO','SUPORTE','DATA','DIA SEMANA','ACOMP','TEMA CULTO','OBS'];
-        for(const campo of campos){
-            const valor=(r[campo]||"").toString();
-            if(valor.includes(',')){
-                const lista=valor.split(',').map(x=>normalizarNome(x.trim()));
-                if(lista.some(x=>x.includes(t))) return true;
-            }else if(normalizarNome(valor).includes(t)) return true;
-        }
-        return false;
+        return ['REGENTE LOUVOR','EQUIPE LOUVOR','PREGADOR','MENSAGEM MUSICAL','AUDIOVISUAL','ANCIÃO','SUPORTE','DATA','DIA SEMANA','ACOMP','TEMA CULTO','OBS'].some(c=>{
+            let v=(r[c]||"").toString();
+            return v.includes(',') ? v.split(',').map(x=>normalizarNome(x.trim())).some(x=>x.includes(t)) : normalizarNome(v).includes(t);
+        });
     });
 }
 
@@ -947,10 +876,7 @@ function buscarContato(nome){
     const alvo=normalizarNome(nome);
     for(const base in contatosMap){
         if(normalizarNome(base)===alvo) return contatosMap[base];
-        const aps=contatosMap[base].apelidos||[];
-        for(const ap of aps){
-            if(normalizarNome(ap)===alvo) return contatosMap[base];
-        }
+        if((contatosMap[base].apelidos||[]).some(ap=>normalizarNome(ap)===alvo)) return contatosMap[base];
     }
     return null;
 }
@@ -958,158 +884,101 @@ function buscarContato(nome){
 function linkarNome(nome){
     if(!nome || nome==="-") return nome||"";
     const c=buscarContato(nome);
-    if(c && c.telefone){
-        return `<a class="whats" href="${c.telefone}" target="_blank">${nome}</a>`;
-    }
-    return nome;
+    return (c && c.telefone) ? `<a class="whats" href="${c.telefone}" target="_blank">${nome}</a>` : nome;
 }
 
 function formatarNome(nome) {
     if(!nome || nome==="-") return nome||"";
-    let htmlFinal = linkarNome(nome);
-    
-    if (usuarioAtual && usuarioAtual.nomeVinculado) {
-        if (normalizarNome(nome) === normalizarNome(usuarioAtual.nomeVinculado)) {
-            htmlFinal = `<span class="highlight-me">${htmlFinal}</span>`;
-        }
+    let html = linkarNome(nome);
+    if (usuarioAtual && usuarioAtual.nomeVinculado && normalizarNome(nome) === normalizarNome(usuarioAtual.nomeVinculado)) {
+        html = `<span class="highlight-me">${html}</span>`;
     }
-    return htmlFinal;
+    return html;
 }
 
-function formatarLista(txt){
-    if(!txt) return "";
-    return txt.split(",").map(n=>formatarNome(n.trim())).join(", ");
-}
+function formatarLista(txt){ return !txt ? "" : txt.split(",").map(n=>formatarNome(n.trim())).join("<br>"); }
 
-// Carregar dados
+// CARREGAR DADOS E RENDERIZAR
 async function carregarCSV(){
     try{
-        const [rDados, rContatos] = await Promise.all([
-            fetch('atual.json?t=' + Date.now()),
-            fetch('contatos.json?t=' + Date.now())
-        ]);
-        dadosGlobais = await rDados.json();
-        contatosMap = await rContatos.json();
-    }catch(e){
-        console.error('Erro ao carregar dados:',e);
-    }
+        const [rDados, rContatos] = await Promise.all([ fetch('atual.json?t='+Date.now()), fetch('contatos.json?t='+Date.now()) ]);
+        dadosGlobais = await rDados.json(); contatosMap = await rContatos.json();
+    }catch(e){ console.error('Erro ao carregar dados:',e); }
 }
 
-// Sempre carrega a escala geral
-function aplicarFiltroAutomatico(){
-    renderizar(dadosGlobais);
-    montarFiltros(dadosGlobais);
-}
+function aplicarFiltroAutomatico(){ renderizar(dadosGlobais); montarFiltros(dadosGlobais); }
 
-function renderizar(d){montarTabela(d);montarCards(d);verificarAlertas();}
+function renderizar(d){ montarTabela(d); montarCards(d); verificarAlertas(); }
 
 function montarTabela(d){
-    const tb=document.getElementById("tableBody");
-    tb.innerHTML="";
+    const tb=document.getElementById("tableBody"); tb.innerHTML="";
     d.forEach(x=>{
         const tr=document.createElement("tr");
         if(isPastDate(x["DATA"])) tr.style.opacity="0.5";
-        tr.innerHTML=`
-<td>${x["DATA"]}</td>
-<td>${x["DIA SEMANA"]}</td>
-<td>${x["ACOMP"]}</td>
-<td>${formatarNome(x["REGENTE LOUVOR"])}</td>
-<td>${formatarLista(x["EQUIPE LOUVOR"])}</td>
-<td>${formatarLista(x["MENSAGEM MUSICAL"]||"")}</td>
-<td>${x["LOUVORES ES"]||""}</td>
-<td>${x["LOUVORES CULTO"]||""}</td>
-<td>${x["TEMA CULTO"]||""}</td>
-<td>${formatarNome(x["AUDIOVISUAL"]||"")}</td>
-<td>${formatarNome(x["ANCIÃO"]||"")}</td>
-<td>${formatarNome(x["PREGADOR"]||"")}</td>
-<td>${formatarNome(x["SUPORTE"]||"")}</td>
-<td>${x["OBS"]||""}</td>`;
+        tr.innerHTML=`<td>${x["DATA"]}<br><small style="color:var(--text-muted)">${x["DIA SEMANA"]}</small></td>
+            <td>${x["ACOMP"]}</td><td>${formatarNome(x["REGENTE LOUVOR"])}</td><td>${formatarLista(x["EQUIPE LOUVOR"])}</td>
+            <td>${formatarLista(x["MENSAGEM MUSICAL"]||"")}</td><td>${x["LOUVORES ES"]||""}</td><td>${x["LOUVORES CULTO"]||""}</td>
+            <td>${x["TEMA CULTO"]||""}</td><td>${formatarNome(x["AUDIOVISUAL"]||"")}</td><td>${formatarNome(x["ANCIÃO"]||"")}</td>
+            <td>${formatarNome(x["PREGADOR"]||"")}</td>`;
         tb.appendChild(tr);
     });
 }
 
 function montarCards(d){
-    const f=document.getElementById("containerFuturo");
-    const p=document.getElementById("containerPassado");
-    const div=document.getElementById("pastDivider");
-    f.innerHTML="";p.innerHTML="";let tem=false;
+    const f=document.getElementById("containerFuturo"), p=document.getElementById("containerPassado"), div=document.getElementById("pastDivider");
+    f.innerHTML=""; p.innerHTML=""; let tem=false;
 
     d.forEach((x,idx)=>{
         const past=isPastDate(x["DATA"]);
         const card=document.createElement("div");
-        let classes="day-card"+(past?" past-card":"");
+        card.className = "day-card" + (past ? " past-card" : "");
+        card.style.animationDelay = `${idx*0.05}s`;
         
-        // Exibir o botão da agenda SOMENTE se for escala da pessoa e estiver no futuro
         const isMyScale = usuarioAtual && usuarioAtual.nomeVinculado && estaEscalado(x,usuarioAtual.nomeVinculado);
-        
-        const btnAgenda = (isMyScale && !past) ? 
-            `<button class="btn-agenda" onclick="exportarParaAgenda('${x.DATA}')" title="Salvar no calendário do celular">
-                <svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5z"/></svg>
-                Salvar na Agenda
-            </button>` : '';
-
-        card.className=classes;
-        card.style.animationDelay=`${idx*0.05}s`;
+        const btnAgenda = (isMyScale && !past) ? `<button class="btn-agenda" onclick="exportarParaAgenda('${x.DATA}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Me lembre</button>` : '';
 
         card.innerHTML=`
         <div class="card-header">
-            <div style="display:flex;align-items:center;gap:8px">
-                <div class="date-pill">${x["DATA"]} — ${x["DIA SEMANA"]}</div>
+            <div class="date-pill">
+                <span class="day-name">${x["DIA SEMANA"]}</span>
+                <span class="full-date">${x["DATA"]}</span>
             </div>
             ${btnAgenda}
         </div>
-
-        <div class="block responsaveis">
-            <h4>
-                <svg width="16" height="16" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
-                </svg>
-                RESPONSÁVEIS
-            </h4>
-            <p><span class="label">Ancião:</span> ${formatarNome(x["ANCIÃO"]||"-")}</p>
-            <p><span class="label">Regente:</span> ${formatarNome(x["REGENTE LOUVOR"]||"-")}</p>
-            <p><span class="label">OBS:</span> ${x["OBS"]||"-"}</p>
-        </div>
-
-        <div class="block equipe">
-            <h4>
-                <svg width="16" height="16" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M16 11c1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3 1.3 3 3 3zm-8 0c1.7 0 3-1.3 3-3S9.7 5 8 5 5 6.3 5 8s1.3 3 3 3zm0 2c-2.7 0-8 1.3-8 4v3h10v-3c0-1.5.8-2.8 2.1-3.7C11.2 13.1 9.1 13 8 13zm8 0c-.3 0-.6 0-.9.1 1.2.9 1.9 2.2 1.9 3.6v3h6v-3h6v-3c0-2.7-5.3-4-7-4z"/>
-                </svg>
-                EQUIPE
-            </h4>
-            <p><span class="label">Louvor:</span> ${formatarLista(x["EQUIPE LOUVOR"]||"-")}</p>
-            <p><span class="label">Acompanhamento:</span> ${x["ACOMP"]||"-"}</p>
-            <p><span class="label">Pregador:</span> ${formatarNome(x["PREGADOR"]||"-")}</p>
-            <p><span class="label">Mensagem Musical:</span> ${formatarLista(x["MENSAGEM MUSICAL"]||"-")}</p>
-            <p><span class="label">Audiovisual:</span> ${formatarNome(x["AUDIOVISUAL"]||"-")}${x["SUPORTE"] ? " e "+formatarNome(x["SUPORTE"])+" (suporte)" : ""}</p>
-        </div>
-
-        <div class="block culto">
-            <h4>
-                <svg width="16" height="16" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M12 2L5 8v12h4v-6h6v6h4V8l-7-6zm-1 7h2v3h-2V9z"/>
-                </svg>
-                CULTO E ES
-            </h4>
-            <p><span class="label">Tema:</span> ${x["TEMA CULTO"]||"-"}</p>
-            <p><span class="label">Músicas ES:</span><br>${(x["LOUVORES ES"]||"").replace(/\|/g,"<br>")}</p>
-            <p><span class="label">Músicas Culto:</span><br>${(x["LOUVORES CULTO"]||"").replace(/\|/g,"<br>")}</p>
-        </div>
-        `;
-
-        if(past){p.appendChild(card);tem=true;}else{f.appendChild(card);}
+        <div class="card-grid">
+            <div class="block responsaveis">
+                <h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Liderança</h4>
+                <div class="info-row"><span class="info-label">Ancião</span><span class="info-value">${formatarNome(x["ANCIÃO"]||"-")}</span></div>
+                <div class="info-row"><span class="info-label">Regente</span><span class="info-value">${formatarNome(x["REGENTE LOUVOR"]||"-")}</span></div>
+                ${x["OBS"] ? `<div class="info-row"><span class="info-label">OBS</span><span class="info-value">${x["OBS"]}</span></div>` : ''}
+            </div>
+            <div class="block equipe">
+                <h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg> Louvor e Áudio</h4>
+                <div class="info-row"><span class="info-label">Equipe Vocal</span><span class="info-value">${formatarLista(x["EQUIPE LOUVOR"]||"-")}</span></div>
+                <div class="info-row"><span class="info-label">Instrumentos</span><span class="info-value">${x["ACOMP"]||"-"}</span></div>
+                <div class="info-row"><span class="info-label">Audiovisual</span><span class="info-value">${formatarNome(x["AUDIOVISUAL"]||"-")}${x["SUPORTE"] ? " e "+formatarNome(x["SUPORTE"]) : ""}</span></div>
+                <div class="info-row"><span class="info-label">Mensagem Musical</span><span class="info-value">${formatarLista(x["MENSAGEM MUSICAL"]||"-")}</span></div>
+            </div>
+            <div class="block culto">
+                <h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg> Detalhes do Culto</h4>
+                <div class="info-row"><span class="info-label">Pregador</span><span class="info-value">${formatarNome(x["PREGADOR"]||"-")}</span></div>
+                <div class="info-row"><span class="info-label">Tema</span><span class="info-value">${x["TEMA CULTO"]||"-"}</span></div>
+                <div class="info-row"><span class="info-label">Músicas ES</span><span class="info-value">${(x["LOUVORES ES"]||"-").replace(/\|/g,"<br>")}</span></div>
+                <div class="info-row"><span class="info-label">Músicas Culto</span><span class="info-value">${(x["LOUVORES CULTO"]||"-").replace(/\|/g,"<br>")}</span></div>
+            </div>
+        </div>`;
+        if(past){ p.appendChild(card); tem=true; } else { f.appendChild(card); }
     });
-    div.style.display=(tem && p.classList.contains("show"))?"block":"none";
+    div.style.display=(tem && p.classList.contains("show")) ? "flex" : "none";
 }
 
 function montarFiltros(d){
     document.querySelectorAll('#filtros select').forEach(s=>{
         const col=s.dataset.col;
         let vals=[...new Set(d.map(x=>x[col]).filter(v=>v && v.trim()!==""))];
-        col==="DATA"?vals.sort((a,b)=>parseDate(a)-parseDate(b)):vals.sort();
+        col==="DATA" ? vals.sort((a,b)=>parseDate(a)-parseDate(b)) : vals.sort();
         s.innerHTML = `<option value="">${s.options[0].text}</option>`;
-        vals.forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;s.appendChild(o);});
+        vals.forEach(v=>{ const o=document.createElement("option"); o.value=v; o.textContent=v; s.appendChild(o); });
         s.onchange=aplicarFiltros;
     });
 }
@@ -1119,11 +988,8 @@ function aplicarFiltros(){
     document.querySelectorAll("#filtros select").forEach(s=>{
         if(s.value){
             const col=s.dataset.col;
-            if(col==="EQUIPE LOUVOR"){
-                f=f.filter(x=>(x[col]||"").toUpperCase().includes(s.value.toUpperCase()));
-            }else{
-                f=f.filter(x=>x[col]===s.value);
-            }
+            if(col==="EQUIPE LOUVOR") f=f.filter(x=>(x[col]||"").toUpperCase().includes(s.value.toUpperCase()));
+            else f=f.filter(x=>x[col]===s.value);
         }
     });
     const busca=document.getElementById("searchInput").value.trim();
@@ -1131,64 +997,32 @@ function aplicarFiltros(){
     renderizar(f);
 }
 
-// Botão que funciona como Interruptor
-function aplicarMinhasEscalas(){
-    if(!usuarioAtual || !usuarioAtual.nomeVinculado){
-        alert('Faça login e vincule seu nome para usar esta função');
-        return;
-    }
-    
+document.getElementById('btnMyScales').onclick = () => {
+    if(!usuarioAtual || !usuarioAtual.nomeVinculado) return alert('Faça login e vincule seu nome para usar esta função');
     const btn = document.getElementById("btnMyScales");
-    
     if(btn.classList.contains("active")) {
-        // Se já está ativo, desativa e mostra a escala geral
-        btn.classList.remove("active");
-        renderizar(dadosGlobais);
+        btn.classList.remove("active"); renderizar(dadosGlobais);
     } else {
-        // Se não está ativo, ativa e filtra pelas escalas do usuário
-        const f = dadosGlobais.filter(x => estaEscalado(x, usuarioAtual.nomeVinculado));
-        btn.classList.add("active");
-        renderizar(f);
-        
-        // Limpa a caixa de busca e os filtros (para não confundir a tela)
-        document.getElementById("searchInput").value = "";
-        document.querySelectorAll("#filtros select").forEach(s => s.value = "");
+        btn.classList.add("active"); renderizar(dadosGlobais.filter(x => estaEscalado(x, usuarioAtual.nomeVinculado)));
+        document.getElementById("searchInput").value = ""; document.querySelectorAll("#filtros select").forEach(s => s.value = "");
     }
-}
-
-// Event listeners
-document.getElementById('btnToggleFilters').onclick=()=>{
-    document.getElementById('filtros').classList.toggle("active");
 };
-document.getElementById('btnClearFilters').onclick=()=>{
+
+document.getElementById('btnToggleFilters').onclick = () => document.getElementById('filtros').classList.toggle("active");
+document.getElementById('btnClearFilters').onclick = () => {
     document.querySelectorAll("#filtros select").forEach(s=>s.value="");
     document.getElementById("searchInput").value="";
     document.getElementById("btnMyScales").classList.remove("active");
     aplicarFiltroAutomatico();
 };
-document.getElementById('btnTogglePast').onclick=()=>{
-    const container=document.getElementById('containerPassado');
-    container.classList.toggle("show");
+document.getElementById('btnTogglePast').onclick = () => {
+    const c=document.getElementById('containerPassado'); c.classList.toggle("show");
     document.getElementById('btnTogglePast').classList.toggle("active");
-    document.getElementById('pastDivider').style.display=container.classList.contains("show")?"block":"none";
+    document.getElementById('pastDivider').style.display = c.classList.contains("show") ? "flex" : "none";
 };
-document.getElementById('btnMyScales').onclick=aplicarMinhasEscalas;
-document.getElementById("searchInput").addEventListener('input',()=>{
-    document.getElementById("btnMyScales").classList.remove("active");
-    aplicarFiltros();
-});
+document.getElementById("searchInput").addEventListener('input', () => { document.getElementById("btnMyScales").classList.remove("active"); aplicarFiltros(); });
 
-// Preferências
-function carregarPreferencias(){
-    modoEscuro=localStorage.getItem('modoEscuro')==='true';
-    if(modoEscuro) document.body.classList.add('dark-mode');
-}
-
-if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded',init);
-}else{
-    init();
-}
+if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded',init); else init();
 </script>
 </body>
 </html>
