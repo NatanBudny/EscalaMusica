@@ -46,7 +46,7 @@ export function formatarMusicasComYouTube(texto) {
       const m = musica.trim();
       if (!m) return '';
       const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(m + ' música louvor')}`;
-      return `<div style="display:flex; align-items:center; gap:4px; margin-bottom:6px; line-height:1.2;"><span>${m}</span> <a href="${url}" target="_blank" class="yt-icon" title="Ouvir no YouTube">${YT_SVG}</a></div>`;
+      return `<div style="display:flex; align-items:center; gap:4px; margin-bottom:6px; line-height:1.2;"><a href="${url}" target="_blank" style="color:inherit;text-decoration:none;" title="Ouvir no YouTube">${m}</a> <a href="${url}" target="_blank" class="yt-icon" title="Ouvir no YouTube">${YT_SVG}</a></div>`;
     })
     .join('');
 }

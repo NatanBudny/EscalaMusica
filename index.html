@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -156,7 +156,7 @@ body {
 }
 .search-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15); }
 
-/* BotÃµes de Controle Adaptados - Reduzidos para caber melhor */
+/* Botões de Controle Adaptados - Reduzidos para caber melhor */
 .control-btn {
     height: 44px; border: 1px solid var(--border); border-radius: var(--radius-md);
     cursor: pointer; display: flex; align-items: center; justify-content: center;
@@ -170,7 +170,7 @@ body {
 .icon-only-btn { width: 44px; padding: 0; }
 .btn-text { font-weight: 700; font-size: 13px; margin-left: 6px; }
 
-#btnToggleSearch { display: none; } /* Oculto por padrÃ£o, aparece no mobile */
+#btnToggleSearch { display: none; } /* Oculto por padrão, aparece no mobile */
 
 /* MARCA TEXTO ELEGANTE */
 .highlight-me {
@@ -309,7 +309,7 @@ tr:hover td { background: var(--bg-body); }
 .alert-banner.success { border-left-color: var(--success); }
 .alert-text { flex: 1; font-size: 13px; font-weight: 700; color: var(--text-main); }
 
-/* ANIMAÃ‡Ã•ES & RESPONSIVIDADE */
+/* ANIMAÇÕES & RESPONSIVIDADE */
 @keyframes fadeInDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes zoomIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
@@ -348,10 +348,10 @@ tr:hover td { background: var(--bg-body); }
         <div id="googleSignIn"></div>
         <div class="auth-info">
             <h3>Por que fazer login?</h3>
-            <p>O login serve para identificar quem vocÃª Ã©. O sistema destacarÃ¡ automaticamente as datas em que vocÃª estÃ¡ escalado e habilitarÃ¡ opÃ§Ãµes personalizadas (Alertas, Agenda e SubstituiÃ§Ãµes).</p>
+            <p>O login serve para identificar quem você é. O sistema destacará automaticamente as datas em que você está escalado e habilitará opções personalizadas (Alertas, Agenda e Substituições).</p>
             <div class="auth-privacy">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                <span>Acesso seguro. NÃ£o temos acesso Ã  sua senha.</span>
+                <span>Acesso seguro. Não temos acesso à sua senha.</span>
             </div>
         </div>
     </div>
@@ -388,9 +388,9 @@ tr:hover td { background: var(--bg-body); }
             </button>
             <div class="search-wrapper" id="searchWrapper">
                 <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <input type="text" id="searchInput" class="search-input" placeholder="Buscar por pessoa, funÃ§Ã£o ou data...">
+                <input type="text" id="searchInput" class="search-input" placeholder="Buscar por pessoa, função ou data...">
             </div>
-            <button class="control-btn icon-only-btn" id="btnToggleFilters" title="Filtros AvanÃ§ados">
+            <button class="control-btn icon-only-btn" id="btnToggleFilters" title="Filtros Avançados">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
             </button>
             <button class="control-btn icon-only-btn" id="btnTogglePast" title="Mostrar Escalas Anteriores">
@@ -400,7 +400,7 @@ tr:hover td { background: var(--bg-body); }
 
         <div class="filters-box" id="filtros">
             <div class="filters-grid">
-                <select data-col="ANCIÃƒO"><option value="">AnciÃ£o</option></select>
+                <select data-col="ANCIÃO"><option value="">Ancião</option></select>
                 <select data-col="REGENTE LOUVOR"><option value="">Regente</option></select>
                 <select data-col="EQUIPE LOUVOR"><option value="">Equipe</option></select>
                 <select data-col="PREGADOR"><option value="">Pregador</option></select>
@@ -416,7 +416,7 @@ tr:hover td { background: var(--bg-body); }
                 <thead>
                     <tr>
                         <th>DATA</th><th>ACOMP</th><th>REGENTE</th><th>EQUIPE</th><th>MENSAGEM</th>
-                        <th>ES</th><th>CULTO</th><th>TEMA</th><th>AUDIOVISUAL</th><th>ANCIÃƒO</th><th>PREGADOR</th>
+                        <th>ES</th><th>CULTO</th><th>TEMA</th><th>AUDIOVISUAL</th><th>ANCIÃO</th><th>PREGADOR</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody"></tbody>
@@ -425,7 +425,7 @@ tr:hover td { background: var(--bg-body); }
 
         <div class="cards">
             <div id="containerPassado"></div>
-            <div id="pastDivider" class="past-divider" style="display:none">PrÃ³ximas Escalas</div>
+            <div id="pastDivider" class="past-divider" style="display:none">Próximas Escalas</div>
             <div id="containerFuturo"></div>
         </div>
         

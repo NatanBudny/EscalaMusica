@@ -46,8 +46,13 @@ export function mostrarApp() {
     document.getElementById('userInfo').style.display = 'flex';
     document.getElementById('userName').textContent =
       state.usuarioAtual.nomeVinculado || state.usuarioAtual.name;
-    if (state.usuarioAtual.picture)
-      document.getElementById('userAvatar').src = state.usuarioAtual.picture;
+    const avatar = document.getElementById('userAvatar');
+    if (state.usuarioAtual.picture) {
+      avatar.src = state.usuarioAtual.picture;
+      avatar.style.display = 'block';
+    } else {
+      avatar.style.display = 'none';
+    }
   }
 }
 
