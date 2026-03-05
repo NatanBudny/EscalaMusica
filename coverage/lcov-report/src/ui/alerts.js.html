@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/17</span>
+                <span class='fraction'>17/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/16</span>
+                <span class='fraction'>16/16</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -98,26 +98,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -126,27 +126,27 @@ import { isPastDate, parseDate } from '../utils/date.js';
 import { estaEscalado } from '../utils/name.js';
 &nbsp;
 /** Shows a banner if the user's next schedule is within 7 days. */
-export function <span class="fstat-no" title="function not covered" >verificarAlertas(</span>) {
-  const container = <span class="cstat-no" title="statement not covered" >document.getElementById('alertContainer');</span>
-<span class="cstat-no" title="statement not covered" >  container.innerHTML = '';</span>
-<span class="cstat-no" title="statement not covered" >  if (!state.usuarioAtual?.nomeVinculado) <span class="cstat-no" title="statement not covered" >return;</span></span>
+export function verificarAlertas() {
+  const container = document.getElementById('alertContainer');
+  container.innerHTML = '';
+  if (!state.usuarioAtual?.nomeVinculado) return;
 &nbsp;
-  const hoje = <span class="cstat-no" title="statement not covered" >new Date();</span>
-<span class="cstat-no" title="statement not covered" >  hoje.setHours(0, 0, 0, 0);</span>
+  const hoje = new Date();
+  hoje.setHours(0, 0, 0, 0);
 &nbsp;
-  const futuras = <span class="cstat-no" title="statement not covered" >state.dadosGlobais.filter(</span>
-<span class="fstat-no" title="function not covered" >    (r</span>) =&gt; <span class="cstat-no" title="statement not covered" >!isPastDate(r.DATA) &amp;&amp; estaEscalado(r, state.usuarioAtual.nomeVinculado),</span>
+  const futuras = state.dadosGlobais.filter(
+    (r) =&gt; !isPastDate(r.DATA) &amp;&amp; estaEscalado(r, state.usuarioAtual.nomeVinculado),
   );
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (futuras.length &gt; 0) {</span>
-    const proxima  = <span class="cstat-no" title="statement not covered" >futuras[0];</span>
-    const diffDias = <span class="cstat-no" title="statement not covered" >Math.floor((parseDate(proxima.DATA) - hoje) / (1000 * 60 * 60 * 24));</span>
-<span class="cstat-no" title="statement not covered" >    if (diffDias &lt;= 7) {</span>
-      const el      = <span class="cstat-no" title="statement not covered" >document.createElement('div');</span>
-<span class="cstat-no" title="statement not covered" >      el.className  = 'alert-banner success';</span>
-      const txtDia  = <span class="cstat-no" title="statement not covered" >diffDias === 0 ? 'Hoje' : diffDias === 1 ? 'Amanhã' : `Em ${diffDias} dias`;</span>
-<span class="cstat-no" title="statement not covered" >      el.innerHTML  = `&lt;span class="alert-icon"&gt;📅&lt;/span&gt;&lt;span class="alert-text"&gt;Sua próxima escala é ${proxima.DATA} (${txtDia})&lt;/span&gt;`;</span>
-<span class="cstat-no" title="statement not covered" >      container.appendChild(el);</span>
+  if (futuras.length &gt; 0) {
+    const proxima  = futuras[0];
+    const diffDias = Math.floor((parseDate(proxima.DATA) - hoje) / (1000 * 60 * 60 * 24));
+    if (diffDias &lt;= 7) {
+      const el      = document.createElement('div');
+      el.className  = 'alert-banner success';
+      const txtDia  = diffDias === 0 ? 'Hoje' : diffDias === 1 ? 'Amanhã' : `Em ${diffDias} dias`;
+      el.innerHTML  = `&lt;span class="alert-icon"&gt;📅&lt;/span&gt;&lt;span class="alert-text"&gt;Sua próxima escala é ${proxima.DATA} (${txtDia})&lt;/span&gt;`;
+      container.appendChild(el);
     }
   }
 }
@@ -157,7 +157,7 @@ export function <span class="fstat-no" title="function not covered" >verificarAl
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-03-05T15:26:51.637Z
+                at 2026-03-05T15:34:42.058Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

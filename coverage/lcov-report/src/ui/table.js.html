@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/11</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">70% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/20</span>
+                <span class='fraction'>14/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -111,17 +111,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -129,9 +127,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -142,7 +140,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { state } from '../state.js';
@@ -151,17 +151,17 @@ import { estaEscalado } from '../utils/name.js';
 import { formatarNome, formatarLista, formatarMusicasComYouTube } from '../utils/formatter.js';
 &nbsp;
 /** Renders the full-width desktop `&lt;table&gt;` with the given schedule records. */
-export function <span class="fstat-no" title="function not covered" >montarTabela(</span>d) {
-  const tb = <span class="cstat-no" title="statement not covered" >document.getElementById('tableBody');</span>
-<span class="cstat-no" title="statement not covered" >  tb.innerHTML = '';</span>
-<span class="cstat-no" title="statement not covered" >  d.forEach(<span class="fstat-no" title="function not covered" >(x</span>) =&gt; {</span>
-    const past = <span class="cstat-no" title="statement not covered" >isPastDate(x['DATA']);</span>
-    const tr = <span class="cstat-no" title="statement not covered" >document.createElement('tr');</span>
-<span class="cstat-no" title="statement not covered" >    if (past) <span class="cstat-no" title="statement not covered" >tr.style.opacity = '0.5';</span></span>
+export function montarTabela(d) {
+  const tb = document.getElementById('tableBody');
+  tb.innerHTML = '';
+  d.forEach((x) =&gt; {
+    const past = isPastDate(x['DATA']);
+    const tr = document.createElement('tr');
+    if (past) tr.style.opacity = '0.5';
 &nbsp;
-    const isMyScale = <span class="cstat-no" title="statement not covered" >state.usuarioAtual?.nomeVinculado &amp;&amp; estaEscalado(x, state.usuarioAtual.nomeVinculado);</span>
-    const btnAgenda = <span class="cstat-no" title="statement not covered" >(isMyScale &amp;&amp; !past)</span>
-      ? `&lt;button class="btn-agenda" onclick="exportarParaAgenda('${x['DATA']}')" title="Adicionar à agenda"&gt;
+    const isMyScale = state.usuarioAtual?.nomeVinculado &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >estaEscalado(x, state.usuarioAtual.nomeVinculado);</span>
+    const btnAgenda = (isMyScale &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >!past)</span>
+      ? <span class="branch-0 cbranch-no" title="branch not covered" >`&lt;button class="btn-agenda" onclick="exportarParaAgenda('${x['DATA']}')" title="Adicionar à agenda"&gt;</span>
           &lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
             &lt;rect x="3" y="4" width="18" height="18" rx="2" ry="2"&gt;&lt;/rect&gt;
             &lt;line x1="16" y1="2" x2="16" y2="6"&gt;&lt;/line&gt;
@@ -170,9 +170,9 @@ export function <span class="fstat-no" title="function not covered" >montarTabel
           &lt;/svg&gt; Me lembre&lt;/button&gt;`
       : '';
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    tr.innerHTML =</span>
+    tr.innerHTML =
       `&lt;td&gt;${x['DATA']}&lt;br&gt;&lt;small style="color:var(--text-muted)"&gt;${x['DIA SEMANA']}&lt;/small&gt;&lt;/td&gt;` +
-      `&lt;td&gt;${x['ACOMP'] || '-'}&lt;/td&gt;` +
+      `&lt;td&gt;${x['ACOMP'] || <span class="branch-1 cbranch-no" title="branch not covered" >'-'}</span>&lt;/td&gt;` +
       `&lt;td&gt;${formatarNome(state.contatosMap, state.usuarioAtual, x['REGENTE LOUVOR'])}&lt;/td&gt;` +
       `&lt;td&gt;${formatarLista(state.contatosMap, state.usuarioAtual, x['EQUIPE LOUVOR'])}&lt;/td&gt;` +
       `&lt;td&gt;${formatarLista(state.contatosMap, state.usuarioAtual, x['MENSAGEM MUSICAL'] || '')}&lt;/td&gt;` +
@@ -180,10 +180,10 @@ export function <span class="fstat-no" title="function not covered" >montarTabel
       `&lt;td&gt;${formatarMusicasComYouTube(x['LOUVORES CULTO'])}&lt;/td&gt;` +
       `&lt;td&gt;${x['TEMA CULTO'] || '-'}&lt;/td&gt;` +
       `&lt;td&gt;${formatarNome(state.contatosMap, state.usuarioAtual, x['AUDIOVISUAL'] || '')}&lt;/td&gt;` +
-      `&lt;td&gt;${formatarNome(state.contatosMap, state.usuarioAtual, x['ANCIÃO'] || '')}&lt;/td&gt;` +
-      `&lt;td&gt;${formatarNome(state.contatosMap, state.usuarioAtual, x['PREGADOR'] || '')}&lt;/td&gt;` +
+      `&lt;td&gt;${formatarNome(state.contatosMap, state.usuarioAtual, x['ANCIÃO'] || <span class="branch-1 cbranch-no" title="branch not covered" >'')</span>}&lt;/td&gt;` +
+      `&lt;td&gt;${formatarNome(state.contatosMap, state.usuarioAtual, x['PREGADOR'] || <span class="branch-1 cbranch-no" title="branch not covered" >'')</span>}&lt;/td&gt;` +
       `&lt;td&gt;${btnAgenda}&lt;/td&gt;`;
-<span class="cstat-no" title="statement not covered" >    tb.appendChild(tr);</span>
+    tb.appendChild(tr);
   });
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -193,7 +193,7 @@ export function <span class="fstat-no" title="function not covered" >montarTabel
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-03-05T15:26:51.637Z
+                at 2026-03-05T15:34:42.058Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -14,6 +14,7 @@ const contatosMap = {
   'ADELMO':   { telefone: 'https://wa.me/554399512450',  apelidos: [] },
   'NATAN':    { telefone: 'https://wa.me/5543999990001', apelidos: [] },
   'YASSER':   { telefone: 'https://wa.me/5543999990002', apelidos: [] },
+  'ALEX':     { telefone: 'https://wa.me/5543999990003', apelidos: [] },
 };
 
 const futureRecord = {
@@ -76,5 +77,103 @@ describe('gerarLinkSubstituto', () => {
     const usuario = { nomeVinculado: 'NATAN' };
     const html = gerarLinkSubstituto(contatosMap, usuario, futureRecord);
     expect(html).toContain(encodeURIComponent('15/03/2026'));
+  });
+});
+
+// ── Additional role branches ───────────────────────────────────────────────────
+
+const baseRecord = (overrides) => ({
+  DATA: '15/03/2026', 'DIA SEMANA': 'Domingo',
+  'REGENTE LOUVOR': '', 'EQUIPE LOUVOR': '',
+  'MENSAGEM MUSICAL': '', 'PREGADOR': '',
+  'ANCIÃO': 'ADELMO', 'AUDIOVISUAL': '', 'SUPORTE': '',
+  ...overrides,
+});
+
+describe('role: MENSAGEM MUSICAL', () => {
+  const r = baseRecord({ 'MENSAGEM MUSICAL': 'PEDRO', 'ANCIÃO': '' });
+
+  test('notifies louvor coordinator (NATAN)', () => {
+    const html = gerarLinkSubstituto(contatosMap, { nomeVinculado: 'PEDRO' }, r);
+    expect(html).toContain('5543999990001');
+  });
+
+  test('message mentions mensagem musical', () => {
+    const html = gerarLinkSubstituto(contatosMap, { nomeVinculado: 'PEDRO' }, r);
+    expect(html).toContain(encodeURIComponent('mensagem musical'));
+  });
+
+  test('returns empty when coordinator has no contact', () => {
+    const html = gerarLinkSubstituto({}, { nomeVinculado: 'PEDRO' }, r);
+    expect(html).toBe('');
+  });
+});
+
+describe('role: PREGADOR', () => {
+  const r = baseRecord({ 'PREGADOR': 'CLEVERSON' });
+
+  test('notifies the scheduled ancião directly', () => {
+    const html = gerarLinkSubstituto(contatosMap, { nomeVinculado: 'CLEVERSON' }, r);
+    expect(html).toContain('554399512450'); // ADELMO
+  });
+
+  test('falls back to YASSER when ancião has no contact', () => {
+    const noAdelmo = { 'YASSER': contatosMap['YASSER'] };
+    const html = gerarLinkSubstituto(noAdelmo, { nomeVinculado: 'CLEVERSON' }, r);
+    expect(html).toContain('5543999990002'); // YASSER
+  });
+
+  test('returns empty when neither ancião nor YASSER has a contact', () => {
+    const html = gerarLinkSubstituto({}, { nomeVinculado: 'CLEVERSON' }, r);
+    expect(html).toBe('');
+  });
+});
+
+describe('role: ANCIÃO', () => {
+  const r = baseRecord({ 'ANCIÃO': 'ADELMO' });
+
+  test('notifies YASSER coordinator', () => {
+    const html = gerarLinkSubstituto(contatosMap, { nomeVinculado: 'ADELMO' }, r);
+    expect(html).toContain('5543999990002'); // YASSER
+  });
+
+  test('returns empty when YASSER has no contact', () => {
+    const noYasser = { 'ADELMO': contatosMap['ADELMO'] };
+    const html = gerarLinkSubstituto(noYasser, { nomeVinculado: 'ADELMO' }, r);
+    expect(html).toBe('');
+  });
+
+  test('message mentions ancião de culto', () => {
+    const html = gerarLinkSubstituto(contatosMap, { nomeVinculado: 'ADELMO' }, r);
+    expect(html).toContain(encodeURIComponent('ancião de culto'));
+  });
+});
+
+describe('role: AUDIOVISUAL', () => {
+  const r = baseRecord({ 'AUDIOVISUAL': 'PEDRO', 'ANCIÃO': '' });
+
+  test('notifies ALEX coordinator', () => {
+    const html = gerarLinkSubstituto(contatosMap, { nomeVinculado: 'PEDRO' }, r);
+    expect(html).toContain('5543999990003'); // ALEX
+  });
+
+  test('returns empty when ALEX has no contact', () => {
+    const noAlex = { 'NATAN': contatosMap['NATAN'] };
+    const html = gerarLinkSubstituto(noAlex, { nomeVinculado: 'PEDRO' }, r);
+    expect(html).toBe('');
+  });
+});
+
+describe('role: SUPORTE', () => {
+  const r = baseRecord({ 'SUPORTE': 'PEDRO', 'ANCIÃO': '' });
+
+  test('also routes to ALEX coordinator', () => {
+    const html = gerarLinkSubstituto(contatosMap, { nomeVinculado: 'PEDRO' }, r);
+    expect(html).toContain('5543999990003'); // ALEX
+  });
+
+  test('message mentions audiovisual', () => {
+    const html = gerarLinkSubstituto(contatosMap, { nomeVinculado: 'PEDRO' }, r);
+    expect(html).toContain(encodeURIComponent('audiovisual'));
   });
 });
