@@ -437,6 +437,28 @@ tr:hover td { background: var(--bg-body); }
 let dadosGlobais=[];
 let contatosMap={};
 let usuarioAtual=null;
+const CHAVE_VINCULOS_GOOGLE = 'googleVinculosPorSub';
+
+function lerVinculosGoogle() {
+    try {
+        return JSON.parse(localStorage.getItem(CHAVE_VINCULOS_GOOGLE) || '{}');
+    } catch {
+        return {};
+    }
+}
+
+function obterNomeVinculadoPorSub(sub) {
+    if (!sub) return '';
+    const vinculos = lerVinculosGoogle();
+    return vinculos[sub] || '';
+}
+
+function salvarVinculoPorSub(sub, nomeVinculado) {
+    if (!sub || !nomeVinculado) return;
+    const vinculos = lerVinculosGoogle();
+    vinculos[sub] = nomeVinculado;
+    localStorage.setItem(CHAVE_VINCULOS_GOOGLE, JSON.stringify(vinculos));
+}
 
 // INICIALIZAÇÃO E CACHE OFFLINE
 async function init(){
@@ -510,7 +532,8 @@ function handleCredentialResponse(response){
     fetch('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token='+response.credential)
         .then(r=>r.json())
         .then(data=>{
-            usuarioAtual={ email:data.email, name:data.name, picture:data.picture, sub:data.sub };
+            const nomeVinculado = obterNomeVinculadoPorSub(data.sub);
+            usuarioAtual={ email:data.email, name:data.name, picture:data.picture, sub:data.sub, nomeVinculado };
             localStorage.setItem('googleToken',response.credential);
             localStorage.setItem('userData',JSON.stringify(usuarioAtual));
             
@@ -523,6 +546,8 @@ function mostrarAuth(){
     document.getElementById('authContainer').style.display='block';
     document.getElementById('nameSelectionContainer').style.display='none';
     document.getElementById('appContainer').style.display='none';
+    document.getElementById('googleSignIn').innerHTML='';
+    inicializarGoogleComTentativas();
 }
 
 function mostrarSelecaoNome() {
@@ -543,6 +568,7 @@ function salvarNomeVinculado() {
     const select = document.getElementById('selectNomeContato');
     if(!select.value) return alert('Por favor, selecione seu nome na lista.');
     usuarioAtual.nomeVinculado = select.value;
+    salvarVinculoPorSub(usuarioAtual.sub, usuarioAtual.nomeVinculado);
     localStorage.setItem('userData', JSON.stringify(usuarioAtual));
     document.getElementById('nameSelectionContainer').style.display='none';
     mostrarApp();
@@ -561,8 +587,13 @@ function mostrarApp(){
 }
 
 document.getElementById('logoutBtn').onclick=()=>{
-    localStorage.removeItem('googleToken'); localStorage.removeItem('userData');
-    usuarioAtual=null; mostrarAuth();
+    localStorage.removeItem('googleToken');
+    localStorage.removeItem('userData');
+    if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
+        google.accounts.id.disableAutoSelect();
+    }
+    usuarioAtual=null;
+    mostrarAuth();
 };
 
 // MÓDULO DE SUBSTITUIÇÃO
