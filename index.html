@@ -245,6 +245,28 @@ a.whats .highlight-me { color: #000; text-decoration: none; }
 .btn-agenda:hover { background: var(--primary-hover); transform: scale(1.02); }
 .btn-agenda svg { width: 14px; height: 14px; }
 
+/* Modal agenda (desktop) */
+#modalAgenda { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; }
+.modal-agenda-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.45); backdrop-filter: blur(2px); }
+.modal-agenda-box {
+    position: relative; background: var(--bg-card); border-radius: var(--radius-lg); padding: 28px 24px 20px;
+    min-width: 300px; box-shadow: var(--shadow-lg); display: flex; flex-direction: column; gap: 10px;
+    animation: fadeInDown 0.2s ease-out;
+}
+.modal-agenda-title { font-size: 15px; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
+.modal-agenda-btn {
+    display: flex; align-items: center; gap: 10px; padding: 11px 16px; border-radius: var(--radius-md);
+    border: 1.5px solid var(--border); background: var(--bg-subtle); color: var(--text-main);
+    font-size: 14px; font-weight: 600; cursor: pointer; transition: var(--transition); text-align: left;
+}
+.modal-agenda-btn:hover { border-color: var(--primary); color: var(--primary); background: #EEF2FF; }
+.modal-agenda-btn small { font-weight: 400; color: var(--text-muted); font-size: 11px; }
+.modal-agenda-close {
+    position: absolute; top: 10px; right: 12px; background: none; border: none; font-size: 22px;
+    cursor: pointer; color: var(--text-muted); line-height: 1;
+}
+.modal-agenda-close:hover { color: var(--danger); }
+
 .btn-substituto {
     display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: var(--radius-full);
     border: 1px solid var(--danger); background: #FEF2F2; color: var(--danger); font-size: 12px;
@@ -416,7 +438,7 @@ tr:hover td { background: var(--bg-body); }
                 <thead>
                     <tr>
                         <th>DATA</th><th>ACOMP</th><th>REGENTE</th><th>EQUIPE</th><th>MENSAGEM</th>
-                        <th>ES</th><th>CULTO</th><th>TEMA</th><th>AUDIOVISUAL</th><th>ANCIÃO</th><th>PREGADOR</th>
+                        <th>ES</th><th>CULTO</th><th>TEMA</th><th>AUDIOVISUAL</th><th>ANCIÃO</th><th>PREGADOR</th><th></th>
                     </tr>
                 </thead>
                 <tbody id="tableBody"></tbody>
