@@ -1,4 +1,5 @@
 import { state } from './state.js';
+import { STORAGE_KEYS } from './config.js';
 import { carregarCSV } from './data/loader.js';
 import { verificarAutenticacao, mostrarAuth, salvarNomeVinculado } from './auth/auth.js';
 import { estaEscalado } from './utils/name.js';
@@ -55,8 +56,8 @@ window.exportarParaAgenda = (dataStr) => {
 // ── Event listeners ───────────────────────────────────────────────────────────
 
 document.getElementById('logoutBtn').onclick = () => {
-  localStorage.removeItem('googleToken');
-  localStorage.removeItem('userData');
+  localStorage.removeItem(STORAGE_KEYS.GOOGLE_TOKEN);
+  localStorage.removeItem(STORAGE_KEYS.USER_DATA);
   if (typeof google !== 'undefined' && google.accounts?.id)
     google.accounts.id.disableAutoSelect();
   state.usuarioAtual = null;

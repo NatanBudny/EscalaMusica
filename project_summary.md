@@ -53,18 +53,6 @@ Este projeto gerencia a escala de louvor de uma igreja. O objetivo é usar o his
   - `ANISSA` (respeitando a regra do sábado)
   - `CATHERINE` (somente após 20/02/2026)
 
-### D. Prioridades de Escalação
-- Os seguintes nomes devem ser priorizados nas sugestões de louvor, respeitando suas disponibilidades:
-  - `EMILY`
-  - `KHEYCIANE`
-  - `FABRICIO`
-  - `GIOVANA`
-  - `ARIADNY`
-  - `LUIS`
-  - `FABRÍCIO`
-  - `ANISSA` (respeitando a regra do sábado)
-  - `CATHERINE` (somente após 20/02/2026)
-
 ### Prioridades de escala para mensagem musical
 - Com base nas escalas anteriores, a prioridade para mensagem musical é:
     - `ALEX`

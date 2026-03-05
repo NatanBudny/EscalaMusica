@@ -1,8 +1,7 @@
 import { state } from '../state.js';
 import { obterNomeVinculadoPorSub, salvarVinculoPorSub } from './storage.js';
 import { aplicarFiltroAutomatico } from '../ui/filters.js';
-
-const CLIENT_ID = '644626883802-8dv5caoftedv677hhiiidtff03j4ne43.apps.googleusercontent.com';
+import { GOOGLE_CLIENT_ID, STORAGE_KEYS } from '../config.js';
 
 // ── View helpers ──────────────────────────────────────────────────────────────
 
@@ -32,7 +31,7 @@ export function salvarNomeVinculado() {
   if (!select.value) return alert('Por favor, selecione seu nome na lista.');
   state.usuarioAtual.nomeVinculado = select.value;
   salvarVinculoPorSub(state.usuarioAtual.sub, state.usuarioAtual.nomeVinculado);
-  localStorage.setItem('userData', JSON.stringify(state.usuarioAtual));
+  localStorage.setItem(STORAGE_KEYS.USER_DATA, JSON.stringify(state.usuarioAtual));
   document.getElementById('nameSelectionContainer').style.display = 'none';
   mostrarApp();
   aplicarFiltroAutomatico();
@@ -59,8 +58,8 @@ export function mostrarApp() {
 // ── Google auth ───────────────────────────────────────────────────────────────
 
 export function verificarAutenticacao() {
-  const token    = localStorage.getItem('googleToken');
-  const userData = localStorage.getItem('userData');
+  const token    = localStorage.getItem(STORAGE_KEYS.GOOGLE_TOKEN);
+  const userData = localStorage.getItem(STORAGE_KEYS.USER_DATA);
   if (token && userData) {
     try {
       state.usuarioAtual = JSON.parse(userData);
@@ -68,8 +67,8 @@ export function verificarAutenticacao() {
       else { mostrarApp(); aplicarFiltroAutomatico(); }
       return;
     } catch {
-      localStorage.removeItem('googleToken');
-      localStorage.removeItem('userData');
+      localStorage.removeItem(STORAGE_KEYS.GOOGLE_TOKEN);
+      localStorage.removeItem(STORAGE_KEYS.USER_DATA);
     }
   }
   mostrarAuth();
@@ -80,7 +79,7 @@ export function inicializarGoogleComTentativas() {
   function checar() {
     tentativas++;
     if (typeof google !== 'undefined' && google.accounts?.id) {
-      google.accounts.id.initialize({ client_id: CLIENT_ID, callback: handleCredentialResponse });
+      google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: handleCredentialResponse });
       const btn = document.getElementById('googleSignIn');
       if (btn) google.accounts.id.renderButton(btn, { theme: 'outline', size: 'large', width: '100%' });
     } else if (tentativas < 50) {
@@ -99,8 +98,8 @@ export function handleCredentialResponse(response) {
         email: data.email, name: data.name, picture: data.picture,
         sub: data.sub, nomeVinculado,
       };
-      localStorage.setItem('googleToken', response.credential);
-      localStorage.setItem('userData', JSON.stringify(state.usuarioAtual));
+      localStorage.setItem(STORAGE_KEYS.GOOGLE_TOKEN, response.credential);
+      localStorage.setItem(STORAGE_KEYS.USER_DATA, JSON.stringify(state.usuarioAtual));
       if (!state.usuarioAtual.nomeVinculado) mostrarSelecaoNome();
       else { mostrarApp(); aplicarFiltroAutomatico(); }
     })

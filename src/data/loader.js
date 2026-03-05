@@ -1,4 +1,5 @@
 import { state } from '../state.js';
+import { STORAGE_KEYS } from '../config.js';
 
 /** Fetches atual.json and contatos.json, falling back to localStorage cache on failure. */
 export async function carregarCSV() {
@@ -9,13 +10,13 @@ export async function carregarCSV() {
     ]);
     state.dadosGlobais = await rDados.json();
     state.contatosMap  = await rContatos.json();
-    localStorage.setItem('cache_dadosGlobais', JSON.stringify(state.dadosGlobais));
-    localStorage.setItem('cache_contatosMap',  JSON.stringify(state.contatosMap));
+    localStorage.setItem(STORAGE_KEYS.CACHE_DADOS,    JSON.stringify(state.dadosGlobais));
+    localStorage.setItem(STORAGE_KEYS.CACHE_CONTATOS, JSON.stringify(state.contatosMap));
     document.getElementById('offlineIndicator').style.display = 'none';
   } catch {
     console.warn('Loading from offline cache…');
-    const cacheDados    = localStorage.getItem('cache_dadosGlobais');
-    const cacheContatos = localStorage.getItem('cache_contatosMap');
+    const cacheDados    = localStorage.getItem(STORAGE_KEYS.CACHE_DADOS);
+    const cacheContatos = localStorage.getItem(STORAGE_KEYS.CACHE_CONTATOS);
     if (cacheDados && cacheContatos) {
       state.dadosGlobais = JSON.parse(cacheDados);
       state.contatosMap  = JSON.parse(cacheContatos);

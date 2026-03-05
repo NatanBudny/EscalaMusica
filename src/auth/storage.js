@@ -1,9 +1,9 @@
-const CHAVE = 'googleVinculosPorSub';
+import { STORAGE_KEYS } from '../config.js';
 
 /** Reads the entire sub→name mapping from localStorage. */
 export function lerVinculosGoogle() {
   try {
-    return JSON.parse(localStorage.getItem(CHAVE) || '{}');
+    return JSON.parse(localStorage.getItem(STORAGE_KEYS.VINCULOS) || '{}');
   } catch {
     return {};
   }
@@ -20,5 +20,5 @@ export function salvarVinculoPorSub(sub, nomeVinculado) {
   if (!sub || !nomeVinculado) return;
   const vinculos = lerVinculosGoogle();
   vinculos[sub] = nomeVinculado;
-  localStorage.setItem(CHAVE, JSON.stringify(vinculos));
+  localStorage.setItem(STORAGE_KEYS.VINCULOS, JSON.stringify(vinculos));
 }

@@ -12,6 +12,8 @@ afterEach(() => jest.useRealTimers());
 const contatosMap = {
   'GIOVANA':  { telefone: 'https://wa.me/5543984876102', apelidos: [] },
   'ADELMO':   { telefone: 'https://wa.me/554399512450',  apelidos: [] },
+  'NATAN':    { telefone: 'https://wa.me/5543999990001', apelidos: [] },
+  'YASSER':   { telefone: 'https://wa.me/5543999990002', apelidos: [] },
 };
 
 const futureRecord = {
@@ -58,14 +60,14 @@ describe('gerarLinkSubstituto', () => {
     expect(html).toContain('5543984876102');
   });
 
-  test('falls back to ancião when regente has no contact', () => {
-    const mapWithoutGiovana = { 'ADELMO': contatosMap['ADELMO'] };
+  test('falls back to louvor coordinator (NATAN) when regente has no contact', () => {
+    const mapWithoutGiovana = { 'NATAN': contatosMap['NATAN'], 'ADELMO': contatosMap['ADELMO'] };
     const usuario = { nomeVinculado: 'EMILY' };
     const html = gerarLinkSubstituto(mapWithoutGiovana, usuario, futureRecord);
-    expect(html).toContain('554399512450');
+    expect(html).toContain('5543999990001');
   });
 
-  test('returns empty string when neither regente nor ancião has a contact', () => {
+  test('returns empty string when regente and louvor coordinator both have no contact', () => {
     const usuario = { nomeVinculado: 'EMILY' };
     expect(gerarLinkSubstituto({}, usuario, futureRecord)).toBe('');
   });

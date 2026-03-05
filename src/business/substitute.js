@@ -2,6 +2,16 @@ import { estaEscalado, normalizarNome } from '../utils/name.js';
 import { isPastDate } from '../utils/date.js';
 import { buscarContato } from '../utils/contact.js';
 
+/**
+ * Fallback coordinators notified when the scheduled person for a role has no
+ * contact info. Update these names if leadership changes.
+ */
+const COORDENADORES = {
+  LOUVOR:     'NATAN',   // Notified for: regente de louvor, mensagem musical
+  ANCIAO:     'YASSER',  // Notified for: ancião de culto
+  AUDIOVISUAL: 'ALEX',   // Notified for: audiovisual / suporte
+};
+
 /** "LUIZ ANTONIO" → "Luiz Antonio" */
 function _capitalizar(nome) {
   return nome
@@ -11,11 +21,9 @@ function _capitalizar(nome) {
     .join(' ');
 }
 
-/** "11/03/2026" + "Quarta" → "11/03 (Quarta)" */
+/** "11/03/2026" + "Quarta" → "11/03/2026 (Quarta)" */
 function _formatarData(dataStr, diaSemana) {
-  const parts = (dataStr || '').split('/');
-  const ddmm = parts.length >= 2 ? `${parts[0]}/${parts[1]}` : dataStr;
-  return diaSemana ? `${ddmm} (${diaSemana})` : ddmm;
+  return diaSemana ? `${dataStr} (${diaSemana})` : dataStr;
 }
 
 /**
@@ -35,7 +43,7 @@ function _resolverAlvo(contatosMap, nomeVinculado, registro) {
   };
 
   if (_inclui('REGENTE LOUVOR')) {
-    return _alvo('NATAN', (dest) =>
+    return _alvo(COORDENADORES.LOUVOR, (dest) =>
       `Olá ${dest}, estava escalado como regente de louvor no culto do dia ${data}, mas tive um imprevisto e não poderei ir. Poderia me ajudar?`);
   }
 
@@ -52,11 +60,13 @@ function _resolverAlvo(contatosMap, nomeVinculado, registro) {
         };
       }
     }
-    return null;
+    // Fallback: regente sem contato → notifica o coordenador de louvor
+    return _alvo(COORDENADORES.LOUVOR, (dest) =>
+      `Olá ${dest}, estava escalado na equipe de louvor no culto do dia ${data}, mas tive um imprevisto e não poderei ir. Poderia me ajudar?`);
   }
 
   if (_inclui('MENSAGEM MUSICAL')) {
-    return _alvo('NATAN', (dest) =>
+    return _alvo(COORDENADORES.LOUVOR, (dest) =>
       `Olá ${dest}, estava escalado para a mensagem musical no culto do dia ${data}, mas tive um imprevisto e não poderei ir. Poderia me ajudar?`);
   }
 
@@ -73,16 +83,18 @@ function _resolverAlvo(contatosMap, nomeVinculado, registro) {
         };
       }
     }
-    return null;
+    // Fallback: ancião sem contato → notifica o coordenador fixo
+    return _alvo(COORDENADORES.ANCIAO, (dest) =>
+      `Olá ${dest}, estava escalado como pregador no culto do dia ${data}, mas tive um imprevisto e não poderei ir. Poderia me ajudar?`);
   }
 
   if (_inclui('ANCIÃO')) {
-    return _alvo('YASSER', (dest) =>
+    return _alvo(COORDENADORES.ANCIAO, (dest) =>
       `Olá ${dest}, estava escalado como ancião de culto no dia ${data}, mas tive um imprevisto e não poderei ir. Poderia me ajudar?`);
   }
 
   if (_inclui('AUDIOVISUAL') || _inclui('SUPORTE')) {
-    return _alvo('ALEX', (dest) =>
+    return _alvo(COORDENADORES.AUDIOVISUAL, (dest) =>
       `Olá ${dest}, estava escalado no audiovisual no culto do dia ${data}, mas tive um imprevisto e não poderei ir. Poderia me ajudar?`);
   }
 
