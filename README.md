@@ -1,22 +1,22 @@
-# EscalaMusica 🎵
+# EscalaMusica
 
-Aplicativo web para a equipe de louvor da Igreja — visualize a escala, exporte para a agenda, entre em contato com a equipe e encontre um substituto, tudo em um único lugar.
+Aplicativo web para a equipe de louvor da Igreja. Exibe a escala de cultos, permite filtrar por membro, exportar eventos para a agenda e facilitar substituições.
 
 ---
 
 ## Funcionalidades
 
-| Funcionalidade | Descrição |
+| Funcionalidade | Descricao |
 |---|---|
-| 📅 **Escala completa** | Tabela (desktop) e cards (mobile) com todos os cultos |
-| 🔐 **Login com Google** | Autenticação OAuth — vincula sua conta ao seu nome na equipe |
-| 🔍 **Minha escala** | Filtra apenas os cultos em que você está escalado |
-| 🔔 **Alerta de 7 dias** | Banner automático quando um culto seu está chegando |
-| 📲 **Links do WhatsApp** | Clique no nome de qualquer membro para abrir o WhatsApp |
-| 🔄 **Me substitua** | Gera uma mensagem pré-escrita para o responsável certo com um clique |
-| 📆 **Exportar para agenda** | Baixa um `.ics` com lembretes configurados para o horário do culto |
-| 🎶 **Músicas no YouTube** | Títulos das músicas viram links de busca no YouTube |
-| 📡 **Modo offline** | Usa cache local quando sem conexão, com indicador visual |
+| **Escala completa** | Tabela (desktop) e cards (mobile) com todos os cultos |
+| **Login com Google** | Autenticacao OAuth vincula sua conta ao seu nome na equipe |
+| **Minha escala** | Filtra apenas os cultos em que voce esta escalado |
+| **Alerta de 7 dias** | Banner automatico quando um culto seu esta chegando |
+| **Links do WhatsApp** | Clique em qualquer nome para abrir o WhatsApp |
+| **Me substitua** | Gera mensagem pre-escrita para o coordenador correto |
+| **Exportar para agenda** | Baixa um `.ics` com lembrete configurado para o culto |
+| **Musicas no YouTube** | Titulos das musicas viram links de busca no YouTube |
+| **Modo offline** | Usa cache local quando sem conexao, com indicador visual |
 
 ---
 
@@ -24,7 +24,7 @@ Aplicativo web para a equipe de louvor da Igreja — visualize a escala, exporte
 
 - **Vanilla JS (ES Modules)** — sem frameworks, sem bundler
 - **Google Identity Services** — OAuth 2.0 via `accounts.id`
-- **Jest 29** — testes unitários com cobertura, em ESM nativo
+- **Jest 29** — testes unitarios com cobertura, em ESM nativo
 - **Python** — servidor HTTP de desenvolvimento local
 
 ---
@@ -33,29 +33,29 @@ Aplicativo web para a equipe de louvor da Igreja — visualize a escala, exporte
 
 ```
 EscalaMusica/
-├── index.html              # Shell da UI: todo CSS e markup. Zero JS inline.
+├── index.html              # UI: todo CSS e markup
 ├── atual.json              # Dados da escala vigente
-├── contatos.json           # Mapa de nomes → { telefone, apelidos[] }
+├── contatos.json           # Mapa de nomes para { telefone, apelidos[] }
 │
 ├── src/
 │   ├── config.js           # Constantes globais (Client ID, chaves do localStorage)
-│   ├── main.js             # Entry point: listeners de evento e handlers do HTML
+│   ├── main.js             # Entry point: listeners de evento
 │   ├── state.js            # Singleton de estado compartilhado
 │   ├── auth/
 │   │   ├── auth.js         # Fluxo OAuth e troca de views
-│   │   └── storage.js      # Helpers puros de localStorage
+│   │   └── storage.js      # Helpers de localStorage
 │   ├── data/
-│   │   └── loader.js       # Fetch de JSONs + fallback de cache offline
+│   │   └── loader.js       # Fetch de JSONs + fallback offline
 │   ├── utils/
-│   │   ├── date.js         # Parsing e formatação de datas
-│   │   ├── name.js         # Normalização de nomes e busca na escala
+│   │   ├── date.js         # Parsing e formatacao de datas
+│   │   ├── name.js         # Normalizacao de nomes e busca na escala
 │   │   ├── contact.js      # Lookup de contatos por nome ou apelido
-│   │   └── formatter.js    # Construtores de HTML (links, listas, músicas)
+│   │   └── formatter.js    # Construtores de HTML (links, listas, musicas)
 │   ├── business/
 │   │   ├── agenda.js       # Monta o evento .ics conforme o papel na escala
-│   │   └── substitute.js   # Gera o link WhatsApp para o substituto certo
+│   │   └── substitute.js   # Gera o link WhatsApp para o coordenador correto
 │   └── ui/
-│       ├── filters.js      # Orquestração de filtros e re-renderização
+│       ├── filters.js      # Orquestracao de filtros e re-renderizacao
 │       ├── table.js        # Renderer da tabela desktop
 │       ├── cards.js        # Renderer dos cards mobile
 │       └── alerts.js       # Banner de alerta de 7 dias
@@ -67,36 +67,33 @@ EscalaMusica/
 │
 ├── scripts/
 │   └── local.py            # Servidor HTTP de dev na porta 8000
-└── old/                    # Histórico de escalas anteriores (referência)
+└── old/                    # Escalas anteriores (referencia)
 ```
 
 ---
 
 ## Como rodar localmente
 
-**Pré-requisito:** Python 3 instalado.
+Requer Python 3.
 
 ```bash
 npm run dev
 ```
 
-O servidor sobe em `http://localhost:8000/index.html` e abre o navegador automaticamente.
+Sobe em `http://localhost:8000/index.html` e abre o navegador automaticamente.
 
-> O servidor local é necessário porque o app usa `fetch()` para carregar os arquivos `.json` — abrir o `index.html` diretamente pelo sistema de arquivos não funciona por restrições de CORS.
+> O servidor e necessario porque o app usa `fetch()` para carregar os arquivos `.json`. Abrir o `index.html` diretamente pelo sistema de arquivos nao funciona por restricoes de CORS.
 
 ---
 
 ## Testes
 
 ```bash
-# Rodar com cobertura
-npm test
-
-# Modo watch (re-executa ao salvar)
-npm run test:watch
+npm test             # com cobertura
+npm run test:watch   # re-executa ao salvar
 ```
 
-Todos os módulos de lógica pura têm cobertura de testes. Os módulos de UI (que manipulam o DOM) são exercitados manualmente.
+Modulos de logica pura possuem cobertura de testes. Modulos de UI sao verificados manualmente.
 
 ---
 
@@ -104,7 +101,7 @@ Todos os módulos de lógica pura têm cobertura de testes. Os módulos de UI (q
 
 ### `atual.json`
 
-Array de registros de cultos. Cada registro segue o esquema:
+Array de registros de cultos:
 
 ```json
 {
@@ -114,16 +111,14 @@ Array de registros de cultos. Cada registro segue o esquema:
   "EQUIPE LOUVOR": "NOME1, NOME2, NOME3",
   "MENSAGEM MUSICAL": "NOME",
   "PREGADOR": "NOME",
-  "ANCIÃO": "NOME",
+  "ANCIAO": "NOME",
   "AUDIOVISUAL": "NOME",
   "SUPORTE": "NOME",
-  "MÚSICAS": "Música 1 | Música 2 | Música 3"
+  "MUSICAS": "Musica 1 | Musica 2 | Musica 3"
 }
 ```
 
 ### `contatos.json`
-
-Mapa de nomes para contatos e apelidos:
 
 ```json
 {
@@ -136,28 +131,12 @@ Mapa de nomes para contatos e apelidos:
 
 ---
 
-## Fluxo da Aplicação
+## Coordenadores de Substituicao
 
-```
-carregarCSV()  →  state (dadosGlobais + contatosMap)
-                      ↓
-              verificarAutenticacao()
-                      ↓
-                 mostrarApp()
-                      ↓
-           aplicarFiltroAutomatico()
-             ↙            ↓           ↘
-      montarTabela()  montarCards()  verificarAlertas()
-```
+Configurados em `src/business/substitute.js` no objeto `COORDENADORES`. Atualizar quando houver mudanca de lideranca.
 
----
-
-## Coordenadores de Substituição
-
-Configurados em `src/business/substitute.js` no objeto `COORDENADORES`. Atualizar este objeto quando houver mudança de liderança — não requer alteração na lógica.
-
-| Papel | Coordenador padrão |
+| Papel | Coordenador |
 |---|---|
 | Regente / Mensagem Musical | `LOUVOR` |
-| Ancião de Culto | `ANCIAO` |
+| Anciao de Culto | `ANCIAO` |
 | Audiovisual / Suporte | `AUDIOVISUAL` |
