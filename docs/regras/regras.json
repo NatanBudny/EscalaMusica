@@ -1,6 +1,6 @@
 {
   "versao": "0.1.0",
-  "ultima_atualizacao": "",
+  "ultima_atualizacao": "2026-03-28",
   "papeis": {
     "REGENTE LOUVOR": {
       "origem": "escala_propria",
@@ -124,6 +124,7 @@
       "descricao": "Músicas escolhidas para a Escola Sabatina, definidas por outro departamento. Informação de referência na escala."
     }
   },
+  "restricoes_pessoais": {},
   "regras_fundamentais": [
     {
       "id": "RF001",
