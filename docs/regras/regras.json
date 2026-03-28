@@ -1,0 +1,102 @@
+{
+  "versao": "0.1.0",
+  "ultima_atualizacao": "",
+  "papeis": {
+    "EQUIPE LOUVOR": {
+      "descricao": "5 cantores que compõem a equipe de louvor junto com o regente (total 6 vozes).",
+      "composicao": {
+        "total_membros": 5,
+        "minimo_homens": 1,
+        "ideal_homens": 2,
+        "excecao_sem_homem": "Cultos temáticos como Culto da Mulher podem ter equipe 100% feminina"
+      },
+      "classificacao_performance": {
+        "descricao": "Nível de desenvoltura do cantor: acertar letra, tempo e não se perder",
+        "niveis": {
+          "Avançado": "Pode ser escalado em qualquer situação",
+          "Intermediário": "Bom desempenho, pode precisar de apoio em músicas menos conhecidas",
+          "Iniciante": "Em desenvolvimento, escalar preferencialmente em cultos mais simples"
+        }
+      },
+      "modelo_escalacao": {
+        "tipo": "times semi-fixos por regente",
+        "descricao": "Cada regente tem um grupo preferencial para promover sinergia",
+        "hierarquia_substituicao": [
+          "Membro do grupo preferencial do regente disponível",
+          "Membro com perfil similar disponível",
+          "Qualquer membro disponível (último recurso)"
+        ]
+      }
+    },
+      "descricao": "Lidera o momento de louvor vocal e espiritualmente. Canta e rege simultaneamente. Aparece somente no campo REGENTE LOUVOR, nunca em EQUIPE LOUVOR. É responsável por tudo que acontece com a equipe de louvor no culto.",
+      "composicao_louvor": {
+        "total_cantores": 6,
+        "regente": 1,
+        "equipe_louvor": 5,
+        "musicas_por_culto": 3
+      },
+      "pode": [
+        "Escolher músicas (sujeito a veto do diretor)",
+        "Definir BANDA ou PB",
+        "Substituir membros da equipe por motivos justificáveis (comportamento, falta no ensaio, desempenho)",
+        "Convidar novos membros em casos de falta",
+        "Marcar e coordenar ensaio, ajustando horário com a equipe",
+        "Combinar paleta de cores/roupas da equipe",
+        "Fazer Mensagem Musical no mesmo culto (muito raro, sem ocorrência registrada)"
+      ],
+      "responsabilidades": [
+        "Garantir que a equipe ensaie as músicas",
+        "Garantir boa performance da equipe no culto",
+        "Garantir conduta espiritual da equipe — ser exemplo e conduzir espiritualmente",
+        "Falar entre as músicas e conduzir a atenção da congregação",
+        "Anunciar o início e encerrar o momento de louvor",
+        "Responder por tudo que acontece com a equipe de louvor"
+      ],
+      "nao_pode": [
+        "Participar da montagem da escala",
+        "Repreender membros publicamente ou aplicar restrições de participação em outros cultos",
+        "Se escalar",
+        "Definir músicas de forma unilateral e irrevogável (diretor pode vetar)",
+        "Alterar quantidade de músicas sem alinhamento com o diretor"
+      ],
+      "quem_pode_ser": "Lista principal de regentes habilitados; em casos excepcionais alguém fora da lista pode assumir",
+      "hierarquia": "DIRETOR > REGENTE > EQUIPE LOUVOR"
+    }
+  },
+  "regras_fundamentais": [],
+  "restricoes_pessoais": {},
+  "preferencias": [],
+  "times": {
+    "louvor": []
+  },
+  "features_futuras": [
+    {
+      "id": "FF001",
+      "descricao": "Condução espiritual da equipe: dar insights aos regentes para que conduzam suas equipes em crescimento espiritual, aproximando-as de Deus para que louvem com mais profundidade. Não é controle, é orientação e sugestão."
+    },
+    {
+      "id": "FF002",
+      "descricao": "Classificação vocal por naipe (soprano, contralto, tenor, barítono etc.) para cada membro. Permite que a escala automática balanceie os naipes e evite agrupamentos como 3 sopranos juntas."
+    }
+  ],
+  "glossario": {
+    "culto": "Serviço religioso (quarta, sábado, domingo)",
+    "louvor": "Parte musical do culto",
+    "mensagem_musical": "Momento especial no culto. O campo registra um responsável (pessoa ou departamento). A apresentação pode ser solo, dupla ou trio — quem está escalado decide o formato. Qualquer membro da igreja pode ser escalado.",
+    "mensagem_musical_responsavel": "O campo MENSAGEM MUSICAL pode conter: (1) nome de uma pessoa, que resolve o formato sozinha; (2) nome de um departamento, que indica internamente quem vai cantar.",
+    "mensagem_musical_ES": "Mensagem musical da Escola Sabatina (parte da manhã do sábado)",
+    "mensagem_musical_culto": "Mensagem musical do culto principal do sábado",
+    "mensagem_musical_por_dia": {
+      "sabado": { "quantidade_normal": 2, "descricao": "Uma na ES e uma no Culto. Em casos especiais de programação, somente a do Culto." },
+      "domingo": { "quantidade_normal": 1 },
+      "quarta-feira": { "quantidade_normal": 1 }
+    },
+    "progressao_mensagem_musical": "Pessoas iniciando começam pela mensagem musical do domingo. Com experiência, progridem para o sábado. Controle feito intuitivamente pelo líder.",
+    "sonoplastia": "Operação de áudio/som (subconjunto de AUDIOVISUAL)",
+    "ensaio": "Ensaio da equipe de louvor antes do culto principal",
+    "escala": "Grade de pessoas escaladas por função e data",
+    "PB": "Playback — culto sem banda ao vivo",
+    "BANDA": "Culto com banda ao vivo",
+    "regente": "Líder do louvor; conduz a equipe vocal e espiritualmente. Responsável por tudo que acontece com a equipe de louvor."
+  }
+}
