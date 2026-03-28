@@ -2,7 +2,58 @@
   "versao": "0.1.0",
   "ultima_atualizacao": "",
   "papeis": {
+    "REGENTE LOUVOR": {
+      "origem": "escala_propria",
+      "descricao": "Lidera o momento de louvor vocal e espiritualmente. Canta e rege simultaneamente. Aparece somente no campo REGENTE LOUVOR, nunca em EQUIPE LOUVOR. É responsável por tudo que acontece com a equipe de louvor no culto.",
+      "composicao_louvor": {
+        "total_cantores": 6,
+        "regente": 1,
+        "equipe_louvor": 5,
+        "musicas_por_culto": 3
+      },
+      "pode": [
+        "Escolher músicas (sujeito a veto do diretor)",
+        "Definir BANDA ou PB",
+        "Substituir membros da equipe por qualquer razão que julgue necessária (comportamento, falta no ensaio, desempenho ou qualquer outro motivo)",
+        "Convidar novos membros em casos de falta",
+        "Marcar e coordenar ensaio, ajustando horário com a equipe",
+        "Combinar paleta de cores/roupas da equipe",
+        "Fazer Mensagem Musical no mesmo culto (muito raro, sem ocorrência registrada)"
+      ],
+      "responsabilidades": [
+        "Garantir que a equipe ensaie as músicas",
+        "Garantir boa performance da equipe no culto",
+        "Garantir conduta espiritual da equipe — ser exemplo e conduzir espiritualmente",
+        "Falar entre as músicas e conduzir a atenção da congregação",
+        "Anunciar o início e encerrar o momento de louvor",
+        "Responder por tudo que acontece com a equipe de louvor"
+      ],
+      "nao_pode": [
+        "Participar da montagem da escala",
+        "Repreender membros publicamente ou aplicar restrições de participação em outros cultos",
+        "Se escalar",
+        "Definir músicas de forma unilateral e irrevogável (diretor pode vetar)",
+        "Alterar quantidade de músicas sem alinhamento com o diretor"
+      ],
+      "quem_pode_ser": "Lista principal de regentes habilitados; em casos excepcionais alguém fora da lista pode assumir",
+      "hierarquia": "DIRETOR > REGENTE > EQUIPE LOUVOR",
+      "nota_diretor": "O diretor às vezes sugere músicas ao regente; quando não sugere, o regente escolhe livremente. O diretor pode vetar qualquer música."
+    },
+    "DIRETOR": {
+      "origem": "interno",
+      "pessoa": "Natan",
+      "descricao": "Responsável geral pelo ministério de louvor. Define e monta a escala, tem autoridade final sobre qualquer decisão.",
+      "responsabilidades": [
+        "Montar e publicar a escala dos cultos",
+        "Receber informações das escalas externas (ANCIÃO, PREGADOR, AUDIOVISUAL, LOUVORES ES)",
+        "Sugerir músicas ao regente quando julgar necessário",
+        "Vetar músicas se necessário",
+        "Ter autoridade final sobre qualquer aspecto do louvor"
+      ],
+      "nota": "Quando o diretor não sugere músicas, o regente escolhe livremente"
+    },
     "EQUIPE LOUVOR": {
+      "origem": "escala_propria",
       "descricao": "5 cantores que compõem a equipe de louvor junto com o regente (total 6 vozes).",
       "composicao": {
         "total_membros": 5,
@@ -28,44 +79,101 @@
         ]
       }
     },
-      "descricao": "Lidera o momento de louvor vocal e espiritualmente. Canta e rege simultaneamente. Aparece somente no campo REGENTE LOUVOR, nunca em EQUIPE LOUVOR. É responsável por tudo que acontece com a equipe de louvor no culto.",
-      "composicao_louvor": {
-        "total_cantores": 6,
-        "regente": 1,
-        "equipe_louvor": 5,
-        "musicas_por_culto": 3
+    "MENSAGEM MUSICAL": {
+      "origem": "escala_propria",
+      "descricao": "Momento especial no culto. O campo registra um responsável (pessoa ou departamento) que decide o formato: solo, dupla ou trio. Qualquer membro da igreja pode ser escalado.",
+      "formatos": ["solo", "dupla", "trio"],
+      "responsavel_pode_ser": ["pessoa", "departamento"],
+      "ocorrencias_por_dia": {
+        "sabado": { "quantidade_normal": 2, "descricao": "Uma na ES e uma no Culto. Em casos especiais só a do Culto." },
+        "domingo": { "quantidade_normal": 1 },
+        "quarta-feira": { "quantidade_normal": 1 }
       },
-      "pode": [
-        "Escolher músicas (sujeito a veto do diretor)",
-        "Definir BANDA ou PB",
-        "Substituir membros da equipe por motivos justificáveis (comportamento, falta no ensaio, desempenho)",
-        "Convidar novos membros em casos de falta",
-        "Marcar e coordenar ensaio, ajustando horário com a equipe",
-        "Combinar paleta de cores/roupas da equipe",
-        "Fazer Mensagem Musical no mesmo culto (muito raro, sem ocorrência registrada)"
-      ],
-      "responsabilidades": [
-        "Garantir que a equipe ensaie as músicas",
-        "Garantir boa performance da equipe no culto",
-        "Garantir conduta espiritual da equipe — ser exemplo e conduzir espiritualmente",
-        "Falar entre as músicas e conduzir a atenção da congregação",
-        "Anunciar o início e encerrar o momento de louvor",
-        "Responder por tudo que acontece com a equipe de louvor"
-      ],
-      "nao_pode": [
-        "Participar da montagem da escala",
-        "Repreender membros publicamente ou aplicar restrições de participação em outros cultos",
-        "Se escalar",
-        "Definir músicas de forma unilateral e irrevogável (diretor pode vetar)",
-        "Alterar quantidade de músicas sem alinhamento com o diretor"
-      ],
-      "quem_pode_ser": "Lista principal de regentes habilitados; em casos excepcionais alguém fora da lista pode assumir",
-      "hierarquia": "DIRETOR > REGENTE > EQUIPE LOUVOR"
+      "progressao_informal": "Iniciantes começam pelo domingo; com experiência progridem para o sábado"
+    },
+    "AUDIOVISUAL": {
+      "origem": "escala_externa",
+      "descricao": "Responsável pela sonoplastia completa: som, microfones, PA, slides, playback, áudio. Opera ativamente durante todo o culto.",
+      "restricoes": [
+        "Não pode acumular REGENTE LOUVOR ou EQUIPE LOUVOR no mesmo culto (RF002)",
+        "Não deve aparecer como PREGADOR — indica erro na escala externa (RF003)",
+        "Pode fazer MENSAGEM MUSICAL apenas em ausência total de substitutos (PE005)"
+      ]
+    },
+    "SUPORTE": {
+      "origem": "escala_propria",
+      "descricao": "Ponte de comunicação por rádio entre banda/louvor e sonoplastia. Confirma mudanças de ordem e repassa ao sonoplasta em tempo real.",
+      "disponibilidade_habitual": "Principalmente sábados",
+      "quadro": "1-2 pessoas exercem esse papel"
+    },
+    "PREGADOR": {
+      "origem": "escala_externa",
+      "descricao": "Quem prega o sermão/mensagem/meditação bíblica. Às vezes informa tema ou solicita música específica.",
+      "interacao_louvor": [
+        "Pode informar tema — louvor deve tentar se alinhar (PE002)",
+        "Pode solicitar música específica — incorporar se viável (PE003)"
+      ]
+    },
+    "ANCIÃO": {
+      "origem": "escala_externa",
+      "descricao": "Gerente do culto. Tem autoridade para alterar qualquer aspecto, mas raramente intervém — na prática apenas confere.",
+      "restricoes": "Nenhuma — pode acumular qualquer papel (RF004-A)"
+    },
+    "LOUVORES ES": {
+      "origem": "escala_externa",
+      "descricao": "Músicas escolhidas para a Escola Sabatina, definidas por outro departamento. Informação de referência na escala."
     }
   },
-  "regras_fundamentais": [],
-  "restricoes_pessoais": {},
-  "preferencias": [],
+  "regras_fundamentais": [
+    {
+      "id": "RF001",
+      "descricao": "A EQUIPE LOUVOR deve ter no mínimo 1 homem",
+      "excecao": "Cultos temáticos femininos (ex: Culto da Mulher) podem ter equipe 100% feminina"
+    },
+    {
+      "id": "RF002",
+      "descricao": "AUDIOVISUAL não pode acumular REGENTE LOUVOR ou EQUIPE LOUVOR no mesmo culto",
+      "papeis_afetados": ["AUDIOVISUAL", "REGENTE LOUVOR", "EQUIPE LOUVOR"]
+    },
+    {
+      "id": "RF003",
+      "descricao": "AUDIOVISUAL não deve aparecer como PREGADOR — indica erro na escala externa",
+      "papeis_afetados": ["AUDIOVISUAL", "PREGADOR"]
+    },
+    {
+      "id": "RF004",
+      "descricao": "Nomes nas funções de origem externa (ANCIÃO, PREGADOR, AUDIOVISUAL, LOUVORES ES) não devem conflitar com escalações da equipe de louvor",
+      "excecao": "RF004-A: ANCIÃO pode acumular qualquer papel — é o gerente do culto",
+      "campos_externos": ["ANCIÃO", "PREGADOR", "AUDIOVISUAL", "LOUVORES ES"]
+    }
+  ],
+  "preferencias": [
+    {
+      "id": "PE001",
+      "descricao": "EQUIPE LOUVOR deve ter idealmente 2 ou mais homens",
+      "prioridade": "media"
+    },
+    {
+      "id": "PE002",
+      "descricao": "Quando PREGADOR informa tema, alinhar músicas do louvor a esse tema",
+      "prioridade": "media"
+    },
+    {
+      "id": "PE003",
+      "descricao": "Quando PREGADOR solicita música específica, incorporar ao louvor se viável",
+      "prioridade": "media"
+    },
+    {
+      "id": "PE004",
+      "descricao": "Priorizar grupo preferencial de cada regente para promover sinergia",
+      "prioridade": "alta"
+    },
+    {
+      "id": "PE005",
+      "descricao": "Não escalar AUDIOVISUAL para MENSAGEM MUSICAL, exceto ausência total de substitutos",
+      "prioridade": "alta"
+    }
+  ],
   "times": {
     "louvor": []
   },
@@ -97,6 +205,8 @@
     "escala": "Grade de pessoas escaladas por função e data",
     "PB": "Playback — culto sem banda ao vivo",
     "BANDA": "Culto com banda ao vivo",
-    "regente": "Líder do louvor; conduz a equipe vocal e espiritualmente. Responsável por tudo que acontece com a equipe de louvor."
+    "regente": "Líder do louvor; conduz a equipe vocal e espiritualmente. Responsável por tudo que acontece com a equipe de louvor.",
+    "escola_sabatina": "Programa de estudo bíblico realizado na manhã do sábado, antes do culto principal. Tem sua própria mensagem musical (mensagem musical ES) e músicas (LOUVORES ES), definidas por departamento externo.",
+    "paleta": "Combinação de cores/tons de roupa definida pelo regente para uniformizar a aparência da equipe no dia do culto."
   }
 }

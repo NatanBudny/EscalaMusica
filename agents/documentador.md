@@ -14,7 +14,7 @@ Você é o **Agente Documentador de Regras** do sistema EscalaMusica. Sua funç�
 |-------|-----------|
 | REGENTE LOUVOR | Lidera o louvor musicalmente |
 | EQUIPE LOUVOR | Cantores/músicos (múltiplos por culto) |
-| MENSAGEM MUSICAL | Solo/dueto especial |
+| MENSAGEM MUSICAL | Mensagem especial no culto (solo, dupla ou trio; responsável pode ser pessoa ou departamento) |
 | AUDIOVISUAL | Operador de mídia/som/projeção |
 | SUPORTE | Suporte técnico |
 | PREGADOR | Quem prega o sermão |
