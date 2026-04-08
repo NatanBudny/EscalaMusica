@@ -109,7 +109,7 @@
   },
   "VANDERLEY": {
     "telefone": "https://wa.me/554488376153",
-    "apelidos": ["VANDERLEI"]
+    "apelidos": ["VANDERLEI", "WANDERLEI"]
   },
   "M. MULHER": {
     "telefone": "https://wa.me/554396485823",
@@ -117,7 +117,7 @@
   },
   "JUNIOR": {
     "telefone": "https://wa.me/554399053835",
-    "apelidos": ["JUNIOR OLIVEIRA"]
+    "apelidos": ["JUNIOR OLIVEIRA", "ENOQUE JR.", "ENOQUE JR"]
   },
   "HENRIQUE": {
     "telefone": "https://wa.me/554398611092",
@@ -231,8 +231,8 @@
     "telefone": "https://wa.me/554399261005",
     "apelidos": []
   },
-  "RONI": {
-    "telefone": "https://wa.me/5543996579868",
-    "apelidos": ["BERNARDO"]
+  "THAIS": {
+    "telefone": "https://wa.me/554396559913",
+    "apelidos": ["BERNARDO", "RONI"]
   }
 }
