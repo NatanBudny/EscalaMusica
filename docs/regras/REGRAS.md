@@ -19,6 +19,9 @@ _Exceção:_ cultos temáticos femininos (ex: Culto da Mulher) podem ter equipe 
 **RF004** — Nomes nas funções de origem externa (ANCIÃO, PREGADOR, AUDIOVISUAL, LOUVORES ES) não devem conflitar com as escalações da equipe de louvor (ex: não escalar alguém para EQUIPE LOUVOR que já está como PREGADOR naquele culto).  
 _Exceção RF004-A:_ O ANCIÃO pode acumular outros papéis sem restrição — é o gerente do culto.
 
+**RF005** — Não fazemos escala própria de louvor às quartas-feiras.  
+Para cultos de quarta, os campos `REGENTE LOUVOR`, `EQUIPE LOUVOR`, `MENSAGEM MUSICAL` e `SUPORTE` devem ficar vazios ou `-`.
+
 ---
 
 ## RP — Restrições Pessoais
@@ -82,7 +85,7 @@ _Exceção RF004-A:_ O ANCIÃO pode acumular outros papéis sem restrição — 
 |-----|------------|------------|
 | Sábado | 2 (normalmente) | Uma na Escola Sabatina (ES) e uma no Culto. Em casos especiais de programação, só a do Culto. |
 | Domingo | 1 | — |
-| Quarta-feira | 1 | — |
+| Quarta-feira | 0 | Não há escala própria de louvor na quarta. |
 
 **Campo no sistema:** Um único campo `MENSAGEM MUSICAL` por culto. Quando há dois no sábado, o líder gerencia manualmente (ES e Culto separados na prática).
 
@@ -227,7 +230,7 @@ Cada pessoa terá a classificação vocal (soprano, contralto, tenor, barítono 
 
 | Termo | Significado |
 |-------|-------------|
-| Culto | Serviço religioso (quarta, sábado, domingo) |
+| Culto | Serviço religioso (quarta, sábado, domingo). A escala própria de louvor contempla sábado e domingo; na quarta, esses campos ficam vazios. |
 | Escola Sabatina (ES) | Programa de estudo bíblico realizado na manhã do sábado, antes do culto principal. Tem sua própria mensagem musical e músicas (LOUVORES ES), definidas por departamento externo. |
 | Louvor | Parte musical do culto |
 | Mensagem musical | Momento especial no culto. O campo registra um responsável (pessoa ou departamento) que decide o formato: solo, dupla ou trio. Qualquer membro pode fazer. |

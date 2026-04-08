@@ -131,6 +131,40 @@ Array de registros de cultos:
 
 ---
 
+## Processo mensal da escala (rascunho -> producao)
+
+Fluxo padrao para abrir um novo mes sem perder historico.
+
+### 1) Criar rascunho em Markdown
+
+- Criar um arquivo de rascunho em Markdown para o novo mes.
+- Sugestao de nome: `escala-louvor-<mes>-<ano>-draft.md`.
+- Revisar internamente ate chegar na versao aprovada.
+
+### 2) Aprovar o rascunho
+
+- Apos validacao final, definir qual arquivo de rascunho foi autorizado.
+- Este arquivo sera a base da nova escala vigente.
+
+### 3) Arquivar a escala vigente
+
+- Antes de trocar a escala atual, mover o arquivo vigente para `old/`.
+- Nomear o arquivo arquivado no formato `mmaaaa` (mes + ano), por exemplo: `042026.json`.
+- Objetivo: manter historico organizado e facilitar consultas futuras.
+
+### 4) Promover o rascunho aprovado para atual
+
+- Criar/atualizar o arquivo atual da escala com base no rascunho aprovado.
+- O arquivo vigente deve continuar acessivel no caminho esperado pela aplicacao (`atual.json`).
+
+### 5) Checklist rapido de fechamento
+
+- Confirmar que o historico foi salvo em `old/` com nome `mmaaaa`.
+- Confirmar que `atual.json` contem a escala aprovada do novo mes.
+- Subir o app localmente e validar se a escala carregou sem erros.
+
+---
+
 ## Coordenadores de Substituicao
 
 Configurados em `src/business/substitute.js` no objeto `COORDENADORES`. Atualizar quando houver mudanca de lideranca.

@@ -87,7 +87,7 @@
       "ocorrencias_por_dia": {
         "sabado": { "quantidade_normal": 2, "descricao": "Uma na ES e uma no Culto. Em casos especiais só a do Culto." },
         "domingo": { "quantidade_normal": 1 },
-        "quarta-feira": { "quantidade_normal": 1 }
+        "quarta-feira": { "quantidade_normal": 0, "descricao": "Não há escala própria de louvor na quarta-feira" }
       },
       "progressao_informal": "Iniciantes começam pelo domingo; com experiência progridem para o sábado"
     },
@@ -146,6 +146,12 @@
       "descricao": "Nomes nas funções de origem externa (ANCIÃO, PREGADOR, AUDIOVISUAL, LOUVORES ES) não devem conflitar com escalações da equipe de louvor",
       "excecao": "RF004-A: ANCIÃO pode acumular qualquer papel — é o gerente do culto",
       "campos_externos": ["ANCIÃO", "PREGADOR", "AUDIOVISUAL", "LOUVORES ES"]
+    },
+    {
+      "id": "RF005",
+      "descricao": "Não fazemos escala própria de louvor às quartas-feiras",
+      "detalhe": "Para cultos de quarta, os campos REGENTE LOUVOR, EQUIPE LOUVOR, MENSAGEM MUSICAL e SUPORTE devem ficar vazios ou '-'",
+      "papeis_afetados": ["REGENTE LOUVOR", "EQUIPE LOUVOR", "MENSAGEM MUSICAL", "SUPORTE"]
     }
   ],
   "preferencias": [
@@ -189,7 +195,7 @@
     }
   ],
   "glossario": {
-    "culto": "Serviço religioso (quarta, sábado, domingo)",
+    "culto": "Serviço religioso (quarta, sábado, domingo). A escala própria de louvor contempla sábado e domingo; na quarta, esses campos ficam vazios.",
     "louvor": "Parte musical do culto",
     "mensagem_musical": "Momento especial no culto. O campo registra um responsável (pessoa ou departamento). A apresentação pode ser solo, dupla ou trio — quem está escalado decide o formato. Qualquer membro da igreja pode ser escalado.",
     "mensagem_musical_responsavel": "O campo MENSAGEM MUSICAL pode conter: (1) nome de uma pessoa, que resolve o formato sozinha; (2) nome de um departamento, que indica internamente quem vai cantar.",
@@ -198,7 +204,7 @@
     "mensagem_musical_por_dia": {
       "sabado": { "quantidade_normal": 2, "descricao": "Uma na ES e uma no Culto. Em casos especiais de programação, somente a do Culto." },
       "domingo": { "quantidade_normal": 1 },
-      "quarta-feira": { "quantidade_normal": 1 }
+      "quarta-feira": { "quantidade_normal": 0, "descricao": "Não há escala própria de louvor na quarta-feira" }
     },
     "progressao_mensagem_musical": "Pessoas iniciando começam pela mensagem musical do domingo. Com experiência, progridem para o sábado. Controle feito intuitivamente pelo líder.",
     "sonoplastia": "Operação de áudio/som (subconjunto de AUDIOVISUAL)",

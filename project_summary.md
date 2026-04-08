@@ -16,6 +16,7 @@ Este projeto gerencia a escala de louvor de uma igreja. O objetivo é usar o his
 - **Nomes**: Todos os nomes de participantes devem estar em **MAIÚSCULAS**.
 - **Composição da Equipe**: A escala padrão é **1 Regente + 5 cantores**.
   - A equipe de louvor deve ter no mínimo **2 homens**.
+- **Quartas-feiras**: Não há escala própria de louvor. Em cultos de quarta, `REGENTE LOUVOR`, `EQUIPE LOUVOR`, `MENSAGEM MUSICAL` e `SUPORTE` devem ficar vazios ou `-`.
 - **Equipes Fixas**:
   - **Equipe 1** (Preferência por BANDA): CATHERINE, GIOVANA, ARIADNY, FABRÍCIO, LUIS, EMILY. (Regência rotativa entre eles).
   - **Equipe 2** (Preferência por BANDA): KHEYCIANE, SUELLEN, ALEX, ANISSA, LUIS, DANY KALLAS. (Regência rotativa entre eles).
