@@ -6,7 +6,7 @@ import os
 
 PORT = 8000
 FILE = "index.html"
-MAINTENANCE_MODE = True
+MAINTENANCE_MODE = False
 MAINTENANCE_FILE = "maintenance.html"
 
 class Handler(http.server.SimpleHTTPRequestHandler):
