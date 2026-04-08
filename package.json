@@ -7,7 +7,8 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
     "validar:regras": "node scripts/validar-regras.js",
-    "validar:obs": "node scripts/validar-obs-publico.js"
+    "validar:obs": "node scripts/validar-obs-publico.js",
+    "gerar:links-publicacao": "node scripts/gerar-links-publicacao.js"
   },
   "devDependencies": {
     "jest": "^29.7.0"

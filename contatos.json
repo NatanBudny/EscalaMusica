@@ -41,7 +41,7 @@
   },
   "ENOQUE": {
     "telefone": "https://wa.me/554396598684",
-    "apelidos": []
+    "apelidos": ["ENOQUE JR", "JUNIOR"]
   },
   "FABRÍCIO": {
     "telefone": "https://wa.me/554396670568",
@@ -61,6 +61,10 @@
   },
   "JEMELLI": {
     "telefone": "https://wa.me/554499552532",
+    "apelidos": []
+  },
+  "LAURA": {
+    "telefone": "https://wa.me/554396284856",
     "apelidos": []
   },
   "LUAN": {
@@ -115,6 +119,10 @@
     "telefone": "https://wa.me/554399053835",
     "apelidos": ["JUNIOR OLIVEIRA"]
   },
+  "HENRIQUE": {
+    "telefone": "https://wa.me/554398611092",
+    "apelidos": []
+  },
   "DIEGO": {
     "telefone": "https://wa.me/554388168906",
     "apelidos": ["DIEGO"]
@@ -133,7 +141,7 @@
   },
   "ROBERTO KOCH": {
     "telefone": "https://wa.me/554399191480",
-    "apelidos": []
+    "apelidos": ["ROBERTO"]
   },
   "DANI HERREIRA": {
     "telefone": "https://wa.me/5543999189819",
@@ -203,6 +211,10 @@
     "telefone": "https://wa.me/5543999695238",
     "apelidos": []
    },
+  "MARAIR": {
+    "telefone": "https://wa.me/554399082597",
+    "apelidos": ["MM"]
+  },
   "YASSER": {
     "telefone": "https://wa.me/5543999519003",
     "apelidos": []

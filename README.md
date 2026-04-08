@@ -166,6 +166,17 @@ Fluxo padrao para abrir um novo mes sem perder historico.
 - Confirmar que `atual.json` contem a escala aprovada do novo mes.
 - Subir o app localmente e validar se a escala carregou sem erros.
 
+### 6) Pos-publicacao (obrigatorio)
+
+- Registrar a publicacao oficial em `publicacoes-escala.md` com data, referencia da escala publicada e responsavel.
+- Gerar lista de links de WhatsApp para confirmacao da escala:
+
+```bash
+npm run gerar:links-publicacao
+```
+
+- A lista deve contemplar REGENTE LOUVOR, EQUIPE LOUVOR, MENSAGEM MUSICAL, contatos fixos (Adelaide e Yasser) e o link do grupo do louvor.
+
 ---
 
 ## Coordenadores de Substituicao

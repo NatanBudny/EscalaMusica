@@ -29,6 +29,15 @@ Na escala publicada, preencher normalmente `PREGADOR`, `ANCIÃO`, `AUDIOVISUAL` 
 Só pode conter observações explicitamente autorizadas para divulgação à igreja (ex: `PUBLICAR: Culto Jovem`, `PUBLICAR: Culto da Mulher`, `PUBLICAR: Culto do Departamento Infantil`).
 É proibido registrar no `OBS` informações internas/sensíveis de montagem de escala (rascunho, pendências, instruções operacionais, dados privados, contatos, alinhamentos internos ou qualquer anotação de desenvolvimento).
 
+**RF008** — Após publicar a versão oficial da escala, registrar a publicação no arquivo `publicacoes-escala.md`, incluindo ao menos: data da publicação, referência da escala publicada e responsável.
+
+**RF009** — Após cada publicação oficial, gerar a lista de links de WhatsApp para confirmação da escala, contemplando:
+- Pessoas escaladas em `REGENTE LOUVOR`
+- Pessoas escaladas em `EQUIPE LOUVOR`
+- Pessoas escaladas em `MENSAGEM MUSICAL`
+- Contatos fixos: líder da banda (Adelaide) e ancião principal (Yasser)
+- Link de convite do grupo do louvor
+
 ---
 
 ## RP — Restrições Pessoais

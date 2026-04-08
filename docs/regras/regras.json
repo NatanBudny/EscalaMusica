@@ -164,6 +164,16 @@
       "descricao": "O campo OBS do atual.json é exclusivamente público e só aceita observações explicitamente informadas para divulgação à igreja",
       "detalhe": "É proibido usar OBS para anotações internas/sensíveis de desenvolvimento da escala. Exemplo permitido: 'PUBLICAR: Culto Jovem'.",
       "papeis_afetados": ["OBS"]
+    },
+    {
+      "id": "RF008",
+      "descricao": "Após publicar a versão oficial da escala, registrar a publicação em um arquivo Markdown de histórico",
+      "detalhe": "Registrar em publicacoes-escala.md, no mínimo: data da publicação, referência da escala publicada e responsável."
+    },
+    {
+      "id": "RF009",
+      "descricao": "Após cada publicação oficial, gerar lista de links de WhatsApp para confirmação de escala",
+      "detalhe": "A lista deve incluir REGENTE LOUVOR, EQUIPE LOUVOR, MENSAGEM MUSICAL, contatos fixos (Adelaide e Yasser) e o link de convite do grupo do louvor."
     }
   ],
   "preferencias": [
