@@ -1,7 +1,39 @@
-[
+﻿[
+  {
+    "DATA": "01/04/2026",
+    "DIA SEMANA": "quarta-feira",
+    "ACOMP": "PB",
+    "REGENTE LOUVOR": "",
+    "EQUIPE LOUVOR": "",
+    "MENSAGEM MUSICAL": "",
+    "LOUVORES ES": "",
+    "LOUVORES CULTO": "",
+    "TEMA CULTO": "",
+    "AUDIOVISUAL": "JUNIOR FERREIRA",
+    "ANCIÃO": "MARCOS",
+    "PREGADOR": "PR. FERNANDO IGLESIAS",
+    "SUPORTE": "",
+    "OBS": "SEM CONFLITO REGISTRADO"
+  },
+  {
+    "DATA": "08/04/2026",
+    "DIA SEMANA": "quarta-feira",
+    "ACOMP": "PB",
+    "REGENTE LOUVOR": "",
+    "EQUIPE LOUVOR": "",
+    "MENSAGEM MUSICAL": "",
+    "LOUVORES ES": "",
+    "LOUVORES CULTO": "",
+    "TEMA CULTO": "",
+    "AUDIOVISUAL": "GABRIEL",
+    "ANCIÃO": "RICARDO",
+    "PREGADOR": "LUIS DA SILVA",
+    "SUPORTE": "",
+    "OBS": "EVITADO BIEL POR POSSIVEL CONFLITO COM GABRIEL DA SONOPLASTIA"
+  },
   {
     "DATA": "11/04/2026",
-    "DIA SEMANA": "sábado",
+    "DIA SEMANA": "sÃ¡bado",
     "ACOMP": "BANDA",
     "REGENTE LOUVOR": "GIOVANA",
     "EQUIPE LOUVOR": "ARIADNY, BIEL, FABRICIO, MARIA, EMILY",
@@ -32,8 +64,24 @@
     "OBS": ""
   },
   {
+    "DATA": "15/04/2026",
+    "DIA SEMANA": "quarta-feira",
+    "ACOMP": "PB",
+    "REGENTE LOUVOR": "",
+    "EQUIPE LOUVOR": "",
+    "MENSAGEM MUSICAL": "",
+    "LOUVORES ES": "",
+    "LOUVORES CULTO": "",
+    "TEMA CULTO": "",
+    "AUDIOVISUAL": "GABRIEL",
+    "ANCIÃO": "ROBERTO",
+    "PREGADOR": "LEONILDA",
+    "SUPORTE": "",
+    "OBS": "EVITADO BIEL POR POSSIVEL CONFLITO COM SONOPLASTIA"
+  },
+  {
     "DATA": "18/04/2026",
-    "DIA SEMANA": "sábado",
+    "DIA SEMANA": "sÃ¡bado",
     "ACOMP": "BANDA",
     "REGENTE LOUVOR": "KHEYCIANE",
     "EQUIPE LOUVOR": "EMILY, ALEX, LUIZ ANTONIO, JESSE, MARIA",
@@ -64,8 +112,24 @@
     "OBS": ""
   },
   {
+    "DATA": "22/04/2026",
+    "DIA SEMANA": "quarta-feira",
+    "ACOMP": "PB",
+    "REGENTE LOUVOR": "",
+    "EQUIPE LOUVOR": "",
+    "MENSAGEM MUSICAL": "",
+    "LOUVORES ES": "",
+    "LOUVORES CULTO": "",
+    "TEMA CULTO": "",
+    "AUDIOVISUAL": "GABRIEL",
+    "ANCIÃO": "SUELLEN",
+    "PREGADOR": "(NAO LEGIVEL)",
+    "SUPORTE": "",
+    "OBS": "PREGADOR A CONFIRMAR (NOME ILEGIVEL NO RASCUNHO)"
+  },
+  {
     "DATA": "25/04/2026",
-    "DIA SEMANA": "sábado",
+    "DIA SEMANA": "sÃ¡bado",
     "ACOMP": "BANDA",
     "REGENTE LOUVOR": "GIOVANA",
     "EQUIPE LOUVOR": "FABRICIO, NILSINHO, MIRELLA, MARCELA, LIDIANE",
@@ -94,5 +158,22 @@
     "PREGADOR": "ENOQUE JR.",
     "SUPORTE": "",
     "OBS": ""
+  },
+  {
+    "DATA": "29/04/2026",
+    "DIA SEMANA": "quarta-feira",
+    "ACOMP": "PB",
+    "REGENTE LOUVOR": "",
+    "EQUIPE LOUVOR": "",
+    "MENSAGEM MUSICAL": "",
+    "LOUVORES ES": "",
+    "LOUVORES CULTO": "",
+    "TEMA CULTO": "",
+    "AUDIOVISUAL": "GABRIEL",
+    "ANCIÃO": "YASSER",
+    "PREGADOR": "MM",
+    "SUPORTE": "",
+    "OBS": "EVITADO BIEL POR POSSIVEL CONFLITO COM SONOPLASTIA"
   }
 ]
+
