@@ -177,6 +177,8 @@ npm run gerar:links-publicacao
 
 - A lista deve contemplar REGENTE LOUVOR, EQUIPE LOUVOR, MENSAGEM MUSICAL, contatos fixos (Adelaide e Yasser) e o link do grupo do louvor.
 
+> ⚠️ **Arquivos temporários:** Os arquivos `links-whatsapp-publicacao-*.md` são gerados para divulgação após cada publicação e podem ser deletados quando a próxima escala for aberta.
+
 ---
 
 ## Coordenadores de Substituicao

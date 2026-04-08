@@ -9,6 +9,7 @@ Link da escala: https://natanbudny.github.io/EscalaMusica/
 
 ## Membros da escala (Regencia, Equipe Louvor e Mensagem Musical)
 
+- ALESSANDRA (REGENTE LOUVOR) -> https://wa.me/554396195901?text=Oi%2C%20escala%20desse%20mes%2C%20me%20confirma%20por%20favor%3F%0ALink%20da%20escala%3A%20https%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F
 - ALEX (EQUIPE LOUVOR) -> https://wa.me/554396849723?text=Oi%2C%20escala%20desse%20mes%2C%20me%20confirma%20por%20favor%3F%0ALink%20da%20escala%3A%20https%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F
 - ARIADNY (EQUIPE LOUVOR) -> https://wa.me/554396158329?text=Oi%2C%20escala%20desse%20mes%2C%20me%20confirma%20por%20favor%3F%0ALink%20da%20escala%3A%20https%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F
 - DANI HERREIRA (MENSAGEM MUSICAL) -> https://wa.me/5543999189819?text=Oi%2C%20escala%20desse%20mes%2C%20me%20confirma%20por%20favor%3F%0ALink%20da%20escala%3A%20https%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F
@@ -44,10 +45,6 @@ Link da escala: https://natanbudny.github.io/EscalaMusica/
 
 - Convite do grupo: https://chat.whatsapp.com/EsfZwmrdWntG9wxqoSN5zw
 - Observacao: link de convite nao preenche mensagem automaticamente como no wa.me.
-
-## Sem contato cadastrado
-
-- ALESSANDRA (REGENTE LOUVOR)
 
 ## Fonte
 
