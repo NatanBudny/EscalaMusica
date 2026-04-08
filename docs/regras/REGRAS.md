@@ -25,6 +25,10 @@ Para cultos de quarta, os campos `REGENTE LOUVOR`, `EQUIPE LOUVOR`, `MENSAGEM MU
 **RF006** — O arquivo de rascunho/preview pode omitir quartas-feiras, mas a publicação final (`atual.json`) deve incluir também os cultos de quarta com dados dos outros departamentos.  
 Na escala publicada, preencher normalmente `PREGADOR`, `ANCIÃO`, `AUDIOVISUAL` e `OBS` da quarta-feira, mantendo `REGENTE LOUVOR`, `EQUIPE LOUVOR`, `MENSAGEM MUSICAL` e `SUPORTE` em branco (ou `-`).
 
+**RF007** — O campo `OBS` no `atual.json` é exclusivamente público.  
+Só pode conter observações explicitamente autorizadas para divulgação à igreja (ex: `PUBLICAR: Culto Jovem`, `PUBLICAR: Culto da Mulher`, `PUBLICAR: Culto do Departamento Infantil`).
+É proibido registrar no `OBS` informações internas/sensíveis de montagem de escala (rascunho, pendências, instruções operacionais, dados privados, contatos, alinhamentos internos ou qualquer anotação de desenvolvimento).
+
 ---
 
 ## RP — Restrições Pessoais

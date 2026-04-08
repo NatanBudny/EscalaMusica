@@ -158,6 +158,12 @@
       "descricao": "O rascunho/preview pode omitir quartas-feiras, mas a publicação final deve incluir os cultos de quarta com dados dos departamentos externos",
       "detalhe": "No atual.json publicado, preencher PREGADOR, ANCIÃO, AUDIOVISUAL e OBS para quartas-feiras; manter REGENTE LOUVOR, EQUIPE LOUVOR, MENSAGEM MUSICAL e SUPORTE em branco ou '-'",
       "papeis_afetados": ["PREGADOR", "ANCIÃO", "AUDIOVISUAL", "OBS", "REGENTE LOUVOR", "EQUIPE LOUVOR", "MENSAGEM MUSICAL", "SUPORTE"]
+    },
+    {
+      "id": "RF007",
+      "descricao": "O campo OBS do atual.json é exclusivamente público e só aceita observações explicitamente informadas para divulgação à igreja",
+      "detalhe": "É proibido usar OBS para anotações internas/sensíveis de desenvolvimento da escala. Exemplo permitido: 'PUBLICAR: Culto Jovem'.",
+      "papeis_afetados": ["OBS"]
     }
   ],
   "preferencias": [
