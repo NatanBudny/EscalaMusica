@@ -1,6 +1,6 @@
 {
   "versao": "0.1.0",
-  "ultima_atualizacao": "2026-03-28",
+  "ultima_atualizacao": "2026-04-08",
   "papeis": {
     "REGENTE LOUVOR": {
       "origem": "escala_propria",
@@ -152,6 +152,12 @@
       "descricao": "Não fazemos escala própria de louvor às quartas-feiras",
       "detalhe": "Para cultos de quarta, os campos REGENTE LOUVOR, EQUIPE LOUVOR, MENSAGEM MUSICAL e SUPORTE devem ficar vazios ou '-'",
       "papeis_afetados": ["REGENTE LOUVOR", "EQUIPE LOUVOR", "MENSAGEM MUSICAL", "SUPORTE"]
+    },
+    {
+      "id": "RF006",
+      "descricao": "O rascunho/preview pode omitir quartas-feiras, mas a publicação final deve incluir os cultos de quarta com dados dos departamentos externos",
+      "detalhe": "No atual.json publicado, preencher PREGADOR, ANCIÃO, AUDIOVISUAL e OBS para quartas-feiras; manter REGENTE LOUVOR, EQUIPE LOUVOR, MENSAGEM MUSICAL e SUPORTE em branco ou '-'",
+      "papeis_afetados": ["PREGADOR", "ANCIÃO", "AUDIOVISUAL", "OBS", "REGENTE LOUVOR", "EQUIPE LOUVOR", "MENSAGEM MUSICAL", "SUPORTE"]
     }
   ],
   "preferencias": [

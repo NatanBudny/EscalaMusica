@@ -22,6 +22,9 @@ _Exceção RF004-A:_ O ANCIÃO pode acumular outros papéis sem restrição — 
 **RF005** — Não fazemos escala própria de louvor às quartas-feiras.  
 Para cultos de quarta, os campos `REGENTE LOUVOR`, `EQUIPE LOUVOR`, `MENSAGEM MUSICAL` e `SUPORTE` devem ficar vazios ou `-`.
 
+**RF006** — O arquivo de rascunho/preview pode omitir quartas-feiras, mas a publicação final (`atual.json`) deve incluir também os cultos de quarta com dados dos outros departamentos.  
+Na escala publicada, preencher normalmente `PREGADOR`, `ANCIÃO`, `AUDIOVISUAL` e `OBS` da quarta-feira, mantendo `REGENTE LOUVOR`, `EQUIPE LOUVOR`, `MENSAGEM MUSICAL` e `SUPORTE` em branco (ou `-`).
+
 ---
 
 ## RP — Restrições Pessoais

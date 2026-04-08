@@ -140,6 +140,7 @@ Fluxo padrao para abrir um novo mes sem perder historico.
 - Criar um arquivo de rascunho em Markdown para o novo mes.
 - Sugestao de nome: `escala-louvor-<mes>-<ano>-draft.md`.
 - Revisar internamente ate chegar na versao aprovada.
+- No rascunho/preview, as quartas-feiras podem ficar fora da tabela.
 
 ### 2) Aprovar o rascunho
 
@@ -156,6 +157,8 @@ Fluxo padrao para abrir um novo mes sem perder historico.
 
 - Criar/atualizar o arquivo atual da escala com base no rascunho aprovado.
 - O arquivo vigente deve continuar acessivel no caminho esperado pela aplicacao (`atual.json`).
+- Na publicacao final (`atual.json`), incluir tambem as quartas-feiras com dados de `PREGADOR`, `ANCIAO`, `AUDIOVISUAL` e `OBS`.
+- Para quartas-feiras, manter `REGENTE LOUVOR`, `EQUIPE LOUVOR`, `MENSAGEM MUSICAL` e `SUPORTE` em branco (ou `-`).
 
 ### 5) Checklist rapido de fechamento
 
