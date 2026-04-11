@@ -5,6 +5,7 @@ import { verificarAutenticacao, mostrarAuth, salvarNomeVinculado } from './auth/
 import { estaEscalado } from './utils/name.js';
 import { getDetalhesAgenda } from './business/agenda.js';
 import { renderizar, aplicarFiltros, aplicarFiltroAutomatico } from './ui/filters.js';
+import { renderizarRanking } from './ui/ranking.js';
 
 // ── Functions exposed to inline onclick handlers in the HTML ──────────────────
 
@@ -162,6 +163,14 @@ document.getElementById('btnTogglePast').onclick = () => {
   document.getElementById('btnTogglePast').classList.toggle('active');
   document.getElementById('pastDivider').style.display =
     c.classList.contains('show') ? 'flex' : 'none';
+};
+
+document.getElementById('btnToggleRanking').onclick = () => {
+  const box = document.getElementById('rankingBox');
+  const btn = document.getElementById('btnToggleRanking');
+  const isActive = box.classList.toggle('active');
+  btn.classList.toggle('active', isActive);
+  if (isActive) renderizarRanking();
 };
 
 document.getElementById('searchInput').addEventListener('input', () => {
