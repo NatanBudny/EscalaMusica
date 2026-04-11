@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1772724882105" clover="3.2.0">
-  <project timestamp="1772724882105" name="All files">
+<coverage generated="1775916603477" clover="3.2.0">
+  <project timestamp="1775916603477" name="All files">
     <metrics statements="368" coveredstatements="213" conditionals="254" coveredconditionals="177" methods="89" coveredmethods="57" elements="711" coveredelements="447" complexity="0" loc="368" ncloc="368" packages="6" files="16" classes="16"/>
     <package name="src">
       <metrics statements="91" coveredstatements="3" conditionals="30" coveredconditionals="0" methods="18" coveredmethods="0"/>
-      <file name="config.js" path="C:\unionall\church\EscalaMusica\src\config.js">
+      <file name="config.js" path="/home/runner/work/EscalaMusica/EscalaMusica/src/config.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="2" type="stmt"/>
         <line num="6" count="2" type="stmt"/>
       </file>
-      <file name="main.js" path="C:\unionall\church\EscalaMusica\src\main.js">
+      <file name="main.js" path="/home/runner/work/EscalaMusica/EscalaMusica/src/main.js">
         <metrics statements="88" coveredstatements="0" conditionals="30" coveredconditionals="0" methods="18" coveredmethods="0"/>
         <line num="11" count="0" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
@@ -100,14 +100,14 @@
         <line num="180" count="0" type="stmt"/>
         <line num="182" count="0" type="stmt"/>
       </file>
-      <file name="state.js" path="C:\unionall\church\EscalaMusica\src\state.js">
+      <file name="state.js" path="/home/runner/work/EscalaMusica/EscalaMusica/src/state.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="2" count="5" type="stmt"/>
       </file>
     </package>
     <package name="src.auth">
       <metrics statements="71" coveredstatements="9" conditionals="34" coveredconditionals="10" methods="15" coveredmethods="3"/>
-      <file name="auth.js" path="C:\unionall\church\EscalaMusica\src\auth\auth.js">
+      <file name="auth.js" path="/home/runner/work/EscalaMusica/EscalaMusica/src/auth/auth.js">
         <metrics statements="62" coveredstatements="0" conditionals="24" coveredconditionals="0" methods="12" coveredmethods="0"/>
         <line num="9" count="0" type="stmt"/>
         <line num="10" count="0" type="stmt"/>
@@ -172,7 +172,7 @@
         <line num="104" count="0" type="stmt"/>
         <line num="106" count="0" type="stmt"/>
       </file>
-      <file name="storage.js" path="C:\unionall\church\EscalaMusica\src\auth\storage.js">
+      <file name="storage.js" path="/home/runner/work/EscalaMusica/EscalaMusica/src/auth/storage.js">
         <metrics statements="9" coveredstatements="9" conditionals="10" coveredconditionals="10" methods="3" coveredmethods="3"/>
         <line num="5" count="14" type="stmt"/>
         <line num="6" count="14" type="cond" truecount="2" falsecount="0"/>
@@ -187,7 +187,7 @@
     </package>
     <package name="src.business">
       <metrics statements="67" coveredstatements="64" conditionals="54" coveredconditionals="48" methods="16" coveredmethods="15"/>
-      <file name="agenda.js" path="C:\unionall\church\EscalaMusica\src\business\agenda.js">
+      <file name="agenda.js" path="/home/runner/work/EscalaMusica/EscalaMusica/src/business/agenda.js">
         <metrics statements="16" coveredstatements="16" conditionals="14" coveredconditionals="14" methods="2" coveredmethods="2"/>
         <line num="3" count="1" type="stmt"/>
         <line num="32" count="12" type="stmt"/>
@@ -206,7 +206,7 @@
         <line num="53" count="1" type="stmt"/>
         <line num="55" count="12" type="stmt"/>
       </file>
-      <file name="substitute.js" path="C:\unionall\church\EscalaMusica\src\business\substitute.js">
+      <file name="substitute.js" path="/home/runner/work/EscalaMusica/EscalaMusica/src/business/substitute.js">
         <metrics statements="51" coveredstatements="48" conditionals="40" coveredconditionals="34" methods="14" coveredmethods="13"/>
         <line num="9" count="3" type="stmt"/>
         <line num="17" count="13" type="stmt"/>
@@ -263,7 +263,7 @@
     </package>
     <package name="src.data">
       <metrics statements="15" coveredstatements="15" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
-      <file name="loader.js" path="C:\unionall\church\EscalaMusica\src\data\loader.js">
+      <file name="loader.js" path="/home/runner/work/EscalaMusica/EscalaMusica/src/data/loader.js">
         <metrics statements="15" coveredstatements="15" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
         <line num="6" count="6" type="stmt"/>
         <line num="7" count="6" type="stmt"/>
@@ -284,7 +284,7 @@
     </package>
     <package name="src.ui">
       <metrics statements="73" coveredstatements="71" conditionals="80" coveredconditionals="64" methods="19" coveredmethods="18"/>
-      <file name="alerts.js" path="C:\unionall\church\EscalaMusica\src\ui\alerts.js">
+      <file name="alerts.js" path="/home/runner/work/EscalaMusica/EscalaMusica/src/ui/alerts.js">
         <metrics statements="16" coveredstatements="16" conditionals="12" coveredconditionals="12" methods="2" coveredmethods="2"/>
         <line num="7" count="20" type="stmt"/>
         <line num="8" count="20" type="stmt"/>
@@ -303,7 +303,7 @@
         <line num="25" count="9" type="stmt"/>
         <line num="26" count="9" type="stmt"/>
       </file>
-      <file name="cards.js" path="C:\unionall\church\EscalaMusica\src\ui\cards.js">
+      <file name="cards.js" path="/home/runner/work/EscalaMusica/EscalaMusica/src/ui/cards.js">
         <metrics statements="21" coveredstatements="21" conditionals="36" coveredconditionals="27" methods="3" coveredmethods="3"/>
         <line num="9" count="20" type="stmt"/>
         <line num="10" count="20" type="stmt"/>
@@ -327,7 +327,7 @@
         <line num="65" count="20" type="cond" truecount="3" falsecount="1"/>
         <line num="69" count="1" type="stmt"/>
       </file>
-      <file name="filters.js" path="C:\unionall\church\EscalaMusica\src\ui\filters.js">
+      <file name="filters.js" path="/home/runner/work/EscalaMusica/EscalaMusica/src/ui/filters.js">
         <metrics statements="26" coveredstatements="24" conditionals="12" coveredconditionals="11" methods="12" coveredmethods="11"/>
         <line num="10" count="7" type="stmt"/>
         <line num="11" count="7" type="stmt"/>
@@ -356,7 +356,7 @@
         <line num="51" count="7" type="cond" truecount="2" falsecount="0"/>
         <line num="52" count="7" type="stmt"/>
       </file>
-      <file name="table.js" path="C:\unionall\church\EscalaMusica\src\ui\table.js">
+      <file name="table.js" path="/home/runner/work/EscalaMusica/EscalaMusica/src/ui/table.js">
         <metrics statements="10" coveredstatements="10" conditionals="20" coveredconditionals="14" methods="2" coveredmethods="2"/>
         <line num="8" count="18" type="stmt"/>
         <line num="9" count="18" type="stmt"/>
@@ -372,7 +372,7 @@
     </package>
     <package name="src.utils">
       <metrics statements="51" coveredstatements="51" conditionals="52" coveredconditionals="51" methods="20" coveredmethods="20"/>
-      <file name="contact.js" path="C:\unionall\church\EscalaMusica\src\utils\contact.js">
+      <file name="contact.js" path="/home/runner/work/EscalaMusica/EscalaMusica/src/utils/contact.js">
         <metrics statements="6" coveredstatements="6" conditionals="6" coveredconditionals="5" methods="2" coveredmethods="2"/>
         <line num="9" count="275" type="stmt"/>
         <line num="10" count="275" type="stmt"/>
@@ -381,7 +381,7 @@
         <line num="13" count="2" type="stmt"/>
         <line num="15" count="246" type="stmt"/>
       </file>
-      <file name="date.js" path="C:\unionall\church\EscalaMusica\src\utils\date.js">
+      <file name="date.js" path="/home/runner/work/EscalaMusica/EscalaMusica/src/utils/date.js">
         <metrics statements="11" coveredstatements="11" conditionals="6" coveredconditionals="6" methods="3" coveredmethods="3"/>
         <line num="1" count="6" type="stmt"/>
         <line num="8" count="103" type="stmt"/>
@@ -395,7 +395,7 @@
         <line num="24" count="42" type="cond" truecount="2" falsecount="0"/>
         <line num="25" count="41" type="stmt"/>
       </file>
-      <file name="formatter.js" path="C:\unionall\church\EscalaMusica\src\utils\formatter.js">
+      <file name="formatter.js" path="/home/runner/work/EscalaMusica/EscalaMusica/src/utils/formatter.js">
         <metrics statements="18" coveredstatements="18" conditionals="28" coveredconditionals="28" methods="6" coveredmethods="6"/>
         <line num="4" count="4" type="stmt"/>
         <line num="8" count="242" type="cond" truecount="6" falsecount="0"/>
@@ -416,7 +416,7 @@
         <line num="48" count="29" type="stmt"/>
         <line num="49" count="29" type="stmt"/>
       </file>
-      <file name="name.js" path="C:\unionall\church\EscalaMusica\src\utils\name.js">
+      <file name="name.js" path="/home/runner/work/EscalaMusica/EscalaMusica/src/utils/name.js">
         <metrics statements="16" coveredstatements="16" conditionals="12" coveredconditionals="12" methods="9" coveredmethods="9"/>
         <line num="1" count="9" type="stmt"/>
         <line num="6" count="9" type="stmt"/>

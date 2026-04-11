@@ -1,5 +1,5 @@
 TN:
-SF:src\config.js
+SF:src/config.js
 FNF:0
 FNH:0
 DA:3,2
@@ -10,7 +10,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src\main.js
+SF:src/main.js
 FN:13,(anonymous_0)
 FN:15,(anonymous_1)
 FN:70,_baixarICS
@@ -173,7 +173,7 @@ BRF:30
 BRH:0
 end_of_record
 TN:
-SF:src\state.js
+SF:src/state.js
 FNF:0
 FNH:0
 DA:2,5
@@ -183,7 +183,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src\auth\auth.js
+SF:src/auth/auth.js
 FN:8,mostrarAuth
 FN:16,mostrarSelecaoNome
 FN:22,(anonymous_2)
@@ -302,7 +302,7 @@ BRF:24
 BRH:0
 end_of_record
 TN:
-SF:src\auth\storage.js
+SF:src/auth/storage.js
 FN:4,lerVinculosGoogle
 FN:13,obterNomeVinculadoPorSub
 FN:19,salvarVinculoPorSub
@@ -336,7 +336,7 @@ BRF:10
 BRH:10
 end_of_record
 TN:
-SF:src\business\agenda.js
+SF:src/business/agenda.js
 FN:31,getDetalhesAgenda
 FN:39,(anonymous_1)
 FNF:2
@@ -379,7 +379,7 @@ BRF:14
 BRH:14
 end_of_record
 TN:
-SF:src\business\substitute.js
+SF:src/business/substitute.js
 FN:16,_capitalizar
 FN:20,(anonymous_1)
 FN:25,_formatarData
@@ -507,7 +507,7 @@ BRF:40
 BRH:34
 end_of_record
 TN:
-SF:src\data\loader.js
+SF:src/data/loader.js
 FN:5,carregarCSV
 FNF:1
 FNH:1
@@ -537,7 +537,7 @@ BRF:4
 BRH:4
 end_of_record
 TN:
-SF:src\ui\alerts.js
+SF:src/ui/alerts.js
 FN:6,verificarAlertas
 FN:15,(anonymous_1)
 FNF:2
@@ -578,7 +578,7 @@ BRF:12
 BRH:12
 end_of_record
 TN:
-SF:src\ui\cards.js
+SF:src/ui/cards.js
 FN:8,montarCards
 FN:16,(anonymous_1)
 FN:68,_btnAgendaHTML
@@ -650,7 +650,7 @@ BRF:36
 BRH:27
 end_of_record
 TN:
-SF:src\ui\filters.js
+SF:src/ui/filters.js
 FN:9,renderizar
 FN:16,aplicarFiltroAutomatico
 FN:22,montarFiltros
@@ -721,7 +721,7 @@ BRF:12
 BRH:11
 end_of_record
 TN:
-SF:src\ui\table.js
+SF:src/ui/table.js
 FN:7,montarTabela
 FN:10,(anonymous_1)
 FNF:2
@@ -764,7 +764,7 @@ BRF:20
 BRH:14
 end_of_record
 TN:
-SF:src\utils\contact.js
+SF:src/utils/contact.js
 FN:8,buscarContato
 FN:12,(anonymous_1)
 FNF:2
@@ -789,7 +789,7 @@ BRF:6
 BRH:5
 end_of_record
 TN:
-SF:src\utils\date.js
+SF:src/utils/date.js
 FN:7,parseDate
 FN:13,isPastDate
 FN:21,formatarDataExtenso
@@ -821,7 +821,7 @@ BRF:6
 BRH:6
 end_of_record
 TN:
-SF:src\utils\formatter.js
+SF:src/utils/formatter.js
 FN:7,linkarNome
 FN:19,formatarNome
 FN:32,formatarLista
@@ -888,7 +888,7 @@ BRF:28
 BRH:28
 end_of_record
 TN:
-SF:src\utils\name.js
+SF:src/utils/name.js
 FN:12,normalizarNome
 FN:20,estaEscalado
 FN:23,(anonymous_2)
