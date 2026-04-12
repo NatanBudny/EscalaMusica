@@ -4,19 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ESCALA 2026</title>
-<script>
-(async () => {
-    try {
-        const response = await fetch('config.json');
-        const config = await response.json();
-        if (config.maintenance_mode === true) {
-            window.location.replace('maintenance.html');
-        }
-    } catch (e) {
-        // Se config.json não existe ou erro, continua normal
-    }
-})();
-</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
