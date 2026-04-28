@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { readFileSync, writeFileSync } from 'fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -76,6 +76,20 @@ function parseCelulaNomes(celula, lookupContato) {
 
 function hojeISO() {
   return new Date().toISOString().slice(0, 10);
+}
+
+function extrairAnoMesDaEscala(escalaAtual) {
+  for (const item of escalaAtual) {
+    const data = String(item?.DATA || '').trim();
+    const match = data.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+    if (!match) continue;
+
+    const mes = match[2];
+    const ano = match[3];
+    return { ano, mes };
+  }
+
+  throw new Error('Nao foi possivel identificar ano/mes a partir de atual.json (campo DATA).');
 }
 
 let escala;
@@ -177,8 +191,12 @@ const fixos = FIXOS.map((item) => {
 });
 
 const data = hojeISO();
-const arquivoSaida = `links-whatsapp-publicacao-${data}.md`;
-const outPath = resolve(ROOT, arquivoSaida);
+const { ano, mes } = extrairAnoMesDaEscala(escala);
+const pastaMes = resolve(ROOT, 'escalas', ano, mes);
+mkdirSync(pastaMes, { recursive: true });
+
+const arquivoSaida = 'links-whatsapp.md';
+const outPath = resolve(pastaMes, arquivoSaida);
 
 const linhas = [];
 linhas.push(`# Links WhatsApp - Publicacao ${data}`);
@@ -239,6 +257,6 @@ linhas.push('- Contatos: contatos.json');
 
 writeFileSync(outPath, `${linhas.join('\n')}\n`, 'utf8');
 
-console.log(`Arquivo gerado: ${arquivoSaida}`);
+console.log(`Arquivo gerado: escalas/${ano}/${mes}/${arquivoSaida}`);
 console.log(`Com contato: ${comContato.length}`);
 console.log(`Sem contato: ${semContato.length}`);

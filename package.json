@@ -11,7 +11,8 @@
     "controle:mm": "node scripts/controle-mensagem-musical.js",
     "controle:regentes": "node scripts/controle-regentes.js",
     "controle:equipe": "node scripts/controle-equipe-louvor.js",
-    "gerar:links-publicacao": "node scripts/gerar-links-publicacao.js"
+    "gerar:links-publicacao": "node scripts/gerar-links-publicacao.js",
+    "limpar:pos-publicacao": "node scripts/coletor-lixo-pos-publicacao.js"
   },
   "devDependencies": {
     "jest": "^29.7.0"

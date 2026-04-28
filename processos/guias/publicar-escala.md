@@ -10,7 +10,9 @@ Promover a escala aprovada para producao com rastreabilidade.
 - [ ] Gerar novo `atual.json` com a escala aprovada
 - [ ] Confirmar quarta-feira com campos de louvor vazios
 - [ ] Executar `npm run gerar:links-publicacao`
+- [ ] Confirmar links em `escalas/AAAA/MM/links-whatsapp.md`
 - [ ] Publicar links no WhatsApp
+- [ ] Executar `npm run limpar:pos-publicacao` para remover arquivos temporarios do mes (rascunho/publicada/insumos)
 
 ## Registro
 

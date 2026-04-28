@@ -51,6 +51,18 @@
       ]
     }
   ],
+  "LIDIANE": [
+    {
+      "id": "RP007",
+      "tipo": "condicional",
+      "prioridade": "preferencial",
+      "descricao": "Prefere cantar apenas uma vez por mes; pode cantar mais vezes somente em ultimo caso, quando nao houver outra pessoa disponivel para cantar",
+      "papeis_afetados": [
+        "EQUIPE LOUVOR",
+        "MENSAGEM MUSICAL"
+      ]
+    }
+  ],
   "JULIANA ALVES": [
     {
       "id": "RP006",

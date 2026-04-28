@@ -63,9 +63,10 @@ Usar estrutura:
   - manter somente observações vindas da escala externa (ancião/pregador) ou autorizadas explicitamente para publicação
   - remover observações de montagem interna (deixar somente no rascunho/Motivo interno)
 - [ ] Executar: `npm run gerar:links-publicacao`
+- [ ] Conferir arquivo gerado em `escalas/AAAA/MM/links-whatsapp.md`
 - [ ] Compartilhar links no WhatsApp
 - [ ] Após aprovação do rascunho, remover `escalas/AAAA/MM/insumos/sonoplastia.json` e `escalas/AAAA/MM/insumos/acionato.json` (dados temporários de montagem)
-- [ ] Após publicar e conferir, descartar `rascunho.md` e `publicada.md` do mês (não são necessários para manutenção)
+- [ ] Após publicar e conferir, executar `npm run limpar:pos-publicacao` para remover `rascunho.md`, `publicada.md` e insumos temporários do mês
 - [ ] Qualquer ajuste posterior deve ser feito diretamente no `atual.json`
 
 ## 6. Atualização de Registros
@@ -87,7 +88,7 @@ escalas/2026/[MES]/
 ├── rascunho.md              ← Versão em trabalho (descartável após aprovação)
 ├── publicada.md             ← Opcional/temporário (descartável após aprovação)
 ├── controle-mensagem-musical.json  ← Ranking e sugestões
-└── links-whatsapp.md        ← Links gerados automaticamente
+└── links-whatsapp.md        ← Links gerados automaticamente por `npm run gerar:links-publicacao`
 ```
 
 ## Dicas de Otimização

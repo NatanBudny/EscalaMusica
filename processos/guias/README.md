@@ -3,6 +3,7 @@
 Cada arquivo abaixo cobre uma responsabilidade unica do ciclo mensal:
 
 - `iniciar-escala-mensal.md`: checklist completo fim-a-fim.
+- `manual-operacao-escala.md`: manual operacional detalhado para executar o processo sem dependencia de IA.
 - `coletar-insumos.md`: somente coleta de dados externos e disponibilidades (inclui sonoplastia e acionato em JSON).
 - `montar-escala.md`: somente montagem do rascunho.
 - `validar-escala.md`: somente validacoes e correcoes.
