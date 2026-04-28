@@ -11,8 +11,8 @@ const atualPath = resolve(ROOT, 'atual.json');
 const contatosPath = resolve(ROOT, 'contatos.json');
 
 const MENSAGEM = [
-  'Oi, escala desse mes, me confirma por favor?',
-  'Link da escala: https://natanbudny.github.io/EscalaMusica/'
+  'Confirma sua escala, por favor?',
+  'https://natanbudny.github.io/EscalaMusica/'
 ].join('\n');
 
 const FIXOS = [
@@ -40,6 +40,10 @@ function limparTelefone(waLink) {
 
 function montarLink(telefone) {
   return `https://wa.me/${telefone}?text=${encodeURIComponent(MENSAGEM)}`;
+}
+
+function toMdLink(url, label = 'Abrir') {
+  return `[${label}](${url})`;
 }
 
 function parseCelulaNomes(celula, lookupContato) {
@@ -187,35 +191,43 @@ linhas.push('```');
 linhas.push('');
 linhas.push('## Membros da escala (Regencia, Equipe Louvor e Mensagem Musical)');
 linhas.push('');
-
+linhas.push('| Nome | Funcoes | Link |');
+linhas.push('|---|---|---|');
 for (const item of comContato) {
-  linhas.push(`- ${item.nomeEscala} (${item.campos}) -> ${item.link}`);
+  linhas.push(`| ${item.nomeEscala} | ${item.campos} | ${toMdLink(item.link)} |`);
 }
 
 linhas.push('');
 linhas.push('## Contatos fixos');
 linhas.push('');
+linhas.push('| Contato | Nome | Link |');
+linhas.push('|---|---|---|');
 
 for (const item of fixos) {
   if (item.link) {
-    linhas.push(`- ${item.label} (${item.origemContato}) -> ${item.link}`);
+    linhas.push(`| ${item.label} | ${item.origemContato} | ${toMdLink(item.link)} |`);
   } else {
-    linhas.push(`- ${item.label} -> SEM CONTATO EM contatos.json`);
+    linhas.push(`| ${item.label} | - | SEM CONTATO EM contatos.json |`);
   }
 }
 
 linhas.push('');
 linhas.push('## Grupo do louvor');
 linhas.push('');
-linhas.push(`- Convite do grupo: ${GRUPO_LOUVOR}`);
-linhas.push('- Observacao: link de convite nao preenche mensagem automaticamente como no wa.me.');
+linhas.push('| Item | Link |');
+linhas.push('|---|---|');
+linhas.push(`| Convite do grupo | ${toMdLink(GRUPO_LOUVOR)} |`);
+linhas.push('');
+linhas.push('Observacao: o link de convite do grupo nao preenche mensagem automaticamente como o wa.me.');
 
 if (semContato.length > 0) {
   linhas.push('');
   linhas.push('## Sem contato cadastrado');
   linhas.push('');
+  linhas.push('| Nome | Funcoes |');
+  linhas.push('|---|---|');
   for (const item of semContato) {
-    linhas.push(`- ${item.nomeEscala} (${item.campos})`);
+    linhas.push(`| ${item.nomeEscala} | ${item.campos} |`);
   }
 }
 

@@ -7,6 +7,7 @@
 | 01/05/2026 | Sexta-feira | ADELMO |  |  | Marair | Adelmo, Sidney, Dani Herreira, Ricardo, Alessandra Donadon | Alessandra Donadon | |
 | 02/05/2026 | Sabado | ADELMO | ENOQUE | Alex | Dany Kallas | Jessica, Jesse, Joas, Jessie, Lidiane | Mirella, Marcela | |
 | 03/05/2026 | Domingo | ADELMO | R. KOCH | Junior Oliveira | Marair | Sidney, Luiz Antonio, Kheyciane, Fabricio, Alessandra Donadon | Vanderley | |
+| 08/05/2026 | Sexta-feira | ADELMO |  |  | Marair | Adelmo, Luiz da Silva, Dani Herreira, Ricardo Herreira, Alessandra Donadon | Alessandra Donadon | FERIADO - CULTO EXCEPCIONAL |
 | 09/05/2026 | Sabado | CLEVERSON | PR. HOFNI | Junior Ferreira | Catherine | Fabricio, Luiz Antonio, Marair, Ariadny, Jemelli | Roni, Bernardo | |
 | 10/05/2026 | Domingo | CLEVERSON | JOVENS | Alex | Jovens | Jovens | Jovens | DIA DAS MAES |
 | 16/05/2026 | Sabado | DULCINEIA | PR. DENIS | Diego | Aventureiros | Aventureiros | Aventureiros | DIA MUNDIAL DOS AVENTUREIROS |
