@@ -159,6 +159,8 @@ Fluxo padrao para abrir um novo mes sem perder historico.
 - O arquivo vigente deve continuar acessivel no caminho esperado pela aplicacao (`atual.json`).
 - Na publicacao final (`atual.json`), incluir tambem as quartas-feiras com dados de `PREGADOR`, `ANCIAO`, `AUDIOVISUAL` e `OBS`.
 - Para quartas-feiras, manter `REGENTE LOUVOR`, `EQUIPE LOUVOR`, `MENSAGEM MUSICAL` e `SUPORTE` em branco (ou `-`).
+- Apos a promocao para `atual.json`, os arquivos `rascunho.md` e `publicada.md` do mes podem ser descartados.
+- Qualquer alteracao posterior na escala deve ser feita diretamente no `atual.json`.
 
 ### 5) Checklist rapido de fechamento
 
@@ -168,7 +170,7 @@ Fluxo padrao para abrir um novo mes sem perder historico.
 
 ### 6) Pos-publicacao (obrigatorio)
 
-- Registrar a publicacao oficial em `publicacoes-escala.md` com data, referencia da escala publicada e responsavel.
+- Registrar a publicacao oficial em `processos/logs/publicacoes.md` com data, referencia do `atual.json` publicado e responsavel.
 - Gerar lista de links de WhatsApp para confirmacao da escala:
 
 ```bash

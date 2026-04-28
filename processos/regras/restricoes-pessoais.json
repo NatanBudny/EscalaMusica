@@ -1,0 +1,70 @@
+{
+  "CARLA RIBEIRO": [
+    {
+      "id": "RP001",
+      "tipo": "disponibilidade",
+      "prioridade": "obrigatoria",
+      "descricao": "Indisponível em 02/05/2026"
+    }
+  ],
+  "GIOVANA": [
+    {
+      "id": "RP002",
+      "tipo": "disponibilidade",
+      "prioridade": "obrigatoria",
+      "descricao": "No mês de maio/2026, disponível somente nos dias 02, 10, 23 e 24; indisponível nos demais dias do mês"
+    }
+  ],
+  "JESSICA": [
+    {
+      "id": "RP003",
+      "tipo": "relacionamento",
+      "prioridade": "obrigatoria",
+      "descricao": "Deve cantar sempre junto com JOAS (como casal), nunca separada dele",
+      "papeis_afetados": [
+        "EQUIPE LOUVOR",
+        "MENSAGEM MUSICAL"
+      ]
+    }
+  ],
+  "JESSE": [
+    {
+      "id": "RP004",
+      "tipo": "relacionamento",
+      "prioridade": "obrigatoria",
+      "descricao": "Deve cantar sempre junto com JESSIE (como casal), nunca separado dela",
+      "papeis_afetados": [
+        "EQUIPE LOUVOR",
+        "MENSAGEM MUSICAL"
+      ]
+    }
+  ],
+  "YASSER": [
+    {
+      "id": "RP005",
+      "tipo": "relacionamento",
+      "prioridade": "obrigatoria",
+      "descricao": "Deve cantar sempre junto com LIDIANE (como casal), nunca separado dela",
+      "papeis_afetados": [
+        "EQUIPE LOUVOR",
+        "MENSAGEM MUSICAL"
+      ]
+    }
+  ],
+  "JULIANA ALVES": [
+    {
+      "id": "RP006",
+      "tipo": "condicional",
+      "prioridade": "obrigatoria",
+      "descricao": "Atua somente na EQUIPE LOUVOR e, por disponibilidade, pode ser escalada apenas aos sábados",
+      "papeis_afetados": [
+        "REGENTE LOUVOR",
+        "EQUIPE LOUVOR",
+        "MENSAGEM MUSICAL"
+      ],
+      "dias_permitidos": [
+        "sabado"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "PE001",
+    "descricao": "EQUIPE LOUVOR deve ter idealmente 2 ou mais homens",
+    "prioridade": "media"
+  },
+  {
+    "id": "PE002",
+    "descricao": "Quando PREGADOR informa tema, alinhar músicas do louvor a esse tema",
+    "prioridade": "media"
+  },
+  {
+    "id": "PE003",
+    "descricao": "Quando PREGADOR solicita música específica, incorporar ao louvor se viável",
+    "prioridade": "media"
+  },
+  {
+    "id": "PE004",
+    "descricao": "Priorizar grupo preferencial de cada regente para promover sinergia",
+    "prioridade": "alta"
+  },
+  {
+    "id": "PE005",
+    "descricao": "Não escalar AUDIOVISUAL para MENSAGEM MUSICAL, exceto ausência total de substitutos",
+    "prioridade": "alta"
+  },
+  {
+    "id": "PE006",
+    "descricao": "O mesmo regente não deve reger dois sábados seguidos, exceto quando não houver mais ninguém viável para sugerir",
+    "prioridade": "alta",
+    "papeis_afetados": [
+      "REGENTE LOUVOR"
+    ],
+    "dias_afetados": [
+      "sabado"
+    ]
+  },
+  {
+    "id": "PE007",
+    "descricao": "O mesmo regente não deve reger mais de um sábado no mesmo mês, exceto quando não houver mais ninguém viável para sugerir",
+    "prioridade": "alta",
+    "papeis_afetados": [
+      "REGENTE LOUVOR"
+    ],
+    "dias_afetados": [
+      "sabado"
+    ]
+  },
+  {
+    "id": "PE008",
+    "descricao": "Usar controle de rotacao da MENSAGEM MUSICAL considerando tres slots distintos: ES (Escola Sabatina, sabado manha), CULTO (servico principal do sabado ou outros dias nao-domingo) e DOMINGO. Ao sugerir, priorizar menor contagem do slot correspondente. Disponibilidade real e RF013/RF014 tem precedencia.",
+    "prioridade": "media",
+    "papeis_afetados": [
+      "MENSAGEM MUSICAL"
+    ],
+    "slots": {
+      "ES": "Primeiro nome do sabado (posicao 1). Menos importante. Bom para estreias ou revezamento.",
+      "CULTO": "Segundo nome do sabado (posicao 2), ou unico nome quando ha apenas 1. Tambem cobre outros dias exceto domingo. Mais importante.",
+      "DOMINGO": "Nome unico do domingo."
+    }
+  }
+]

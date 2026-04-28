@@ -184,16 +184,6 @@
         "papeis_afetados": ["REGENTE LOUVOR", "EQUIPE LOUVOR", "MENSAGEM MUSICAL"],
         "dias_permitidos": ["sabado"]
       }
-    ],
-    "ARIADNY": [
-      {
-        "id": "RP007",
-        "tipo": "disponibilidade",
-        "prioridade": "obrigatoria",
-        "descricao": "Indisponível aos domingos",
-        "papeis_afetados": ["REGENTE LOUVOR", "EQUIPE LOUVOR", "MENSAGEM MUSICAL"],
-        "dias_bloqueados": ["domingo"]
-      }
     ]
   },
   "regras_fundamentais": [

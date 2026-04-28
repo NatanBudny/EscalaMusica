@@ -17,7 +17,7 @@
  * 10. Aviso se ultima_atualizacao estiver vazia
  */
 
-import { readFileSync } from 'fs';
+import { existsSync, readFileSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -38,7 +38,9 @@ function aviso(msg)  { warnings.push(`  ${YELLOW}⚠${RESET}  ${msg}`); }
 
 // ─── 1. Carrega e valida o JSON ───────────────────────────────────────────────
 let json;
-const jsonPath = resolve(ROOT, 'docs/regras/regras.json');
+const jsonNovo = resolve(ROOT, 'processos/regras/regras.snapshot.json');
+const jsonLegado = resolve(ROOT, 'docs/regras/regras.json');
+const jsonPath = existsSync(jsonNovo) ? jsonNovo : jsonLegado;
 try {
   const raw = readFileSync(jsonPath, 'utf8');
   json = JSON.parse(raw);
@@ -50,7 +52,9 @@ try {
 
 // ─── 2. Carrega REGRAS.md ─────────────────────────────────────────────────────
 let md;
-const mdPath = resolve(ROOT, 'docs/regras/REGRAS.md');
+const mdNovo = resolve(ROOT, 'processos/regras/REGRAS.md');
+const mdLegado = resolve(ROOT, 'docs/regras/REGRAS.md');
+const mdPath = existsSync(mdNovo) ? mdNovo : mdLegado;
 try {
   md = readFileSync(mdPath, 'utf8');
 } catch (e) {

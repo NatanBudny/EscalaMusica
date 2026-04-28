@@ -107,10 +107,6 @@ Informações usadas durante a montagem da escala (ex: justificativas internas, 
 - `tipo`: condicional
 - `prioridade`: obrigatoria
 
-- **RP007 · ARIADNY** — indisponível aos domingos
-- `tipo`: disponibilidade
-- `prioridade`: obrigatoria
-
 ---
 
 ## PE — Preferências de Escala

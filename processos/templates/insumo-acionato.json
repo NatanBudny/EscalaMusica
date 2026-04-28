@@ -1,0 +1,14 @@
+{
+  "mes": "AAAA-MM",
+  "fonte": "Escala oficial do acionato",
+  "atualizado_em": "AAAA-MM-DD",
+  "itens": [
+    {
+      "data": "AAAA-MM-DD",
+      "dia": "sabado",
+      "anciao": "NOME COMPLETO",
+      "pregador": "NOME COMPLETO",
+      "observacoes": ""
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+[
+  {
+    "id": "RF001",
+    "descricao": "A EQUIPE LOUVOR deve ter no mínimo 1 homem",
+    "excecao": "Cultos temáticos femininos (ex: Culto da Mulher) podem ter equipe 100% feminina"
+  },
+  {
+    "id": "RF002",
+    "descricao": "AUDIOVISUAL não pode acumular REGENTE LOUVOR ou EQUIPE LOUVOR no mesmo culto",
+    "papeis_afetados": [
+      "AUDIOVISUAL",
+      "REGENTE LOUVOR",
+      "EQUIPE LOUVOR"
+    ]
+  },
+  {
+    "id": "RF003",
+    "descricao": "AUDIOVISUAL não deve aparecer como PREGADOR — indica erro na escala externa",
+    "papeis_afetados": [
+      "AUDIOVISUAL",
+      "PREGADOR"
+    ]
+  },
+  {
+    "id": "RF004",
+    "descricao": "Nomes nas funções de origem externa (ANCIÃO, PREGADOR, AUDIOVISUAL, LOUVORES ES) não devem conflitar com escalações da equipe de louvor",
+    "excecao": "RF004-A: ANCIÃO pode acumular qualquer papel — é o gerente do culto",
+    "campos_externos": [
+      "ANCIÃO",
+      "PREGADOR",
+      "AUDIOVISUAL",
+      "LOUVORES ES"
+    ]
+  },
+  {
+    "id": "RF005",
+    "descricao": "Não fazemos escala própria de louvor às quartas-feiras",
+    "detalhe": "Para cultos de quarta, os campos REGENTE LOUVOR, EQUIPE LOUVOR, MENSAGEM MUSICAL e SUPORTE devem ficar vazios ou '-'",
+    "papeis_afetados": [
+      "REGENTE LOUVOR",
+      "EQUIPE LOUVOR",
+      "MENSAGEM MUSICAL",
+      "SUPORTE"
+    ]
+  },
+  {
+    "id": "RF006",
+    "descricao": "O rascunho/preview pode omitir quartas-feiras, mas a publicação final deve incluir os cultos de quarta com dados dos departamentos externos",
+    "detalhe": "No atual.json publicado, preencher PREGADOR, ANCIÃO, AUDIOVISUAL e OBS para quartas-feiras; manter REGENTE LOUVOR, EQUIPE LOUVOR, MENSAGEM MUSICAL e SUPORTE em branco ou '-'",
+    "papeis_afetados": [
+      "PREGADOR",
+      "ANCIÃO",
+      "AUDIOVISUAL",
+      "OBS",
+      "REGENTE LOUVOR",
+      "EQUIPE LOUVOR",
+      "MENSAGEM MUSICAL",
+      "SUPORTE"
+    ]
+  },
+  {
+    "id": "RF007",
+    "descricao": "O campo OBS do atual.json é exclusivamente público e só aceita observações explicitamente informadas para divulgação à igreja",
+    "detalhe": "É proibido usar OBS para anotações internas/sensíveis de desenvolvimento da escala. Exemplo permitido: 'PUBLICAR: Culto Jovem'.",
+    "papeis_afetados": [
+      "OBS"
+    ]
+  },
+  {
+    "id": "RF008",
+    "descricao": "Após publicar a versão oficial da escala, registrar a publicação em um arquivo Markdown de histórico",
+    "detalhe": "Registrar em processos/publicacoes.md, no mínimo: data da publicação, referência do atual.json publicado e responsável."
+  },
+  {
+    "id": "RF009",
+    "descricao": "Após cada publicação oficial, gerar lista de links de WhatsApp para confirmação de escala",
+    "detalhe": "A lista deve incluir REGENTE LOUVOR, EQUIPE LOUVOR, MENSAGEM MUSICAL, contatos fixos (Adelaide e Yasser) e o link de convite do grupo do louvor."
+  },
+  {
+    "id": "RF010",
+    "descricao": "Quando o culto tiver observação de Dia dos Aventureiros, os campos REGENTE LOUVOR, EQUIPE LOUVOR e MENSAGEM MUSICAL devem ser preenchidos com 'Aventureiros'",
+    "detalhe": "A presença da observação de Dia dos Aventureiros indica que o departamento dos Aventureiros assume o louvor daquele culto. Nesse caso, os três campos de louvor devem registrar 'Aventureiros' como responsável, sem escalar membros individuais da equipe de louvor.",
+    "papeis_afetados": [
+      "REGENTE LOUVOR",
+      "EQUIPE LOUVOR",
+      "MENSAGEM MUSICAL"
+    ]
+  },
+  {
+    "id": "RF011",
+    "descricao": "O campo OBS, tanto no rascunho quanto na escala publicada, deve conter apenas observações para divulgação — nunca anotações do processo de montagem da escala",
+    "detalhe": "Anotações internas como pendências, instruções operacionais, alinhamentos em andamento ou qualquer dado de processo não pertencem ao campo OBS em nenhum contexto. Esse campo existe para comunicar informações à igreja. Complementa e estende a RF007, que restringe o mesmo campo no atual.json.",
+    "papeis_afetados": [
+      "OBS"
+    ]
+  },
+  {
+    "id": "RF012",
+    "descricao": "A partir de maio de 2026, todos os cultos de sábado têm 2 mensagens musicais obrigatórias",
+    "detalhe": "Os dois responsaveis devem ser registrados no campo MENSAGEM MUSICAL separados por virgula. Convencao de posicao obrigatoria: primeiro nome = responsavel pela mensagem da Escola Sabatina (ES); segundo nome = responsavel pela mensagem do culto principal. Exemplo: 'Nome_ES, Nome_Culto'. Nao ha campo separado para ES e Culto.",
+    "vigencia": "a partir de 2026-05-01",
+    "papeis_afetados": [
+      "MENSAGEM MUSICAL"
+    ],
+    "dias_afetados": [
+      "sabado"
+    ]
+  },
+  {
+    "id": "RF013",
+    "descricao": "Quem estiver escalado em EQUIPE LOUVOR não deve cantar em sequência (sábado-sábado, domingo-domingo ou sábado-domingo); a mesma regra vale para MENSAGEM MUSICAL",
+    "detalhe": "Evitar repetição consecutiva de pessoas entre cultos próximos. A restrição se aplica tanto dentro do mesmo papel quanto entre papéis de canto (EQUIPE LOUVOR e MENSAGEM MUSICAL).",
+    "papeis_afetados": [
+      "EQUIPE LOUVOR",
+      "MENSAGEM MUSICAL"
+    ],
+    "dias_afetados": [
+      "sabado",
+      "domingo"
+    ]
+  },
+  {
+    "id": "RF014",
+    "descricao": "Uma pessoa não deve cantar mais de uma MENSAGEM MUSICAL no mesmo mês",
+    "detalhe": "Cada pessoa pode aparecer no máximo uma vez por mês no campo MENSAGEM MUSICAL, independentemente do dia da semana.",
+    "papeis_afetados": [
+      "MENSAGEM MUSICAL"
+    ]
+  },
+  {
+    "id": "RF015",
+    "descricao": "Quando o PREGADOR for um departamento, preencher REGENTE LOUVOR, EQUIPE LOUVOR e MENSAGEM MUSICAL com o nome do departamento",
+    "detalhe": "Se o campo PREGADOR contiver o nome de um departamento (ex: 'Jovens', 'Dorcas', 'Desbravadores', etc.), isso indica que o departamento assume a responsabilidade do louvor naquele culto. Neste caso, os três campos de louvor (REGENTE LOUVOR, EQUIPE LOUVOR e MENSAGEM MUSICAL) devem ser preenchidos com o nome do departamento, sem escalar membros individuais da equipe de louvor.",
+    "exemplos": [
+      "PREGADOR='Jovens' -> REGENTE LOUVOR='Jovens', EQUIPE LOUVOR='Jovens', MENSAGEM MUSICAL='Jovens'",
+      "PREGADOR='Dorcas' -> REGENTE LOUVOR='Dorcas', EQUIPE LOUVOR='Dorcas', MENSAGEM MUSICAL='Dorcas'",
+      "PREGADOR='Desbravadores' -> REGENTE LOUVOR='Desbravadores', EQUIPE LOUVOR='Desbravadores', MENSAGEM MUSICAL='Desbravadores'"
+    ],
+    "papeis_afetados": [
+      "PREGADOR",
+      "REGENTE LOUVOR",
+      "EQUIPE LOUVOR",
+      "MENSAGEM MUSICAL"
+    ],
+    "nota": "Esta regra generaliza a lógica de RF010 (Dia dos Aventureiros) para qualquer departamento. Se o PREGADOR é um departamento, o louvor também fica sob responsabilidade desse departamento."
+  },
+  {
+    "id": "RF016",
+    "descricao": "A coluna OBS da versão publicada só pode receber observações da escala externa ou explicitamente autorizadas para publicação",
+    "detalhe": "No atual.json, OBS deve conter apenas informação pública originada da lista externa de ancião/pregador ou instruída explicitamente pelo diretor para publicar. Informações de montagem da escala (justificativas internas, notas operacionais e rótulos temporários sem autorização explícita) ficam apenas no rascunho, preferencialmente em Motivo (interno), e não sobem para produção.",
+    "papeis_afetados": [
+      "OBS",
+      "atual.json",
+      "rascunho.md"
+    ]
+  },
+  {
+    "id": "RF017",
+    "descricao": "O rascunho mensal e temporário e deve ser usado apenas para montagem e aprovação da escala",
+    "detalhe": "Após promover a escala aprovada para atual.json, os arquivos rascunho.md e publicada.md do mês podem ser descartados.",
+    "papeis_afetados": [
+      "rascunho.md",
+      "publicada.md",
+      "atual.json"
+    ]
+  },
+  {
+    "id": "RF018",
+    "descricao": "Após a publicação mensal, toda manutenção da escala vigente deve ser feita diretamente no atual.json",
+    "detalhe": "Trocas de nomes, ajustes de observações públicas autorizadas e correções operacionais posteriores devem ocorrer no atual.json vigente.",
+    "papeis_afetados": [
+      "atual.json"
+    ]
+  }
+]

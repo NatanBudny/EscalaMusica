@@ -1,0 +1,397 @@
+{
+  "gerado_em": "2026-04-28T11:23:38.694Z",
+  "periodo": "2026-01 a 2026-04",
+  "tipo_controle": "regentes",
+  "legenda": {
+    "REGENCIAS": "Quantidade de vezes em que a pessoa apareceu como REGENTE LOUVOR."
+  },
+  "criterio_sugestao": "Priorizar menor quantidade total de regencias, respeitando disponibilidade real e as regras vigentes.",
+  "observacao": "O ranking considera apenas pessoas ativas e habilitadas para regencia no cadastro oficial de funcoes do louvor.",
+  "fonte": [
+    "old/2026/01-2026.json",
+    "old/2026/02-2026.json",
+    "old/2026/032026.json",
+    "atual.json"
+  ],
+  "nomes_nao_mapeados": [],
+  "ranking_menor_para_maior": [
+    {
+      "nome": "ARIADNY",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 0,
+      "TOTAL": 0,
+      "por_mes": {
+        "JAN": {
+          "REGENCIAS": 0
+        },
+        "FEV": {
+          "REGENCIAS": 0
+        },
+        "MAR": {
+          "REGENCIAS": 0
+        },
+        "ABR": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "JUNIOR",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 0,
+      "TOTAL": 0,
+      "por_mes": {
+        "JAN": {
+          "REGENCIAS": 0
+        },
+        "FEV": {
+          "REGENCIAS": 0
+        },
+        "MAR": {
+          "REGENCIAS": 0
+        },
+        "ABR": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "LIDIANE",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 0,
+      "TOTAL": 0,
+      "por_mes": {
+        "JAN": {
+          "REGENCIAS": 0
+        },
+        "FEV": {
+          "REGENCIAS": 0
+        },
+        "MAR": {
+          "REGENCIAS": 0
+        },
+        "ABR": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "LUIZ ANTONIO",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 0,
+      "TOTAL": 0,
+      "por_mes": {
+        "JAN": {
+          "REGENCIAS": 0
+        },
+        "FEV": {
+          "REGENCIAS": 0
+        },
+        "MAR": {
+          "REGENCIAS": 0
+        },
+        "ABR": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "MARAIR",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 0,
+      "TOTAL": 0,
+      "por_mes": {
+        "JAN": {
+          "REGENCIAS": 0
+        },
+        "FEV": {
+          "REGENCIAS": 0
+        },
+        "MAR": {
+          "REGENCIAS": 0
+        },
+        "ABR": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "SILVANA",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 0,
+      "TOTAL": 0,
+      "por_mes": {
+        "JAN": {
+          "REGENCIAS": 0
+        },
+        "FEV": {
+          "REGENCIAS": 0
+        },
+        "MAR": {
+          "REGENCIAS": 0
+        },
+        "ABR": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "KHEYCIANE",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 1,
+      "TOTAL": 1,
+      "por_mes": {
+        "JAN": {
+          "REGENCIAS": 0
+        },
+        "FEV": {
+          "REGENCIAS": 1
+        },
+        "MAR": {
+          "REGENCIAS": 0
+        },
+        "ABR": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "NILSINHO",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 1,
+      "TOTAL": 1,
+      "por_mes": {
+        "JAN": {
+          "REGENCIAS": 0
+        },
+        "FEV": {
+          "REGENCIAS": 0
+        },
+        "MAR": {
+          "REGENCIAS": 0
+        },
+        "ABR": {
+          "REGENCIAS": 1
+        }
+      }
+    },
+    {
+      "nome": "RICARDO HERREIRA",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 1,
+      "TOTAL": 1,
+      "por_mes": {
+        "JAN": {
+          "REGENCIAS": 0
+        },
+        "FEV": {
+          "REGENCIAS": 0
+        },
+        "MAR": {
+          "REGENCIAS": 1
+        },
+        "ABR": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "YASSER",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 1,
+      "TOTAL": 1,
+      "por_mes": {
+        "JAN": {
+          "REGENCIAS": 0
+        },
+        "FEV": {
+          "REGENCIAS": 0
+        },
+        "MAR": {
+          "REGENCIAS": 1
+        },
+        "ABR": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "ALESSANDRA DONADON",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 2,
+      "TOTAL": 2,
+      "por_mes": {
+        "JAN": {
+          "REGENCIAS": 0
+        },
+        "FEV": {
+          "REGENCIAS": 0
+        },
+        "MAR": {
+          "REGENCIAS": 0
+        },
+        "ABR": {
+          "REGENCIAS": 2
+        }
+      }
+    },
+    {
+      "nome": "JESSIE",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 2,
+      "TOTAL": 2,
+      "por_mes": {
+        "JAN": {
+          "REGENCIAS": 0
+        },
+        "FEV": {
+          "REGENCIAS": 1
+        },
+        "MAR": {
+          "REGENCIAS": 1
+        },
+        "ABR": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "JOAS",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 2,
+      "TOTAL": 2,
+      "por_mes": {
+        "JAN": {
+          "REGENCIAS": 1
+        },
+        "FEV": {
+          "REGENCIAS": 1
+        },
+        "MAR": {
+          "REGENCIAS": 0
+        },
+        "ABR": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "CATHERINE",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 3,
+      "TOTAL": 3,
+      "por_mes": {
+        "JAN": {
+          "REGENCIAS": 1
+        },
+        "FEV": {
+          "REGENCIAS": 1
+        },
+        "MAR": {
+          "REGENCIAS": 1
+        },
+        "ABR": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "DANY KALLAS",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 3,
+      "TOTAL": 3,
+      "por_mes": {
+        "JAN": {
+          "REGENCIAS": 0
+        },
+        "FEV": {
+          "REGENCIAS": 2
+        },
+        "MAR": {
+          "REGENCIAS": 0
+        },
+        "ABR": {
+          "REGENCIAS": 1
+        }
+      }
+    },
+    {
+      "nome": "SUELLEN",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 3,
+      "TOTAL": 3,
+      "por_mes": {
+        "JAN": {
+          "REGENCIAS": 2
+        },
+        "FEV": {
+          "REGENCIAS": 1
+        },
+        "MAR": {
+          "REGENCIAS": 0
+        },
+        "ABR": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "FABRICIO",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 6,
+      "TOTAL": 6,
+      "por_mes": {
+        "JAN": {
+          "REGENCIAS": 2
+        },
+        "FEV": {
+          "REGENCIAS": 1
+        },
+        "MAR": {
+          "REGENCIAS": 3
+        },
+        "ABR": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "GIOVANA",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 6,
+      "TOTAL": 6,
+      "por_mes": {
+        "JAN": {
+          "REGENCIAS": 2
+        },
+        "FEV": {
+          "REGENCIAS": 2
+        },
+        "MAR": {
+          "REGENCIAS": 1
+        },
+        "ABR": {
+          "REGENCIAS": 1
+        }
+      }
+    }
+  ]
+}
