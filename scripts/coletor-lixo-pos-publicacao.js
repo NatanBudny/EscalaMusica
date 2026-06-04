@@ -6,6 +6,10 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
+const INSUMOS_PRESERVADOS = new Set([
+  'indisponibilidade-cantores.json',
+  'mapeamento-indisponibilidade-contatos.md',
+]);
 
 function parseArgs(argv) {
   const args = { dryRun: false, ano: '', mes: '' };
@@ -37,6 +41,7 @@ function listarArquivosInsumos(insumosDir) {
   if (!existsSync(insumosDir)) return [];
   const nomes = readdirSync(insumosDir);
   return nomes
+    .filter((nome) => !INSUMOS_PRESERVADOS.has(nome))
     .map((nome) => resolve(insumosDir, nome))
     .filter((filePath) => existsSync(filePath) && statSync(filePath).isFile());
 }

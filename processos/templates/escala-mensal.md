@@ -3,20 +3,21 @@
 ## Instruções
 
 - Preencha a tabela com os dados do novo mês
-- Siga a estrutura: Data | Dia | Ancião | Pregador | Sonoplastia | Regente Louvor | Equipe Louvor (5) | Mensagem Musical | Observações
+- Siga a estrutura: Data | Dia | Ancião | Pregador | Sonoplastia | Regente Louvor | Equipe Louvor (5) | Mensagem Musical | Banda/PB | Observações
 - A coluna "Equipe Louvor (5)" sempre deve ter exatamente 5 pessoas
+- A coluna "Banda/PB" e de acompanhamento operacional e deve ser preenchida com `BANDA` ou `PB`
 - Nomes devem corresponder aos cadastrados em `contatos.json`
 
 ## Tabela
 
-| Data | Dia | Anciao | Pregador | Sonoplastia | Regente Louvor | Equipe Louvor (5) | Mensagem Musical | Observacoes |
-|---|---|---|---|---|---|---|---|---|
-| DD/MM/YYYY | Dia | Nome | Nome | Nome | Nome | Nome1, Nome2, Nome3, Nome4, Nome5 | Nome | Observação opcional |
-| DD/MM/YYYY | Dia | Nome | Nome | Nome | Nome | Nome1, Nome2, Nome3, Nome4, Nome5 | Nome | |
-| DD/MM/YYYY | Dia | Nome | Nome | Nome | Nome | Nome1, Nome2, Nome3, Nome4, Nome5 | Nome | |
-| DD/MM/YYYY | Dia | Nome | Nome | Nome | Nome | Nome1, Nome2, Nome3, Nome4, Nome5 | Nome | |
-| DD/MM/YYYY | Dia | Nome | Nome | Nome | Nome | Nome1, Nome2, Nome3, Nome4, Nome5 | Nome | |
-| DD/MM/YYYY | Dia | Nome | Nome | Nome | Nome | Nome1, Nome2, Nome3, Nome4, Nome5 | Nome | |
+| Data | Dia | Anciao | Pregador | Sonoplastia | Regente Louvor | Equipe Louvor (5) | Mensagem Musical | Banda/PB | Observacoes |
+|---|---|---|---|---|---|---|---|---|---|
+| DD/MM/YYYY | Dia | Nome | Nome | Nome | Nome | Nome1, Nome2, Nome3, Nome4, Nome5 | Nome | BANDA/PB | Observação opcional |
+| DD/MM/YYYY | Dia | Nome | Nome | Nome | Nome | Nome1, Nome2, Nome3, Nome4, Nome5 | Nome | BANDA/PB | |
+| DD/MM/YYYY | Dia | Nome | Nome | Nome | Nome | Nome1, Nome2, Nome3, Nome4, Nome5 | Nome | BANDA/PB | |
+| DD/MM/YYYY | Dia | Nome | Nome | Nome | Nome | Nome1, Nome2, Nome3, Nome4, Nome5 | Nome | BANDA/PB | |
+| DD/MM/YYYY | Dia | Nome | Nome | Nome | Nome | Nome1, Nome2, Nome3, Nome4, Nome5 | Nome | BANDA/PB | |
+| DD/MM/YYYY | Dia | Nome | Nome | Nome | Nome | Nome1, Nome2, Nome3, Nome4, Nome5 | Nome | BANDA/PB | |
 
 ## Processo antes de iniciar
 
@@ -25,6 +26,9 @@
 3. Receber e salvar os insumos externos em `escalas/AAAA/MM/insumos/`:
    - `sonoplastia.json`
    - `acionato.json`
+   - `indisponibilidade-cantores.json`
+4. Arquivar snapshot da indisponibilidade em `escalas/AAAA/MM/arquivo/indisponibilidade-cantores-AAAA-MM-DD.json`
+5. Na indisponibilidade vinculada, propagar automaticamente indisponibilidade entre casais oficiais (JESSIE↔JESSE, JESSICA↔JOAS)
 
 ## Processo de preenchimento da escala
 

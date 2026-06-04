@@ -5,6 +5,7 @@ Modelos reutilizaveis para abertura de novo ciclo mensal.
 - `escala-mensal.md`: template padrao de rascunho.
 - `insumo-sonoplastia.json`: modelo de entrada da escala de sonoplastia.
 - `insumo-acionato.json`: modelo de entrada da escala de acionato (anciaos, pregadores e observacoes).
+- `indisponibilidade-cantores.json`: modelo de indisponibilidade coletada por enquete/mensagens.
 
 Use junto com:
 - `processos/guias/iniciar-escala-mensal.md`

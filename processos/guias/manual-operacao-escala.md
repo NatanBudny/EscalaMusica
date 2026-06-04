@@ -19,6 +19,16 @@ Este manual descreve o processo completo para montar, validar, publicar e encerr
 
 ## Processo completo (checklist)
 
+### Comando principal (recomendado)
+
+Para fechamento mensal completo, use:
+
+```bash
+npm run publicar:fechamento -- --rascunho=escalas/AAAA/MM/rascunho.md
+```
+
+Esse fluxo executa publicacao, validacoes, geracao de links, limpeza pos-publicacao e sobe o ambiente local (`python scripts/local.py`) no final.
+
 ### 1. Preparar o mes
 
 1. Confirmar ano/mes da escala.
@@ -70,12 +80,19 @@ Execute:
 npm run limpar:pos-publicacao
 ```
 
+Observacao: quando usar `publicar:fechamento`, esta etapa ja e executada automaticamente.
+
 O coletor remove automaticamente no mes vigente:
 
 - `rascunho.md`
 - `publicada.md`
-- Arquivos de `insumos/` (sonoplastia/acionato, se existirem)
-- Pasta `insumos/` quando estiver vazia
+- Arquivos temporarios de `insumos/` (sonoplastia/acionato, se existirem)
+
+Arquivos preservados para rastreabilidade:
+
+- `insumos/indisponibilidade-cantores.json`
+- `insumos/mapeamento-indisponibilidade-contatos.md`
+- `arquivo/indisponibilidade-cantores-AAAA-MM-DD.json`
 
 Opcional (simulacao, sem apagar):
 
@@ -104,6 +121,7 @@ Depois de publicado, qualquer ajuste deve ser feito diretamente no `atual.json` 
 ## Troubleshooting rapido
 
 - Links gerados no mes errado:
+  - Sempre informe `--rascunho=escalas/AAAA/MM/rascunho.md` no comando de fechamento.
   - Verifique se `atual.json` contem datas validas no formato `DD/MM/YYYY`.
 - Nome sem link:
   - Verifique se o nome existe em `contatos.json` (nome principal ou apelido).

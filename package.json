@@ -7,10 +7,13 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
     "validar:regras": "node scripts/validar-regras.js",
+    "validar:rascunho": "node scripts/validar-rascunho.js",
     "validar:obs": "node scripts/validar-obs-publico.js",
     "controle:mm": "node scripts/controle-mensagem-musical.js",
     "controle:regentes": "node scripts/controle-regentes.js",
     "controle:equipe": "node scripts/controle-equipe-louvor.js",
+    "publicar:mensal": "node scripts/publicar-escala-mensal.js",
+    "publicar:fechamento": "node scripts/publicar-fechamento.js",
     "gerar:links-publicacao": "node scripts/gerar-links-publicacao.js",
     "limpar:pos-publicacao": "node scripts/coletor-lixo-pos-publicacao.js"
   },

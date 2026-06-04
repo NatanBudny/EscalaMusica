@@ -5,7 +5,7 @@
   },
   "JULIANA": {
     "telefone": "https://wa.me/5543996306944",
-    "apelidos": ["MIRELLA", "MARCELA"]
+    "apelidos": ["MIRELLA", "MARCELA", "JULIANA ALVES"]
   },
   "ARIADNY": {
     "telefone": "https://wa.me/554396158329",
@@ -145,7 +145,7 @@
   },
   "ROBERTO KOCH": {
     "telefone": "https://wa.me/554399191480",
-    "apelidos": ["R. KOCH"]
+    "apelidos": ["R. KOCH", "ROBERTO"]
   },
   "DANI HERREIRA": {
     "telefone": "https://wa.me/5543999189819",
@@ -242,5 +242,9 @@
   "MARCOS GALUCH": {
     "telefone": "https://wa.me/5543998741000",
     "apelidos": []
-  }
+  },
+  "BETE": {
+    "telefone": "https://wa.me/554399722921",
+    "apelidos": ["BETE DA SILVA", "BETE"]
+    }
 }

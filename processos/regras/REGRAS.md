@@ -72,6 +72,14 @@ Informações usadas durante a montagem da escala (ex: justificativas internas, 
 
 **RF018** — Após a publicação mensal, qualquer manutenção (trocas, ajustes de nomes, observações públicas autorizadas e correções) deve ser feita diretamente no `atual.json` vigente.
 
+**RF019** — É proibido escalar a mesma pessoa em `REGENTE LOUVOR` e `EQUIPE LOUVOR` no mesmo culto.  
+Essa violação é grave e invalida a sugestão da escala.  
+_Exceção:_ quando o `PREGADOR` for departamento e a regra RF015 estiver ativa (ex.: `JOVENS` em todos os campos), a repetição textual do nome do departamento é permitida por representar responsabilidade institucional, não dupla escalação individual.
+
+**RF020** — Conflito com indisponibilidade é gravíssimo e bloqueante.  
+É proibido inserir ou manter no rascunho qualquer pessoa em `REGENTE LOUVOR`, `EQUIPE LOUVOR` ou `MENSAGEM MUSICAL` em data na qual ela esteja marcada como indisponível em `insumos/indisponibilidade-cantores-vinculada.json`.  
+Quando houver conflito, a sugestão deve ser rejeitada até correção.
+
 ---
 
 ## RP — Restrições Pessoais
@@ -107,6 +115,42 @@ Informações usadas durante a montagem da escala (ex: justificativas internas, 
 - `tipo`: condicional
 - `prioridade`: obrigatoria
 
+- **RP008 · JUNIOR** — indisponível por solicitação pessoal por 60 dias a partir de 01/06/2026 (até 31/07/2026)
+- `tipo`: disponibilidade
+- `prioridade`: obrigatoria
+
+- **RP009 · LUIZ DA SILVA** — quando escalado para cantar, deve estar junto com ao menos um membro da família da silva (JESSE, JESSIE, JOAS ou JESSICA)
+- `tipo`: relacionamento
+- `prioridade`: obrigatoria
+
+- **RP010 · ARIADNY** — não faz MENSAGEM MUSICAL
+- `tipo`: condicional
+- `prioridade`: obrigatoria
+
+- **RP011 · FABIOLA** — afastada por 120 dias por licença maternidade a partir de 01/06/2026 (até 28/09/2026)
+- `tipo`: disponibilidade
+- `prioridade`: obrigatoria
+
+- **RP012 · CATHERINE** — canta somente aos sábados
+- `tipo`: condicional
+- `prioridade`: obrigatoria
+
+- **RP013 · LAURA GESSNER** — afastada por 60 dias por compromissos de trabalho a partir de 01/06/2026 (até 31/07/2026)
+- `tipo`: disponibilidade
+- `prioridade`: obrigatoria
+
+- **RP014 · IGOR DUARTE** — afastado por 120 dias por licença paternidade a partir de 01/06/2026 (até 28/09/2026)
+- `tipo`: disponibilidade
+- `prioridade`: obrigatoria
+
+- **RP015 · MIRIAN** — perfil de canto de acompanhamento/participação: priorizar no máximo 1 escala por mês e permitir até 2 somente quando necessário por indisponibilidade geral
+- `tipo`: condicional
+- `prioridade`: preferencial
+
+- **RP016 · BETE** — quando escalada para cantar, deve estar junto com ao menos um membro da família da silva (JESSE, JESSIE, JOAS ou JESSICA)
+- `tipo`: relacionamento
+- `prioridade`: obrigatoria
+
 ---
 
 ## PE — Preferências de Escala
@@ -134,6 +178,9 @@ Informações usadas durante a montagem da escala (ex: justificativas internas, 
 
 Ao sugerir nomes, priorizar: slot ES → menor contagem de ES; slot CULTO → menor contagem de CULTO; slot DOMINGO → menor contagem de DOMINGO.  
 Não é regra rígida: disponibilidade real do mês e RF013/RF014 têm precedência sobre qualquer critério de rotação.
+
+**PE009** — Pessoas com `perfil_canto = participacao` devem ser escaladas com baixa frequência para preservar equilíbrio vocal da equipe.  
+Priorizar no máximo 1 escala por mês para esse perfil e permitir até 2 apenas em cenário excepcional (indisponibilidade geral e ausência de opção de base viável).
 
 ---
 

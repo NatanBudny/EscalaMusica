@@ -9,6 +9,7 @@ Preencher o rascunho mensal respeitando regras e prioridades.
 - `escalas/AAAA/MM/controle-mensagem-musical.json`
 - `escalas/AAAA/MM/insumos/sonoplastia.json`
 - `escalas/AAAA/MM/insumos/acionato.json`
+- `escalas/AAAA/MM/insumos/indisponibilidade-cantores-vinculada.json`
 - `processos/regras/regras.index.json`
 - Grupos em `processos/regras/*.json`
 - Cadastros em `processos/regras/cadastros/`
@@ -18,6 +19,8 @@ Preencher o rascunho mensal respeitando regras e prioridades.
 - [ ] Definir regencia priorizando menor `REGENCIA` e disponibilidade
 - [ ] Definir equipe (5 pessoas) priorizando menor `EQUIPE` e disponibilidade
 - [ ] Definir mensagem musical por slot (ES/CULTO/DOMINGO) por menor frequencia
+- [ ] Aplicar bloqueios da indisponibilidade vinculada (incluindo propagacao por casal)
+- [ ] Definir coluna de acompanhamento `Banda/PB` como `BANDA` ou `PB` para cada culto
 - [ ] Revisar conflitos com papeis externos no mesmo culto
 - [ ] Carregar observacoes vindas do acionato e separar o que e publico do que e interno
 

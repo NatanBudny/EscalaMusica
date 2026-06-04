@@ -184,6 +184,97 @@
         "papeis_afetados": ["REGENTE LOUVOR", "EQUIPE LOUVOR", "MENSAGEM MUSICAL"],
         "dias_permitidos": ["sabado"]
       }
+    ],
+    "JUNIOR": [
+      {
+        "id": "RP008",
+        "tipo": "disponibilidade",
+        "prioridade": "obrigatoria",
+        "descricao": "Indisponivel por solicitacao pessoal por 60 dias a partir de 01/06/2026 (ate 31/07/2026)",
+        "papeis_afetados": ["REGENTE LOUVOR", "EQUIPE LOUVOR", "MENSAGEM MUSICAL"],
+        "vigencia": { "inicio": "2026-06-01", "fim": "2026-07-31" }
+      }
+    ],
+    "LUIZ DA SILVA": [
+      {
+        "id": "RP009",
+        "tipo": "relacionamento",
+        "prioridade": "obrigatoria",
+        "descricao": "Quando escalado para cantar, deve estar junto com ao menos um membro da familia da silva (JESSE, JESSIE, JOAS ou JESSICA)",
+        "papeis_afetados": ["EQUIPE LOUVOR", "MENSAGEM MUSICAL"],
+        "familia_referencia": ["JESSE", "JESSIE", "JOAS", "JESSICA"]
+      }
+    ],
+    "ARIADNY": [
+      {
+        "id": "RP010",
+        "tipo": "condicional",
+        "prioridade": "obrigatoria",
+        "descricao": "Nao faz MENSAGEM MUSICAL",
+        "papeis_afetados": ["MENSAGEM MUSICAL"]
+      }
+    ],
+    "FABIOLA": [
+      {
+        "id": "RP011",
+        "tipo": "disponibilidade",
+        "prioridade": "obrigatoria",
+        "descricao": "Afastada por 120 dias por licenca maternidade a partir de 01/06/2026 (ate 28/09/2026)",
+        "papeis_afetados": ["REGENTE LOUVOR", "EQUIPE LOUVOR", "MENSAGEM MUSICAL"],
+        "vigencia": { "inicio": "2026-06-01", "fim": "2026-09-28" }
+      }
+    ],
+    "CATHERINE": [
+      {
+        "id": "RP012",
+        "tipo": "condicional",
+        "prioridade": "obrigatoria",
+        "descricao": "Canta somente aos sabados",
+        "papeis_afetados": ["REGENTE LOUVOR", "EQUIPE LOUVOR", "MENSAGEM MUSICAL"],
+        "dias_permitidos": ["sabado"]
+      }
+    ],
+    "LAURA GESSNER": [
+      {
+        "id": "RP013",
+        "tipo": "disponibilidade",
+        "prioridade": "obrigatoria",
+        "descricao": "Afastada por 60 dias por compromissos de trabalho a partir de 01/06/2026 (ate 31/07/2026)",
+        "papeis_afetados": ["REGENTE LOUVOR", "EQUIPE LOUVOR", "MENSAGEM MUSICAL"],
+        "vigencia": { "inicio": "2026-06-01", "fim": "2026-07-31" }
+      }
+    ],
+    "IGOR DUARTE": [
+      {
+        "id": "RP014",
+        "tipo": "disponibilidade",
+        "prioridade": "obrigatoria",
+        "descricao": "Afastado por 120 dias por licenca paternidade a partir de 01/06/2026 (ate 28/09/2026)",
+        "papeis_afetados": ["REGENTE LOUVOR", "EQUIPE LOUVOR", "MENSAGEM MUSICAL"],
+        "vigencia": { "inicio": "2026-06-01", "fim": "2026-09-28" }
+      }
+    ],
+    "MIRIAN": [
+      {
+        "id": "RP015",
+        "tipo": "condicional",
+        "prioridade": "preferencial",
+        "descricao": "Perfil de canto de acompanhamento/participacao: priorizar no maximo 1 escala por mes e permitir ate 2 somente quando necessario por indisponibilidade geral",
+        "papeis_afetados": ["EQUIPE LOUVOR", "MENSAGEM MUSICAL"],
+        "limite_mensal_preferencial": 1,
+        "limite_mensal_excepcional": 2,
+        "condicao_excecao": "Somente em ultimo caso, quando nao houver pessoas base disponiveis para fechar a escala"
+      }
+    ],
+    "BETE": [
+      {
+        "id": "RP016",
+        "tipo": "relacionamento",
+        "prioridade": "obrigatoria",
+        "descricao": "Quando escalada para cantar, deve estar junto com ao menos um membro da familia da silva (JESSE, JESSIE, JOAS ou JESSICA)",
+        "papeis_afetados": ["EQUIPE LOUVOR", "MENSAGEM MUSICAL"],
+        "familia_referencia": ["JESSE", "JESSIE", "JOAS", "JESSICA"]
+      }
     ]
   },
   "regras_fundamentais": [
@@ -298,6 +389,18 @@
       "descricao": "Após a publicação mensal, toda manutenção da escala vigente deve ser feita diretamente no atual.json",
       "detalhe": "Trocas de nomes, ajustes de observações públicas autorizadas e correções operacionais posteriores devem ocorrer no atual.json vigente.",
       "papeis_afetados": ["atual.json"]
+    },
+    {
+      "id": "RF019",
+      "descricao": "E proibido escalar a mesma pessoa em REGENTE LOUVOR e EQUIPE LOUVOR no mesmo culto",
+      "detalhe": "Violacao grave que invalida a sugestao. Excecao: quando PREGADOR for departamento e RF015 estiver ativa (ex.: JOVENS nos tres campos), a repeticao textual do nome do departamento e permitida por representar responsabilidade institucional, nao dupla escala individual.",
+      "papeis_afetados": ["REGENTE LOUVOR", "EQUIPE LOUVOR", "PREGADOR"]
+    },
+    {
+      "id": "RF020",
+      "descricao": "Conflito com indisponibilidade e gravissimo e bloqueante",
+      "detalhe": "E proibido inserir ou manter no rascunho qualquer pessoa em REGENTE LOUVOR, EQUIPE LOUVOR ou MENSAGEM MUSICAL em data na qual ela esteja marcada como indisponivel em insumos/indisponibilidade-cantores-vinculada.json. Quando houver conflito, a sugestao deve ser rejeitada ate correcao.",
+      "papeis_afetados": ["REGENTE LOUVOR", "EQUIPE LOUVOR", "MENSAGEM MUSICAL", "insumos/indisponibilidade-cantores-vinculada.json"]
     }
   ],
   "preferencias": [
@@ -350,6 +453,12 @@
         "CULTO": "Segundo nome do sabado (posicao 2), ou unico nome quando ha apenas 1. Tambem cobre outros dias exceto domingo. Mais importante.",
         "DOMINGO": "Nome unico do domingo."
       }
+    },
+    {
+      "id": "PE009",
+      "descricao": "Pessoas com perfil_canto participacao devem ser escaladas com baixa frequencia para preservar equilibrio vocal da equipe: priorizar no maximo 1 escala por mes e permitir ate 2 apenas em cenario excepcional.",
+      "prioridade": "media",
+      "papeis_afetados": ["EQUIPE LOUVOR", "MENSAGEM MUSICAL"]
     }
   ],
   "times": {
