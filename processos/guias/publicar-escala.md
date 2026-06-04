@@ -14,7 +14,13 @@ Promover a escala aprovada para producao com rastreabilidade.
 - [ ] Alternativa manual: executar `npm run publicar:mensal -- --rascunho=escalas/AAAA/MM/rascunho.md`
 - [ ] Executar `npm run gerar:links-publicacao`
 - [ ] Confirmar links em `escalas/AAAA/MM/links-whatsapp.md`
+- [ ] Confirmar que a mensagem do WhatsApp esta personalizada por contato com `{nome}`, `{mes/ano}` e `{funcoes}`
+- [ ] Confirmar template oficial da mensagem:
+	- `Ola, {nome}. Voce esta na escala de {mes/ano}, como {funcoes}. Entre na escala, veja os dias.`
+	- `De um joinha nessa mensagem para confirmar que podera participar.`
+	- `*Link da escala:* https://natanbudny.github.io/EscalaMusica/`
 - [ ] Publicar links no WhatsApp
+- [ ] Atualizar os 3 controles de rotacao (`controle:mm`, `controle:regentes`, `controle:equipe`)
 - [ ] Executar `npm run limpar:pos-publicacao` para remover arquivos temporarios do mes (rascunho/publicada e insumos temporarios)
 - [ ] Confirmar que `insumos/indisponibilidade-cantores.json` e `arquivo/indisponibilidade-cantores-AAAA-MM-DD.json` foram preservados
 - [ ] Confirmar que o `local.py` foi iniciado ao fim do `publicar:fechamento`
@@ -51,6 +57,7 @@ npm run publicar:fechamento -- --rascunho=escalas/AAAA/MM/rascunho.md --acionato
 ## Observacao de seguranca
 
 - Sempre informar `--rascunho` para evitar publicar o mes errado quando houver mais de um `rascunho.md` no repositorio.
+- Em caso de conflito de merge no `atual.json` apos publicacao, preservar a versao local recem-publicada do mes vigente.
 
 ## Registro
 

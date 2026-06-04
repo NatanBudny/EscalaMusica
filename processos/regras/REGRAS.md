@@ -80,6 +80,33 @@ _Exceção:_ quando o `PREGADOR` for departamento e a regra RF015 estiver ativa 
 É proibido inserir ou manter no rascunho qualquer pessoa em `REGENTE LOUVOR`, `EQUIPE LOUVOR` ou `MENSAGEM MUSICAL` em data na qual ela esteja marcada como indisponível em `insumos/indisponibilidade-cantores-vinculada.json`.  
 Quando houver conflito, a sugestão deve ser rejeitada até correção.
 
+**RF021** — Em conflito de merge no `atual.json` após publicação oficial, prevalece a versão local recém-publicada para o mês vigente.  
+Não reintroduzir conteúdo antigo de branches remotos quando isso sobrescrever a publicação mais recente já validada.
+
+**RF022** — O pós-publicação só é considerado concluído após atualizar os 3 controles de rotação:  
+- `controle-mensagem-musical.json`  
+- `controle-regentes.json`  
+- `controle-equipe-louvor.json`
+
+**RF023** — A tabela de mensagens de WhatsApp é etapa obrigatória de fechamento.  
+Após publicar, deve-se regenerar e conferir `escalas/AAAA/MM/links-whatsapp.md` antes do encerramento do ciclo.
+
+**RF024** — A mensagem de WhatsApp deve ser personalizada por pessoa, contendo obrigatoriamente:  
+- `{nome}`  
+- `{mes/ano}`  
+- `{funções}`
+
+**RF025** — Template padrão oficial da mensagem de WhatsApp:
+
+```text
+Olá, {nome}. Você está na escala de {mes/ano}, como {funções}. Entre na escala, veja os dias.
+
+Dê um joinha nessa mensagem para confirmar que poderá participar.
+
+*Link da escala:*
+https://natanbudny.github.io/EscalaMusica/
+```
+
 ---
 
 ## RP — Restrições Pessoais
