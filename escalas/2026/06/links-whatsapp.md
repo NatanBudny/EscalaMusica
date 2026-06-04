@@ -16,6 +16,7 @@ https://natanbudny.github.io/EscalaMusica/
 | ANDRE | EQUIPE LOUVOR | [Abrir](https://wa.me/5543920008370?text=Confirma%20sua%20escala%2C%20por%20favor%3F%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
 | ARIADNY | REGENTE LOUVOR | [Abrir](https://wa.me/554396158329?text=Confirma%20sua%20escala%2C%20por%20favor%3F%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
 | BERNARDO | MENSAGEM MUSICAL | [Abrir](https://wa.me/5543996579868?text=Confirma%20sua%20escala%2C%20por%20favor%3F%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| BETE | EQUIPE LOUVOR | [Abrir](https://wa.me/554399722921?text=Confirma%20sua%20escala%2C%20por%20favor%3F%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
 | CARLA RIBEIRO | MENSAGEM MUSICAL | [Abrir](https://wa.me/554399890085?text=Confirma%20sua%20escala%2C%20por%20favor%3F%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
 | CATHERINE | EQUIPE LOUVOR, REGENTE LOUVOR | [Abrir](https://wa.me/554391360091?text=Confirma%20sua%20escala%2C%20por%20favor%3F%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
 | DANI HERREIRA | EQUIPE LOUVOR, MENSAGEM MUSICAL | [Abrir](https://wa.me/5543999189819?text=Confirma%20sua%20escala%2C%20por%20favor%3F%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
@@ -28,6 +29,7 @@ https://natanbudny.github.io/EscalaMusica/
 | JESSIE | EQUIPE LOUVOR | [Abrir](https://wa.me/554399149664?text=Confirma%20sua%20escala%2C%20por%20favor%3F%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
 | JOAS | REGENTE LOUVOR | [Abrir](https://wa.me/554399234367?text=Confirma%20sua%20escala%2C%20por%20favor%3F%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
 | JOVENS | EQUIPE LOUVOR, MENSAGEM MUSICAL, REGENTE LOUVOR | [Abrir](https://wa.me/554396670568?text=Confirma%20sua%20escala%2C%20por%20favor%3F%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| JULIANA ALVES | EQUIPE LOUVOR | [Abrir](https://wa.me/5543996306944?text=Confirma%20sua%20escala%2C%20por%20favor%3F%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
 | KHEYCIANE | EQUIPE LOUVOR | [Abrir](https://wa.me/554388586342?text=Confirma%20sua%20escala%2C%20por%20favor%3F%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
 | LIDIANE | EQUIPE LOUVOR | [Abrir](https://wa.me/554396005175?text=Confirma%20sua%20escala%2C%20por%20favor%3F%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
 | LUIZ ANTONIO | EQUIPE LOUVOR | [Abrir](https://wa.me/5543999609883?text=Confirma%20sua%20escala%2C%20por%20favor%3F%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
@@ -59,13 +61,6 @@ https://natanbudny.github.io/EscalaMusica/
 | Convite do grupo | [Abrir](https://chat.whatsapp.com/EsfZwmrdWntG9wxqoSN5zw) |
 
 Observacao: o link de convite do grupo nao preenche mensagem automaticamente como o wa.me.
-
-## Sem contato cadastrado
-
-| Nome | Funcoes |
-|---|---|
-| BETE | EQUIPE LOUVOR |
-| JULIANA ALVES | EQUIPE LOUVOR |
 
 ## Fonte
 
