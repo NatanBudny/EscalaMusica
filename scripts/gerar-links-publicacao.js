@@ -11,7 +11,9 @@ const atualPath = resolve(ROOT, 'atual.json');
 const contatosPath = resolve(ROOT, 'contatos.json');
 
 const MENSAGEM_TEMPLATE = [
-  'Olá, {nome}. Você está escalado para {mes/ano} como {funções}. Entre na escala, veja os dias. Dê um joinha nessa mensagem para confirmar que pode participar.',
+  'Olá, {nome}. Você está na escala de {mes/ano}, como {funções}. Entre na escala, veja os dias.',
+  '',
+  'Dê um joinha nessa mensagem para confirmar que poderá participar.',
   '',
   '*Link da escala:*',
   'https://natanbudny.github.io/EscalaMusica/'
