@@ -10,8 +10,10 @@ const ROOT = resolve(__dirname, '..');
 const atualPath = resolve(ROOT, 'atual.json');
 const contatosPath = resolve(ROOT, 'contatos.json');
 
-const MENSAGEM = [
-  'Confirma sua escala, por favor?',
+const MENSAGEM_TEMPLATE = [
+  'Olá, {nome}. Você está escalado para {mes/ano} como {funções}. Entre na escala, veja os dias. Dê um joinha nessa mensagem para confirmar que pode participar.',
+  '',
+  '*Link da escala:*',
   'https://natanbudny.github.io/EscalaMusica/'
 ].join('\n');
 
@@ -38,8 +40,15 @@ function limparTelefone(waLink) {
   return match[1].replace('+', '');
 }
 
-function montarLink(telefone) {
-  return `https://wa.me/${telefone}?text=${encodeURIComponent(MENSAGEM)}`;
+function montarMensagemPersonalizada({ nome, mesAno, funcoes }) {
+  return MENSAGEM_TEMPLATE
+    .replaceAll('{nome}', nome)
+    .replaceAll('{mes/ano}', mesAno)
+    .replaceAll('{funções}', funcoes);
+}
+
+function montarLink(telefone, mensagem) {
+  return `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
 }
 
 function toMdLink(url, label = 'Abrir') {
@@ -161,17 +170,25 @@ const membrosOrdenados = Array.from(membrosMap.values()).sort((a, b) =>
 
 const comContato = [];
 const semContato = [];
+const { ano, mes } = extrairAnoMesDaEscala(escala);
+const mesAno = `${mes}/${ano}`;
 
 for (const membro of membrosOrdenados) {
   const encontrado = lookupContato.get(normalizeNome(membro.nomeEscala));
   const campos = Array.from(membro.campos).sort().join(', ');
 
   if (encontrado) {
+    const mensagem = montarMensagemPersonalizada({
+      nome: membro.nomeEscala,
+      mesAno,
+      funcoes: campos
+    });
+
     comContato.push({
       nomeEscala: membro.nomeEscala,
       origemContato: encontrado.nomeContato,
       campos,
-      link: montarLink(encontrado.telefone)
+      link: montarLink(encontrado.telefone, mensagem)
     });
   } else {
     semContato.push({
@@ -183,15 +200,20 @@ for (const membro of membrosOrdenados) {
 
 const fixos = FIXOS.map((item) => {
   const encontrado = lookupContato.get(normalizeNome(item.nome));
+  const mensagem = montarMensagemPersonalizada({
+    nome: item.nome,
+    mesAno,
+    funcoes: item.label
+  });
+
   return {
     ...item,
-    link: encontrado ? montarLink(encontrado.telefone) : '',
+    link: encontrado ? montarLink(encontrado.telefone, mensagem) : '',
     origemContato: encontrado ? encontrado.nomeContato : ''
   };
 });
 
 const data = hojeISO();
-const { ano, mes } = extrairAnoMesDaEscala(escala);
 const pastaMes = resolve(ROOT, 'escalas', ano, mes);
 mkdirSync(pastaMes, { recursive: true });
 
@@ -204,7 +226,7 @@ linhas.push('');
 linhas.push('## Mensagem padrao');
 linhas.push('');
 linhas.push('```text');
-linhas.push(MENSAGEM);
+linhas.push(MENSAGEM_TEMPLATE);
 linhas.push('```');
 linhas.push('');
 linhas.push('## Membros da escala (Regencia, Equipe Louvor e Mensagem Musical)');
