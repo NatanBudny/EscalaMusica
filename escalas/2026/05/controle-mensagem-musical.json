@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-06-04T14:55:02.934Z",
+  "gerado_em": "2026-07-03T02:20:00.816Z",
   "periodo": "2026-01 a 2026-04",
   "tipo_controle": "mensagem_musical",
   "legenda": {
@@ -15,13 +15,7 @@
     "old/2026/032026.json",
     "atual.json"
   ],
-  "nomes_nao_mapeados": [
-    {
-      "campo": "MENSAGEM MUSICAL",
-      "nome": "CARLA RIBEIRO",
-      "data": "06/06/2026"
-    }
-  ],
+  "nomes_nao_mapeados": [],
   "ranking_menor_para_maior": [
     {
       "nome": "EMILY",
@@ -128,39 +122,6 @@
       "pode_mm_es": true,
       "pode_mm_culto": true,
       "pode_mm_dom": true,
-      "ES": 0,
-      "CULTO": 0,
-      "DOMINGO": 0,
-      "TOTAL": 0,
-      "por_mes": {
-        "JAN": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "FEV": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "MAR": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "ABR": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        }
-      }
-    },
-    {
-      "nome": "LUAN",
-      "ativo": true,
-      "pode_mm_es": true,
-      "pode_mm_culto": true,
-      "pode_mm_dom": false,
       "ES": 0,
       "CULTO": 0,
       "DOMINGO": 0,
@@ -486,6 +447,39 @@
       }
     },
     {
+      "nome": "CARLA RIBEIRO",
+      "ativo": true,
+      "pode_mm_es": true,
+      "pode_mm_culto": true,
+      "pode_mm_dom": true,
+      "ES": 0,
+      "CULTO": 1,
+      "DOMINGO": 0,
+      "TOTAL": 1,
+      "por_mes": {
+        "JAN": {
+          "ES": 0,
+          "CULTO": 0,
+          "DOMINGO": 0
+        },
+        "FEV": {
+          "ES": 0,
+          "CULTO": 0,
+          "DOMINGO": 0
+        },
+        "MAR": {
+          "ES": 0,
+          "CULTO": 0,
+          "DOMINGO": 0
+        },
+        "ABR": {
+          "ES": 0,
+          "CULTO": 1,
+          "DOMINGO": 0
+        }
+      }
+    },
+    {
       "nome": "JUNIOR",
       "ativo": true,
       "pode_mm_es": true,
@@ -717,6 +711,39 @@
       }
     },
     {
+      "nome": "DANI HERREIRA",
+      "ativo": true,
+      "pode_mm_es": true,
+      "pode_mm_culto": true,
+      "pode_mm_dom": true,
+      "ES": 0,
+      "CULTO": 3,
+      "DOMINGO": 1,
+      "TOTAL": 4,
+      "por_mes": {
+        "JAN": {
+          "ES": 0,
+          "CULTO": 1,
+          "DOMINGO": 0
+        },
+        "FEV": {
+          "ES": 0,
+          "CULTO": 1,
+          "DOMINGO": 1
+        },
+        "MAR": {
+          "ES": 0,
+          "CULTO": 1,
+          "DOMINGO": 0
+        },
+        "ABR": {
+          "ES": 0,
+          "CULTO": 0,
+          "DOMINGO": 0
+        }
+      }
+    },
+    {
       "nome": "FABRICIO",
       "ativo": true,
       "pode_mm_es": true,
@@ -745,39 +772,6 @@
         "ABR": {
           "ES": 0,
           "CULTO": 0,
-          "DOMINGO": 0
-        }
-      }
-    },
-    {
-      "nome": "DANI HERREIRA",
-      "ativo": true,
-      "pode_mm_es": true,
-      "pode_mm_culto": true,
-      "pode_mm_dom": true,
-      "ES": 0,
-      "CULTO": 4,
-      "DOMINGO": 1,
-      "TOTAL": 5,
-      "por_mes": {
-        "JAN": {
-          "ES": 0,
-          "CULTO": 1,
-          "DOMINGO": 0
-        },
-        "FEV": {
-          "ES": 0,
-          "CULTO": 1,
-          "DOMINGO": 1
-        },
-        "MAR": {
-          "ES": 0,
-          "CULTO": 1,
-          "DOMINGO": 0
-        },
-        "ABR": {
-          "ES": 0,
-          "CULTO": 1,
           "DOMINGO": 0
         }
       }

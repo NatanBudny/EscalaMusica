@@ -178,6 +178,10 @@ https://natanbudny.github.io/EscalaMusica/
 - `tipo`: relacionamento
 - `prioridade`: obrigatoria
 
+- **RP017 · BRUNA** — afastada por tempo indeterminado do louvor a partir de 02/07/2026
+- `tipo`: disponibilidade
+- `prioridade`: obrigatoria
+
 ---
 
 ## PE — Preferências de Escala

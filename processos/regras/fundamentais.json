@@ -171,5 +171,47 @@
     "papeis_afetados": [
       "atual.json"
     ]
+  },
+  {
+    "id": "RF021",
+    "descricao": "Em conflito de merge no atual.json após publicação oficial, prevalece a versão local recém-publicada para o mês vigente",
+    "detalhe": "Não reintroduzir conteúdo antigo de branches remotos quando isso sobrescrever a publicação mais recente já validada.",
+    "papeis_afetados": [
+      "atual.json"
+    ]
+  },
+  {
+    "id": "RF022",
+    "descricao": "O pós-publicação só é concluído após atualizar os 3 controles de rotação",
+    "detalhe": "Atualizar controle-mensagem-musical.json, controle-regentes.json e controle-equipe-louvor.json no fechamento do ciclo mensal.",
+    "papeis_afetados": [
+      "controle-mensagem-musical.json",
+      "controle-regentes.json",
+      "controle-equipe-louvor.json"
+    ]
+  },
+  {
+    "id": "RF023",
+    "descricao": "A tabela de mensagens de WhatsApp é etapa obrigatória de fechamento",
+    "detalhe": "Após publicar, regenerar e conferir escalas/AAAA/MM/links-whatsapp.md antes do encerramento do ciclo.",
+    "papeis_afetados": [
+      "links-whatsapp.md"
+    ]
+  },
+  {
+    "id": "RF024",
+    "descricao": "A mensagem de WhatsApp deve ser personalizada por pessoa",
+    "detalhe": "Cada mensagem deve conter obrigatoriamente os placeholders {nome}, {mes/ano} e {funções}.",
+    "papeis_afetados": [
+      "template-whatsapp"
+    ]
+  },
+  {
+    "id": "RF025",
+    "descricao": "Usar o template padrão oficial da mensagem de WhatsApp",
+    "detalhe": "Olá, {nome}. Você está na escala de {mes/ano}, como {funções}. Entre na escala, veja os dias. Dê um joinha nessa mensagem para confirmar que poderá participar. Link da escala: https://natanbudny.github.io/EscalaMusica/",
+    "papeis_afetados": [
+      "template-whatsapp"
+    ]
   }
 ]

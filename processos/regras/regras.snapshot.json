@@ -275,6 +275,16 @@
         "papeis_afetados": ["EQUIPE LOUVOR", "MENSAGEM MUSICAL"],
         "familia_referencia": ["JESSE", "JESSIE", "JOAS", "JESSICA"]
       }
+    ],
+    "BRUNA": [
+      {
+        "id": "RP017",
+        "tipo": "disponibilidade",
+        "prioridade": "obrigatoria",
+        "descricao": "Afastada por tempo indeterminado do louvor a partir de 02/07/2026",
+        "papeis_afetados": ["REGENTE LOUVOR", "EQUIPE LOUVOR", "MENSAGEM MUSICAL"],
+        "vigencia": { "inicio": "2026-07-02" }
+      }
     ]
   },
   "regras_fundamentais": [
@@ -401,6 +411,36 @@
       "descricao": "Conflito com indisponibilidade e gravissimo e bloqueante",
       "detalhe": "E proibido inserir ou manter no rascunho qualquer pessoa em REGENTE LOUVOR, EQUIPE LOUVOR ou MENSAGEM MUSICAL em data na qual ela esteja marcada como indisponivel em insumos/indisponibilidade-cantores-vinculada.json. Quando houver conflito, a sugestao deve ser rejeitada ate correcao.",
       "papeis_afetados": ["REGENTE LOUVOR", "EQUIPE LOUVOR", "MENSAGEM MUSICAL", "insumos/indisponibilidade-cantores-vinculada.json"]
+    },
+    {
+      "id": "RF021",
+      "descricao": "Em conflito de merge no atual.json apos publicacao oficial, prevalece a versao local recem-publicada para o mes vigente",
+      "detalhe": "Nao reintroduzir conteudo antigo de branches remotos quando isso sobrescrever a publicacao mais recente ja validada.",
+      "papeis_afetados": ["atual.json"]
+    },
+    {
+      "id": "RF022",
+      "descricao": "O pos-publicacao so e considerado concluido apos atualizar os 3 controles de rotacao",
+      "detalhe": "Atualizar controle-mensagem-musical.json, controle-regentes.json e controle-equipe-louvor.json.",
+      "papeis_afetados": ["controle-mensagem-musical.json", "controle-regentes.json", "controle-equipe-louvor.json"]
+    },
+    {
+      "id": "RF023",
+      "descricao": "A tabela de mensagens de WhatsApp e etapa obrigatoria de fechamento",
+      "detalhe": "Apos publicar, regenerar e conferir escalas/AAAA/MM/links-whatsapp.md antes do encerramento do ciclo.",
+      "papeis_afetados": ["links-whatsapp.md"]
+    },
+    {
+      "id": "RF024",
+      "descricao": "A mensagem de WhatsApp deve ser personalizada por pessoa com placeholders obrigatorios",
+      "detalhe": "A mensagem deve conter obrigatoriamente {nome}, {mes/ano} e {funcoes}.",
+      "papeis_afetados": ["template-whatsapp"]
+    },
+    {
+      "id": "RF025",
+      "descricao": "Template padrao oficial da mensagem de WhatsApp",
+      "detalhe": "Ola, {nome}. Voce esta na escala de {mes/ano}, como {funcoes}. Entre na escala, veja os dias. De um joinha nessa mensagem para confirmar que podera participar. Link da escala: https://natanbudny.github.io/EscalaMusica/",
+      "papeis_afetados": ["template-whatsapp"]
     }
   ],
   "preferencias": [

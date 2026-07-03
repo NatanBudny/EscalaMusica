@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-06-04T14:55:03.912Z",
+  "gerado_em": "2026-07-03T02:20:01.616Z",
   "periodo": "2026-01 a 2026-04",
   "tipo_controle": "equipe_louvor",
   "legenda": {
@@ -254,27 +254,6 @@
         },
         "ABR": {
           "ESCALAS_EQUIPE": 1
-        }
-      }
-    },
-    {
-      "nome": "GABRIEL P.",
-      "ativo": true,
-      "pode_equipe": true,
-      "ESCALAS_EQUIPE": 2,
-      "TOTAL": 2,
-      "por_mes": {
-        "JAN": {
-          "ESCALAS_EQUIPE": 1
-        },
-        "FEV": {
-          "ESCALAS_EQUIPE": 0
-        },
-        "MAR": {
-          "ESCALAS_EQUIPE": 1
-        },
-        "ABR": {
-          "ESCALAS_EQUIPE": 0
         }
       }
     },

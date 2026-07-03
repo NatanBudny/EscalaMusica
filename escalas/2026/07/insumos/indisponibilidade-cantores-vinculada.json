@@ -1,0 +1,173 @@
+{
+  "contexto": "Indisponibilidade vinculada de cantores - Julho 2026",
+  "origem": "Derivado de indisponibilidade-cantores.json com vinculacao a contatos e propagacao por casal",
+  "atualizado_em": "2026-07-02",
+  "casais_vinculados": [
+    "JESSIE<->JESSE",
+    "JESSICA<->JOAS"
+  ],
+  "datas": [
+    {
+      "data_referencia": "2026-07-05",
+      "dia_semana": "domingo",
+      "indisponiveis_contatos": [
+        "JOAS",
+        "DANI HERREIRA",
+        "MARIA HELOISA",
+        "JESSIE",
+        "RICARDO",
+        "JESSE",
+        "SILVANA",
+        "JEMELLI",
+        "CATHERINE",
+        "ARIADNY",
+        "NILSINHO",
+        "KHEYCIANE",
+        "STELLA",
+        "DANY KALLAS",
+        "ALESSANDRA DONADON",
+        "SIRLENE",
+        "ADELAIDE",
+        "VONI",
+        "JULIANA",
+        "JESSICA"
+      ],
+      "propagados_casal": [
+        "JESSICA"
+      ]
+    },
+    {
+      "data_referencia": "2026-07-11",
+      "dia_semana": "sabado",
+      "indisponiveis_contatos": [
+        "RICARDO",
+        "ANDRE",
+        "KHEYCIANE",
+        "SIRLENE",
+        "ADELAIDE",
+        "VONI",
+        "JULIANA"
+      ],
+      "propagados_casal": []
+    },
+    {
+      "data_referencia": "2026-07-12",
+      "dia_semana": "domingo",
+      "indisponiveis_contatos": [
+        "JOAS",
+        "MARIA HELOISA",
+        "RICARDO",
+        "JESSE",
+        "JEMELLI",
+        "ADELAIDE",
+        "ARIADNY",
+        "NILSINHO",
+        "KHEYCIANE",
+        "STELLA",
+        "ALESSANDRA DONADON",
+        "SUELLEN",
+        "SIRLENE",
+        "VONI",
+        "JULIANA",
+        "JESSICA",
+        "JESSIE"
+      ],
+      "propagados_casal": [
+        "JESSICA",
+        "JESSIE"
+      ]
+    },
+    {
+      "data_referencia": "2026-07-18",
+      "dia_semana": "sabado",
+      "indisponiveis_contatos": [
+        "LIDIANE",
+        "LUIZ ANTONIO",
+        "ADELAIDE",
+        "ALESSANDRA DONADON",
+        "SIRLENE",
+        "VONI",
+        "KHEYCIANE",
+        "JULIANA"
+      ],
+      "propagados_casal": []
+    },
+    {
+      "data_referencia": "2026-07-19",
+      "dia_semana": "domingo",
+      "indisponiveis_contatos": [
+        "JOAS",
+        "DANI HERREIRA",
+        "MARIA HELOISA",
+        "RICARDO",
+        "JESSE",
+        "LIDIANE",
+        "JEMELLI",
+        "CATHERINE",
+        "ADELAIDE",
+        "ARIADNY",
+        "NILSINHO",
+        "KHEYCIANE",
+        "STELLA",
+        "SUELLEN",
+        "SIRLENE",
+        "VONI",
+        "JULIANA",
+        "JESSICA",
+        "JESSIE"
+      ],
+      "propagados_casal": [
+        "JESSICA",
+        "JESSIE"
+      ]
+    },
+    {
+      "data_referencia": "2026-07-25",
+      "dia_semana": "sabado",
+      "indisponiveis_contatos": [
+        "MARIA HELOISA",
+        "LIDIANE",
+        "ANDRE",
+        "ALEX",
+        "ARIADNY",
+        "KHEYCIANE",
+        "MARAIR",
+        "ALESSANDRA DONADON",
+        "SIRLENE",
+        "ADELAIDE",
+        "VONI",
+        "JULIANA"
+      ],
+      "propagados_casal": []
+    },
+    {
+      "data_referencia": "2026-07-26",
+      "dia_semana": "domingo",
+      "indisponiveis_contatos": [
+        "JOAS",
+        "MARIA HELOISA",
+        "RICARDO",
+        "JESSE",
+        "LIDIANE",
+        "ANDRE",
+        "JEMELLI",
+        "ADELAIDE",
+        "ARIADNY",
+        "NILSINHO",
+        "KHEYCIANE",
+        "STELLA",
+        "DANY KALLAS",
+        "ALESSANDRA DONADON",
+        "SIRLENE",
+        "VONI",
+        "JULIANA",
+        "JESSICA",
+        "JESSIE"
+      ],
+      "propagados_casal": [
+        "JESSICA",
+        "JESSIE"
+      ]
+    }
+  ]
+}

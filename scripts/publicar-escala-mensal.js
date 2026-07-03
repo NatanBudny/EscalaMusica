@@ -86,18 +86,61 @@ function parseRows(mdContent) {
     .split(/\r?\n/)
     .filter((line) => /^\|\s\d{2}\/\d{2}\/\d{4}\s\|/i.test(line))
     .map((line) => line.split('|').map((part) => part.trim()))
-    .map((parts) => ({
-      data: parts[1] || '',
-      dia: (parts[2] || '').toLowerCase(),
-      anciao: parts[3] || '',
-      pregador: parts[4] || '',
-      audiovisual: parts[5] || '',
-      regente: parts[6] || '',
-      equipe: parts[7] || '',
-      mensagem: parts[8] || '',
-      acomp: (parts[9] || '').toUpperCase(),
-      obs: parts[10] || ''
-    }));
+    .map((parts) => {
+      const looksLikeAcompInPart5 = /^(BANDA|PB)$/i.test(parts[5] || '');
+
+      // Formato atual sem Louvores ES:
+      // Data | Dia | Anciao | Pregador | Acomp | Regente | Equipe | Mensagem | Sonoplastia | Obs
+      if (looksLikeAcompInPart5 && parts.length < 12) {
+        return {
+          data: parts[1] || '',
+          dia: (parts[2] || '').toLowerCase(),
+          anciao: parts[3] || '',
+          pregador: parts[4] || '',
+          acomp: (parts[5] || '').toUpperCase(),
+          regente: parts[6] || '',
+          equipe: parts[7] || '',
+          mensagem: parts[8] || '',
+          audiovisual: parts[9] || '',
+          louvoresEs: '',
+          obs: parts[10] || ''
+        };
+      }
+
+      // Formato atual com Louvores ES:
+      // Data | Dia | Anciao | Pregador | Acomp | Regente | Equipe | Mensagem | Sonoplastia | Louvores ES | Obs
+      if (looksLikeAcompInPart5 && parts.length >= 12) {
+        return {
+          data: parts[1] || '',
+          dia: (parts[2] || '').toLowerCase(),
+          anciao: parts[3] || '',
+          pregador: parts[4] || '',
+          acomp: (parts[5] || '').toUpperCase(),
+          regente: parts[6] || '',
+          equipe: parts[7] || '',
+          mensagem: parts[8] || '',
+          audiovisual: parts[9] || '',
+          louvoresEs: parts[10] || '',
+          obs: parts[11] || ''
+        };
+      }
+
+      // Formato legado:
+      // Data | Dia | Anciao | Pregador | Sonoplastia | Regente | Equipe | Mensagem | Banda/PB | Obs
+      return {
+        data: parts[1] || '',
+        dia: (parts[2] || '').toLowerCase(),
+        anciao: parts[3] || '',
+        pregador: parts[4] || '',
+        audiovisual: parts[5] || '',
+        regente: parts[6] || '',
+        equipe: parts[7] || '',
+        mensagem: parts[8] || '',
+        acomp: (parts[9] || '').toUpperCase(),
+        louvoresEs: '',
+        obs: parts[10] || ''
+      };
+    });
 }
 
 function toRowFromRascunho(row) {
@@ -108,7 +151,7 @@ function toRowFromRascunho(row) {
     'REGENTE LOUVOR': row.regente,
     'EQUIPE LOUVOR': row.equipe,
     'MENSAGEM MUSICAL': row.mensagem,
-    'LOUVORES ES': '',
+    'LOUVORES ES': row.louvoresEs || '',
     'LOUVORES CULTO': '',
     'TEMA CULTO': '',
     AUDIOVISUAL: row.audiovisual,

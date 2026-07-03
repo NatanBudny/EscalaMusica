@@ -224,5 +224,53 @@
         "JESSICA"
       ]
     }
+  ],
+  "BRUNA": [
+    {
+      "id": "RP017",
+      "tipo": "disponibilidade",
+      "prioridade": "obrigatoria",
+      "descricao": "Afastada por tempo indeterminado do louvor a partir de 02/07/2026",
+      "papeis_afetados": [
+        "REGENTE LOUVOR",
+        "EQUIPE LOUVOR",
+        "MENSAGEM MUSICAL"
+      ],
+      "vigencia": {
+        "inicio": "2026-07-02"
+      }
+    }
+  ],
+  "GABRIEL P.": [
+    {
+      "id": "RP018",
+      "tipo": "disponibilidade",
+      "prioridade": "obrigatoria",
+      "descricao": "Afastado por tempo indeterminado do louvor por baixa frequencia a partir de 02/07/2026",
+      "papeis_afetados": [
+        "REGENTE LOUVOR",
+        "EQUIPE LOUVOR",
+        "MENSAGEM MUSICAL"
+      ],
+      "vigencia": {
+        "inicio": "2026-07-02"
+      }
+    }
+  ],
+  "LUAN": [
+    {
+      "id": "RP019",
+      "tipo": "disponibilidade",
+      "prioridade": "obrigatoria",
+      "descricao": "Afastado por tempo indeterminado do louvor por baixa frequencia a partir de 02/07/2026",
+      "papeis_afetados": [
+        "REGENTE LOUVOR",
+        "EQUIPE LOUVOR",
+        "MENSAGEM MUSICAL"
+      ],
+      "vigencia": {
+        "inicio": "2026-07-02"
+      }
+    }
   ]
 }

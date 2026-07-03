@@ -151,7 +151,7 @@
       "nome": "BRUNA",
       "aliases": [],
       "ativo": false,
-      "notas": "Usuario da escala (referencia administrativa). Nao usar para sugestao automatica.",
+      "notas": "Afastada permanentemente do louvor a partir de 02/07/2026. Nao usar para sugestao automatica.",
       "funcoes": {
         "regente": false,
         "equipe": false,
@@ -161,6 +161,24 @@
           "dom": false
         }
       }
+    },
+    {
+      "nome": "CARLA RIBEIRO",
+      "aliases": [
+        "CARLA"
+      ],
+      "ativo": true,
+      "notas": "Atua somente em mensagem musical. Nao escalar em regencia ou equipe de louvor.",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": true
+        }
+      },
+      "perfil_canto": "base"
     },
     {
       "nome": "CATHERINE",
@@ -346,8 +364,8 @@
     {
       "nome": "GABRIEL P.",
       "aliases": [],
-      "ativo": true,
-      "notas": "",
+      "ativo": false,
+      "notas": "Afastado permanentemente das sugestoes de escala por baixa frequencia.",
       "funcoes": {
         "regente": false,
         "equipe": true,
@@ -604,8 +622,8 @@
     {
       "nome": "LUAN",
       "aliases": [],
-      "ativo": true,
-      "notas": "Habilitado para mensagem musical (ES e Culto) conforme planilha-base de observacoes.",
+      "ativo": false,
+      "notas": "Afastado permanentemente das sugestoes de escala por baixa frequencia.",
       "funcoes": {
         "regente": false,
         "equipe": false,
