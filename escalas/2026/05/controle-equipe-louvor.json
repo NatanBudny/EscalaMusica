@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-07-03T02:20:01.616Z",
+  "gerado_em": "2026-07-04T00:24:02.761Z",
   "periodo": "2026-01 a 2026-04",
   "tipo_controle": "equipe_louvor",
   "legenda": {
@@ -23,11 +23,47 @@
       "campo": "EQUIPE LOUVOR",
       "nome": "FAMILIA JESSE",
       "data": "18/01/2026"
+    },
+    {
+      "campo": "EQUIPE LOUVOR",
+      "nome": "QUARTETO",
+      "data": "04/07/2026"
+    },
+    {
+      "campo": "EQUIPE LOUVOR",
+      "nome": "ADELMO",
+      "data": "05/07/2026"
+    },
+    {
+      "campo": "EQUIPE LOUVOR",
+      "nome": "MELHOR IDADE",
+      "data": "26/07/2026"
     }
   ],
   "ranking_menor_para_maior": [
     {
       "nome": "BERNARDO",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 0,
+      "TOTAL": 0,
+      "por_mes": {
+        "JAN": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "FEV": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "MAR": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "ABR": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "JULIANA ALVES",
       "ativo": true,
       "pode_equipe": true,
       "ESCALAS_EQUIPE": 0,
@@ -69,6 +105,48 @@
       }
     },
     {
+      "nome": "STELLA",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 0,
+      "TOTAL": 0,
+      "por_mes": {
+        "JAN": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "FEV": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "MAR": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "ABR": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "VONI",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 0,
+      "TOTAL": 0,
+      "por_mes": {
+        "JAN": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "FEV": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "MAR": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "ABR": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
       "nome": "YASSER",
       "ativo": true,
       "pode_equipe": true,
@@ -90,7 +168,7 @@
       }
     },
     {
-      "nome": "JULIANA ALVES",
+      "nome": "DANI HERREIRA",
       "ativo": true,
       "pode_equipe": true,
       "ESCALAS_EQUIPE": 1,
@@ -103,10 +181,31 @@
           "ESCALAS_EQUIPE": 0
         },
         "MAR": {
-          "ESCALAS_EQUIPE": 0
+          "ESCALAS_EQUIPE": 1
         },
         "ABR": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "LIDIANE",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 1,
+      "TOTAL": 1,
+      "por_mes": {
+        "JAN": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "FEV": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "MAR": {
           "ESCALAS_EQUIPE": 1
+        },
+        "ABR": {
+          "ESCALAS_EQUIPE": 0
         }
       }
     },
@@ -195,7 +294,28 @@
       }
     },
     {
-      "nome": "RAISSA",
+      "nome": "MIRIAN",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 1,
+      "TOTAL": 1,
+      "por_mes": {
+        "JAN": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "FEV": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "MAR": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "ABR": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "SILVANA",
       "ativo": true,
       "pode_equipe": true,
       "ESCALAS_EQUIPE": 1,
@@ -237,62 +357,20 @@
       }
     },
     {
-      "nome": "VONI",
-      "ativo": true,
-      "pode_equipe": true,
-      "ESCALAS_EQUIPE": 1,
-      "TOTAL": 1,
-      "por_mes": {
-        "JAN": {
-          "ESCALAS_EQUIPE": 0
-        },
-        "FEV": {
-          "ESCALAS_EQUIPE": 0
-        },
-        "MAR": {
-          "ESCALAS_EQUIPE": 0
-        },
-        "ABR": {
-          "ESCALAS_EQUIPE": 1
-        }
-      }
-    },
-    {
-      "nome": "JUNIOR",
+      "nome": "HELOISE",
       "ativo": true,
       "pode_equipe": true,
       "ESCALAS_EQUIPE": 2,
       "TOTAL": 2,
       "por_mes": {
         "JAN": {
-          "ESCALAS_EQUIPE": 2
-        },
-        "FEV": {
-          "ESCALAS_EQUIPE": 0
-        },
-        "MAR": {
-          "ESCALAS_EQUIPE": 0
-        },
-        "ABR": {
-          "ESCALAS_EQUIPE": 0
-        }
-      }
-    },
-    {
-      "nome": "LIDIANE",
-      "ativo": true,
-      "pode_equipe": true,
-      "ESCALAS_EQUIPE": 2,
-      "TOTAL": 2,
-      "por_mes": {
-        "JAN": {
-          "ESCALAS_EQUIPE": 0
-        },
-        "FEV": {
-          "ESCALAS_EQUIPE": 0
-        },
-        "MAR": {
           "ESCALAS_EQUIPE": 1
+        },
+        "FEV": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "MAR": {
+          "ESCALAS_EQUIPE": 0
         },
         "ABR": {
           "ESCALAS_EQUIPE": 1
@@ -321,7 +399,7 @@
       }
     },
     {
-      "nome": "MIRIAN",
+      "nome": "MARIA HELOISA",
       "ativo": true,
       "pode_equipe": true,
       "ESCALAS_EQUIPE": 2,
@@ -334,10 +412,10 @@
           "ESCALAS_EQUIPE": 0
         },
         "MAR": {
-          "ESCALAS_EQUIPE": 1
+          "ESCALAS_EQUIPE": 2
         },
         "ABR": {
-          "ESCALAS_EQUIPE": 1
+          "ESCALAS_EQUIPE": 0
         }
       }
     },
@@ -363,28 +441,7 @@
       }
     },
     {
-      "nome": "SILVANA",
-      "ativo": true,
-      "pode_equipe": true,
-      "ESCALAS_EQUIPE": 2,
-      "TOTAL": 2,
-      "por_mes": {
-        "JAN": {
-          "ESCALAS_EQUIPE": 0
-        },
-        "FEV": {
-          "ESCALAS_EQUIPE": 0
-        },
-        "MAR": {
-          "ESCALAS_EQUIPE": 0
-        },
-        "ABR": {
-          "ESCALAS_EQUIPE": 2
-        }
-      }
-    },
-    {
-      "nome": "STELLA",
+      "nome": "RAISSA",
       "ativo": true,
       "pode_equipe": true,
       "ESCALAS_EQUIPE": 2,
@@ -426,7 +483,28 @@
       }
     },
     {
-      "nome": "DANI HERREIRA",
+      "nome": "JESSIE",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 3,
+      "TOTAL": 3,
+      "por_mes": {
+        "JAN": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "FEV": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "MAR": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "ABR": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "RICARDO HERREIRA",
       "ativo": true,
       "pode_equipe": true,
       "ESCALAS_EQUIPE": 3,
@@ -439,10 +517,10 @@
           "ESCALAS_EQUIPE": 0
         },
         "MAR": {
-          "ESCALAS_EQUIPE": 1
+          "ESCALAS_EQUIPE": 3
         },
         "ABR": {
-          "ESCALAS_EQUIPE": 2
+          "ESCALAS_EQUIPE": 0
         }
       }
     },
@@ -471,8 +549,8 @@
       "nome": "SIRLENE",
       "ativo": true,
       "pode_equipe": true,
-      "ESCALAS_EQUIPE": 3,
-      "TOTAL": 3,
+      "ESCALAS_EQUIPE": 4,
+      "TOTAL": 4,
       "por_mes": {
         "JAN": {
           "ESCALAS_EQUIPE": 2
@@ -482,132 +560,6 @@
         },
         "MAR": {
           "ESCALAS_EQUIPE": 1
-        },
-        "ABR": {
-          "ESCALAS_EQUIPE": 0
-        }
-      }
-    },
-    {
-      "nome": "HELOISE",
-      "ativo": true,
-      "pode_equipe": true,
-      "ESCALAS_EQUIPE": 4,
-      "TOTAL": 4,
-      "por_mes": {
-        "JAN": {
-          "ESCALAS_EQUIPE": 1
-        },
-        "FEV": {
-          "ESCALAS_EQUIPE": 0
-        },
-        "MAR": {
-          "ESCALAS_EQUIPE": 0
-        },
-        "ABR": {
-          "ESCALAS_EQUIPE": 3
-        }
-      }
-    },
-    {
-      "nome": "JESSIE",
-      "ativo": true,
-      "pode_equipe": true,
-      "ESCALAS_EQUIPE": 4,
-      "TOTAL": 4,
-      "por_mes": {
-        "JAN": {
-          "ESCALAS_EQUIPE": 0
-        },
-        "FEV": {
-          "ESCALAS_EQUIPE": 2
-        },
-        "MAR": {
-          "ESCALAS_EQUIPE": 1
-        },
-        "ABR": {
-          "ESCALAS_EQUIPE": 1
-        }
-      }
-    },
-    {
-      "nome": "JOAS",
-      "ativo": true,
-      "pode_equipe": true,
-      "ESCALAS_EQUIPE": 4,
-      "TOTAL": 4,
-      "por_mes": {
-        "JAN": {
-          "ESCALAS_EQUIPE": 0
-        },
-        "FEV": {
-          "ESCALAS_EQUIPE": 3
-        },
-        "MAR": {
-          "ESCALAS_EQUIPE": 1
-        },
-        "ABR": {
-          "ESCALAS_EQUIPE": 0
-        }
-      }
-    },
-    {
-      "nome": "MARAIR",
-      "ativo": true,
-      "pode_equipe": true,
-      "ESCALAS_EQUIPE": 4,
-      "TOTAL": 4,
-      "por_mes": {
-        "JAN": {
-          "ESCALAS_EQUIPE": 0
-        },
-        "FEV": {
-          "ESCALAS_EQUIPE": 3
-        },
-        "MAR": {
-          "ESCALAS_EQUIPE": 0
-        },
-        "ABR": {
-          "ESCALAS_EQUIPE": 1
-        }
-      }
-    },
-    {
-      "nome": "MARIA HELOISA",
-      "ativo": true,
-      "pode_equipe": true,
-      "ESCALAS_EQUIPE": 4,
-      "TOTAL": 4,
-      "por_mes": {
-        "JAN": {
-          "ESCALAS_EQUIPE": 0
-        },
-        "FEV": {
-          "ESCALAS_EQUIPE": 0
-        },
-        "MAR": {
-          "ESCALAS_EQUIPE": 2
-        },
-        "ABR": {
-          "ESCALAS_EQUIPE": 2
-        }
-      }
-    },
-    {
-      "nome": "RICARDO HERREIRA",
-      "ativo": true,
-      "pode_equipe": true,
-      "ESCALAS_EQUIPE": 4,
-      "TOTAL": 4,
-      "por_mes": {
-        "JAN": {
-          "ESCALAS_EQUIPE": 0
-        },
-        "FEV": {
-          "ESCALAS_EQUIPE": 0
-        },
-        "MAR": {
-          "ESCALAS_EQUIPE": 3
         },
         "ABR": {
           "ESCALAS_EQUIPE": 1
@@ -632,6 +584,27 @@
         },
         "ABR": {
           "ESCALAS_EQUIPE": 1
+        }
+      }
+    },
+    {
+      "nome": "JEMELLI",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 5,
+      "TOTAL": 5,
+      "por_mes": {
+        "JAN": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "FEV": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "MAR": {
+          "ESCALAS_EQUIPE": 3
+        },
+        "ABR": {
+          "ESCALAS_EQUIPE": 0
         }
       }
     },
@@ -678,6 +651,48 @@
       }
     },
     {
+      "nome": "KHEYCIANE",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 5,
+      "TOTAL": 5,
+      "por_mes": {
+        "JAN": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "FEV": {
+          "ESCALAS_EQUIPE": 5
+        },
+        "MAR": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "ABR": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "MARAIR",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 5,
+      "TOTAL": 5,
+      "por_mes": {
+        "JAN": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "FEV": {
+          "ESCALAS_EQUIPE": 3
+        },
+        "MAR": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "ABR": {
+          "ESCALAS_EQUIPE": 2
+        }
+      }
+    },
+    {
       "nome": "GIOVANA",
       "ativo": true,
       "pode_equipe": true,
@@ -699,70 +714,28 @@
       }
     },
     {
-      "nome": "JEMELLI",
+      "nome": "JOAS",
       "ativo": true,
       "pode_equipe": true,
       "ESCALAS_EQUIPE": 6,
       "TOTAL": 6,
       "por_mes": {
         "JAN": {
-          "ESCALAS_EQUIPE": 1
+          "ESCALAS_EQUIPE": 0
         },
         "FEV": {
-          "ESCALAS_EQUIPE": 1
-        },
-        "MAR": {
           "ESCALAS_EQUIPE": 3
         },
-        "ABR": {
-          "ESCALAS_EQUIPE": 1
-        }
-      }
-    },
-    {
-      "nome": "KHEYCIANE",
-      "ativo": true,
-      "pode_equipe": true,
-      "ESCALAS_EQUIPE": 6,
-      "TOTAL": 6,
-      "por_mes": {
-        "JAN": {
-          "ESCALAS_EQUIPE": 0
-        },
-        "FEV": {
-          "ESCALAS_EQUIPE": 5
-        },
-        "MAR": {
-          "ESCALAS_EQUIPE": 0
-        },
-        "ABR": {
-          "ESCALAS_EQUIPE": 1
-        }
-      }
-    },
-    {
-      "nome": "SUELLEN",
-      "ativo": true,
-      "pode_equipe": true,
-      "ESCALAS_EQUIPE": 6,
-      "TOTAL": 6,
-      "por_mes": {
-        "JAN": {
-          "ESCALAS_EQUIPE": 1
-        },
-        "FEV": {
-          "ESCALAS_EQUIPE": 4
-        },
         "MAR": {
           "ESCALAS_EQUIPE": 1
         },
         "ABR": {
-          "ESCALAS_EQUIPE": 0
+          "ESCALAS_EQUIPE": 2
         }
       }
     },
     {
-      "nome": "EMILY",
+      "nome": "CATHERINE",
       "ativo": true,
       "pode_equipe": true,
       "ESCALAS_EQUIPE": 7,
@@ -772,10 +745,10 @@
           "ESCALAS_EQUIPE": 3
         },
         "FEV": {
-          "ESCALAS_EQUIPE": 3
+          "ESCALAS_EQUIPE": 2
         },
         "MAR": {
-          "ESCALAS_EQUIPE": 1
+          "ESCALAS_EQUIPE": 2
         },
         "ABR": {
           "ESCALAS_EQUIPE": 0
@@ -783,20 +756,20 @@
       }
     },
     {
-      "nome": "CATHERINE",
+      "nome": "SUELLEN",
       "ativo": true,
       "pode_equipe": true,
-      "ESCALAS_EQUIPE": 8,
-      "TOTAL": 8,
+      "ESCALAS_EQUIPE": 7,
+      "TOTAL": 7,
       "por_mes": {
         "JAN": {
-          "ESCALAS_EQUIPE": 3
+          "ESCALAS_EQUIPE": 1
         },
         "FEV": {
-          "ESCALAS_EQUIPE": 2
+          "ESCALAS_EQUIPE": 4
         },
         "MAR": {
-          "ESCALAS_EQUIPE": 2
+          "ESCALAS_EQUIPE": 1
         },
         "ABR": {
           "ESCALAS_EQUIPE": 1
@@ -825,14 +798,14 @@
       }
     },
     {
-      "nome": "FABRICIO",
+      "nome": "DANY KALLAS",
       "ativo": true,
       "pode_equipe": true,
       "ESCALAS_EQUIPE": 9,
       "TOTAL": 9,
       "por_mes": {
         "JAN": {
-          "ESCALAS_EQUIPE": 2
+          "ESCALAS_EQUIPE": 3
         },
         "FEV": {
           "ESCALAS_EQUIPE": 4
@@ -841,19 +814,19 @@
           "ESCALAS_EQUIPE": 1
         },
         "ABR": {
-          "ESCALAS_EQUIPE": 2
+          "ESCALAS_EQUIPE": 1
         }
       }
     },
     {
-      "nome": "DANY KALLAS",
+      "nome": "FABRICIO",
       "ativo": true,
       "pode_equipe": true,
-      "ESCALAS_EQUIPE": 10,
-      "TOTAL": 10,
+      "ESCALAS_EQUIPE": 9,
+      "TOTAL": 9,
       "por_mes": {
         "JAN": {
-          "ESCALAS_EQUIPE": 3
+          "ESCALAS_EQUIPE": 2
         },
         "FEV": {
           "ESCALAS_EQUIPE": 4
@@ -912,8 +885,8 @@
       "nome": "LUIZ ANTONIO",
       "ativo": true,
       "pode_equipe": true,
-      "ESCALAS_EQUIPE": 17,
-      "TOTAL": 17,
+      "ESCALAS_EQUIPE": 16,
+      "TOTAL": 16,
       "por_mes": {
         "JAN": {
           "ESCALAS_EQUIPE": 7
@@ -925,7 +898,7 @@
           "ESCALAS_EQUIPE": 6
         },
         "ABR": {
-          "ESCALAS_EQUIPE": 3
+          "ESCALAS_EQUIPE": 2
         }
       }
     }

@@ -1,6 +1,6 @@
 {
   "versao": "1.0.0",
-  "ultima_atualizacao": "2026-06-04",
+  "ultima_atualizacao": "2026-07-03",
   "descricao": "Cadastro de pessoas e funcoes permitidas no louvor. Estrutura simples e editavel para manutencao manual.",
   "pessoas": [
     {
@@ -296,15 +296,15 @@
     {
       "nome": "EMILY",
       "aliases": [],
-      "ativo": true,
-      "notas": "",
+      "ativo": false,
+      "notas": "Afastada por tempo indeterminado (intercambio em outro pais). Nao usar para sugestao automatica.",
       "funcoes": {
         "regente": false,
-        "equipe": true,
+        "equipe": false,
         "mm": {
-          "es": true,
-          "culto": true,
-          "dom": true
+          "es": false,
+          "culto": false,
+          "dom": false
         }
       },
       "perfil_canto": "base"
@@ -329,15 +329,15 @@
       "aliases": [
         "FABÍOLA"
       ],
-      "ativo": true,
-      "notas": "Habilitada para mensagem musical conforme planilha-base de observacoes.",
+      "ativo": false,
+      "notas": "Afastada por tempo indeterminado por bebe recem-nascido. Nao usar para sugestao automatica.",
       "funcoes": {
         "regente": false,
         "equipe": false,
         "mm": {
-          "es": true,
-          "culto": true,
-          "dom": true
+          "es": false,
+          "culto": false,
+          "dom": false
         }
       },
       "perfil_canto": "base"
@@ -413,14 +413,14 @@
       "nome": "HENRIQUE",
       "aliases": [],
       "ativo": true,
-      "notas": "",
+      "notas": "Sem propriedade para cantar/regencia/mensagem musical por orientacao do diretor.",
       "funcoes": {
         "regente": false,
         "equipe": false,
         "mm": {
-          "es": true,
-          "culto": true,
-          "dom": true
+          "es": false,
+          "culto": false,
+          "dom": false
         }
       },
       "perfil_canto": "participacao"
@@ -428,15 +428,15 @@
     {
       "nome": "IGOR DUARTE",
       "aliases": [],
-      "ativo": true,
-      "notas": "",
+      "ativo": false,
+      "notas": "Afastado por tempo indeterminado por bebe recem-nascido. Nao usar para sugestao automatica.",
       "funcoes": {
         "regente": false,
         "equipe": false,
         "mm": {
-          "es": true,
-          "culto": true,
-          "dom": true
+          "es": false,
+          "culto": false,
+          "dom": false
         }
       },
       "perfil_canto": "base"
@@ -541,15 +541,15 @@
     {
       "nome": "JUNIOR",
       "aliases": [],
-      "ativo": true,
-      "notas": "",
+      "ativo": false,
+      "notas": "Afastado por tempo indeterminado por solicitacao pessoal. Nao usar para sugestao automatica.",
       "funcoes": {
-        "regente": true,
-        "equipe": true,
+        "regente": false,
+        "equipe": false,
         "mm": {
-          "es": true,
-          "culto": true,
-          "dom": true
+          "es": false,
+          "culto": false,
+          "dom": false
         }
       },
       "perfil_canto": "base"
@@ -590,15 +590,15 @@
       "aliases": [
         "LAURA"
       ],
-      "ativo": true,
-      "notas": "Atualizado conforme orientacao do diretor.",
+      "ativo": false,
+      "notas": "Afastada por tempo indeterminado por demandas de trabalho. Nao usar para sugestao automatica.",
       "funcoes": {
         "regente": false,
         "equipe": false,
         "mm": {
-          "es": true,
-          "culto": true,
-          "dom": true
+          "es": false,
+          "culto": false,
+          "dom": false
         }
       },
       "perfil_canto": "base"

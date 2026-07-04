@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-07-03T02:20:00.816Z",
+  "gerado_em": "2026-07-04T00:24:01.941Z",
   "periodo": "2026-01 a 2026-04",
   "tipo_controle": "mensagem_musical",
   "legenda": {
@@ -15,109 +15,26 @@
     "old/2026/032026.json",
     "atual.json"
   ],
-  "nomes_nao_mapeados": [],
+  "nomes_nao_mapeados": [
+    {
+      "campo": "MENSAGEM MUSICAL",
+      "nome": "QUARTETO",
+      "data": "04/07/2026"
+    },
+    {
+      "campo": "MENSAGEM MUSICAL",
+      "nome": "FAMILIA NILSINHO",
+      "data": "11/07/2026"
+    },
+    {
+      "campo": "MENSAGEM MUSICAL",
+      "nome": "MELHOR IDADE",
+      "data": "26/07/2026"
+    }
+  ],
   "ranking_menor_para_maior": [
     {
-      "nome": "EMILY",
-      "ativo": true,
-      "pode_mm_es": true,
-      "pode_mm_culto": true,
-      "pode_mm_dom": true,
-      "ES": 0,
-      "CULTO": 0,
-      "DOMINGO": 0,
-      "TOTAL": 0,
-      "por_mes": {
-        "JAN": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "FEV": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "MAR": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "ABR": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        }
-      }
-    },
-    {
-      "nome": "FABIOLA",
-      "ativo": true,
-      "pode_mm_es": true,
-      "pode_mm_culto": true,
-      "pode_mm_dom": true,
-      "ES": 0,
-      "CULTO": 0,
-      "DOMINGO": 0,
-      "TOTAL": 0,
-      "por_mes": {
-        "JAN": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "FEV": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "MAR": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "ABR": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        }
-      }
-    },
-    {
-      "nome": "HENRIQUE",
-      "ativo": true,
-      "pode_mm_es": true,
-      "pode_mm_culto": true,
-      "pode_mm_dom": true,
-      "ES": 0,
-      "CULTO": 0,
-      "DOMINGO": 0,
-      "TOTAL": 0,
-      "por_mes": {
-        "JAN": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "FEV": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "MAR": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "ABR": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        }
-      }
-    },
-    {
-      "nome": "LAURA GESSNER",
+      "nome": "ALESSANDRA DONADON",
       "ativo": true,
       "pode_mm_es": true,
       "pode_mm_culto": true,
@@ -216,6 +133,39 @@
       }
     },
     {
+      "nome": "NILSINHO",
+      "ativo": true,
+      "pode_mm_es": true,
+      "pode_mm_culto": true,
+      "pode_mm_dom": true,
+      "ES": 0,
+      "CULTO": 0,
+      "DOMINGO": 0,
+      "TOTAL": 0,
+      "por_mes": {
+        "JAN": {
+          "ES": 0,
+          "CULTO": 0,
+          "DOMINGO": 0
+        },
+        "FEV": {
+          "ES": 0,
+          "CULTO": 0,
+          "DOMINGO": 0
+        },
+        "MAR": {
+          "ES": 0,
+          "CULTO": 0,
+          "DOMINGO": 0
+        },
+        "ABR": {
+          "ES": 0,
+          "CULTO": 0,
+          "DOMINGO": 0
+        }
+      }
+    },
+    {
       "nome": "RAISSA",
       "ativo": true,
       "pode_mm_es": true,
@@ -282,15 +232,15 @@
       }
     },
     {
-      "nome": "ALESSANDRA DONADON",
+      "nome": "VANDERLEY",
       "ativo": true,
       "pode_mm_es": true,
       "pode_mm_culto": true,
       "pode_mm_dom": true,
       "ES": 0,
       "CULTO": 0,
-      "DOMINGO": 1,
-      "TOTAL": 1,
+      "DOMINGO": 0,
+      "TOTAL": 0,
       "por_mes": {
         "JAN": {
           "ES": 0,
@@ -310,25 +260,25 @@
         "ABR": {
           "ES": 0,
           "CULTO": 0,
-          "DOMINGO": 1
+          "DOMINGO": 0
         }
       }
     },
     {
-      "nome": "IGOR DUARTE",
+      "nome": "VONI",
       "ativo": true,
       "pode_mm_es": true,
-      "pode_mm_culto": true,
+      "pode_mm_culto": false,
       "pode_mm_dom": true,
       "ES": 0,
       "CULTO": 0,
-      "DOMINGO": 1,
-      "TOTAL": 1,
+      "DOMINGO": 0,
+      "TOTAL": 0,
       "por_mes": {
         "JAN": {
           "ES": 0,
           "CULTO": 0,
-          "DOMINGO": 1
+          "DOMINGO": 0
         },
         "FEV": {
           "ES": 0,
@@ -381,72 +331,6 @@
       }
     },
     {
-      "nome": "VANDERLEY",
-      "ativo": true,
-      "pode_mm_es": true,
-      "pode_mm_culto": true,
-      "pode_mm_dom": true,
-      "ES": 1,
-      "CULTO": 0,
-      "DOMINGO": 0,
-      "TOTAL": 1,
-      "por_mes": {
-        "JAN": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "FEV": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "MAR": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "ABR": {
-          "ES": 1,
-          "CULTO": 0,
-          "DOMINGO": 0
-        }
-      }
-    },
-    {
-      "nome": "VONI",
-      "ativo": true,
-      "pode_mm_es": true,
-      "pode_mm_culto": false,
-      "pode_mm_dom": true,
-      "ES": 0,
-      "CULTO": 0,
-      "DOMINGO": 1,
-      "TOTAL": 1,
-      "por_mes": {
-        "JAN": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "FEV": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "MAR": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "ABR": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 1
-        }
-      }
-    },
-    {
       "nome": "CARLA RIBEIRO",
       "ativo": true,
       "pode_mm_es": true,
@@ -480,7 +364,40 @@
       }
     },
     {
-      "nome": "JUNIOR",
+      "nome": "JEMELLI",
+      "ativo": true,
+      "pode_mm_es": true,
+      "pode_mm_culto": true,
+      "pode_mm_dom": true,
+      "ES": 0,
+      "CULTO": 1,
+      "DOMINGO": 0,
+      "TOTAL": 1,
+      "por_mes": {
+        "JAN": {
+          "ES": 0,
+          "CULTO": 0,
+          "DOMINGO": 0
+        },
+        "FEV": {
+          "ES": 0,
+          "CULTO": 1,
+          "DOMINGO": 0
+        },
+        "MAR": {
+          "ES": 0,
+          "CULTO": 0,
+          "DOMINGO": 0
+        },
+        "ABR": {
+          "ES": 0,
+          "CULTO": 0,
+          "DOMINGO": 0
+        }
+      }
+    },
+    {
+      "nome": "SILVANA",
       "ativo": true,
       "pode_mm_es": true,
       "pode_mm_culto": true,
@@ -546,39 +463,6 @@
       }
     },
     {
-      "nome": "JEMELLI",
-      "ativo": true,
-      "pode_mm_es": true,
-      "pode_mm_culto": true,
-      "pode_mm_dom": true,
-      "ES": 0,
-      "CULTO": 1,
-      "DOMINGO": 1,
-      "TOTAL": 2,
-      "por_mes": {
-        "JAN": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "FEV": {
-          "ES": 0,
-          "CULTO": 1,
-          "DOMINGO": 0
-        },
-        "MAR": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "ABR": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 1
-        }
-      }
-    },
-    {
       "nome": "KHEYCIANE",
       "ativo": true,
       "pode_mm_es": true,
@@ -606,72 +490,6 @@
         },
         "ABR": {
           "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        }
-      }
-    },
-    {
-      "nome": "NILSINHO",
-      "ativo": true,
-      "pode_mm_es": true,
-      "pode_mm_culto": true,
-      "pode_mm_dom": true,
-      "ES": 1,
-      "CULTO": 1,
-      "DOMINGO": 0,
-      "TOTAL": 2,
-      "por_mes": {
-        "JAN": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "FEV": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "MAR": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "ABR": {
-          "ES": 1,
-          "CULTO": 1,
-          "DOMINGO": 0
-        }
-      }
-    },
-    {
-      "nome": "SILVANA",
-      "ativo": true,
-      "pode_mm_es": true,
-      "pode_mm_culto": true,
-      "pode_mm_dom": true,
-      "ES": 1,
-      "CULTO": 1,
-      "DOMINGO": 0,
-      "TOTAL": 2,
-      "por_mes": {
-        "JAN": {
-          "ES": 0,
-          "CULTO": 1,
-          "DOMINGO": 0
-        },
-        "FEV": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "MAR": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        },
-        "ABR": {
-          "ES": 1,
           "CULTO": 0,
           "DOMINGO": 0
         }
@@ -711,39 +529,6 @@
       }
     },
     {
-      "nome": "DANI HERREIRA",
-      "ativo": true,
-      "pode_mm_es": true,
-      "pode_mm_culto": true,
-      "pode_mm_dom": true,
-      "ES": 0,
-      "CULTO": 3,
-      "DOMINGO": 1,
-      "TOTAL": 4,
-      "por_mes": {
-        "JAN": {
-          "ES": 0,
-          "CULTO": 1,
-          "DOMINGO": 0
-        },
-        "FEV": {
-          "ES": 0,
-          "CULTO": 1,
-          "DOMINGO": 1
-        },
-        "MAR": {
-          "ES": 0,
-          "CULTO": 1,
-          "DOMINGO": 0
-        },
-        "ABR": {
-          "ES": 0,
-          "CULTO": 0,
-          "DOMINGO": 0
-        }
-      }
-    },
-    {
       "nome": "FABRICIO",
       "ativo": true,
       "pode_mm_es": true,
@@ -773,6 +558,39 @@
           "ES": 0,
           "CULTO": 0,
           "DOMINGO": 0
+        }
+      }
+    },
+    {
+      "nome": "DANI HERREIRA",
+      "ativo": true,
+      "pode_mm_es": true,
+      "pode_mm_culto": true,
+      "pode_mm_dom": true,
+      "ES": 0,
+      "CULTO": 3,
+      "DOMINGO": 2,
+      "TOTAL": 5,
+      "por_mes": {
+        "JAN": {
+          "ES": 0,
+          "CULTO": 1,
+          "DOMINGO": 0
+        },
+        "FEV": {
+          "ES": 0,
+          "CULTO": 1,
+          "DOMINGO": 1
+        },
+        "MAR": {
+          "ES": 0,
+          "CULTO": 1,
+          "DOMINGO": 0
+        },
+        "ABR": {
+          "ES": 0,
+          "CULTO": 0,
+          "DOMINGO": 1
         }
       }
     },

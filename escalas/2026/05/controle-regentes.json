@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-07-03T02:20:01.214Z",
+  "gerado_em": "2026-07-04T00:24:02.341Z",
   "periodo": "2026-01 a 2026-04",
   "tipo_controle": "regentes",
   "legenda": {
@@ -13,10 +13,21 @@
     "old/2026/032026.json",
     "atual.json"
   ],
-  "nomes_nao_mapeados": [],
+  "nomes_nao_mapeados": [
+    {
+      "campo": "REGENTE LOUVOR",
+      "nome": "QUARTETO",
+      "data": "04/07/2026"
+    },
+    {
+      "campo": "REGENTE LOUVOR",
+      "nome": "MELHOR IDADE",
+      "data": "26/07/2026"
+    }
+  ],
   "ranking_menor_para_maior": [
     {
-      "nome": "JUNIOR",
+      "nome": "ARIADNY",
       "ativo": true,
       "pode_regencia": true,
       "REGENCIAS": 0,
@@ -142,27 +153,6 @@
       }
     },
     {
-      "nome": "ARIADNY",
-      "ativo": true,
-      "pode_regencia": true,
-      "REGENCIAS": 1,
-      "TOTAL": 1,
-      "por_mes": {
-        "JAN": {
-          "REGENCIAS": 0
-        },
-        "FEV": {
-          "REGENCIAS": 0
-        },
-        "MAR": {
-          "REGENCIAS": 0
-        },
-        "ABR": {
-          "REGENCIAS": 1
-        }
-      }
-    },
-    {
       "nome": "KHEYCIANE",
       "ativo": true,
       "pode_regencia": true,
@@ -177,6 +167,27 @@
         },
         "MAR": {
           "REGENCIAS": 0
+        },
+        "ABR": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "RICARDO HERREIRA",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 1,
+      "TOTAL": 1,
+      "por_mes": {
+        "JAN": {
+          "REGENCIAS": 0
+        },
+        "FEV": {
+          "REGENCIAS": 0
+        },
+        "MAR": {
+          "REGENCIAS": 1
         },
         "ABR": {
           "REGENCIAS": 0
@@ -226,53 +237,11 @@
       }
     },
     {
-      "nome": "JESSIE",
-      "ativo": true,
-      "pode_regencia": true,
-      "REGENCIAS": 2,
-      "TOTAL": 2,
-      "por_mes": {
-        "JAN": {
-          "REGENCIAS": 0
-        },
-        "FEV": {
-          "REGENCIAS": 1
-        },
-        "MAR": {
-          "REGENCIAS": 1
-        },
-        "ABR": {
-          "REGENCIAS": 0
-        }
-      }
-    },
-    {
-      "nome": "RICARDO HERREIRA",
-      "ativo": true,
-      "pode_regencia": true,
-      "REGENCIAS": 2,
-      "TOTAL": 2,
-      "por_mes": {
-        "JAN": {
-          "REGENCIAS": 0
-        },
-        "FEV": {
-          "REGENCIAS": 0
-        },
-        "MAR": {
-          "REGENCIAS": 1
-        },
-        "ABR": {
-          "REGENCIAS": 1
-        }
-      }
-    },
-    {
       "nome": "DANY KALLAS",
       "ativo": true,
       "pode_regencia": true,
-      "REGENCIAS": 3,
-      "TOTAL": 3,
+      "REGENCIAS": 2,
+      "TOTAL": 2,
       "por_mes": {
         "JAN": {
           "REGENCIAS": 0
@@ -284,7 +253,7 @@
           "REGENCIAS": 0
         },
         "ABR": {
-          "REGENCIAS": 1
+          "REGENCIAS": 0
         }
       }
     },
@@ -292,8 +261,8 @@
       "nome": "JOAS",
       "ativo": true,
       "pode_regencia": true,
-      "REGENCIAS": 3,
-      "TOTAL": 3,
+      "REGENCIAS": 2,
+      "TOTAL": 2,
       "por_mes": {
         "JAN": {
           "REGENCIAS": 1
@@ -305,7 +274,49 @@
           "REGENCIAS": 0
         },
         "ABR": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "JESSIE",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 3,
+      "TOTAL": 3,
+      "por_mes": {
+        "JAN": {
+          "REGENCIAS": 0
+        },
+        "FEV": {
           "REGENCIAS": 1
+        },
+        "MAR": {
+          "REGENCIAS": 1
+        },
+        "ABR": {
+          "REGENCIAS": 1
+        }
+      }
+    },
+    {
+      "nome": "SUELLEN",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 3,
+      "TOTAL": 3,
+      "por_mes": {
+        "JAN": {
+          "REGENCIAS": 2
+        },
+        "FEV": {
+          "REGENCIAS": 1
+        },
+        "MAR": {
+          "REGENCIAS": 0
+        },
+        "ABR": {
+          "REGENCIAS": 0
         }
       }
     },
@@ -348,27 +359,6 @@
         },
         "ABR": {
           "REGENCIAS": 0
-        }
-      }
-    },
-    {
-      "nome": "SUELLEN",
-      "ativo": true,
-      "pode_regencia": true,
-      "REGENCIAS": 5,
-      "TOTAL": 5,
-      "por_mes": {
-        "JAN": {
-          "REGENCIAS": 2
-        },
-        "FEV": {
-          "REGENCIAS": 1
-        },
-        "MAR": {
-          "REGENCIAS": 0
-        },
-        "ABR": {
-          "REGENCIAS": 2
         }
       }
     },
