@@ -16,6 +16,7 @@ https://natanbudny.github.io/EscalaMusica/
 | Nome | Funcoes | Link |
 |---|---|---|
 | ADELMO | EQUIPE LOUVOR | [Abrir](https://wa.me/554399512450?text=Ol%C3%A1%2C%20ADELMO.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2007%2F2026%2C%20como%20EQUIPE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| ALESSANDRA DONADON | EQUIPE LOUVOR | [Abrir](https://wa.me/554396195901?text=Ol%C3%A1%2C%20ALESSANDRA%20DONADON.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2007%2F2026%2C%20como%20EQUIPE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
 | ALEX | EQUIPE LOUVOR, MENSAGEM MUSICAL | [Abrir](https://wa.me/554396849723?text=Ol%C3%A1%2C%20ALEX.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2007%2F2026%2C%20como%20EQUIPE%20LOUVOR%2C%20MENSAGEM%20MUSICAL.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
 | ANDRE | REGENTE LOUVOR | [Abrir](https://wa.me/5543920008370?text=Ol%C3%A1%2C%20ANDRE.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2007%2F2026%2C%20como%20REGENTE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
 | BERNARDO | MENSAGEM MUSICAL | [Abrir](https://wa.me/5543996579868?text=Ol%C3%A1%2C%20BERNARDO.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2007%2F2026%2C%20como%20MENSAGEM%20MUSICAL.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
@@ -59,7 +60,6 @@ Observacao: o link de convite do grupo nao preenche mensagem automaticamente com
 
 | Nome | Funcoes |
 |---|---|
-| ALESSANDRA | EQUIPE LOUVOR |
 | FAMILIA NILSINHO | MENSAGEM MUSICAL |
 | LAURA | MENSAGEM MUSICAL |
 | MARIA F. | MENSAGEM MUSICAL |
