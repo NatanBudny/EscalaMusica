@@ -14,10 +14,16 @@
     "controle:equipe": "node scripts/controle-equipe-louvor.js",
     "publicar:mensal": "node scripts/publicar-escala-mensal.js",
     "publicar:fechamento": "node scripts/publicar-fechamento.js",
+    "gerar:contatos": "node scripts/gerar-contatos.js",
     "gerar:links-publicacao": "node scripts/gerar-links-publicacao.js",
-    "limpar:pos-publicacao": "node scripts/coletor-lixo-pos-publicacao.js"
+    "limpar:pos-publicacao": "node scripts/coletor-lixo-pos-publicacao.js",
+    "limpar:regras": "node scripts/limpar-regras.js",
+    "migrar:cadastro": "node scripts/migrar-cadastro.js",
+    "vincular:indisponibilidade": "node scripts/vincular-indisponibilidade.js",
+    "sugerir:rascunho": "node scripts/sugerir-rascunho.js"
   },
   "devDependencies": {
+    "fast-check": "4.9.0",
     "jest": "^29.7.0"
   }
 }

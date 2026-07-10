@@ -1,0 +1,111 @@
+{
+  "versao": "1.0.0",
+  "proximo_id": 6,
+  "ultima_atualizacao": "2026-07-10",
+  "grupos": {
+    "familia_silva": { "membros_ids": [3, 4] }
+  },
+  "departamentos_contato": {},
+  "pessoas": [
+    {
+      "id": 1,
+      "nome": "ALICE",
+      "aliases": ["ALI"],
+      "telefone": "5511999990001",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "",
+      "habilitacoes": {
+        "regente": true,
+        "equipe": true,
+        "mensagem_musical": { "es": true, "culto": false, "domingo": true }
+      },
+      "afastado": null,
+      "vinculos": [
+        { "tipo": "sempre_junto", "com_id": 2 }
+      ],
+      "dias_permitidos": null
+    },
+    {
+      "id": 2,
+      "nome": "BOB",
+      "aliases": ["ROBERTO"],
+      "telefone": "5511999990002",
+      "genero": "M",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": { "es": false, "culto": true, "domingo": false }
+      },
+      "afastado": null,
+      "vinculos": [
+        { "tipo": "sempre_junto", "com_id": 1 }
+      ],
+      "dias_permitidos": null
+    },
+    {
+      "id": 3,
+      "nome": "CARLOS",
+      "aliases": ["CARLAO"],
+      "telefone": "5511999990003",
+      "genero": "M",
+      "ativo": true,
+      "perfil_canto": "participacao",
+      "notas": "",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": { "es": false, "culto": false, "domingo": false }
+      },
+      "afastado": null,
+      "vinculos": [
+        { "tipo": "familia_requerida", "grupo": "familia_silva" }
+      ],
+      "dias_permitidos": ["sabado"]
+    },
+    {
+      "id": 4,
+      "nome": "DIANA",
+      "aliases": [],
+      "telefone": "5511999990004",
+      "genero": "F",
+      "ativo": false,
+      "perfil_canto": null,
+      "notas": "Afastada",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": { "es": false, "culto": false, "domingo": false }
+      },
+      "afastado": {
+        "ativo": true,
+        "ate": null,
+        "motivo": "mudanca de cidade"
+      },
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 5,
+      "nome": "EDUARDO",
+      "aliases": ["EDU", "DUDU"],
+      "telefone": "5511999990005",
+      "genero": "M",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "",
+      "habilitacoes": {
+        "regente": true,
+        "equipe": true,
+        "mensagem_musical": { "es": true, "culto": true, "domingo": true }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    }
+  ]
+}

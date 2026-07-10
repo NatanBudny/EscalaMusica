@@ -1,0 +1,1617 @@
+{
+  "versao": "1.0.0",
+  "proximo_id": 69,
+  "ultima_atualizacao": "2026-07-10",
+  "grupos": {
+    "familia_silva": {
+      "membros_ids": [
+        30,
+        28,
+        31,
+        29
+      ]
+    }
+  },
+  "departamentos_contato": {
+    "AVENTUREIROS": {
+      "representante_id": 30,
+      "nota": "JESSIE é contato do departamento"
+    },
+    "JOVENS": {
+      "representante_id": 21,
+      "nota": "FABRICIO é contato do departamento (via alias JOVENS em contatos.json)"
+    }
+  },
+  "pessoas": [
+    {
+      "id": 1,
+      "nome": "ADELAIDE",
+      "aliases": [],
+      "telefone": "554399261005",
+      "genero": "F",
+      "ativo": false,
+      "perfil_canto": null,
+      "notas": "Lider de banda. Contato fixo; nao entra na sugestao automatica de escala de louvor.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 2,
+      "nome": "ALESSANDRA DONADON",
+      "aliases": [
+        "ALESSANDRA"
+      ],
+      "telefone": "554396195901",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "ALESSANDRA e ALESSANDRA DONADON sao a mesma pessoa.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": true,
+          "culto": true,
+          "domingo": true
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 3,
+      "nome": "ALEX",
+      "aliases": [],
+      "telefone": "554396849723",
+      "genero": "M",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": true,
+          "culto": true,
+          "domingo": true
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 4,
+      "nome": "ANDRE",
+      "aliases": [],
+      "telefone": "5543920008370",
+      "genero": "M",
+      "ativo": false,
+      "perfil_canto": null,
+      "notas": "Em viagem, tempo indeterminado.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 5,
+      "nome": "ANISSA",
+      "aliases": [],
+      "telefone": "554399706425",
+      "genero": "F",
+      "ativo": false,
+      "perfil_canto": null,
+      "notas": "Usuario da escala (referencia administrativa). Nao usar para sugestao automatica.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 6,
+      "nome": "ARIADNY",
+      "aliases": [],
+      "telefone": "554396158329",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "participacao",
+      "notas": "Nao faz mensagem musical (somente regencia/equipe).",
+      "habilitacoes": {
+        "regente": true,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 7,
+      "nome": "BANDA",
+      "aliases": [],
+      "telefone": "554399261005",
+      "genero": "F",
+      "ativo": false,
+      "perfil_canto": null,
+      "notas": "Nao e uma pessoa; contato de grupo/departamento. Nao usar em sugestao automatica.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 8,
+      "nome": "BERNARDO",
+      "aliases": [],
+      "telefone": "5543996579868",
+      "genero": "M",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": true,
+          "culto": true,
+          "domingo": true
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 9,
+      "nome": "BETE",
+      "aliases": [],
+      "telefone": "554399722921",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "participacao",
+      "notas": "",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [
+        {
+          "tipo": "familia_requerida",
+          "grupo": "familia_silva"
+        }
+      ],
+      "dias_permitidos": null
+    },
+    {
+      "id": 10,
+      "nome": "BRUNA",
+      "aliases": [],
+      "telefone": "5543986868206",
+      "genero": "F",
+      "ativo": false,
+      "perfil_canto": null,
+      "notas": "Afastada permanentemente do louvor a partir de 02/07/2026. Nao usar para sugestao automatica.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": {
+        "ativo": true,
+        "ate": null,
+        "motivo": "solicitacao pessoal"
+      },
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 11,
+      "nome": "CARLA RIBEIRO",
+      "aliases": [
+        "CARLA"
+      ],
+      "telefone": "554399890085",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "Atua somente em mensagem musical. Nao escalar em regencia ou equipe de louvor.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": true,
+          "culto": true,
+          "domingo": true
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 12,
+      "nome": "CATHERINE",
+      "aliases": [],
+      "telefone": "554391360091",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "",
+      "habilitacoes": {
+        "regente": true,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": true,
+          "culto": true,
+          "domingo": true
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": [
+        "sabado"
+      ]
+    },
+    {
+      "id": 13,
+      "nome": "CLEVERSON",
+      "aliases": [],
+      "telefone": "554396703272",
+      "genero": "M",
+      "ativo": false,
+      "perfil_canto": null,
+      "notas": "Usuario da escala externa (ancianato/pregacao). Nao usar para sugestao automatica de louvor.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 14,
+      "nome": "DANI HERREIRA",
+      "aliases": [],
+      "telefone": "5543999189819",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": true,
+          "culto": true,
+          "domingo": true
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 15,
+      "nome": "DANY KALLAS",
+      "aliases": [],
+      "telefone": "554399830142",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "",
+      "habilitacoes": {
+        "regente": true,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 16,
+      "nome": "DIEGO",
+      "aliases": [],
+      "telefone": "554388168906",
+      "genero": "M",
+      "ativo": false,
+      "perfil_canto": null,
+      "notas": "Usuario da escala externa (audiovisual). Nao usar para sugestao automatica de louvor.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 17,
+      "nome": "DULCINEIA",
+      "aliases": [],
+      "telefone": "554396339940",
+      "genero": "F",
+      "ativo": false,
+      "perfil_canto": null,
+      "notas": "Usuario da escala externa (ancianato). Nao usar para sugestao automatica de louvor.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 18,
+      "nome": "EMILY",
+      "aliases": [],
+      "telefone": "554391240309",
+      "genero": "F",
+      "ativo": false,
+      "perfil_canto": "base",
+      "notas": "Afastada por tempo indeterminado (intercambio em outro pais). Nao usar para sugestao automatica.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 19,
+      "nome": "ENOQUE",
+      "aliases": [],
+      "telefone": "554396598684",
+      "genero": "M",
+      "ativo": false,
+      "perfil_canto": null,
+      "notas": "Usuario da escala externa. Nao usar para sugestao automatica de louvor.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 20,
+      "nome": "FABIOLA",
+      "aliases": [
+        "FABÍOLA"
+      ],
+      "telefone": "5543999695238",
+      "genero": "F",
+      "ativo": false,
+      "perfil_canto": "base",
+      "notas": "Afastada por tempo indeterminado por bebe recem-nascido. Nao usar para sugestao automatica.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": {
+        "ativo": true,
+        "ate": "2026-09-28",
+        "motivo": "licenca maternidade (120 dias a partir de 01/06/2026)"
+      },
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 21,
+      "nome": "FABRICIO",
+      "aliases": [
+        "FABRICIO 1"
+      ],
+      "telefone": "554396670568",
+      "genero": "M",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "Consolidado com variacoes de grafia/historico.",
+      "habilitacoes": {
+        "regente": true,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": true,
+          "culto": true,
+          "domingo": true
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 22,
+      "nome": "GABRIEL P.",
+      "aliases": [],
+      "telefone": "554499412470",
+      "genero": "M",
+      "ativo": false,
+      "perfil_canto": "participacao",
+      "notas": "Afastado permanentemente das sugestoes de escala por baixa frequencia.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 23,
+      "nome": "GIOVANA",
+      "aliases": [],
+      "telefone": "5543984876102",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "",
+      "habilitacoes": {
+        "regente": true,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 24,
+      "nome": "HELOISE",
+      "aliases": [],
+      "telefone": "554388020838",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "participacao",
+      "notas": "",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 25,
+      "nome": "HENRIQUE",
+      "aliases": [],
+      "telefone": null,
+      "genero": "M",
+      "ativo": true,
+      "perfil_canto": "participacao",
+      "notas": "Sem propriedade para cantar/regencia/mensagem musical por orientacao do diretor.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 26,
+      "nome": "IGOR DUARTE",
+      "aliases": [],
+      "telefone": "554398451640",
+      "genero": "M",
+      "ativo": false,
+      "perfil_canto": "base",
+      "notas": "Afastado por tempo indeterminado por bebe recem-nascido. Nao usar para sugestao automatica.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": {
+        "ativo": true,
+        "ate": "2026-09-28",
+        "motivo": "licenca paternidade (120 dias a partir de 01/06/2026)"
+      },
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 27,
+      "nome": "JEMELLI",
+      "aliases": [],
+      "telefone": "554499552532",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": true,
+          "culto": true,
+          "domingo": true
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 28,
+      "nome": "JESSE",
+      "aliases": [],
+      "telefone": "554396181993",
+      "genero": "M",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [
+        {
+          "tipo": "sempre_junto",
+          "com_id": 30
+        }
+      ],
+      "dias_permitidos": null
+    },
+    {
+      "id": 29,
+      "nome": "JESSICA",
+      "aliases": [],
+      "telefone": "554399152336",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": null,
+      "notas": "",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [
+        {
+          "tipo": "sempre_junto",
+          "com_id": 31
+        }
+      ],
+      "dias_permitidos": null
+    },
+    {
+      "id": 30,
+      "nome": "JESSIE",
+      "aliases": [],
+      "telefone": "554399149664",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "participacao",
+      "notas": "",
+      "habilitacoes": {
+        "regente": true,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [
+        {
+          "tipo": "sempre_junto",
+          "com_id": 28
+        }
+      ],
+      "dias_permitidos": null
+    },
+    {
+      "id": 31,
+      "nome": "JOAS",
+      "aliases": [],
+      "telefone": "554399234367",
+      "genero": "M",
+      "ativo": true,
+      "perfil_canto": "participacao",
+      "notas": "",
+      "habilitacoes": {
+        "regente": true,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [
+        {
+          "tipo": "sempre_junto",
+          "com_id": 29
+        }
+      ],
+      "dias_permitidos": null
+    },
+    {
+      "id": 32,
+      "nome": "JULIANA ALVES",
+      "aliases": [
+        "JULIANA"
+      ],
+      "telefone": "5543996306944",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "Atualizado conforme orientacao do diretor. Atua somente na equipe de louvor e com disponibilidade restrita aos sabados.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": [
+        "sabado"
+      ]
+    },
+    {
+      "id": 33,
+      "nome": "JUNIOR",
+      "aliases": [],
+      "telefone": "554399053835",
+      "genero": "M",
+      "ativo": false,
+      "perfil_canto": "base",
+      "notas": "Afastado por tempo indeterminado por solicitacao pessoal. Nao usar para sugestao automatica.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": {
+        "ativo": true,
+        "ate": "2026-07-31",
+        "motivo": "solicitacao pessoal (60 dias a partir de 01/06/2026)"
+      },
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 34,
+      "nome": "JUNIOR FERREIRA",
+      "aliases": [],
+      "telefone": "554384479273",
+      "genero": "M",
+      "ativo": false,
+      "perfil_canto": null,
+      "notas": "Usuario da escala externa (audiovisual). Nao usar para sugestao automatica de louvor.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 35,
+      "nome": "KHEYCIANE",
+      "aliases": [],
+      "telefone": "554388586342",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "",
+      "habilitacoes": {
+        "regente": true,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": true,
+          "culto": true,
+          "domingo": true
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 36,
+      "nome": "LAURA GESSNER",
+      "aliases": [
+        "LAURA"
+      ],
+      "telefone": "554396284856",
+      "genero": "F",
+      "ativo": false,
+      "perfil_canto": "base",
+      "notas": "Afastada por tempo indeterminado por demandas de trabalho. Nao usar para sugestao automatica.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": {
+        "ativo": true,
+        "ate": "2026-07-31",
+        "motivo": "compromissos de trabalho (60 dias a partir de 01/06/2026)"
+      },
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 37,
+      "nome": "LIDIANE",
+      "aliases": [],
+      "telefone": "554396005175",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "",
+      "habilitacoes": {
+        "regente": true,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [
+        {
+          "tipo": "sempre_junto",
+          "com_id": 67
+        }
+      ],
+      "dias_permitidos": null
+    },
+    {
+      "id": 38,
+      "nome": "LUAN",
+      "aliases": [],
+      "telefone": "556699941638",
+      "genero": "M",
+      "ativo": false,
+      "perfil_canto": "base",
+      "notas": "Afastado permanentemente das sugestoes de escala por baixa frequencia.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": true,
+          "culto": true,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 39,
+      "nome": "LUIZ ANTONIO",
+      "aliases": [
+        "LUIS"
+      ],
+      "telefone": "5543999609883",
+      "genero": "M",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "Consolidado: LUIS e o mesmo de LUIZ ANTONIO.",
+      "habilitacoes": {
+        "regente": true,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 40,
+      "nome": "LUIZ DA SILVA",
+      "aliases": [
+        "LUIZ"
+      ],
+      "telefone": "554399722921",
+      "genero": "M",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "Consolidado: LUIZ e o mesmo de LUIZ DA SILVA.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [
+        {
+          "tipo": "familia_requerida",
+          "grupo": "familia_silva"
+        }
+      ],
+      "dias_permitidos": null
+    },
+    {
+      "id": 41,
+      "nome": "M. MULHER",
+      "aliases": [],
+      "telefone": "554396485823",
+      "genero": "F",
+      "ativo": false,
+      "perfil_canto": null,
+      "notas": "E um departamento, nao pessoa. Nao usar em sugestao automatica de pessoas.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 42,
+      "nome": "MANU C.",
+      "aliases": [],
+      "telefone": null,
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "participacao",
+      "notas": "",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 43,
+      "nome": "MANU S.",
+      "aliases": [],
+      "telefone": null,
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "participacao",
+      "notas": "",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 44,
+      "nome": "MARAIR",
+      "aliases": [],
+      "telefone": "5543999082597",
+      "genero": "M",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "",
+      "habilitacoes": {
+        "regente": true,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 45,
+      "nome": "MARCELA",
+      "aliases": [],
+      "telefone": "5543996306944",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": true,
+          "culto": true,
+          "domingo": true
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 46,
+      "nome": "MARCOS",
+      "aliases": [
+        "MARCOS LEANDRO"
+      ],
+      "telefone": "554396589712",
+      "genero": "M",
+      "ativo": false,
+      "perfil_canto": null,
+      "notas": "Usuario da escala externa; nome completo Marcos Leandro. Nao usar para sugestao automatica de louvor.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 47,
+      "nome": "MARCOS GALUCH",
+      "aliases": [],
+      "telefone": "5543998741000",
+      "genero": "M",
+      "ativo": false,
+      "perfil_canto": null,
+      "notas": "Usuario da escala externa. Nao usar para sugestao automatica de louvor.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 48,
+      "nome": "MARIA F.",
+      "aliases": [],
+      "telefone": null,
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "participacao",
+      "notas": "",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 49,
+      "nome": "MARIA HELOISA",
+      "aliases": [],
+      "telefone": "554399703366",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "Pode atuar em regencia e equipe conforme planilha-base de observacoes.",
+      "habilitacoes": {
+        "regente": true,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 50,
+      "nome": "MIRELLA",
+      "aliases": [],
+      "telefone": "5543996306944",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": true,
+          "culto": true,
+          "domingo": true
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 51,
+      "nome": "MIRIAN",
+      "aliases": [],
+      "telefone": "554399665418",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "participacao",
+      "notas": "",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 52,
+      "nome": "NATAN",
+      "aliases": [],
+      "telefone": "5543991600011",
+      "genero": "M",
+      "ativo": false,
+      "perfil_canto": null,
+      "notas": "Diretor/usuario da escala. Nao entra na sugestao automatica de escala de louvor.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 53,
+      "nome": "NILSINHO",
+      "aliases": [
+        "NILSON"
+      ],
+      "telefone": "554396557195",
+      "genero": "M",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "NILSINHO e NILSON sao a mesma pessoa.",
+      "habilitacoes": {
+        "regente": true,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": true,
+          "culto": true,
+          "domingo": true
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 54,
+      "nome": "PR. HOFNI",
+      "aliases": [
+        "PR. HOFNE",
+        "PR HOFNI",
+        "PR HOFNE"
+      ],
+      "telefone": "554396680026",
+      "genero": "M",
+      "ativo": false,
+      "perfil_canto": null,
+      "notas": "Usuario da escala externa (pregador). Nao usar para sugestao automatica de louvor.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 55,
+      "nome": "RAISSA",
+      "aliases": [],
+      "telefone": "554399784486",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "Reativada para participacao no louvor a partir de junho/2026.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": true,
+          "culto": true,
+          "domingo": true
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 56,
+      "nome": "RICARDO HERREIRA",
+      "aliases": [
+        "RICARDO"
+      ],
+      "telefone": "554396158431",
+      "genero": "M",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "RICARDO e RICARDO HERREIRA sao a mesma pessoa.",
+      "habilitacoes": {
+        "regente": true,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": true,
+          "culto": true,
+          "domingo": true
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 57,
+      "nome": "ROBERTO KOCH",
+      "aliases": [
+        "R. KOCH"
+      ],
+      "telefone": "554399191480",
+      "genero": "M",
+      "ativo": false,
+      "perfil_canto": null,
+      "notas": "Usuario da escala externa (pregador). Nao usar para sugestao automatica de louvor.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 58,
+      "nome": "RONI",
+      "aliases": [],
+      "telefone": "5543996579868",
+      "genero": "M",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": true,
+          "culto": true,
+          "domingo": true
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 59,
+      "nome": "ROSANA",
+      "aliases": [],
+      "telefone": "5543999063257",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "participacao",
+      "notas": "",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 60,
+      "nome": "SAMUEL",
+      "aliases": [],
+      "telefone": "554388653377",
+      "genero": "M",
+      "ativo": false,
+      "perfil_canto": null,
+      "notas": "Usuario da escala (referencia administrativa). Nao usar para sugestao automatica.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 61,
+      "nome": "SILVANA",
+      "aliases": [],
+      "telefone": "5511931474998",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "",
+      "habilitacoes": {
+        "regente": true,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": true,
+          "culto": true,
+          "domingo": true
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 62,
+      "nome": "SIRLENE",
+      "aliases": [],
+      "telefone": "554398333496",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 63,
+      "nome": "STELLA",
+      "aliases": [],
+      "telefone": "554399665418",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "participacao",
+      "notas": "",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 64,
+      "nome": "SUELLEN",
+      "aliases": [],
+      "telefone": "554398488720",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "",
+      "habilitacoes": {
+        "regente": true,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 65,
+      "nome": "VANDERLEY",
+      "aliases": [],
+      "telefone": "554488376153",
+      "genero": "M",
+      "ativo": true,
+      "perfil_canto": "participacao",
+      "notas": "",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": true,
+          "culto": true,
+          "domingo": true
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 66,
+      "nome": "VONI",
+      "aliases": [
+        "VONIVALDO"
+      ],
+      "telefone": "556984254032",
+      "genero": "M",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "Habilitado para equipe e mensagem musical (ES e Domingo) conforme planilha-base de observacoes.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": true,
+          "culto": false,
+          "domingo": true
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 67,
+      "nome": "YASSER",
+      "aliases": [],
+      "telefone": "5543999519003",
+      "genero": "M",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "",
+      "habilitacoes": {
+        "regente": true,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [
+        {
+          "tipo": "sempre_junto",
+          "com_id": 37
+        }
+      ],
+      "dias_permitidos": null
+    },
+    {
+      "id": 68,
+      "nome": "ZAILSON",
+      "aliases": [],
+      "telefone": "554398756565",
+      "genero": "M",
+      "ativo": false,
+      "perfil_canto": null,
+      "notas": "Usuario da escala (referencia administrativa). Nao usar para sugestao automatica.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    }
+  ]
+}

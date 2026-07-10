@@ -39,6 +39,53 @@ function criarZeros(chaves) {
 }
 
 export function carregarCadastro() {
+  const caminhoPessoas = resolve(ROOT, 'pessoas.json');
+
+  // Preferir pessoas.json (cadastro unificado) quando disponível
+  if (existsSync(caminhoPessoas)) {
+    return carregarDePessoas(caminhoPessoas);
+  }
+
+  // Fallback: funcoes-louvor.json (formato legado)
+  return carregarDeFuncoesLouvor();
+}
+
+function carregarDePessoas(caminhoPessoas) {
+  const dados = JSON.parse(readFileSync(caminhoPessoas, 'utf8'));
+  const porNome = new Map();
+  const funcoes = new Map();
+
+  for (const pessoa of dados.pessoas || []) {
+    const canonico = normalizar(pessoa.nome);
+    if (!canonico) continue;
+
+    porNome.set(canonico, canonico);
+    for (const alias of pessoa.aliases || []) {
+      porNome.set(normalizar(alias), canonico);
+    }
+
+    const hab = pessoa.habilitacoes || {};
+    const mm = hab.mensagem_musical || {};
+
+    funcoes.set(canonico, {
+      ativo: pessoa.ativo !== false,
+      regente: !!hab.regente,
+      equipe: !!hab.equipe,
+      mm: {
+        es: !!mm.es,
+        culto: !!mm.culto,
+        dom: !!mm.domingo,
+      },
+    });
+  }
+
+  // Manter shape compatível: cadastro.pessoas deve existir para downstream
+  const cadastro = { pessoas: dados.pessoas || [] };
+
+  return { cadastro, porNome, funcoes };
+}
+
+function carregarDeFuncoesLouvor() {
   const caminhoNovo = resolve(ROOT, 'processos/regras/cadastros/funcoes-louvor.json');
   const caminhoLegado = resolve(ROOT, 'docs/regras/cadastro-funcoes-louvor.json');
   const caminho = existsSync(caminhoNovo) ? caminhoNovo : caminhoLegado;
