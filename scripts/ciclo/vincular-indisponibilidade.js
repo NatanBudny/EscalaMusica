@@ -19,11 +19,11 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { carregarPessoas } from './lib/cadastro.js';
-import { resolverPessoaPorNome } from './lib/fuzzy-match.js';
+import { carregarPessoas } from '../lib/cadastro.js';
+import { resolverPessoaPorNome } from '../lib/fuzzy-match.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = resolve(__dirname, '..');
+const ROOT = resolve(__dirname, '../..');
 
 // --- CLI argument parsing ---
 

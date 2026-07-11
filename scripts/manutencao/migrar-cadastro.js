@@ -12,7 +12,7 @@ import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = resolve(__dirname, '..');
+const ROOT = resolve(__dirname, '../..');
 
 // === Caminhos dos arquivos fonte ===
 const CAMINHO_FUNCOES = resolve(ROOT, 'processos/regras/cadastros/funcoes-louvor.json');

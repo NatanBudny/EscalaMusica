@@ -1,0 +1,18 @@
+{
+  "_documentacao": "Template do acionato mensal. Copie para escalas/YYYY/MM/insumos/acionato.json e preencha.",
+  "_formato": {
+    "data": "YYYY-MM-DD (ISO)",
+    "dia": "Dia da semana (ex: Sábado, Domingo, Quarta-feira)",
+    "anciao": "Nome do ancião responsável pelo culto",
+    "pregador": "Nome do pregador (se departamento, usar nome do departamento: Jovens, Aventureiros, etc.)",
+    "audiovisual": "Nome do responsável pela sonoplastia",
+    "observacoes": "Observações públicas (ex: Culto Jovem). Deixar vazio se não houver."
+  },
+  "contexto": "Acionato - [Mês] [Ano]",
+  "gerado_em": "[YYYY-MM-DD]",
+  "itens": [
+    { "data": "2026-08-01", "dia": "Sábado", "anciao": "", "pregador": "", "audiovisual": "", "observacoes": "" },
+    { "data": "2026-08-02", "dia": "Domingo", "anciao": "", "pregador": "", "audiovisual": "", "observacoes": "" },
+    { "data": "2026-08-05", "dia": "Quarta-feira", "anciao": "", "pregador": "", "audiovisual": "", "observacoes": "" }
+  ]
+}

@@ -17,14 +17,14 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { carregarPessoas } from './lib/cadastro.js';
-import { carregarHistorico } from './lib/solver-historico.js';
-import { sugerirCulto } from './lib/solver-selecao.js';
-import { diaDaSemana } from './lib/solver-filtros.js';
-import { formatarRascunhoMd, gerarJustificativa } from './lib/solver-output.js';
+import { carregarPessoas } from '../lib/cadastro.js';
+import { carregarHistorico } from '../lib/solver-historico.js';
+import { sugerirCulto } from '../lib/solver-selecao.js';
+import { diaDaSemana } from '../lib/solver-filtros.js';
+import { formatarRascunhoMd, gerarJustificativa } from '../lib/solver-output.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = resolve(__dirname, '..');
+const ROOT = resolve(__dirname, '../..');
 
 // --- Departamentos reconhecidos (RF015) ---
 const DEPARTAMENTOS = new Set([

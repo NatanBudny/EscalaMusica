@@ -10,7 +10,7 @@ import { tmpdir } from 'node:os';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const ROOT = resolve(__dirname, '..', '..');
-const SCRIPT = resolve(ROOT, 'scripts', 'limpar-regras.js');
+const SCRIPT = resolve(ROOT, 'scripts', 'manutencao', 'limpar-regras.js');
 
 describe('limpar-regras.js', () => {
   const inputPath = resolve(ROOT, 'processos', 'regras', 'regras.snapshot.json');

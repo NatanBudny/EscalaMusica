@@ -1,84 +1,94 @@
 # Processo: Iniciar Nova Escala Mensal
 
-## 1. Preparação Inicial
+## 1. Pré-requisitos
 
-- [ ] Confirmar mês da escala (ex: MAIO/2026)
-- [ ] Verificar se houve mudanças no cadastro de funções (`processos/regras/cadastros/funcoes-louvor.json`)
-  - Se **SIM**: Atualizar `pode_regencia` e `pode_equipe` de cada pessoa conforme necessário
-- [ ] Regenerar ou criar novo `controle-mensagem-musical.json` com contadores zerados para o novo período
+Antes de iniciar o ciclo:
 
-## 2. Coleta de Dados
+- [ ] `pessoas.json` atualizado (habilitações, afastamentos, vínculos)
+- [ ] Insumos coletados e salvos em `escalas/AAAA/MM/insumos/`:
+  - `indisponibilidade-cantores.json` — gerado a partir da enquete WhatsApp (IA converte texto → JSON)
+  - `acionato.json` — escala de anciãos e pregadores (formato em `processos/templates/insumo-acionato.json`)
+- [ ] Datas dos cultos do mês confirmadas
 
-- [ ] Obter data de todos os cultos do mês
-- [ ] Receber escala de sonoplastia em JSON
-- [ ] Receber escala de acionato (anciãos, pregadores e observações) em JSON
-- [ ] Consolidar indisponibilidade do louvor (enquete) em JSON
-- [ ] Validar nome a nome contra `contatos.json` e gerar arquivo vinculado
-- [ ] Propagar indisponibilidade entre casais oficiais (JESSIE↔JESSE, JESSICA↔JOAS)
-- [ ] Armazenar os tres arquivos em `escalas/AAAA/MM/insumos/`
-- [ ] Arquivar snapshot da indisponibilidade em `escalas/AAAA/MM/arquivo/`
-- [ ] Confirmar disponibilidades do louvor (enquete ou privado)
+---
 
-## 3. Preenchimento da Escala
+## 2. Fluxo automatizado
 
-Use o arquivo `controle-mensagem-musical.json` como **sistema de sugestão**:
+### Fluxo rápido (5 comandos)
 
-### Para Regência de Louvor
-- Priorizar pessoas com `pode_regencia: true`
-- Sugerir quem tem menor contador `REGENCIA`
-- Considerar disponibilidade
+```bash
+# 1. Iniciar estrutura do mês
+npm run iniciar:mes -- --mes=2026-08
 
-### Para Equipe de Louvor (5 pessoas por culto)
-- Priorizar pessoas com `pode_equipe: true`
-- Sugerir quem tem menor contador `EQUIPE`
-- Garantir exatamente 5 pessoas por evento
-- Considerar disponibilidade
+# 2. Coletar insumos (manual — colocar em escalas/2026/08/insumos/)
+#    - indisponibilidade-cantores.json (enquete WhatsApp → IA → JSON)
+#    - acionato.json (escala de anciãos/pregadores)
 
-### Para Mensagem Musical
-- **ES** (Escola Sabatina): Sugerir menor `ES`, com `pode_mm_es: true`
-- **CULTO** (Culto Principal): Sugerir menor `CULTO`, com `pode_mm_culto: true`
-- **DOMINGO**: Sugerir menor `DOMINGO`, com `pode_mm_dom: true`
-- Considerar disponibilidade
+# 3. Vincular indisponibilidade (fuzzy match nomes → IDs)
+npm run vincular:indisponibilidade -- --mes=2026-08 --auto
 
-**Preencher tabela em**: `escalas/2026/[MES]/rascunho.md`
+# 4. Rodar solver (gera rascunho + justificativa)
+npm run sugerir:rascunho -- --mes=2026-08
 
-Insumos obrigatórios para montar o rascunho:
+# 5. Validar rascunho
+npm run validar:rascunho escalas/2026/08/rascunho.md
 
-- `escalas/AAAA/MM/insumos/sonoplastia.json`
-- `escalas/AAAA/MM/insumos/acionato.json`
-- `escalas/AAAA/MM/insumos/indisponibilidade-cantores.json`
-- `escalas/AAAA/MM/insumos/indisponibilidade-cantores-vinculada.json`
-
-Usar estrutura:
-```
-| Data | Dia | Anciao | Pregador | Sonoplastia | Regente Louvor | Equipe Louvor (5) | Mensagem Musical | Banda/PB | Observacoes |
+# 6. Revisar manualmente e publicar
+npm run publicar:fechamento -- --rascunho=escalas/2026/08/rascunho.md
 ```
 
-## 4. Validações
+### Comando combinado (alternativa)
 
-- [ ] Executar: `npm run validar:regras`
-- [ ] Executar: `npm run validar:obs`
-- [ ] Revisar erros/avisos
-- [ ] Corrigir nomes/conflitos conforme necessário
+```bash
+npm run ciclo:mensal -- --mes=2026-08
+```
 
-## 5. Publicação
+Executa os passos 1, 3, 4 e 5 em sequência. Os insumos (passo 2) devem estar no diretório antes de rodar.
 
-- [ ] Arquivar o `atual.json` vigente em `old/[ANO]/mmaaaa.json`
-- [ ] Criar o novo `atual.json` do mês aprovado usando o `rascunho.md` como base
-- [ ] Revisar a coluna OBS antes de publicar:
-  - manter somente observações vindas da escala externa (ancião/pregador) ou autorizadas explicitamente para publicação
-  - remover observações de montagem interna (deixar somente no rascunho/Motivo interno)
-- [ ] Executar: `npm run gerar:links-publicacao`
-- [ ] Conferir arquivo gerado em `escalas/AAAA/MM/links-whatsapp.md`
-- [ ] Compartilhar links no WhatsApp
-- [ ] Após aprovação do rascunho, remover `escalas/AAAA/MM/insumos/sonoplastia.json` e `escalas/AAAA/MM/insumos/acionato.json` (dados temporários de montagem)
-- [ ] Manter `escalas/AAAA/MM/insumos/indisponibilidade-cantores.json` e o snapshot em `escalas/AAAA/MM/arquivo/` para rastreabilidade
-- [ ] Após publicar e conferir, executar `npm run limpar:pos-publicacao` para remover `rascunho.md`, `publicada.md` e insumos temporários do mês
-- [ ] Qualquer ajuste posterior deve ser feito diretamente no `atual.json`
+---
 
-### Fechamento recomendado (automatizado)
+## 3. O que o solver faz
 
-Executar comando unico com rascunho explicito:
+O script `scripts/sugerir-rascunho.js` realiza:
+
+1. Lê `pessoas.json` (cadastro, habilitações, vínculos, afastamentos)
+2. Lê `regras.snapshot.json` (regras fundamentais, restrições pessoais, preferências)
+3. Lê insumos do mês (indisponibilidade vinculada, acionato)
+4. Aplica constraints de forma automática:
+   - Respeita indisponibilidades e afastamentos
+   - Garante habilitação correta para cada função (regência, equipe, MM)
+   - Distribui carga por menor frequência (contadores de rotação)
+   - Aplica vínculos (casais sempre_junto, família_requerida)
+   - Respeita `dias_permitidos` por pessoa
+5. Gera dois arquivos:
+   - `escalas/AAAA/MM/rascunho.md` — tabela completa da escala
+   - `escalas/AAAA/MM/rascunho-justificativa.md` — explicação das escolhas e exclusões
+
+---
+
+## 4. Revisão manual
+
+Após o solver gerar o rascunho, o diretor deve verificar:
+
+- [ ] Distribuição visual equilibrada (não repetir mesmas pessoas em cultos seguidos)
+- [ ] Ajustes de contexto que o solver não captura (viagens não informadas, preferências verbais)
+- [ ] Coluna `Banda/PB` preenchida corretamente
+- [ ] Observações do acionato transferidas para a coluna OBS
+- [ ] Se alguma sugestão precisa de troca manual, consultar a justificativa para entender o motivo da escolha original
+
+### Validações automatizadas
+
+```bash
+npm run validar:rascunho escalas/AAAA/MM/rascunho.md
+npm run validar:regras
+npm run validar:obs
+```
+
+---
+
+## 5. Publicação e fechamento
+
+Após revisão e aprovação do rascunho:
 
 ```bash
 npm run publicar:fechamento -- --rascunho=escalas/AAAA/MM/rascunho.md
@@ -86,44 +96,48 @@ npm run publicar:fechamento -- --rascunho=escalas/AAAA/MM/rascunho.md
 
 Esse comando:
 
-- promove o rascunho para `atual.json` com backup do atual anterior em `old/AAAA/mmaaaa.json`
-- roda `validar:regras` e `validar:obs`
-- gera `links-whatsapp.md`
-- roda limpeza pos-publicacao
-- inicia `python scripts/local.py` ao final
+- Promove o rascunho para `atual.json` com backup do anterior em `old/AAAA/mmaaaa.json`
+- Roda `validar:regras` e `validar:obs`
+- Gera `links-whatsapp.md`
+- Roda limpeza pós-publicação
+- Inicia `python scripts/local.py` ao final
 
-Use `--skip-local` apenas quando nao quiser subir o servidor local ao final.
+Use `--skip-local` para não subir o servidor local ao final.
 
-## 6. Atualização de Registros
+### Observações na publicação
 
-- [ ] Atualizar `controle-mensagem-musical.json` - incrementar contadores:
+- Manter somente observações vindas da escala externa (ancião/pregador) ou autorizadas para publicação
+- Remover observações de montagem interna (deixar somente no rascunho)
+
+---
+
+## 6. Pós-publicação
+
+- [ ] Compartilhar links do `links-whatsapp.md` nos grupos
+- [ ] Atualizar contadores de rotação em `controle-mensagem-musical.json`:
   - `REGENCIA`: +1 para regentes escalados
   - `EQUIPE`: +1 para cada membro escalado
   - `ES` / `CULTO` / `DOMINGO`: +1 para MM escalados
-  - Atualizar `por_mes` com contadores do mês atual
-- [ ] Registrar publicação em: `processos/logs/publicacoes.md`
+- [ ] Registrar publicação em `processos/logs/publicacoes.md`
+- [ ] Qualquer ajuste posterior: editar diretamente `atual.json`
 
-## Estrutura de Arquivos por Mês
+---
+
+## 7. Estrutura de arquivos do mês
 
 ```
-escalas/2026/[MES]/
+escalas/AAAA/MM/
 ├── arquivo/
-│   └── indisponibilidade-cantores-AAAA-MM-DD.json  ← Snapshot de referencia
+│   └── indisponibilidade-cantores-AAAA-MM-DD.json  ← Snapshot de referência
 ├── insumos/
-│   ├── sonoplastia.json     ← Entrada externa temporária para montagem
-│   ├── acionato.json        ← Entrada externa temporária para montagem
-│   └── indisponibilidade-cantores.json  ← Referencia de indisponibilidade do mes
-├── rascunho.md              ← Versão em trabalho (descartável após aprovação)
-├── publicada.md             ← Opcional/temporário (descartável após aprovação)
-├── controle-mensagem-musical.json  ← Ranking e sugestões
-└── links-whatsapp.md        ← Links gerados automaticamente por `npm run gerar:links-publicacao`
+│   ├── acionato.json                                ← Entrada externa (template: processos/templates/insumo-acionato.json)
+│   ├── indisponibilidade-cantores.json              ← Enquete bruta convertida em JSON
+│   ├── indisponibilidade-cantores-vinculada.json    ← Gerado por vincular-indisponibilidade
+│   └── mapeamento-indisponibilidade-contatos.md     ← Log de match nomes → IDs
+├── rascunho.md                                      ← Gerado pelo solver (editável)
+├── rascunho-justificativa.md                        ← Explicação das escolhas do solver
+├── controle-mensagem-musical.json                   ← Ranking e contadores
+├── controle-equipe-louvor.json                      ← Controle de equipe
+├── controle-regentes.json                           ← Controle de regência
+└── links-whatsapp.md                                ← Gerado por publicar:fechamento
 ```
-
-## Dicas de Otimização
-
-1. **Considerar sonoplastia**: Se alguém está na sonoplastia, pode estar indisponível para louvor no mesmo dia
-2. **Balancear carga**: Tentar distribuir REGENCIA e EQUIPE entre pessoas
-3. **Respeitar disponibilidades**: Nunca forçar alguém indisponível
-5. **Aplicar indisponibilidade vinculada**: Para qualquer sugestao de regencia/equipe/MM, bloquear nomes listados em `indisponibilidade-cantores-vinculada.json` na data do culto
-6. **Banda/PB**: Preencher a coluna de acompanhamento com `BANDA` ou `PB` para cada culto
-4. **Atualizar cadastro**: Se alguém mudar de função (ex: passa a poder fazer regência), registrar em `processos/regras/cadastros/funcoes-louvor.json`

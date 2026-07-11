@@ -1,4 +1,4 @@
-import { carregarCadastro, normalizar } from '../../scripts/controle-rotacao-utils.js';
+import { carregarCadastro, normalizar } from '../../scripts/controle/controle-rotacao-utils.js';
 import { writeFileSync, mkdirSync, rmSync, renameSync, existsSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';

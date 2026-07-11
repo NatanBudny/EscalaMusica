@@ -281,7 +281,9 @@
     {
       "id": 12,
       "nome": "CATHERINE",
-      "aliases": [],
+      "aliases": [
+        "VIDA"
+      ],
       "telefone": "554391360091",
       "genero": "F",
       "ativo": true,
@@ -327,7 +329,11 @@
     {
       "id": 14,
       "nome": "DANI HERREIRA",
-      "aliases": [],
+      "aliases": [
+        "DANIELLE H",
+        "DANIELLE HERREIRA",
+        "DANIELLE"
+      ],
       "telefone": "5543999189819",
       "genero": "F",
       "ativo": true,
@@ -701,7 +707,9 @@
     {
       "id": 30,
       "nome": "JESSIE",
-      "aliases": [],
+      "aliases": [
+        "JESSIE CANDEIAS"
+      ],
       "telefone": "554399149664",
       "genero": "F",
       "ativo": true,
@@ -728,7 +736,10 @@
     {
       "id": 31,
       "nome": "JOAS",
-      "aliases": [],
+      "aliases": [
+        "JOAS GOUVEA DA SILVA",
+        "JOAS GOUVEA"
+      ],
       "telefone": "554399234367",
       "genero": "M",
       "ativo": true,
@@ -756,7 +767,8 @@
       "id": 32,
       "nome": "JULIANA ALVES",
       "aliases": [
-        "JULIANA"
+        "JULIANA",
+        "JULIANA DO NILSINHO"
       ],
       "telefone": "5543996306944",
       "genero": "F",
@@ -1455,7 +1467,9 @@
     {
       "id": 62,
       "nome": "SIRLENE",
-      "aliases": [],
+      "aliases": [
+        "SIRLENE NICASTRO"
+      ],
       "telefone": "554398333496",
       "genero": "F",
       "ativo": true,
@@ -1544,7 +1558,9 @@
       "id": 66,
       "nome": "VONI",
       "aliases": [
-        "VONIVALDO"
+        "VONIVALDO",
+        "VONI LEAO",
+        "VONIVALDO LEAO"
       ],
       "telefone": "556984254032",
       "genero": "M",

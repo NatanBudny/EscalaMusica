@@ -18,7 +18,7 @@ import { resolve, dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = resolve(__dirname, '..');
+const ROOT = resolve(__dirname, '../..');
 
 const RED = '\x1b[31m';
 const GREEN = '\x1b[32m';

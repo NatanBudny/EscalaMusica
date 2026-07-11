@@ -21,10 +21,10 @@
 import { writeFileSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { carregarPessoas } from './lib/cadastro.js';
+import { carregarPessoas } from '../lib/cadastro.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = resolve(__dirname, '..');
+const ROOT = resolve(__dirname, '../..');
 
 function gerarContatos() {
   const { pessoas } = carregarPessoas();
