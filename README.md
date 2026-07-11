@@ -1,73 +1,63 @@
 # EscalaMusica
 
-Aplicativo web para a equipe de louvor da Igreja. Exibe a escala de cultos, permite filtrar por membro, exportar eventos para a agenda e facilitar substituições.
+Aplicativo web para a equipe de louvor da Igreja. Exibe a escala de cultos, permite filtrar por membro, exportar eventos para agenda e facilitar substituições.
 
 ---
 
 ## Funcionalidades
 
-| Funcionalidade | Descricao |
+| Funcionalidade | Descrição |
 |---|---|
-| **Escala completa** | Tabela (desktop) e cards (mobile) com todos os cultos |
-| **Login com Google** | Autenticacao OAuth vincula sua conta ao seu nome na equipe |
-| **Minha escala** | Filtra apenas os cultos em que voce esta escalado |
-| **Alerta de 7 dias** | Banner automatico quando um culto seu esta chegando |
-| **Links do WhatsApp** | Clique em qualquer nome para abrir o WhatsApp |
-| **Me substitua** | Gera mensagem pre-escrita para o coordenador correto |
-| **Exportar para agenda** | Baixa um `.ics` com lembrete configurado para o culto |
-| **Musicas no YouTube** | Titulos das musicas viram links de busca no YouTube |
-| **Modo offline** | Usa cache local quando sem conexao, com indicador visual |
+| Escala completa | Tabela (desktop) e cards (mobile) com todos os cultos |
+| Login com Google | Autenticação OAuth para vincular conta ao nome na equipe |
+| Minha escala | Filtro automático para exibir apenas os cultos do usuário |
+| Alerta de 7 dias | Banner automático quando um culto do usuário está próximo |
+| Links de WhatsApp | Clique em nomes para abrir contato no WhatsApp |
+| Me substitua | Gera mensagem pronta para o coordenador correto |
+| Exportar para agenda | Modal para Google Calendar ou download `.ics` |
+| Músicas no YouTube | Louvores viram links de busca no YouTube |
+| Modo offline | Fallback para cache local de escala e contatos |
 
 ---
 
 ## Tecnologias
 
-- **Vanilla JS (ES Modules)** — sem frameworks, sem bundler
-- **Google Identity Services** — OAuth 2.0 via `accounts.id`
-- **Jest 29** — testes unitarios com cobertura, em ESM nativo
-- **Python** — servidor HTTP de desenvolvimento local
+- Vanilla JS (ES Modules)
+- Google Identity Services (`google.accounts.id`)
+- Jest 29 (ESM nativo)
+- Python (servidor local)
 
 ---
 
-## Estrutura do Projeto
+## Estrutura do projeto
 
-```
+```text
 EscalaMusica/
-├── index.html              # UI: todo CSS e markup
-├── atual.json              # Dados da escala vigente
-├── contatos.json           # Mapa de nomes para { telefone, apelidos[] }
-│
+├── index.html
+├── atual.json
+├── contatos.json
 ├── src/
-│   ├── config.js           # Constantes globais (Client ID, chaves do localStorage)
-│   ├── main.js             # Entry point: listeners de evento
-│   ├── state.js            # Singleton de estado compartilhado
 │   ├── auth/
-│   │   ├── auth.js         # Fluxo OAuth e troca de views
-│   │   └── storage.js      # Helpers de localStorage
-│   ├── data/
-│   │   └── loader.js       # Fetch de JSONs + fallback offline
-│   ├── utils/
-│   │   ├── date.js         # Parsing e formatacao de datas
-│   │   ├── name.js         # Normalizacao de nomes e busca na escala
-│   │   ├── contact.js      # Lookup de contatos por nome ou apelido
-│   │   └── formatter.js    # Construtores de HTML (links, listas, musicas)
 │   ├── business/
-│   │   ├── agenda.js       # Monta o evento .ics conforme o papel na escala
-│   │   └── substitute.js   # Gera o link WhatsApp para o coordenador correto
-│   └── ui/
-│       ├── filters.js      # Orquestracao de filtros e re-renderizacao
-│       ├── table.js        # Renderer da tabela desktop
-│       ├── cards.js        # Renderer dos cards mobile
-│       └── alerts.js       # Banner de alerta de 7 dias
-│
-├── tests/
-│   ├── utils/              # date, name, contact, formatter
-│   ├── auth/               # storage
-│   └── business/           # agenda, substitute
-│
+│   ├── data/
+│   ├── ui/
+│   ├── utils/
+│   ├── config.js
+│   ├── main.js
+│   └── state.js
 ├── scripts/
-│   └── local.py            # Servidor HTTP de dev na porta 8000
-└── old/                    # Escalas anteriores (referencia)
+├── tests/
+├── escalas/                 # Escalas mensais organizadas por ano/mês
+├── processos/
+│   ├── guias/               # Guias operacionais
+│   ├── regras/              # Regras e cadastros
+│   ├── templates/           # Modelos reutilizáveis
+│   └── logs/                # Registros oficiais
+├── docs/
+├── old/                     # Histórico de escalas publicadas
+├── package.json
+├── jest.config.js
+└── ARCHITECTURE.md
 ```
 
 ---
@@ -80,20 +70,49 @@ Requer Python 3.
 npm run dev
 ```
 
-Sobe em `http://localhost:8000/index.html` e abre o navegador automaticamente.
+Abre em `http://localhost:8000/index.html`.
 
-> O servidor e necessario porque o app usa `fetch()` para carregar os arquivos `.json`. Abrir o `index.html` diretamente pelo sistema de arquivos nao funciona por restricoes de CORS.
+> O servidor é necessário porque o app usa `fetch()` para carregar os arquivos `.json`.
 
 ---
 
 ## Testes
 
 ```bash
-npm test             # com cobertura
-npm run test:watch   # re-executa ao salvar
+npm test
+npm run test:watch
 ```
 
-Modulos de logica pura possuem cobertura de testes. Modulos de UI sao verificados manualmente.
+---
+
+## Scripts NPM
+
+### Validação
+
+- `npm run validar:regras`
+- `npm run validar:rascunho`
+- `npm run validar:obs`
+
+### Controle e relatórios
+
+- `npm run controle:mm`
+- `npm run controle:regentes`
+- `npm run controle:equipe`
+
+### Publicação
+
+- `npm run publicar:mensal`
+- `npm run publicar:fechamento`
+- `npm run gerar:links-publicacao`
+- `npm run limpar:pos-publicacao`
+
+### Dados e apoio
+
+- `npm run gerar:contatos`
+- `npm run limpar:regras`
+- `npm run migrar:cadastro`
+- `npm run vincular:indisponibilidade`
+- `npm run sugerir:rascunho`
 
 ---
 
@@ -101,20 +120,24 @@ Modulos de logica pura possuem cobertura de testes. Modulos de UI sao verificado
 
 ### `atual.json`
 
-Array de registros de cultos:
+Cada culto segue o formato:
 
 ```json
 {
-  "DATA": "11/03/2026",
-  "DIA SEMANA": "Quarta",
+  "DATA": "11/07/2026",
+  "DIA SEMANA": "quarta-feira | sábado | domingo",
+  "ACOMP": "BANDA",
   "REGENTE LOUVOR": "NOME",
   "EQUIPE LOUVOR": "NOME1, NOME2, NOME3",
   "MENSAGEM MUSICAL": "NOME",
-  "PREGADOR": "NOME",
-  "ANCIAO": "NOME",
+  "LOUVORES ES": "NUM - Título",
+  "LOUVORES CULTO": "Título 1 | Título 2",
+  "TEMA CULTO": "Tema opcional",
   "AUDIOVISUAL": "NOME",
+  "ANCIÃO": "NOME",
+  "PREGADOR": "NOME",
   "SUPORTE": "NOME",
-  "MUSICAS": "Musica 1 | Musica 2 | Musica 3"
+  "OBS": "Observação pública"
 }
 ```
 
@@ -131,64 +154,48 @@ Array de registros de cultos:
 
 ---
 
-## Processo mensal da escala (rascunho -> producao)
+## Fluxo mensal (rascunho → produção)
 
-Fluxo padrao para abrir um novo mes sem perder historico.
+Para o passo a passo completo, use os guias em `processos/guias/`.
 
-### 1) Criar rascunho em Markdown
+1. Iniciar ciclo: `processos/guias/iniciar-escala-mensal.md`
+2. Validar rascunho: `processos/guias/validar-escala.md`
+3. Publicar escala: `processos/guias/publicar-escala.md`
+4. Pós-publicação: `processos/guias/pos-publicacao.md`
 
-- Criar um arquivo de rascunho em Markdown para o novo mes.
-- Sugestao de nome: `escala-louvor-<mes>-<ano>-draft.md`.
-- Revisar internamente ate chegar na versao aprovada.
-- No rascunho/preview, as quartas-feiras podem ficar fora da tabela.
+Referências importantes do fluxo:
 
-### 2) Aprovar o rascunho
+- Insumos externos por mês: `escalas/AAAA/MM/insumos/`
+- Arquivo de rastreabilidade: `escalas/AAAA/MM/arquivo/`
+- Registro oficial de publicações: `processos/logs/publicacoes.md`
+- Regras e cadastros: `processos/regras/`
 
-- Apos validacao final, definir qual arquivo de rascunho foi autorizado.
-- Este arquivo sera a base da nova escala vigente.
+### Comando recomendado de fechamento
 
-### 3) Arquivar a escala vigente
+```bash
+npm run publicar:fechamento -- --rascunho=escalas/AAAA/MM/rascunho.md
+```
 
-- Antes de trocar a escala atual, mover o arquivo vigente para `old/`.
-- Nomear o arquivo arquivado no formato `mmaaaa` (mes + ano), por exemplo: `042026.json`.
-- Objetivo: manter historico organizado e facilitar consultas futuras.
+Esse fluxo publica, valida, gera links de WhatsApp, limpa arquivos temporários do mês e inicia o servidor local.
 
-### 4) Promover o rascunho aprovado para atual
+---
 
-- Criar/atualizar o arquivo atual da escala com base no rascunho aprovado.
-- O arquivo vigente deve continuar acessivel no caminho esperado pela aplicacao (`atual.json`).
-- Na publicacao final (`atual.json`), incluir tambem as quartas-feiras com dados de `PREGADOR`, `ANCIAO`, `AUDIOVISUAL` e `OBS`.
-- Para quartas-feiras, manter `REGENTE LOUVOR`, `EQUIPE LOUVOR`, `MENSAGEM MUSICAL` e `SUPORTE` em branco (ou `-`).
-- Apos a promocao para `atual.json`, os arquivos `rascunho.md` e `publicada.md` do mes podem ser descartados.
-- Qualquer alteracao posterior na escala deve ser feita diretamente no `atual.json`.
-
-### 5) Checklist rapido de fechamento
-
-- Confirmar que o historico foi salvo em `old/` com nome `mmaaaa`.
-- Confirmar que `atual.json` contem a escala aprovada do novo mes.
-- Subir o app localmente e validar se a escala carregou sem erros.
-
-### 6) Pos-publicacao (obrigatorio)
-
-- Registrar a publicacao oficial em `processos/logs/publicacoes.md` com data, referencia do `atual.json` publicado e responsavel.
-- Gerar lista de links de WhatsApp para confirmacao da escala:
+## Links de publicação (WhatsApp)
 
 ```bash
 npm run gerar:links-publicacao
 ```
 
-- A lista deve contemplar REGENTE LOUVOR, EQUIPE LOUVOR, MENSAGEM MUSICAL, contatos fixos (Adelaide e Yasser) e o link do grupo do louvor.
+Gera `escalas/AAAA/MM/links-whatsapp.md` com mensagens para:
 
-> ⚠️ **Arquivos temporários:** Os arquivos `links-whatsapp-publicacao-*.md` são gerados para divulgação após cada publicação e podem ser deletados quando a próxima escala for aberta.
+- Regente de Louvor
+- Equipe de Louvor
+- Mensagem Musical
+- Contatos fixos e grupo do louvor
 
 ---
 
-## Coordenadores de Substituicao
+## Substituições
 
-Configurados em `src/business/substitute.js` no objeto `COORDENADORES`. Atualizar quando houver mudanca de lideranca.
-
-| Papel | Coordenador |
-|---|---|
-| Regente / Mensagem Musical | `LOUVOR` |
-| Anciao de Culto | `ANCIAO` |
-| Audiovisual / Suporte | `AUDIOVISUAL` |
+- Coordenadores de substituição: `src/business/substitute.js`
+- Telefones e apelidos: `contatos.json`
