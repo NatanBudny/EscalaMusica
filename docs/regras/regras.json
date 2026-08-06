@@ -146,6 +146,12 @@
       "descricao": "Nomes nas funções de origem externa (ANCIÃO, PREGADOR, AUDIOVISUAL, LOUVORES ES) não devem conflitar com escalações da equipe de louvor",
       "excecao": "RF004-A: ANCIÃO pode acumular qualquer papel — é o gerente do culto",
       "campos_externos": ["ANCIÃO", "PREGADOR", "AUDIOVISUAL", "LOUVORES ES"]
+    },
+    {
+      "id": "RF005",
+      "descricao": "Pessoa que informou indisponibilidade em uma data NÃO pode ser escalada para nenhuma função de louvor (REGENTE, EQUIPE, MENSAGEM MUSICAL) nessa data. Só pode ser escalada se o diretor autorizar explicitamente.",
+      "fonte": "Enquete de disponibilidade mensal no WhatsApp",
+      "excecao": "Apenas com autorização explícita do diretor"
     }
   ],
   "preferencias": [

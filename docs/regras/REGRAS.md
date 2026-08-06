@@ -19,6 +19,9 @@ _Exceção:_ cultos temáticos femininos (ex: Culto da Mulher) podem ter equipe 
 **RF004** — Nomes nas funções de origem externa (ANCIÃO, PREGADOR, AUDIOVISUAL, LOUVORES ES) não devem conflitar com as escalações da equipe de louvor (ex: não escalar alguém para EQUIPE LOUVOR que já está como PREGADOR naquele culto).  
 _Exceção RF004-A:_ O ANCIÃO pode acumular outros papéis sem restrição — é o gerente do culto.
 
+**RF005** — Pessoa que informou indisponibilidade em uma data (via enquete de disponibilidade) NÃO pode ser escalada para nenhuma função de louvor (REGENTE, EQUIPE LOUVOR, MENSAGEM MUSICAL) nessa data.  
+_Exceção:_ Apenas com autorização explícita do diretor.
+
 ---
 
 ## RP — Restrições Pessoais

@@ -28,6 +28,10 @@ Este projeto gerencia a escala de louvor de uma igreja. O objetivo é usar o his
 - **Indisponíveis (Longo Prazo)**:
   - `JUNIOR` (pausa até ~08/2026).
   - `BRUNA` (mesmo motivo do JUNIOR).
+  - `EMILY` (viagem, indisponível o ano de 2026 inteiro).
+  - `FABÍOLA` (licença maternidade).
+  - `GABRIEL P.` (indisponível por tempo indeterminado).
+  - `ANISSA` (indisponível por tempo indeterminado).
 - **Indisponíveis (Temporário)**:
   - `CATHERINE` (saúde, indisponível até **20/02/2026**).
   - `ANDRÉ` (viagem, indisponível até 06/2026).
@@ -37,6 +41,7 @@ Este projeto gerencia a escala de louvor de uma igreja. O objetivo é usar o his
 
 ### C. Regras Específicas de Membros de equipe de lovuor 
 - `ANISSA`: Canta apenas aos **sábados** e com frequência reduzida.
+- `CATHERINE`: Não canta aos **domingos** (disponível apenas sábados).
 - `MIRELLA` & `MARCELLA`: Só podem ser escaladas para o louvor se `NILSON` também estiver na escala do mesmo dia (seja como regente ou na equipe). Para a mensagem musical, podem se apresentar sozinhas.
 - **Regra de Rotação Específica**:
   - Para a escala atual, priorizar que `LUIZ DA SILVA`, `RAISSA`, e `MARAIR` apareçam em dias distintos (apenas um dia para cada).
