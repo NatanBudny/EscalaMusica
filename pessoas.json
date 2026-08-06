@@ -1,6 +1,6 @@
 {
   "versao": "1.0.0",
-  "proximo_id": 69,
+  "proximo_id": 70,
   "ultima_atualizacao": "2026-07-10",
   "grupos": {
     "familia_silva": {
@@ -97,16 +97,16 @@
       "aliases": [],
       "telefone": "5543920008370",
       "genero": "M",
-      "ativo": false,
-      "perfil_canto": null,
-      "notas": "Em viagem, tempo indeterminado.",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "Voltou de viagem em 07/2026.",
       "habilitacoes": {
-        "regente": false,
-        "equipe": false,
+        "regente": true,
+        "equipe": true,
         "mensagem_musical": {
-          "es": false,
-          "culto": false,
-          "domingo": false
+          "es": true,
+          "culto": true,
+          "domingo": true
         }
       },
       "afastado": null,
@@ -863,10 +863,8 @@
     {
       "id": 36,
       "nome": "LAURA GESSNER",
-      "aliases": [
-        "LAURA"
-      ],
-      "telefone": "554396284856",
+      "aliases": [],
+      "telefone": "",
       "genero": "F",
       "ativo": false,
       "perfil_canto": "base",
@@ -882,8 +880,8 @@
       },
       "afastado": {
         "ativo": true,
-        "ate": "2026-07-31",
-        "motivo": "compromissos de trabalho (60 dias a partir de 01/06/2026)"
+        "ate": null,
+        "motivo": "compromissos de trabalho, tempo indeterminado"
       },
       "vinculos": [],
       "dias_permitidos": null
@@ -1623,6 +1621,28 @@
           "es": false,
           "culto": false,
           "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 69,
+      "nome": "LAURA",
+      "aliases": [],
+      "telefone": "554396284856",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "Filha da Alessandra (tel compartilhado com mae). Diferente de LAURA GESSNER.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": true,
+          "culto": true,
+          "domingo": true
         }
       },
       "afastado": null,

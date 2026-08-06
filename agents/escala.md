@@ -58,6 +58,17 @@ Resumo dos scripts envolvidos:
 ### Explicar exclusões
 - Consultar `pessoas.json` para informar motivo de exclusão (afastado, inativo, sem habilitação, indisponível na data)
 
+### Análise de percentual de participação (OBRIGATÓRIO antes de finalizar rascunho)
+- Calcular para cada membro disponível:
+  - **% Participação** = dias escalado ÷ dias disponível no mês
+  - **Carga Real** = dias escalado ÷ total de cultos do mês
+  - **ICR (Índice de Cobertura Relativa)** = dias escalado ÷ média ideal (~3 dias)
+- Apresentar a tabela ao diretor antes de finalizar
+- Identificar desequilíbrios:
+  - ICR > 2.0 = sobrecarregado, propor alívio
+  - ICR 0.0 = esquecido, propor inclusão
+- Sugerir trocas para equilibrar distribuição
+
 ---
 
 ## 5. Formato de saída

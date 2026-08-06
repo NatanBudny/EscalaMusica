@@ -108,8 +108,8 @@
   },
   {
     "id": "RF013",
-    "descricao": "Quem estiver escalado em EQUIPE LOUVOR não deve cantar em sequência (sábado-sábado, domingo-domingo ou sábado-domingo); a mesma regra vale para MENSAGEM MUSICAL",
-    "detalhe": "Evitar repetição consecutiva de pessoas entre cultos próximos. A restrição se aplica tanto dentro do mesmo papel quanto entre papéis de canto (EQUIPE LOUVOR e MENSAGEM MUSICAL).",
+    "descricao": "[MOVIDA PARA PE006] — Esta regra foi reclassificada como preferência. Ver preferencias.json.",
+    "nota": "Anteriormente RF013, agora é PE006 — evitar cantar em sequência é preferível mas não obrigatório.",
     "papeis_afetados": [
       "EQUIPE LOUVOR",
       "MENSAGEM MUSICAL"
@@ -212,6 +212,28 @@
     "detalhe": "Olá, {nome}. Você está na escala de {mes/ano}, como {funções}. Entre na escala, veja os dias. Dê um joinha nessa mensagem para confirmar que poderá participar. Link da escala: https://natanbudny.github.io/EscalaMusica/",
     "papeis_afetados": [
       "template-whatsapp"
+    ]
+  },
+  {
+    "id": "RF026",
+    "descricao": "Pessoa que informou indisponibilidade em uma data (via enquete mensal) NÃO pode ser escalada para nenhuma função de louvor nessa data",
+    "detalhe": "Os campos REGENTE LOUVOR, EQUIPE LOUVOR e MENSAGEM MUSICAL não podem conter pessoas que declararam indisponibilidade naquela data. Exceção: apenas com autorização explícita do diretor.",
+    "fonte": "Enquete de disponibilidade mensal no WhatsApp",
+    "excecao": "Apenas com autorização explícita do diretor",
+    "papeis_afetados": [
+      "REGENTE LOUVOR",
+      "EQUIPE LOUVOR",
+      "MENSAGEM MUSICAL"
+    ]
+  },
+  {
+    "id": "RF027",
+    "descricao": "Antes de apresentar qualquer rascunho de escala, calcular o percentual de participação e o ICR de cada membro",
+    "detalhe": "Percentual = dias escalado / dias disponível. ICR (Índice de Cobertura Relativa) = dias escalado / média ideal (~3 dias). Identificar desequilíbrios (ICR > 2.0 = sobrecarregado, ICR 0.0 = esquecido) e propor ajustes antes de finalizar o rascunho.",
+    "papeis_afetados": [
+      "EQUIPE LOUVOR",
+      "REGENTE LOUVOR",
+      "MENSAGEM MUSICAL"
     ]
   }
 ]

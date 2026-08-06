@@ -48,7 +48,7 @@
   },
   {
     "id": "PE008",
-    "descricao": "Usar controle de rotacao da MENSAGEM MUSICAL considerando tres slots distintos: ES (Escola Sabatina, sabado manha), CULTO (servico principal do sabado ou outros dias nao-domingo) e DOMINGO. Ao sugerir, priorizar menor contagem do slot correspondente. Disponibilidade real e RF013/RF014 tem precedencia.",
+    "descricao": "Usar controle de rotacao da MENSAGEM MUSICAL considerando tres slots distintos: ES (Escola Sabatina, sabado manha), CULTO (servico principal do sabado ou outros dias nao-domingo) e DOMINGO. Ao sugerir, priorizar menor contagem do slot correspondente. Disponibilidade real e RF014 tem precedencia.",
     "prioridade": "media",
     "papeis_afetados": [
       "MENSAGEM MUSICAL"
@@ -58,5 +58,19 @@
       "CULTO": "Segundo nome do sabado (posicao 2), ou unico nome quando ha apenas 1. Tambem cobre outros dias exceto domingo. Mais importante.",
       "DOMINGO": "Nome unico do domingo."
     }
+  },
+  {
+    "id": "PE009",
+    "descricao": "Evitar escalar a mesma pessoa em EQUIPE LOUVOR ou MENSAGEM MUSICAL em cultos consecutivos (sábado-domingo, domingo-sábado, sábado-sábado)",
+    "prioridade": "media",
+    "detalhe": "Preferível mas não obrigatório. Quando o quadro de disponibilidade é reduzido, repetições consecutivas são aceitáveis.",
+    "papeis_afetados": [
+      "EQUIPE LOUVOR",
+      "MENSAGEM MUSICAL"
+    ],
+    "dias_afetados": [
+      "sabado",
+      "domingo"
+    ]
   }
 ]
