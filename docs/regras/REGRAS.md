@@ -19,8 +19,58 @@ _Exceção:_ cultos temáticos femininos (ex: Culto da Mulher) podem ter equipe 
 **RF004** — Nomes nas funções de origem externa (ANCIÃO, PREGADOR, AUDIOVISUAL, LOUVORES ES) não devem conflitar com as escalações da equipe de louvor (ex: não escalar alguém para EQUIPE LOUVOR que já está como PREGADOR naquele culto).  
 _Exceção RF004-A:_ O ANCIÃO pode acumular outros papéis sem restrição — é o gerente do culto.
 
-**RF005** — Pessoa que informou indisponibilidade em uma data (via enquete de disponibilidade) NÃO pode ser escalada para nenhuma função de louvor (REGENTE, EQUIPE LOUVOR, MENSAGEM MUSICAL) nessa data.  
-_Exceção:_ Apenas com autorização explícita do diretor.
+**RF005** — Não fazemos escala própria de louvor às quartas-feiras.  
+Para cultos de quarta, os campos `REGENTE LOUVOR`, `EQUIPE LOUVOR`, `MENSAGEM MUSICAL` e `SUPORTE` devem ficar vazios ou `-`.
+
+**RF006** — O arquivo de rascunho/preview pode omitir quartas-feiras, mas a publicação final (`atual.json`) deve incluir também os cultos de quarta com dados dos outros departamentos.  
+Na escala publicada, preencher normalmente `PREGADOR`, `ANCIÃO`, `AUDIOVISUAL` e `OBS` da quarta-feira, mantendo `REGENTE LOUVOR`, `EQUIPE LOUVOR`, `MENSAGEM MUSICAL` e `SUPORTE` em branco (ou `-`).
+
+**RF007** — O campo `OBS` no `atual.json` é exclusivamente público.  
+Só pode conter observações explicitamente autorizadas para divulgação à igreja (ex: `PUBLICAR: Culto Jovem`, `PUBLICAR: Culto da Mulher`, `PUBLICAR: Culto do Departamento Infantil`).
+É proibido registrar no `OBS` informações internas/sensíveis de montagem de escala (rascunho, pendências, instruções operacionais, dados privados, contatos, alinhamentos internos ou qualquer anotação de desenvolvimento).
+
+**RF008** — Após publicar a versão oficial da escala, registrar a publicação no arquivo `processos/publicacoes.md`, incluindo ao menos: data da publicação, referência do `atual.json` publicado e responsável.
+
+**RF009** — Após cada publicação oficial, gerar a lista de links de WhatsApp para confirmação da escala, contemplando:
+- Pessoas escaladas em `REGENTE LOUVOR`
+- Pessoas escaladas em `EQUIPE LOUVOR`
+- Pessoas escaladas em `MENSAGEM MUSICAL`
+- Contatos fixos: líder da banda (Adelaide) e ancião principal (Yasser)
+- Link de convite do grupo do louvor
+
+**RF010** — Quando o culto tiver observação de Dia dos Aventureiros, os campos `REGENTE LOUVOR`, `EQUIPE LOUVOR` e `MENSAGEM MUSICAL` devem ser preenchidos com `Aventureiros`.  
+_Motivo:_ o departamento dos Aventureiros assume o louvor daquele culto. Não se escalada membros individuais da equipe de louvor nesses casos.
+
+**RF011** — O campo `OBS`, tanto no rascunho quanto na escala publicada, deve conter apenas observações para divulgação à igreja — nunca anotações do processo de montagem da escala.  
+São proibidos no `OBS`: pendências, instruções operacionais, alinhamentos em andamento, dados privados ou qualquer informação de processo interno.  
+_Esta regra complementa a RF007, estendendo a mesma restrição ao arquivo de rascunho._
+
+**RF012** — A partir de maio de 2026, todos os cultos de sábado têm **2 mensagens musicais obrigatórias**.  
+Os dois responsáveis devem ser registrados no campo `MENSAGEM MUSICAL` separados por vírgula:
+```
+Nome_ES, Nome_Culto
+```
+**Convenção de posição (obrigatória):** o primeiro nome é o responsável pela mensagem da Escola Sabatina (ES); o segundo é o responsável pela mensagem do culto principal.  
+_Não há campo separado para ES e Culto — ambos ficam na mesma célula, e a posição define o tipo._
+
+**RF013** — Quem estiver escalado em `EQUIPE LOUVOR` não deve cantar em sequência: sábado-sábado, domingo-domingo ou sábado-domingo. A mesma regra vale para `MENSAGEM MUSICAL`.  
+Evitar repetição consecutiva de pessoas entre cultos próximos, inclusive entre os dois campos de canto (`EQUIPE LOUVOR` e `MENSAGEM MUSICAL`).
+
+**RF014** — Uma pessoa não deve cantar mais de uma `MENSAGEM MUSICAL` no mesmo mês.
+
+**RF015** — Quando o PREGADOR for um departamento, os campos `REGENTE LOUVOR`, `EQUIPE LOUVOR` e `MENSAGEM MUSICAL` devem ser preenchidos com o nome do departamento.  
+_Motivo:_ se o campo PREGADOR contém um departamento (ex: "Jovens", "Dorcas", "Desbravadores", etc.), isso indica que o departamento assume a responsabilidade do louvor naquele culto. Neste caso, não se escalada membros individuais — os três campos de louvor registram o nome do departamento.  
+_Exemplo:_ se `PREGADOR='Jovens'`, então `REGENTE LOUVOR='Jovens'`, `EQUIPE LOUVOR='Jovens'`, `MENSAGEM MUSICAL='Jovens'`.  
+_Nota:_ Esta regra generaliza a lógica de **RF010** (Dia dos Aventureiros) para qualquer departamento que seja escalado como pregador.
+
+**RF016** — A coluna `OBS` da versão publicada (`atual.json`) só pode receber:  
+1) observações vindas junto da escala externa (ancião/pregador), ou  
+2) observações explicitamente autorizadas pelo diretor para publicação.  
+Informações usadas durante a montagem da escala (ex: justificativas internas, notas operacionais, rótulos temporários como "culto excepcional" sem autorização explícita de publicação) devem ficar apenas no rascunho, preferencialmente na coluna `Motivo (interno)`, e nunca subir para produção no `atual.json`.
+
+**RF017** — O arquivo `rascunho.md` é temporário e serve apenas para montagem e aprovação da escala mensal. Após a promoção para `atual.json`, `rascunho.md` e `publicada.md` podem ser descartados.
+
+**RF018** — Após a publicação mensal, qualquer manutenção (trocas, ajustes de nomes, observações públicas autorizadas e correções) deve ser feita diretamente no `atual.json` vigente.
 
 ---
 
@@ -33,7 +83,33 @@ _Exceção:_ Apenas com autorização explícita do diretor.
 - `tipo`: disponibilidade | relacionamento | condicional | excecao
 - `prioridade`: obrigatoria | preferencial
 
-<!-- Restrições serão inseridas aqui pelo agente documentador -->
+- **RP001 · CARLA RIBEIRO** — indisponível em 02/05/2026
+- `tipo`: disponibilidade
+- `prioridade`: obrigatoria
+
+- **RP002 · GIOVANA** — no mês de maio/2026, disponível somente nos dias 02, 10, 23 e 24; indisponível nos demais dias do mês
+- `tipo`: disponibilidade
+- `prioridade`: obrigatoria
+
+- **RP003 · JESSICA** — deve cantar sempre junto com JOAS (regra de casal), nunca separada dele
+- `tipo`: relacionamento
+- `prioridade`: obrigatoria
+
+- **RP004 · JESSE** — deve cantar sempre junto com JESSIE (regra de casal), nunca separado dela
+- `tipo`: relacionamento
+- `prioridade`: obrigatoria
+
+- **RP005 · YASSER** — deve cantar sempre junto com LIDIANE (regra de casal), nunca separado dela
+- `tipo`: relacionamento
+- `prioridade`: obrigatoria
+
+- **RP006 · JULIANA ALVES** — atua somente na EQUIPE LOUVOR e, por disponibilidade, pode ser escalada apenas aos sábados
+- `tipo`: condicional
+- `prioridade`: obrigatoria
+
+- **RP007 · ARIADNY** — indisponível aos domingos
+- `tipo`: disponibilidade
+- `prioridade`: obrigatoria
 
 ---
 
@@ -50,6 +126,18 @@ _Exceção:_ Apenas com autorização explícita do diretor.
 **PE004** — Priorizar a escalação do grupo preferencial de cada regente para promover sinergia.
 
 **PE005** — Não escalar AUDIOVISUAL para MENSAGEM MUSICAL, exceto quando não houver nenhuma outra pessoa disponível.
+
+**PE006** — O mesmo regente não deve fazer a regência em dois sábados seguidos, exceto quando não houver mais ninguém viável para sugerir.
+
+**PE007** — O mesmo regente não deve fazer a regência em mais de um sábado no mesmo mês, exceto quando não houver mais ninguém viável para sugerir.
+
+**PE008** — Usar controle de rotação da MENSAGEM MUSICAL para balancear oportunidades entre cantores, considerando três slots distintos:
+- **ES** (Escola Sabatina, sábado manhã) — momento menos visível; bom para estreias ou revezamento.
+- **CULTO** (serviço principal do sábado, ou outros dias não-domingo) — momento mais importante; priorizar quem ainda não o fez.
+- **DOMINGO** — culto de domingo; revezar entre os disponíveis.
+
+Ao sugerir nomes, priorizar: slot ES → menor contagem de ES; slot CULTO → menor contagem de CULTO; slot DOMINGO → menor contagem de DOMINGO.  
+Não é regra rígida: disponibilidade real do mês e RF013/RF014 têm precedência sobre qualquer critério de rotação.
 
 ---
 
@@ -85,7 +173,7 @@ _Exceção:_ Apenas com autorização explícita do diretor.
 |-----|------------|------------|
 | Sábado | 2 (normalmente) | Uma na Escola Sabatina (ES) e uma no Culto. Em casos especiais de programação, só a do Culto. |
 | Domingo | 1 | — |
-| Quarta-feira | 1 | — |
+| Quarta-feira | 0 | Não há escala própria de louvor na quarta. |
 
 **Campo no sistema:** Um único campo `MENSAGEM MUSICAL` por culto. Quando há dois no sábado, o líder gerencia manualmente (ES e Culto separados na prática).
 
@@ -93,6 +181,12 @@ _Exceção:_ Apenas com autorização explícita do diretor.
 - Pessoas iniciando: começam pela mensagem musical do **domingo**
 - Com mais experiência: progridem para o **sábado**
 - Não há controle formal desta progressão — é feita intuitivamente pelo líder
+
+**Controle de rotação (implementado):**
+- Cadastro geral de pessoas/funcoes em `docs/regras/cadastro-funcoes-louvor.json`
+- Apuração histórica em `escalas/2026/05/controle-mensagem-musical.json`
+- Script de atualização: `node scripts/controle-mensagem-musical.js`
+- Critério: priorizar menor carga histórica, sem engessar a escala (disponibilidade e contexto do culto seguem primeiro)
 
 ### Regente de Louvor — Detalhamento
 
@@ -230,7 +324,7 @@ Cada pessoa terá a classificação vocal (soprano, contralto, tenor, barítono 
 
 | Termo | Significado |
 |-------|-------------|
-| Culto | Serviço religioso (quarta, sábado, domingo) |
+| Culto | Serviço religioso (quarta, sábado, domingo). A escala própria de louvor contempla sábado e domingo; na quarta, esses campos ficam vazios. |
 | Escola Sabatina (ES) | Programa de estudo bíblico realizado na manhã do sábado, antes do culto principal. Tem sua própria mensagem musical e músicas (LOUVORES ES), definidas por departamento externo. |
 | Louvor | Parte musical do culto |
 | Mensagem musical | Momento especial no culto. O campo registra um responsável (pessoa ou departamento) que decide o formato: solo, dupla ou trio. Qualquer membro pode fazer. |

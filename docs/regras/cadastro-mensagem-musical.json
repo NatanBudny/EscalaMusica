@@ -1,0 +1,118 @@
+{
+  "versao": "1.0.0",
+  "ultima_atualizacao": "2026-04-28",
+  "descricao": "Cadastro legado de consulta rapida para Mensagem Musical. Mantido alinhado ao cadastro-funcoes-louvor.json, incluindo apenas pessoas ativas habilitadas para MM.",
+  "cantores": [
+    {
+      "nome": "ALESSANDRA DONADON",
+      "aliases": [
+        "ALESSANDRA"
+      ]
+    },
+    {
+      "nome": "ALEX",
+      "aliases": []
+    },
+    {
+      "nome": "ARIADNY",
+      "aliases": []
+    },
+    {
+      "nome": "BERNARDO",
+      "aliases": []
+    },
+    {
+      "nome": "CATHERINE",
+      "aliases": []
+    },
+    {
+      "nome": "DANI HERREIRA",
+      "aliases": []
+    },
+    {
+      "nome": "EMILY",
+      "aliases": []
+    },
+    {
+      "nome": "FABIOLA",
+      "aliases": [
+        "FABÍOLA"
+      ]
+    },
+    {
+      "nome": "FABRICIO",
+      "aliases": [
+        "FABRICIO",
+        "FABRICIO 1"
+      ]
+    },
+    {
+      "nome": "HENRIQUE",
+      "aliases": []
+    },
+    {
+      "nome": "IGOR DUARTE",
+      "aliases": []
+    },
+    {
+      "nome": "JEMELLI",
+      "aliases": []
+    },
+    {
+      "nome": "JUNIOR",
+      "aliases": []
+    },
+    {
+      "nome": "KHEYCIANE",
+      "aliases": []
+    },
+    {
+      "nome": "LAURA GESSNER",
+      "aliases": [
+        "LAURA"
+      ]
+    },
+    {
+      "nome": "LUAN",
+      "aliases": []
+    },
+    {
+      "nome": "MARCELA",
+      "aliases": []
+    },
+    {
+      "nome": "MIRELLA",
+      "aliases": []
+    },
+    {
+      "nome": "NILSINHO",
+      "aliases": [
+        "NILSON"
+      ]
+    },
+    {
+      "nome": "RICARDO HERREIRA",
+      "aliases": [
+        "RICARDO"
+      ]
+    },
+    {
+      "nome": "RONI",
+      "aliases": []
+    },
+    {
+      "nome": "SILVANA",
+      "aliases": []
+    },
+    {
+      "nome": "VANDERLEY",
+      "aliases": []
+    },
+    {
+      "nome": "VONI",
+      "aliases": [
+        "VONIVALDO"
+      ]
+    }
+  ]
+}

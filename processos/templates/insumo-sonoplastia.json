@@ -1,0 +1,13 @@
+{
+  "mes": "AAAA-MM",
+  "fonte": "Escala oficial de sonoplastia",
+  "atualizado_em": "AAAA-MM-DD",
+  "itens": [
+    {
+      "data": "AAAA-MM-DD",
+      "dia": "sabado",
+      "sonoplastia": ["NOME COMPLETO"],
+      "observacoes": ""
+    }
+  ]
+}

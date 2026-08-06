@@ -1,0 +1,21 @@
+{
+  "contexto": "Indisponibilidade de cantores - AAAA-MM",
+  "origem": "Enquete do grupo: qual dia voce NAO pode cantar",
+  "atualizado_em": "AAAA-MM-DD",
+  "datas": [
+    {
+      "data_referencia": "AAAA-MM-DD",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "Nome salvo no celular"
+      ]
+    },
+    {
+      "data_referencia": "geral",
+      "dia_semana": "todos",
+      "disponiveis_para_todos": [
+        "Nome salvo no celular"
+      ]
+    }
+  ]
+}

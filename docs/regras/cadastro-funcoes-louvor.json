@@ -1,0 +1,1063 @@
+{
+  "versao": "1.0.0",
+  "ultima_atualizacao": "2026-04-28",
+  "descricao": "Cadastro de pessoas e funcoes permitidas no louvor. Estrutura simples e editavel para manutencao manual.",
+  "pessoas": [
+    {
+      "nome": "ADELAIDE",
+      "aliases": [],
+      "ativo": false,
+      "notas": "Lider de banda. Contato fixo; nao entra na sugestao automatica de escala de louvor.",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "ALESSANDRA DONADON",
+      "aliases": [
+        "ALESSANDRA"
+      ],
+      "ativo": true,
+      "notas": "ALESSANDRA e ALESSANDRA DONADON sao a mesma pessoa.",
+      "funcoes": {
+        "regente": true,
+        "equipe": true,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": true
+        }
+      }
+    },
+    {
+      "nome": "ALEX",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": true
+        }
+      }
+    },
+    {
+      "nome": "ANDRE",
+      "aliases": [],
+      "ativo": false,
+      "notas": "Em viagem, tempo indeterminado.",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "ANISSA",
+      "aliases": [],
+      "ativo": false,
+      "notas": "Usuario da escala (referencia administrativa). Nao usar para sugestao automatica.",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "ARIADNY",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": true,
+        "equipe": true,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": true
+        }
+      }
+    },
+    {
+      "nome": "BANDA",
+      "aliases": [
+        "ADELAIDE"
+      ],
+      "ativo": false,
+      "notas": "Nao e uma pessoa; contato de grupo/departamento. Nao usar em sugestao automatica.",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "BERNARDO",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": true
+        }
+      }
+    },
+    {
+      "nome": "BETE",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "BRUNA",
+      "aliases": [],
+      "ativo": false,
+      "notas": "Usuario da escala (referencia administrativa). Nao usar para sugestao automatica.",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "CATHERINE",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": true,
+        "equipe": true,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": true
+        }
+      }
+    },
+    {
+      "nome": "CLEVERSON",
+      "aliases": [],
+      "ativo": false,
+      "notas": "Usuario da escala externa (ancianato/pregacao). Nao usar para sugestao automatica de louvor.",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "DA SILVA",
+      "aliases": [
+        "LUIZ DA SILVA",
+        "LUIS DA SILVA",
+        "LUIZ SILVA",
+        "LUIS SILVA"
+      ],
+      "ativo": false,
+      "notas": "Mesmo que LUIZ DA SILVA (alias). Nao duplicar na sugestao automatica.",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "DANI HERREIRA",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": true
+        }
+      }
+    },
+    {
+      "nome": "DANY KALLAS",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": true,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "DIEGO",
+      "aliases": [],
+      "ativo": false,
+      "notas": "Usuario da escala externa (audiovisual). Nao usar para sugestao automatica de louvor.",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "DULCINEIA",
+      "aliases": [],
+      "ativo": false,
+      "notas": "Usuario da escala externa (ancianato). Nao usar para sugestao automatica de louvor.",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "EMILY",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": true
+        }
+      }
+    },
+    {
+      "nome": "ENOQUE",
+      "aliases": [],
+      "ativo": false,
+      "notas": "Usuario da escala externa. Nao usar para sugestao automatica de louvor.",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "FABIOLA",
+      "aliases": [
+        "FABÍOLA"
+      ],
+      "ativo": true,
+      "notas": "Habilitada para mensagem musical conforme planilha-base de observacoes.",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": true
+        }
+      }
+    },
+    {
+      "nome": "FABRICIO",
+      "aliases": [
+        "FABRICIO",
+        "FABRICIO 1"
+      ],
+      "ativo": true,
+      "notas": "Consolidado com variacoes de grafia/historico.",
+      "funcoes": {
+        "regente": true,
+        "equipe": true,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": true
+        }
+      }
+    },
+    {
+      "nome": "GABRIEL P.",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "GIOVANA",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": true,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "HELOISE",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "HENRIQUE",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": true
+        }
+      }
+    },
+    {
+      "nome": "IGOR DUARTE",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": true
+        }
+      }
+    },
+    {
+      "nome": "JEMELLI",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": true
+        }
+      }
+    },
+    {
+      "nome": "JESSE",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "JESSICA",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "JESSIE",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": true,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "JOAS",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": true,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "JULIANA ALVES",
+      "aliases": [
+        "JULIANA"
+      ],
+      "ativo": true,
+      "notas": "Atualizado conforme orientacao do diretor. Atua somente na equipe de louvor e com disponibilidade restrita aos sabados.",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "JUNIOR",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": true,
+        "equipe": true,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": true
+        }
+      }
+    },
+    {
+      "nome": "JUNIOR FERREIRA",
+      "aliases": [],
+      "ativo": false,
+      "notas": "Usuario da escala externa (audiovisual). Nao usar para sugestao automatica de louvor.",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "KHEYCIANE",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": true,
+        "equipe": true,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": true
+        }
+      }
+    },
+    {
+      "nome": "LAURA GESSNER",
+      "aliases": [
+        "LAURA"
+      ],
+      "ativo": true,
+      "notas": "Atualizado conforme orientacao do diretor.",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": true
+        }
+      }
+    },
+    {
+      "nome": "LIDIANE",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": true,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "LUAN",
+      "aliases": [],
+      "ativo": true,
+      "notas": "Habilitado para mensagem musical (ES e Culto) conforme planilha-base de observacoes.",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "LUIZ ANTONIO",
+      "aliases": [
+        "LUIS"
+      ],
+      "ativo": true,
+      "notas": "Consolidado: LUIS e o mesmo de LUIZ ANTONIO.",
+      "funcoes": {
+        "regente": true,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "LUIZ DA SILVA",
+      "aliases": [
+        "LUIZ"
+      ],
+      "ativo": true,
+      "notas": "Consolidado: LUIZ e o mesmo de LUIZ DA SILVA.",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "M. MULHER",
+      "aliases": [],
+      "ativo": false,
+      "notas": "E um departamento, nao pessoa. Nao usar em sugestao automatica de pessoas.",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "MANU C.",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "MANU S.",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "MARAIR",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": true,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "MARCELA",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": true
+        }
+      }
+    },
+    {
+      "nome": "MARCOS",
+      "aliases": [
+        "MARCOS LEANDRO"
+      ],
+      "ativo": false,
+      "notas": "Usuario da escala externa; nome completo Marcos Leandro. Nao usar para sugestao automatica de louvor.",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "MARCOS GALUCH",
+      "aliases": [],
+      "ativo": false,
+      "notas": "Usuario da escala externa. Nao usar para sugestao automatica de louvor.",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "MARIA F.",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "MARIA HELOISA",
+      "aliases": [],
+      "ativo": true,
+      "notas": "Pode atuar em regencia e equipe conforme planilha-base de observacoes.",
+      "funcoes": {
+        "regente": true,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "MIRELLA",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": true
+        }
+      }
+    },
+    {
+      "nome": "MIRIAN",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "NATAN",
+      "aliases": [],
+      "ativo": false,
+      "notas": "Diretor/usuario da escala. Nao entra na sugestao automatica de escala de louvor.",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "NILSINHO",
+      "aliases": [
+        "NILSON"
+      ],
+      "ativo": true,
+      "notas": "NILSINHO e NILSON sao a mesma pessoa.",
+      "funcoes": {
+        "regente": true,
+        "equipe": true,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": true
+        }
+      }
+    },
+    {
+      "nome": "PR. HOFNI",
+      "aliases": [
+        "PR. HOFNE",
+        "PR HOFNI",
+        "PR HOFNE"
+      ],
+      "ativo": false,
+      "notas": "Usuario da escala externa (pregador). Nao usar para sugestao automatica de louvor.",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "RAISSA",
+      "aliases": [],
+      "ativo": false,
+      "notas": "Inativa (conforme observacao da planilha-base).",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "RICARDO HERREIRA",
+      "aliases": [
+        "RICARDO"
+      ],
+      "ativo": true,
+      "notas": "RICARDO e RICARDO HERREIRA sao a mesma pessoa.",
+      "funcoes": {
+        "regente": true,
+        "equipe": true,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": true
+        }
+      }
+    },
+    {
+      "nome": "ROBERTO KOCH",
+      "aliases": [
+        "R. KOCH"
+      ],
+      "ativo": false,
+      "notas": "Usuario da escala externa (pregador). Nao usar para sugestao automatica de louvor.",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "RONI",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": true
+        }
+      }
+    },
+    {
+      "nome": "ROSANA",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "SAMUEL",
+      "aliases": [],
+      "ativo": false,
+      "notas": "Usuario da escala (referencia administrativa). Nao usar para sugestao automatica.",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "SILVANA",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": true,
+        "equipe": true,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": true
+        }
+      }
+    },
+    {
+      "nome": "SIRLENE",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "STELLA",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "SUELLEN",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": true,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "VANDERLEY",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": true,
+          "culto": true,
+          "dom": true
+        }
+      }
+    },
+    {
+      "nome": "VONI",
+      "aliases": [
+        "VONIVALDO"
+      ],
+      "ativo": true,
+      "notas": "Habilitado para equipe e mensagem musical (ES e Domingo) conforme planilha-base de observacoes.",
+      "funcoes": {
+        "regente": false,
+        "equipe": true,
+        "mm": {
+          "es": true,
+          "culto": false,
+          "dom": true
+        }
+      }
+    },
+    {
+      "nome": "YASSER",
+      "aliases": [],
+      "ativo": true,
+      "notas": "",
+      "funcoes": {
+        "regente": true,
+        "equipe": true,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    },
+    {
+      "nome": "ZAILSON",
+      "aliases": [],
+      "ativo": false,
+      "notas": "Usuario da escala (referencia administrativa). Nao usar para sugestao automatica.",
+      "funcoes": {
+        "regente": false,
+        "equipe": false,
+        "mm": {
+          "es": false,
+          "culto": false,
+          "dom": false
+        }
+      }
+    }
+  ]
+}

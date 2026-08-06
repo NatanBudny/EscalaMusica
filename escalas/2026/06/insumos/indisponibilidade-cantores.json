@@ -1,0 +1,151 @@
+{
+  "contexto": "Indisponibilidade de cantores - Junho 2026",
+  "origem": "Enquete do grupo: qual dia voce NAO pode cantar",
+  "atualizado_em": "2026-06-04",
+  "datas": [
+    {
+      "data_referencia": "2026-06-06",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "Giovana spoliante iasd central",
+        "Jessica Tanaka iasd",
+        "Ricardo Central",
+        "Raissa iasd central",
+        "~Sirlene Nicastro",
+        "Andre Herreira iasd",
+        "Kheyciane iasd Central",
+        "~ariadnysouza",
+        "Nilsinho iasd central",
+        "Lidiane iasd central",
+        "Stella Buosi iasd central",
+        "alessandra donadon",
+        "Suelen Central",
+        "Maria iasd central"
+      ]
+    },
+    {
+      "data_referencia": "2026-06-07",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "Giovana spoliante iasd central",
+        "Jessica Tanaka iasd",
+        "Ricardo Central",
+        "Raissa iasd central",
+        "Jesse iasd central",
+        "~Sirlene Nicastro",
+        "Andre Herreira iasd",
+        "Kheyciane iasd Central",
+        "Juliana iasd central do nilsinho",
+        "~ariadnysouza",
+        "Nilsinho iasd central",
+        "Lidiane iasd central",
+        "Stella Buosi iasd central",
+        "alessandra donadon",
+        "Suelen Central",
+        "~DanielleH.",
+        "Maria iasd central"
+      ]
+    },
+    {
+      "data_referencia": "2026-06-13",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "Giovana spoliante iasd central",
+        "Jemelli gatti iasd central",
+        "~Sirlene Nicastro",
+        "Lidiane iasd central",
+        "alessandra donadon",
+        "Suelen Central"
+      ]
+    },
+    {
+      "data_referencia": "2026-06-14",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "Giovana spoliante iasd central",
+        "Jessica Tanaka iasd",
+        "Ricardo Central",
+        "Raissa iasd central",
+        "Jesse iasd central",
+        "~Sirlene Nicastro",
+        "Kheyciane iasd Central",
+        "Juliana iasd central do nilsinho",
+        "Nilsinho iasd central",
+        "Lidiane iasd central",
+        "vida",
+        "alessandra donadon",
+        "Suelen Central",
+        "Maria iasd central"
+      ]
+    },
+    {
+      "data_referencia": "2026-06-20",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "Giovana spoliante iasd central",
+        "Jemelli gatti iasd central",
+        "~Sirlene Nicastro",
+        "Kheyciane iasd Central",
+        "Suelen Central"
+      ]
+    },
+    {
+      "data_referencia": "2026-06-21",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "Giovana spoliante iasd central",
+        "Jessica Tanaka iasd",
+        "Raissa iasd central",
+        "Jesse iasd central",
+        "~Sirlene Nicastro",
+        "Juliana iasd central do nilsinho",
+        "Nilsinho iasd central",
+        "Jessie Candeias iasd Central",
+        "~DanielleH.",
+        "Maria iasd central"
+      ]
+    },
+    {
+      "data_referencia": "2026-06-27",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "Giovana spoliante iasd central",
+        "Jemelli gatti iasd central",
+        "~Sirlene Nicastro"
+      ]
+    },
+    {
+      "data_referencia": "2026-06-28",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "Giovana spoliante iasd central",
+        "Raissa iasd central",
+        "Jesse iasd central",
+        "~Sirlene Nicastro",
+        "Kheyciane iasd Central",
+        "Juliana iasd central do nilsinho",
+        "Nilsinho iasd central",
+        "Lidiane iasd central",
+        "vida",
+        "Maria iasd central"
+      ]
+    },
+    {
+      "data_referencia": "geral",
+      "dia_semana": "todos",
+      "indisponiveis_tempo_indeterminado": [
+        "Emily"
+      ],
+      "observacoes": [
+        "Emily indisponivel por tempo indeterminado (outro pais)."
+      ],
+      "disponiveis_para_todos": [
+        "Silvana iasd Central",
+        "Giovana spoliante iasd central",
+        "luiz iasd antonio",
+        "Alex iasd central",
+        "Dani Kallas"
+      ]
+    }
+  ]
+}

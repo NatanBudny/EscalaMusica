@@ -41,7 +41,9 @@ EscalaMusica/
 ├── local.py                # Dev server: serves files over HTTP on port 8000.
 ├── package.json            # "type": "module". Test script uses --experimental-vm-modules.
 ├── jest.config.js          # Jest config for native ESM.
-└── project_summary.md      # Business rules for schedule generation (AI context).
+├── escalas/                # Escalas mensais organizadas por ano/mês (YYYY/MM/).
+├── processos/              # Guias operacionais, regras, templates e logs.
+└── docs/resumo.md          # Business rules for schedule generation (AI context).
 ```
 
 ---

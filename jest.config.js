@@ -4,5 +4,5 @@ export default {
   transform: {},
   testMatch: ['**/tests/**/*.test.js'],
   coverageDirectory: 'coverage',
-  collectCoverageFrom: ['src/**/*.js'],
+  collectCoverageFrom: ['src/**/*.js', 'scripts/**/*.js'],
 };

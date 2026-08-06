@@ -1,0 +1,136 @@
+{
+  "contexto": "Indisponibilidade de cantores - Julho 2026",
+  "origem": "Enquete do grupo: vote em quais dias voce NAO pode cantar",
+  "atualizado_em": "2026-07-02",
+  "datas": [
+    {
+      "data_referencia": "2026-07-05",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "Joas Gouvea da Silva",
+        "Danielle H.",
+        "Maria iasd central",
+        "Jessie Candeias iasd central",
+        "Ricardo Central",
+        "Jesse iasd central",
+        "Silvana iasd Central",
+        "Jemelli gatti iasd central",
+        "vida",
+        "ariadnysouza",
+        "Nilsinho iasd central",
+        "Kheyciane Iasd Central",
+        "Stella Buosi Iasd central",
+        "Dani Kallas",
+        "alessandra donadon"
+      ]
+    },
+    {
+      "data_referencia": "2026-07-11",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "Ricardo Central",
+        "Andre Herreira iasd",
+        "Kheyciane Iasd Central"
+      ]
+    },
+    {
+      "data_referencia": "2026-07-12",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "Joas Gouvea da Silva",
+        "Maria iasd central",
+        "Ricardo Central",
+        "Jesse iasd central",
+        "Jemelli gatti iasd central",
+        "Adelaide Central",
+        "ariadnysouza",
+        "Nilsinho iasd central",
+        "Kheyciane Iasd Central",
+        "Stella Buosi Iasd central",
+        "alessandra donadon",
+        "Suelen Central"
+      ]
+    },
+    {
+      "data_referencia": "2026-07-18",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "Lidiane Iasd central",
+        "luiz iasd antonio",
+        "Adelaide Central",
+        "alessandra donadon"
+      ]
+    },
+    {
+      "data_referencia": "2026-07-19",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "Joas Gouvea da Silva",
+        "Danielle H.",
+        "Maria iasd central",
+        "Ricardo Central",
+        "Jesse iasd central",
+        "Lidiane Iasd central",
+        "Jemelli gatti iasd central",
+        "vida",
+        "Adelaide Central",
+        "ariadnysouza",
+        "Nilsinho iasd central",
+        "Kheyciane Iasd Central",
+        "Stella Buosi Iasd central",
+        "Suelen Central"
+      ]
+    },
+    {
+      "data_referencia": "2026-07-25",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "Maria iasd central",
+        "Lidiane Iasd central",
+        "Andre Herreira iasd",
+        "Alex iasd central",
+        "ariadnysouza",
+        "Kheyciane Iasd Central",
+        "Marair Iasd central",
+        "alessandra donadon"
+      ]
+    },
+    {
+      "data_referencia": "2026-07-26",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "Joas Gouvea da Silva",
+        "Maria iasd central",
+        "Ricardo Central",
+        "Jesse iasd central",
+        "Lidiane Iasd central",
+        "Andre Herreira iasd",
+        "Jemelli gatti iasd central",
+        "Adelaide Central",
+        "ariadnysouza",
+        "Nilsinho iasd central",
+        "Kheyciane Iasd Central",
+        "Stella Buosi Iasd central",
+        "Dani Kallas",
+        "alessandra donadon"
+      ]
+    },
+    {
+      "data_referencia": "geral",
+      "dia_semana": "todos",
+      "indisponiveis_tempo_indeterminado": [
+        "Sirlene Nicastro",
+        "Adelaide Central",
+        "Voni Leao",
+        "Kheyciane Iasd Central",
+        "Juliana iasd central do Nilsinho"
+      ],
+      "observacoes": [
+        "Nomes marcados em extra_indisponibilidade_total aplicados para todo o mes."
+      ],
+      "disponiveis_para_todos": [
+        ""
+      ]
+    }
+  ]
+}
