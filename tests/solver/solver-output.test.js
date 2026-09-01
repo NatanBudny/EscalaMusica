@@ -180,18 +180,32 @@ describe('formatarRascunhoMd', () => {
     expect(pipes).toBe(11); // |col1|col2|...|col9| = 11 parts when split
   });
 
-  test('quarta-feira com campos vazios de louvor', () => {
+  test('RF006: quarta-feira é omitida do rascunho', () => {
     const sugestao = criarSugestao({
       data: '2026-07-02',
       dia_semana: 'quarta-feira',
+      tipo: 'quarta',
       regente: null,
       equipe: [],
       mm: [],
     });
     const md = formatarRascunhoMd([sugestao]);
 
-    expect(md).toContain('Quarta-feira');
-    expect(md).toContain('02/07/2026');
+    expect(md).not.toContain('Quarta-feira');
+    expect(md).not.toContain('02/07/2026');
+  });
+
+  test('RF006: quartas são filtradas mas sábados/domingos permanecem', () => {
+    const sugestoes = [
+      criarSugestao({ data: '2026-07-02', dia_semana: 'quarta-feira', tipo: 'quarta' }),
+      criarSugestao({ data: '2026-07-05', dia_semana: 'domingo' }),
+      criarSugestao({ data: '2026-07-11', dia_semana: 'sabado' }),
+    ];
+    const md = formatarRascunhoMd(sugestoes);
+
+    expect(md).not.toContain('02/07/2026');
+    expect(md).toContain('05/07/2026');
+    expect(md).toContain('11/07/2026');
   });
 });
 
