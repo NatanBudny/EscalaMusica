@@ -1,191 +1,107 @@
 #!/usr/bin/env node
 /**
  * validar-rascunho.js
- * Valida regras operacionais no rascunho mensal (markdown).
  *
- * Regras validadas:
- * - Ninguem pode estar em REGENTE LOUVOR e EQUIPE LOUVOR no mesmo culto.
- * - Excecao permitida quando o louvor inteiro e de departamento (RF015),
- *   identificado por PREGADOR = REGENTE = EQUIPE (valor unico, sem virgula).
+ * Validador determinístico e completo do rascunho mensal. Usa o auditor central
+ * (scripts/lib/auditor-escala.js), que concentra TODAS as regras. Substitui as
+ * checagens manuais que antes eram feitas caso a caso.
  *
  * Uso:
- *   node scripts/validar-rascunho.js
- *   node scripts/validar-rascunho.js escalas/2026/06/rascunho.md
+ *   node scripts/validacao/validar-rascunho.js                 # rascunho mais recente
+ *   node scripts/validacao/validar-rascunho.js escalas/2026/09/rascunho.md
+ *
+ * Exit codes:
+ *   0 = sem violações obrigatórias (pode haver avisos)
+ *   1 = há violações obrigatórias, ou erro fatal
  */
 
 import { existsSync, readFileSync, readdirSync, statSync } from 'fs';
 import { resolve, dirname, join } from 'path';
 import { fileURLToPath } from 'url';
+import { carregarPessoas } from '../lib/cadastro.js';
+import { auditarEscala, parseRascunho } from '../lib/auditor-escala.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '../..');
 
-const RED = '\x1b[31m';
-const GREEN = '\x1b[32m';
-const RESET = '\x1b[0m';
-const BOLD = '\x1b[1m';
+const RED = '\x1b[31m', GREEN = '\x1b[32m', YELLOW = '\x1b[33m', BOLD = '\x1b[1m', RESET = '\x1b[0m';
 
 function collectRascunhos(dir) {
   const out = [];
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const full = join(dir, entry.name);
-    if (entry.isDirectory()) {
-      out.push(...collectRascunhos(full));
-      continue;
-    }
-    if (entry.isFile() && entry.name.toLowerCase() === 'rascunho.md') {
-      out.push(full);
-    }
+    if (entry.isDirectory()) out.push(...collectRascunhos(full));
+    else if (entry.isFile() && entry.name.toLowerCase() === 'rascunho.md') out.push(full);
   }
   return out;
 }
 
 function resolveRascunhoPath() {
   const argPath = process.argv[2];
-  if (argPath) {
-    return resolve(ROOT, argPath);
-  }
-
+  if (argPath) return resolve(ROOT, argPath);
   const escalasDir = resolve(ROOT, 'escalas');
-  if (!existsSync(escalasDir)) {
-    throw new Error('Pasta escalas/ nao encontrada. Informe o caminho do rascunho manualmente.');
-  }
-
+  if (!existsSync(escalasDir)) throw new Error('Pasta escalas/ não encontrada. Informe o caminho do rascunho.');
   const files = collectRascunhos(escalasDir)
-    .map((filePath) => ({ filePath, mtime: statSync(filePath).mtimeMs }))
-    .sort((a, b) => b.mtime - a.mtime);
-
-  if (files.length === 0) {
-    throw new Error('Nenhum rascunho.md encontrado em escalas/.');
-  }
-
-  return files[0].filePath;
+    .map((f) => ({ f, m: statSync(f).mtimeMs }))
+    .sort((a, b) => b.m - a.m);
+  if (files.length === 0) throw new Error('Nenhum rascunho.md encontrado em escalas/.');
+  return files[0].f;
 }
 
-function parseRows(mdContent) {
-  return mdContent
-    .split(/\r?\n/)
-    .filter((line) => /^\|\s\d{2}\/\d{2}\/\d{4}\s\|/.test(line))
-    .map((line) => line.split('|').map((part) => part.trim()));
-}
-
-function toIsoDate(brDate) {
-  const [dd, mm, yyyy] = (brDate || '').split('/');
-  if (!dd || !mm || !yyyy) return '';
-  return `${yyyy}-${mm}-${dd}`;
-}
-
-function resolveIndisponibilidadePath(pathRascunho) {
-  const mmDir = dirname(pathRascunho);
-  const candid = resolve(mmDir, 'insumos', 'indisponibilidade-cantores-vinculada.json');
+function resolveIndisponibilidade(pathRascunho) {
+  const candid = resolve(dirname(pathRascunho), 'insumos', 'indisponibilidade-cantores-vinculada.json');
   if (!existsSync(candid)) {
-    throw new Error(`Arquivo de indisponibilidade nao encontrado para o rascunho: ${candid}`);
+    console.warn(`${YELLOW}AVISO:${RESET} indisponibilidade vinculada não encontrada (${candid}). Checagem de disponibilidade ficará limitada.`);
+    return { datas: [], indisponiveis_mes_inteiro: { nomes: [] } };
   }
-  return candid;
-}
-
-function splitAllNames(raw) {
-  if (!raw) return [];
-  return raw
-    .split(',')
-    .map((name) => name.trim().toUpperCase())
-    .filter((name) => Boolean(name) && name !== 'JOVENS');
-}
-
-function splitEquipeNames(raw) {
-  if (!raw) return [];
-  if (raw.toUpperCase() === 'JOVENS') return ['JOVENS'];
-  return raw
-    .split(',')
-    .map((name) => name.trim().toUpperCase())
-    .filter(Boolean);
-}
-
-function isDepartmentException(regente, equipeRaw, pregador) {
-  const reg = (regente || '').trim().toUpperCase();
-  const eq = (equipeRaw || '').trim().toUpperCase();
-  const preg = (pregador || '').trim().toUpperCase();
-  if (!reg || !eq || !preg) return false;
-  if (eq.includes(',')) return false;
-  return reg === preg && eq === reg;
+  return JSON.parse(readFileSync(candid, 'utf8'));
 }
 
 function run() {
   const pathRascunho = resolveRascunhoPath();
-  const raw = readFileSync(pathRascunho, 'utf8');
-  const rows = parseRows(raw);
-  const pathIndisponibilidade = resolveIndisponibilidadePath(pathRascunho);
-  const indisponibilidade = JSON.parse(readFileSync(pathIndisponibilidade, 'utf8'));
+  const cadastro = carregarPessoas();
+  const indisponibilidade = resolveIndisponibilidade(pathRascunho);
+  const cultos = parseRascunho(readFileSync(pathRascunho, 'utf8'));
 
-  const indisponiveisPorData = new Map();
-  for (const item of indisponibilidade.datas || []) {
-    if (!item?.data_referencia || !/^\d{4}-\d{2}-\d{2}$/.test(item.data_referencia)) continue;
-    indisponiveisPorData.set(
-      item.data_referencia,
-      new Set((item.indisponiveis_contatos || []).map((name) => String(name).toUpperCase()))
-    );
+  const { erros, avisos, icr, totalCultos } = auditarEscala({
+    pessoas: cadastro.pessoas, indisponibilidade, cultos,
+  });
+
+  console.log(`\n${BOLD}=== Validação de Rascunho ===${RESET}`);
+  console.log(`Arquivo: ${pathRascunho}`);
+  console.log(`Cultos próprios: ${totalCultos}\n`);
+
+  if (erros.length) {
+    console.log(`${RED}${BOLD}Violações obrigatórias (${erros.length}):${RESET}`);
+    for (const e of erros) console.log(`  ${RED}✗${RESET} ${e}`);
+    console.log('');
+  } else {
+    console.log(`${GREEN}${BOLD}✓ Nenhuma violação obrigatória.${RESET}\n`);
   }
 
-  const errosDuplicidade = [];
-  const errosIndisponibilidade = [];
-
-  for (const row of rows) {
-    const data = row[1];
-    const pregador = row[4];
-    const regente = row[6];
-    const equipeRaw = row[7];
-    const mensagemRaw = row[8];
-    const equipeNames = splitEquipeNames(equipeRaw);
-    const regenteNorm = (regente || '').trim().toUpperCase();
-    const isoDate = toIsoDate(data);
-    const indisponiveisData = indisponiveisPorData.get(isoDate) || new Set();
-
-    if (!regenteNorm) continue;
-    const isDeptException = isDepartmentException(regente, equipeRaw, pregador);
-    if (!isDeptException && equipeNames.includes(regenteNorm)) {
-      errosDuplicidade.push({
-        data,
-        regente: regenteNorm,
-      });
-    }
-
-    const namesNoCulto = [regente, equipeRaw, mensagemRaw].flatMap(splitAllNames);
-    for (const nome of namesNoCulto) {
-      if (indisponiveisData.has(nome)) {
-        errosIndisponibilidade.push({ data, nome });
-      }
-    }
+  if (avisos.length) {
+    console.log(`${YELLOW}${BOLD}Avisos / preferências (${avisos.length}):${RESET}`);
+    for (const a of avisos) console.log(`  ${YELLOW}⚠${RESET} ${a}`);
+    console.log('');
   }
 
-  console.log(`\n${BOLD}=== Validacao de Rascunho ===${RESET}`);
-  console.log(`Arquivo: ${pathRascunho}\n`);
+  // ICR resumido
+  const sobre = icr.filter((l) => l.icr > 2.0);
+  const esquecidos = icr.filter((l) => l.esc === 0 && l.disp >= Math.ceil(totalCultos / 2) && !l.incentivo);
+  console.log(`${BOLD}ICR (participação):${RESET}`);
+  for (const l of icr.filter((l) => l.esc > 0)) console.log(`  ${l.nome.padEnd(18)} esc=${l.esc} disp=${l.disp} ICR=${l.icr.toFixed(2)}`);
+  if (sobre.length) console.log(`  ${RED}Sobrecarga:${RESET} ${sobre.map((l) => l.nome).join(', ')}`);
+  if (esquecidos.length) console.log(`  ${YELLOW}Esquecidos (disp, sem incentivo):${RESET} ${esquecidos.map((l) => l.nome).join(', ')}`);
 
-  if (errosDuplicidade.length > 0) {
-    console.log(`${RED}${BOLD}Erros graves de duplicidade (${errosDuplicidade.length}):${RESET}`);
-    for (const erro of errosDuplicidade) {
-      console.log(`  ${RED}x${RESET} ${erro.data}: ${erro.regente} em REGENTE e EQUIPE no mesmo culto`);
-    }
-  }
-
-  if (errosIndisponibilidade.length > 0) {
-    console.log(`${RED}${BOLD}Erros gravissimos de indisponibilidade (${errosIndisponibilidade.length}):${RESET}`);
-    for (const erro of errosIndisponibilidade) {
-      console.log(`  ${RED}x${RESET} ${erro.data}: ${erro.nome} marcado como indisponivel no insumo vinculado`);
-    }
-  }
-
-  if (errosDuplicidade.length > 0 || errosIndisponibilidade.length > 0) {
-    console.log(`\n${RED}${BOLD}Falhou.${RESET} Corrija antes de seguir.`);
+  console.log('');
+  if (erros.length) {
+    console.log(`${RED}${BOLD}FALHOU — corrija as violações obrigatórias.${RESET}`);
     process.exit(1);
   }
-
-  console.log(`${GREEN}${BOLD}OK:${RESET} sem duplicidade individual entre REGENTE e EQUIPE.`);
-  console.log(`${GREEN}${BOLD}OK:${RESET} sem conflitos com indisponibilidade vinculada.`);
+  console.log(`${GREEN}${BOLD}OK — rascunho válido.${RESET}`);
 }
 
-try {
-  run();
-} catch (error) {
-  console.error(`${RED}${BOLD}ERRO:${RESET} ${error.message}`);
+try { run(); } catch (err) {
+  console.error(`${RED}${BOLD}ERRO:${RESET} ${err.message}`);
   process.exit(1);
 }

@@ -64,7 +64,11 @@ export function formatarRascunhoMd(sugestoes) {
   linhas.push('| DATA | DIA SEMANA | ANCIÃO | PREGADOR | AUDIOVISUAL | REGENTE LOUVOR | EQUIPE LOUVOR | MENSAGEM MUSICAL | OBS |');
   linhas.push('|------|------------|--------|----------|-------------|----------------|---------------|------------------|-----|');
 
-  for (const sug of sugestoes) {
+  // RF006: o rascunho omite as quartas-feiras (sem escala própria de louvor).
+  // Os dados externos das quartas voltam a ser incluídos apenas na publicação final (atual.json).
+  const sugestoesRascunho = sugestoes.filter((sug) => sug.tipo !== 'quarta');
+
+  for (const sug of sugestoesRascunho) {
     const dataBR = formatarDataBR(sug.data);
     const diaSemana = capitalizarDia(sug.dia_semana);
     const anciao = sug.anciao || '';
@@ -75,12 +79,7 @@ export function formatarRascunhoMd(sugestoes) {
     let mm = '';
     let obs = sug.obs || '';
 
-    if (sug.tipo === 'quarta') {
-      // Quarta-feira: sem louvor (campos vazios)
-      regente = '';
-      equipe = '';
-      mm = '';
-    } else if (sug.tipo === 'departamental') {
+    if (sug.tipo === 'departamental') {
       // Departamental: preencher com nome do departamento (RF015)
       regente = sug.departamento;
       equipe = sug.departamento;

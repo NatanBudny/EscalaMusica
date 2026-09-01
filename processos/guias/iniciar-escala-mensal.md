@@ -33,6 +33,9 @@ npm run sugerir:rascunho -- --mes=2026-08
 # 5. Validar rascunho
 npm run validar:rascunho escalas/2026/08/rascunho.md
 
+# 5.1 Analisar participacao / ICR (RF027 — obrigatorio antes de apresentar)
+npm run analisar:participacao -- --mes=2026-08
+
 # 6. Revisar manualmente e publicar
 npm run publicar:fechamento -- --rascunho=escalas/2026/08/rascunho.md
 ```
@@ -82,7 +85,10 @@ Após o solver gerar o rascunho, o diretor deve verificar:
 npm run validar:rascunho escalas/AAAA/MM/rascunho.md
 npm run validar:regras
 npm run validar:obs
+npm run analisar:participacao -- --mes=AAAA-MM
 ```
+
+O `analisar:participacao` gera `escalas/AAAA/MM/participacao-icr.md` com o percentual de participacao, carga real e ICR de cada membro (RF027). Revisar sobrecarregados (ICR > 2.0) e esquecidos (ICR 0 estando disponiveis) antes de finalizar.
 
 ---
 

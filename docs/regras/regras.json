@@ -1,6 +1,6 @@
 {
   "versao": "0.1.0",
-  "ultima_atualizacao": "2026-04-28",
+  "ultima_atualizacao": "2026-09-01T21:15:00Z",
   "papeis": {
     "REGENTE LOUVOR": {
       "origem": "escala_propria",
@@ -171,8 +171,16 @@
         "id": "RP005",
         "tipo": "relacionamento",
         "prioridade": "obrigatoria",
-        "descricao": "Deve cantar sempre junto com LIDIANE (como casal), nunca separado dela",
+        "descricao": "Deve cantar sempre junto com LIDIANE (como casal), nunca separado dele",
         "papeis_afetados": ["EQUIPE LOUVOR", "MENSAGEM MUSICAL"]
+      },
+      {
+        "id": "RP012",
+        "tipo": "condicional",
+        "prioridade": "preferencial",
+        "descricao": "Já é muito ativo no ministério; usar como REGENTE apenas em último caso e sugerir sua escalação no máximo a cada 2 meses",
+        "papeis_afetados": ["REGENTE LOUVOR", "EQUIPE LOUVOR"],
+        "intervalo_minimo_meses": 2
       }
     ],
     "JULIANA ALVES": [
@@ -191,6 +199,95 @@
         "tipo": "disponibilidade",
         "prioridade": "obrigatoria",
         "descricao": "Indisponível aos domingos",
+        "papeis_afetados": ["REGENTE LOUVOR", "EQUIPE LOUVOR", "MENSAGEM MUSICAL"],
+        "dias_bloqueados": ["domingo"]
+      }
+    ],
+    "BERNARDO": [
+      {
+        "id": "RP008",
+        "tipo": "condicional",
+        "prioridade": "preferencial",
+        "descricao": "Cantor infantil escalado por incentivo à participação; não deve ser escalado em meses consecutivos (escalar um mês e pular o seguinte)",
+        "papeis_afetados": ["EQUIPE LOUVOR"],
+        "intervalo_minimo_meses": 2,
+        "observacao": "Perfil de incentivo à participação infantil"
+      }
+    ],
+    "MANU C.": [
+      {
+        "id": "RP009",
+        "tipo": "condicional",
+        "prioridade": "obrigatoria",
+        "descricao": "Só pode ser escalada quando SILVANA também estiver na escala do mesmo culto",
+        "papeis_afetados": ["EQUIPE LOUVOR"],
+        "condicao": { "tipo": "junto_com", "valor": "SILVANA" }
+      },
+      {
+        "id": "RP010",
+        "tipo": "condicional",
+        "prioridade": "preferencial",
+        "descricao": "Cantora infantil escalada por incentivo à participação; não deve ser escalada em meses consecutivos",
+        "papeis_afetados": ["EQUIPE LOUVOR"],
+        "intervalo_minimo_meses": 2,
+        "observacao": "Perfil de incentivo à participação infantil"
+      }
+    ],
+    "MANU S.": [
+      {
+        "id": "RP011",
+        "tipo": "condicional",
+        "prioridade": "obrigatoria",
+        "descricao": "Só pode ser escalada quando JESSICA ou JOAS estiverem na escala do mesmo culto",
+        "papeis_afetados": ["EQUIPE LOUVOR"],
+        "condicao": { "tipo": "junto_com_qualquer", "valor": ["JESSICA", "JOAS"] }
+      },
+      {
+        "id": "RP015",
+        "tipo": "condicional",
+        "prioridade": "preferencial",
+        "descricao": "Cantora infantil escalada por incentivo à participação; não deve ser escalada em meses consecutivos",
+        "papeis_afetados": ["EQUIPE LOUVOR"],
+        "intervalo_minimo_meses": 2,
+        "observacao": "Perfil de incentivo à participação infantil"
+      }
+    ],
+    "LIDIANE": [
+      {
+        "id": "RP013",
+        "tipo": "condicional",
+        "prioridade": "preferencial",
+        "descricao": "Segue a mesma cadência do YASSER (casal): sugerir sua escalação no máximo a cada 2 meses",
+        "papeis_afetados": ["REGENTE LOUVOR", "EQUIPE LOUVOR"],
+        "intervalo_minimo_meses": 2
+      }
+    ],
+    "RONI": [
+      {
+        "id": "RP014",
+        "tipo": "condicional",
+        "prioridade": "preferencial",
+        "descricao": "Evitar escalar em cultos muito próximos da data de montagem/publicação; costuma recusar convocações em cima da hora. Preferir escalá-lo em cultos com antecedência maior",
+        "papeis_afetados": ["EQUIPE LOUVOR", "MENSAGEM MUSICAL"]
+      }
+    ],
+    "VANDERLEY": [
+      {
+        "id": "RP016",
+        "tipo": "condicional",
+        "prioridade": "preferencial",
+        "descricao": "Entra raramente (cerca de 1 vez a cada 3 meses) e somente aos sábados; atua mais como apoio de sonoplastia, e no louvor é escalado por incentivo",
+        "papeis_afetados": ["EQUIPE LOUVOR"],
+        "dias_permitidos": ["sabado"],
+        "intervalo_minimo_meses": 3
+      }
+    ],
+    "CATHERINE": [
+      {
+        "id": "RP017",
+        "tipo": "disponibilidade",
+        "prioridade": "obrigatoria",
+        "descricao": "Não canta aos domingos (disponível apenas aos sábados)",
         "papeis_afetados": ["REGENTE LOUVOR", "EQUIPE LOUVOR", "MENSAGEM MUSICAL"],
         "dias_bloqueados": ["domingo"]
       }
@@ -226,8 +323,8 @@
     },
     {
       "id": "RF006",
-      "descricao": "O rascunho/preview pode omitir quartas-feiras, mas a publicação final deve incluir os cultos de quarta com dados dos departamentos externos",
-      "detalhe": "No atual.json publicado, preencher PREGADOR, ANCIÃO, AUDIOVISUAL e OBS para quartas-feiras; manter REGENTE LOUVOR, EQUIPE LOUVOR, MENSAGEM MUSICAL e SUPORTE em branco ou '-'",
+      "descricao": "O rascunho/preview deve omitir as quartas-feiras; a publicação final deve incluir os cultos de quarta com dados dos departamentos externos",
+      "detalhe": "As quartas-feiras não entram no rascunho.md (não há escala própria de louvor nesses dias). Elas são reintroduzidas apenas na publicação final: no atual.json, preencher PREGADOR, ANCIÃO, AUDIOVISUAL e OBS para as quartas-feiras, mantendo REGENTE LOUVOR, EQUIPE LOUVOR, MENSAGEM MUSICAL e SUPORTE em branco ou '-'",
       "papeis_afetados": ["PREGADOR", "ANCIÃO", "AUDIOVISUAL", "OBS", "REGENTE LOUVOR", "EQUIPE LOUVOR", "MENSAGEM MUSICAL", "SUPORTE"]
     },
     {
@@ -360,6 +457,15 @@
         "CULTO": "Segundo nome do sabado (posicao 2), ou unico nome quando ha apenas 1. Tambem cobre outros dias exceto domingo. Mais importante.",
         "DOMINGO": "Nome unico do domingo."
       }
+    },
+    {
+      "id": "PE009",
+      "descricao": "Pessoas com perfil de incentivo cantam com frequencia reduzida (participacao por incentivo). Escala-las no maximo uma vez a cada 'intervalo_meses' definido no cadastro (campo 'incentivo' em pessoas.json). Ao sugerir, dar preferencia a espaca-las conforme esse intervalo.",
+      "prioridade": "media",
+      "papeis_afetados": ["EQUIPE LOUVOR", "MENSAGEM MUSICAL"],
+      "tipo": "distribuicao",
+      "fonte_dados": "pessoas.json -> incentivo: { ativo, intervalo_meses }",
+      "nota": "Generaliza os casos individuais de cantores de incentivo/infantis (ex: ROSANA 1.5 mes; BERNARDO, MANU C., MANU S., LAURA 1.5 mes; VANDERLEY 3 meses). As restricoes pessoais especificas (RP) continuam valendo em conjunto."
     }
   ],
   "times": {

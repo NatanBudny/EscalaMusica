@@ -25,11 +25,26 @@ if (publishArgs.length > 0) {
   publishCommand = `${publishCommand} -- ${publishArgs.join(' ')}`;
 }
 
+// Validação do rascunho ANTES de promover (aborta o fechamento se houver violação).
+const validarRascunhoCmd = rascunho
+  ? `npm run validar:rascunho -- ${quoteArg(rascunho)}`
+  : 'npm run validar:rascunho';
+
+// Mês alvo (AAAA-MM) inferido do caminho do rascunho, para passar aos controles.
+const mesMatch = String(rascunho).match(/escalas[\/\\](\d{4})[\/\\](\d{2})[\/\\]/);
+const mesAlvo = mesMatch ? `${mesMatch[1]}-${mesMatch[2]}` : '';
+const mesArg = mesAlvo ? ` -- --mes=${mesAlvo}` : '';
+
 const steps = [
+  { label: 'Validar rascunho (auditoria completa)', command: validarRascunhoCmd },
   { label: 'Publicar mes', command: publishCommand },
   { label: 'Validar regras', command: 'npm run validar:regras' },
   { label: 'Validar OBS', command: 'npm run validar:obs' },
   { label: 'Gerar links', command: 'npm run gerar:links-publicacao' },
+  // Controles de rotação: rodam APÓS publicar, para já incluir o mês recém-publicado no histórico.
+  { label: 'Controle Mensagem Musical', command: `npm run controle:mm${mesArg}` },
+  { label: 'Controle Regentes', command: `npm run controle:regentes${mesArg}` },
+  { label: 'Controle Equipe Louvor', command: `npm run controle:equipe${mesArg}` },
   { label: 'Limpar pos-publicacao', command: 'npm run limpar:pos-publicacao' }
 ];
 

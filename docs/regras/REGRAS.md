@@ -22,7 +22,7 @@ _Exceção RF004-A:_ O ANCIÃO pode acumular outros papéis sem restrição — 
 **RF005** — Não fazemos escala própria de louvor às quartas-feiras.  
 Para cultos de quarta, os campos `REGENTE LOUVOR`, `EQUIPE LOUVOR`, `MENSAGEM MUSICAL` e `SUPORTE` devem ficar vazios ou `-`.
 
-**RF006** — O arquivo de rascunho/preview pode omitir quartas-feiras, mas a publicação final (`atual.json`) deve incluir também os cultos de quarta com dados dos outros departamentos.  
+**RF006** — O arquivo de rascunho/preview (`rascunho.md`) **deve omitir as quartas-feiras** (não há escala própria de louvor nesses dias). A publicação final (`atual.json`) deve incluir também os cultos de quarta com dados dos outros departamentos.  
 Na escala publicada, preencher normalmente `PREGADOR`, `ANCIÃO`, `AUDIOVISUAL` e `OBS` da quarta-feira, mantendo `REGENTE LOUVOR`, `EQUIPE LOUVOR`, `MENSAGEM MUSICAL` e `SUPORTE` em branco (ou `-`).
 
 **RF007** — O campo `OBS` no `atual.json` é exclusivamente público.  
@@ -111,6 +111,46 @@ Informações usadas durante a montagem da escala (ex: justificativas internas, 
 - `tipo`: disponibilidade
 - `prioridade`: obrigatoria
 
+- **RP008 · BERNARDO** — cantor infantil escalado por incentivo à participação; não escalar em meses consecutivos (escalar um mês e pular o seguinte)
+- `tipo`: condicional
+- `prioridade`: preferencial
+
+- **RP009 · MANU C.** — só pode ser escalada quando `SILVANA` também estiver na escala do mesmo culto
+- `tipo`: condicional
+- `prioridade`: obrigatoria
+
+- **RP010 · MANU C.** — cantora infantil escalada por incentivo à participação; não escalar em meses consecutivos
+- `tipo`: condicional
+- `prioridade`: preferencial
+
+- **RP011 · MANU S.** — só pode ser escalada quando `JESSICA` ou `JOAS` estiverem na escala do mesmo culto
+- `tipo`: condicional
+- `prioridade`: obrigatoria
+
+- **RP012 · YASSER** — já é muito ativo no ministério; usar como regente apenas em último caso e sugerir sua escalação no máximo a cada 2 meses
+- `tipo`: condicional
+- `prioridade`: preferencial
+
+- **RP013 · LIDIANE** — segue a mesma cadência do YASSER (casal): sugerir sua escalação no máximo a cada 2 meses
+- `tipo`: condicional
+- `prioridade`: preferencial
+
+- **RP014 · RONI** — evitar escalar em cultos muito próximos da data de montagem/publicação; costuma recusar convocações em cima da hora
+- `tipo`: condicional
+- `prioridade`: preferencial
+
+- **RP015 · MANU S.** — cantora infantil escalada por incentivo à participação; não escalar em meses consecutivos
+- `tipo`: condicional
+- `prioridade`: preferencial
+
+- **RP016 · VANDERLEY** — entra raramente (~1x a cada 3 meses) e somente aos sábados; atua mais como apoio de sonoplastia e no louvor é escalado por incentivo
+- `tipo`: condicional
+- `prioridade`: preferencial
+
+- **RP017 · CATHERINE** — não canta aos domingos (disponível apenas aos sábados)
+- `tipo`: disponibilidade
+- `prioridade`: obrigatoria
+
 ---
 
 ## PE — Preferências de Escala
@@ -138,6 +178,10 @@ Informações usadas durante a montagem da escala (ex: justificativas internas, 
 
 Ao sugerir nomes, priorizar: slot ES → menor contagem de ES; slot CULTO → menor contagem de CULTO; slot DOMINGO → menor contagem de DOMINGO.  
 Não é regra rígida: disponibilidade real do mês e RF013/RF014 têm precedência sobre qualquer critério de rotação.
+
+**PE009** — Pessoas com **perfil de incentivo** cantam com frequência reduzida (participação por incentivo). Escalá-las no máximo uma vez a cada `intervalo_meses` definido no cadastro (campo `incentivo` em `pessoas.json`).  
+_Fonte de dados:_ `pessoas.json` → `incentivo: { ativo, intervalo_meses }`.  
+_Aplicação atual:_ ROSANA (1.5 mês); BERNARDO, MANU C., MANU S., LAURA (1.5 mês); VANDERLEY (3 meses). Generaliza os casos individuais desses cantores; as RP específicas continuam valendo em conjunto.
 
 ---
 

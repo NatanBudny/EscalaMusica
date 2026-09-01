@@ -1,0 +1,165 @@
+{
+  "contexto": "Indisponibilidade de cantores - Setembro 2026",
+  "origem": "Enquete do grupo: vote em quais dias voce NAO pode cantar",
+  "atualizado_em": "2026-09-01",
+  "datas": [
+    {
+      "data_referencia": "2026-09-05",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "Maria iasd central",
+        "voni leao",
+        "Suelen Central",
+        "Adelaide Central",
+        "Maria Elisa iasd central",
+        "Rosana spoliante iasd central",
+        "luiz iasd antonio",
+        "Raíssa iasd central",
+        "Stella Buosi Iasd central",
+        "Giovana spoliante iasd central"
+      ]
+    },
+    {
+      "data_referencia": "2026-09-06",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "Juliana iasd central do nilsinho",
+        "Maria iasd central",
+        "Stephany Cionek",
+        "voni leao",
+        "Suelen Central",
+        "Silvana Iasd Central",
+        "Adelaide Central",
+        "ariadny manu iasd",
+        "Jessé iasd central",
+        "Rosana spoliante iasd central",
+        "fabricio iasd central",
+        "Dani Kallas",
+        "luiz iasd antonio",
+        "André Herreira iasd",
+        "Jessica Tanaka iasd",
+        "Jemelli gatti iasd central",
+        "Raíssa iasd central",
+        "Stella Buosi Iasd central",
+        "Giovana spoliante iasd central",
+        "Joás Gouvêa da Silva"
+      ]
+    },
+    {
+      "data_referencia": "2026-09-12",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "voni leao",
+        "Adelaide Central",
+        "Rosana spoliante iasd central",
+        "Giovana spoliante iasd central"
+      ]
+    },
+    {
+      "data_referencia": "2026-09-13",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "Juliana iasd central do nilsinho",
+        "Maria iasd central",
+        "Stephany Cionek",
+        "Silvana Iasd Central",
+        "Adelaide Central",
+        "vida ❤️",
+        "ariadny manu iasd",
+        "Jessé iasd central",
+        "Maria Elisa iasd central",
+        "fabricio iasd central",
+        "Dani Kallas",
+        "André Herreira iasd",
+        "Daniele Herreira",
+        "Jemelli gatti iasd central",
+        "Raíssa iasd central",
+        "Stella Buosi Iasd central",
+        "Giovana spoliante iasd central",
+        "Joás Gouvêa da Silva"
+      ]
+    },
+    {
+      "data_referencia": "2026-09-19",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "voni leao",
+        "Adelaide Central",
+        "Maria Elisa iasd central",
+        "Rosana spoliante iasd central",
+        "Giovana spoliante iasd central"
+      ]
+    },
+    {
+      "data_referencia": "2026-09-20",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "Juliana iasd central do nilsinho",
+        "Maria iasd central",
+        "Stephany Cionek",
+        "voni leao",
+        "Silvana Iasd Central",
+        "Adelaide Central",
+        "vida ❤️",
+        "ariadny manu iasd",
+        "Jessé iasd central",
+        "fabricio iasd central",
+        "Dani Kallas",
+        "Jessica Tanaka iasd",
+        "Jemelli gatti iasd central",
+        "Raíssa iasd central",
+        "Stella Buosi Iasd central",
+        "Giovana spoliante iasd central",
+        "Joás Gouvêa da Silva"
+      ]
+    },
+    {
+      "data_referencia": "2026-09-26",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "voni leao",
+        "Adelaide Central",
+        "Rosana spoliante iasd central",
+        "luiz iasd antonio"
+      ]
+    },
+    {
+      "data_referencia": "2026-09-27",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "Juliana iasd central do nilsinho",
+        "Maria iasd central",
+        "Stephany Cionek",
+        "Suelen Central",
+        "Adelaide Central",
+        "ariadny manu iasd",
+        "Jessé iasd central",
+        "Maria Elisa iasd central",
+        "fabricio iasd central",
+        "Dani Kallas",
+        "luiz iasd antonio",
+        "Daniele Herreira",
+        "Jemelli gatti iasd central",
+        "Raíssa iasd central",
+        "Stella Buosi Iasd central",
+        "Joás Gouvêa da Silva"
+      ]
+    },
+    {
+      "data_referencia": "geral",
+      "dia_semana": "todos",
+      "indisponiveis_tempo_indeterminado": [
+        "sirlene iasd",
+        "alessandra donadon",
+        "Marair Iasd central",
+        "Nilsinho iasd central"
+      ],
+      "observacoes": [
+        "Nomes em indisponiveis_tempo_indeterminado marcaram 'NAO POSSO EM SETEMBRO' na enquete."
+      ],
+      "disponiveis_para_todos": [
+        ""
+      ]
+    }
+  ]
+}

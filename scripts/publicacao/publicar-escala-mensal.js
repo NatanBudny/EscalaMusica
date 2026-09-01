@@ -81,20 +81,35 @@ function parseAnoMesFromPath(pathRascunho) {
   return { ano: match[1], mes: match[2] };
 }
 
+/**
+ * Deriva o acompanhamento (BANDA/PB) a partir do dia da semana, já que o
+ * rascunho gerado pelo solver não tem coluna ACOMP.
+ * Convenção: quarta = PB; sábado/domingo = BANDA. Ajustes pontuais (ex: um
+ * sábado em PB) devem ser feitos diretamente no atual.json após publicar (RF018).
+ */
+function acompPorDia(dia) {
+  return String(dia || '').toLowerCase().startsWith('quarta') ? 'PB' : 'BANDA';
+}
+
+/**
+ * Faz o parse do rascunho.md no formato canônico gerado por solver-output.js:
+ * | DATA | DIA SEMANA | ANCIÃO | PREGADOR | AUDIOVISUAL | REGENTE LOUVOR | EQUIPE LOUVOR | MENSAGEM MUSICAL | OBS |
+ * (também aceita o formato legado que tinha ACOMP na coluna 5)
+ */
 function parseRows(mdContent) {
   return mdContent
     .split(/\r?\n/)
     .filter((line) => /^\|\s\d{2}\/\d{2}\/\d{4}\s\|/i.test(line))
     .map((line) => line.split('|').map((part) => part.trim()))
     .map((parts) => {
-      const looksLikeAcompInPart5 = /^(BANDA|PB)$/i.test(parts[5] || '');
+      const dia = (parts[2] || '').toLowerCase();
+      const col5EhAcomp = /^(BANDA|PB)$/i.test(parts[5] || '');
 
-      // Formato atual sem Louvores ES:
-      // Data | Dia | Anciao | Pregador | Acomp | Regente | Equipe | Mensagem | Sonoplastia | Obs
-      if (looksLikeAcompInPart5 && parts.length < 12) {
+      // Formato legado: col5 = ACOMP (BANDA/PB), col9 = AUDIOVISUAL/sonoplastia
+      if (col5EhAcomp) {
         return {
           data: parts[1] || '',
-          dia: (parts[2] || '').toLowerCase(),
+          dia,
           anciao: parts[3] || '',
           pregador: parts[4] || '',
           acomp: (parts[5] || '').toUpperCase(),
@@ -107,38 +122,20 @@ function parseRows(mdContent) {
         };
       }
 
-      // Formato atual com Louvores ES:
-      // Data | Dia | Anciao | Pregador | Acomp | Regente | Equipe | Mensagem | Sonoplastia | Louvores ES | Obs
-      if (looksLikeAcompInPart5 && parts.length >= 12) {
-        return {
-          data: parts[1] || '',
-          dia: (parts[2] || '').toLowerCase(),
-          anciao: parts[3] || '',
-          pregador: parts[4] || '',
-          acomp: (parts[5] || '').toUpperCase(),
-          regente: parts[6] || '',
-          equipe: parts[7] || '',
-          mensagem: parts[8] || '',
-          audiovisual: parts[9] || '',
-          louvoresEs: parts[10] || '',
-          obs: parts[11] || ''
-        };
-      }
-
-      // Formato legado:
-      // Data | Dia | Anciao | Pregador | Sonoplastia | Regente | Equipe | Mensagem | Banda/PB | Obs
+      // Formato canônico atual (solver-output): col5 = AUDIOVISUAL, sem ACOMP.
+      // DATA(1) DIA(2) ANCIÃO(3) PREGADOR(4) AUDIOVISUAL(5) REGENTE(6) EQUIPE(7) MM(8) OBS(9)
       return {
         data: parts[1] || '',
-        dia: (parts[2] || '').toLowerCase(),
+        dia,
         anciao: parts[3] || '',
         pregador: parts[4] || '',
         audiovisual: parts[5] || '',
         regente: parts[6] || '',
         equipe: parts[7] || '',
         mensagem: parts[8] || '',
-        acomp: (parts[9] || '').toUpperCase(),
+        acomp: acompPorDia(dia),
         louvoresEs: '',
-        obs: parts[10] || ''
+        obs: parts[9] || ''
       };
     });
 }
@@ -205,6 +202,10 @@ function addMissingQuartas(rows, acionatoJson, audioMap) {
     if (!isoDate || !dia.startsWith('quarta')) continue;
     if (existing.has(isoDate)) continue;
 
+    // AV da quarta: preferir sonoplastia.json (audioMap); senão, o campo
+    // audiovisual do próprio acionato.json (que é onde guardamos hoje).
+    const audiovisual = audioMap.get(isoDate) || String(item?.audiovisual || '');
+
     rows.push({
       DATA: toBrDate(isoDate),
       'DIA SEMANA': 'quarta-feira',
@@ -215,12 +216,42 @@ function addMissingQuartas(rows, acionatoJson, audioMap) {
       'LOUVORES ES': '',
       'LOUVORES CULTO': '',
       'TEMA CULTO': '',
-      AUDIOVISUAL: audioMap.get(isoDate) || '',
+      AUDIOVISUAL: audiovisual,
       'ANCIÃO': String(item?.anciao || ''),
       PREGADOR: String(item?.pregador || ''),
       SUPORTE: '',
       OBS: String(item?.observacoes || '')
     });
+  }
+}
+
+/**
+ * OBS vindo da escala externa (acionato) é público por definição (RF016).
+ * Prefixa com "PUBLICAR:" se ainda não tiver, para passar em validar:obs.
+ * OBS já iniciado com PUBLICAR: e OBS vazio são mantidos como estão.
+ */
+function formatarObsPublico(obs) {
+  const texto = String(obs || '').trim();
+  if (!texto) return '';
+  if (/^PUBLICAR\s*:/i.test(texto)) return texto;
+  return `PUBLICAR: ${texto}`;
+}
+
+/**
+ * Mescla o OBS do acionato nas linhas já existentes (sábados/domingos do
+ * rascunho não trazem OBS, mas o acionato pode ter — ex: "MANÁ"). Só preenche
+ * quando a linha está sem OBS, para não sobrescrever observação já definida.
+ */
+function mergeObsAcionato(rows, acionatoJson) {
+  const obsPorData = new Map();
+  for (const item of acionatoJson?.itens || []) {
+    const iso = String(item?.data || '');
+    if (iso && item?.observacoes) obsPorData.set(iso, String(item.observacoes));
+  }
+  for (const row of rows) {
+    const iso = toIsoDate(row.DATA);
+    if (!row.OBS && obsPorData.has(iso)) row.OBS = obsPorData.get(iso);
+    row.OBS = formatarObsPublico(row.OBS);
   }
 }
 
@@ -265,6 +296,7 @@ function run() {
 
   if (acionatoJson) {
     addMissingQuartas(rows, acionatoJson, audioMap);
+    mergeObsAcionato(rows, acionatoJson);
   }
 
   rows.sort((a, b) => compareBrDates(a.DATA, b.DATA));

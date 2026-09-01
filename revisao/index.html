@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Revisão do Rascunho — EscalaMusica</title>
+  <style>
+    :root {
+      --neutro: #f1f3f5;
+      --neutro-borda: #dee2e6;
+      --verde: #2f9e44;
+      --verde-bg: #ebfbee;
+      --verde-borda: #8ce99a;
+      --vermelho: #e03131;
+      --vermelho-bg: #fff5f5;
+      --vermelho-borda: #ffa8a8;
+      --texto: #212529;
+      --cinza: #868e96;
+      --cinza-claro: #adb5bd;
+      --azul: #1971c2;
+      --bg: #f8f9fa;
+      --sombra: 0 1px 2px rgba(0,0,0,.04), 0 1px 3px rgba(0,0,0,.06);
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: var(--texto);
+      margin: 0;
+      padding: 0 20px 76px;
+      background: var(--bg);
+      line-height: 1.35;
+      font-size: 14px;
+    }
+
+    /* ---- Header ---- */
+    header {
+      position: sticky; top: 0; z-index: 20;
+      background: #fff; border-bottom: 1px solid var(--neutro-borda);
+      margin: 0 -20px 16px; padding: 10px 20px;
+    }
+    .topo { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    h1 { font-size: 16px; margin: 0; font-weight: 700; white-space: nowrap; }
+    .controles { display: flex; gap: 6px; align-items: center; }
+    .controles input {
+      font-size: 13px; padding: 5px 8px; border-radius: 6px;
+      border: 1px solid var(--neutro-borda); width: 92px;
+    }
+    button {
+      cursor: pointer; background: #fff; font-size: 13px; padding: 5px 11px;
+      border-radius: 6px; border: 1px solid var(--neutro-borda); color: var(--texto);
+      transition: background .12s, border-color .12s;
+    }
+    button:hover { background: var(--neutro); }
+    button.primario { background: var(--azul); color: #fff; border-color: var(--azul); }
+    button.primario:hover { background: #1864ab; }
+    button.ghost { border-color: transparent; color: var(--cinza); padding: 5px 8px; }
+    button.ghost:hover { color: var(--texto); background: var(--neutro); }
+
+    /* progresso + contadores */
+    .progresso-wrap { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+    .contadores { display: flex; gap: 6px; }
+    .badge {
+      font-size: 12px; font-weight: 600; padding: 2px 9px; border-radius: 999px;
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+    .badge.aprov { background: var(--verde-bg); color: var(--verde); }
+    .badge.reprov { background: var(--vermelho-bg); color: var(--vermelho); }
+    .badge.pend { background: var(--neutro); color: var(--cinza); }
+    .barra {
+      width: 160px; height: 8px; border-radius: 999px; overflow: hidden;
+      background: var(--neutro); display: flex;
+    }
+    .barra .seg-aprov { background: var(--verde); height: 100%; transition: width .2s; }
+    .barra .seg-reprov { background: var(--vermelho); height: 100%; transition: width .2s; }
+    .sub { font-size: 12px; color: var(--cinza); margin-top: 6px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+    .legenda-inline { display: inline-flex; align-items: center; gap: 5px; }
+    .ponto { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+
+    /* ---- Grid de cultos ---- */
+    #conteudo {
+      display: grid; gap: 12px;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      align-items: start;
+    }
+    .culto {
+      background: #fff; border: 1px solid var(--neutro-borda); border-radius: 10px;
+      box-shadow: var(--sombra); overflow: hidden;
+      transition: opacity .2s;
+    }
+    /* Card totalmente respondido: esmaece (apenas visual — continua editável) */
+    .culto.concluido { opacity: .5; }
+    .culto.concluido:hover, .culto.concluido:focus-within { opacity: 1; }
+    .culto.concluido .culto-head::after {
+      content: '✓ revisado'; font-size: 11px; font-weight: 600; color: var(--verde);
+      background: var(--verde-bg); padding: 1px 8px; border-radius: 999px; margin-left: 8px;
+    }
+    .culto-head {
+      padding: 8px 12px; display: flex; justify-content: space-between; align-items: baseline;
+      border-bottom: 1px solid var(--neutro); gap: 8px;
+    }
+    .culto-head .data { font-weight: 700; font-size: 14px; }
+    .culto-head .dia { font-weight: 500; color: var(--cinza); font-size: 12px; margin-left: 4px; }
+    .culto-head .contexto { color: var(--cinza-claro); font-size: 11px; text-align: right; }
+    .culto-body { padding: 6px 12px 12px; }
+    .grupo { margin-top: 8px; }
+    .grupo-titulo {
+      font-size: 10px; text-transform: uppercase; letter-spacing: .05em;
+      color: var(--cinza-claro); margin-bottom: 5px; font-weight: 600;
+    }
+    .nomes { display: flex; flex-wrap: wrap; gap: 5px; }
+
+    /* ---- Chips ---- */
+    .chip {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px; border-radius: 7px; cursor: pointer;
+      background: #fff; border: 1px solid var(--neutro-borda);
+      font-size: 13px; user-select: none; line-height: 1.2;
+      transition: background .1s, border-color .1s, box-shadow .1s;
+    }
+    .chip:hover { border-color: var(--cinza-claro); box-shadow: var(--sombra); }
+    .chip:active { transform: translateY(1px); }
+    .chip .marca {
+      font-size: 11px; width: 14px; height: 14px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      border: 1.5px solid var(--cinza-claro); color: transparent; flex-shrink: 0;
+    }
+    .chip[data-status="aprovado"] {
+      background: var(--verde-bg); border-color: var(--verde-borda); color: #2b8a3e; font-weight: 600;
+    }
+    .chip[data-status="aprovado"] .marca { border-color: var(--verde); background: var(--verde); color: #fff; }
+    /* aprovado em revisão anterior — confirmado, mas com aparência distinta (contorno tracejado + ícone de histórico) */
+    .chip[data-status="aprovado-anterior"] {
+      background: #f4fbf5; border-color: var(--verde-borda); border-style: dashed; color: #37864a; font-weight: 600;
+    }
+    .chip[data-status="aprovado-anterior"] .marca {
+      border-color: var(--verde); background: #fff; color: var(--verde); font-size: 9px;
+    }
+    .chip[data-status="reprovado"] {
+      background: var(--vermelho-bg); border-color: var(--vermelho-borda); color: #c92a2a; font-weight: 600;
+    }
+    .chip[data-status="reprovado"] .marca { border-color: var(--vermelho); background: var(--vermelho); color: #fff; }
+    .chip.fixo {
+      cursor: default; background: repeating-linear-gradient(45deg, #f8f9fa, #f8f9fa 5px, #f1f3f5 5px, #f1f3f5 10px);
+      color: var(--cinza); font-style: italic;
+    }
+    .chip.fixo .marca { display: none; }
+
+    .obs-linha { margin-top: 5px; }
+    .obs-linha input {
+      width: 100%; font-size: 12px; padding: 5px 8px; border: 1px solid var(--vermelho-borda);
+      border-radius: 6px; background: #fff;
+    }
+    .obs-linha input:focus { outline: none; border-color: var(--vermelho); }
+
+    /* ---- Rodapé ---- */
+    .rodape {
+      position: fixed; bottom: 0; left: 0; right: 0; background: #fff;
+      border-top: 1px solid var(--neutro-borda); padding: 9px 20px; display: flex;
+      gap: 10px; align-items: center; justify-content: space-between; z-index: 20;
+    }
+    .rodape .status { font-size: 12px; color: var(--cinza); }
+    .rodape .acoes { display: flex; gap: 8px; align-items: center; }
+
+    /* ---- Avisos / toast ---- */
+    .aviso { background: #fff9db; border: 1px solid #ffe066; padding: 10px 12px; border-radius: 8px; font-size: 13px; margin-bottom: 14px; }
+    .toast {
+      position: fixed; bottom: 60px; left: 50%; transform: translateX(-50%) translateY(20px);
+      background: #212529; color: #fff; padding: 9px 16px; border-radius: 8px; font-size: 13px;
+      opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 30;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .hidden { display: none; }
+    .vazio { color: var(--cinza); font-size: 14px; padding: 40px; text-align: center; }
+
+    /* Indicador de substituto escolhido no chip reprovado */
+    .chip .subst {
+      font-size: 12px; font-weight: 600; color: var(--azul);
+      background: #e7f5ff; border-radius: 5px; padding: 0 5px; margin-left: 2px;
+    }
+
+    /* Menu de contexto (substitutos) */
+    .menu-subst {
+      position: fixed; z-index: 50; background: #fff; border: 1px solid var(--neutro-borda);
+      border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,.16); padding: 4px;
+      min-width: 180px; max-height: 320px; overflow-y: auto; font-size: 13px;
+    }
+    .menu-subst .titulo {
+      font-size: 11px; color: var(--cinza); padding: 5px 8px 6px; border-bottom: 1px solid var(--neutro);
+      margin-bottom: 4px; font-weight: 600;
+    }
+    .menu-subst .item {
+      padding: 6px 8px; border-radius: 5px; cursor: pointer; display: flex; justify-content: space-between; gap: 8px;
+    }
+    .menu-subst .item:hover { background: var(--verde-bg); }
+    .menu-subst .item .tag { font-size: 11px; color: var(--cinza); }
+    .menu-subst .item.limpar { color: var(--vermelho); }
+    .menu-subst .item.limpar:hover { background: var(--vermelho-bg); }
+    .menu-subst .vazio-menu { padding: 8px; color: var(--cinza); font-size: 12px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="topo">
+      <h1>Revisão da Escala</h1>
+      <div class="controles">
+        <input id="mes" type="text" placeholder="2026-09" />
+        <button id="carregar">Carregar</button>
+        <button id="recarregarLimpo" class="ghost" title="Busca o rascunho mais recente e descarta as marcações desta sessão (mantém aprovações anteriores como ↩)">↻ Recarregar limpo</button>
+        <button id="revisaoFinal" class="ghost" title="Zera TUDO — marcações da sessão e aprovações anteriores — para uma revisão final nome a nome do zero">⭐ Revisão final</button>
+      </div>
+      <div class="progresso-wrap">
+        <div class="barra" title="Progresso da revisão">
+          <div class="seg-aprov" id="segAprov" style="width:0"></div>
+          <div class="seg-reprov" id="segReprov" style="width:0"></div>
+        </div>
+        <div class="contadores">
+          <span class="badge aprov" id="bAprov">✓ 0</span>
+          <span class="badge reprov" id="bReprov">✕ 0</span>
+          <span class="badge pend" id="bPend">• 0</span>
+        </div>
+      </div>
+    </div>
+    <div class="sub">
+      <span class="legenda-inline"><span class="ponto" style="background:var(--verde)"></span> 1 clique aprova</span>
+      <span class="legenda-inline"><span class="ponto" style="background:var(--vermelho)"></span> 2 cliques reprova (+ motivo)</span>
+      <span class="legenda-inline"><span class="ponto" style="background:var(--neutro-borda)"></span> 3 cliques limpa</span>
+      <span class="legenda-inline" title="Aprovado numa revisão anterior — já confirmado, clique para alterar">↩ = confirmado antes</span>
+      <span class="legenda-inline" title="Clique com o botão direito num nome reprovado para escolher um substituto disponível">🖱 botão direito no reprovado = sugerir substituto</span>
+      <button class="ghost" id="aprovarPendentes" title="Marca todos os nomes ainda pendentes como aprovados">Aprovar pendentes</button>
+      <button class="ghost" id="limparTudo" title="Volta todos ao estado neutro">Limpar tudo</button>
+    </div>
+  </header>
+
+  <div id="aviso" class="aviso hidden"></div>
+  <div id="conteudo"></div>
+  <div id="toast" class="toast"></div>
+
+  <div class="rodape">
+    <span class="status" id="statusSalvo">Nada carregado.</span>
+    <div class="acoes">
+      <button id="importar">Importar revisão</button>
+      <input id="arquivoImport" type="file" accept="application/json" class="hidden" />
+      <button class="primario" id="salvar">Salvar revisão</button>
+    </div>
+  </div>
+
+  <script>
+    // --- Estado ---
+    let mesAtual = '';
+    let cultos = [];
+    let revisao = {};
+    let cadastro = [];            // pessoas.json -> array de pessoas
+    let indispPorData = {};       // { 'AAAA-MM-DD': Set(nomes) }
+    let indispMesInteiro = new Set();
+
+    // Apenas marcadores vazios não são revisáveis. Departamentos (Jovens,
+    // Desbravadores, etc.) SÃO revisáveis — o diretor precisa aprová-los também.
+    const NAO_REVISAVEL = new Set(['-', '']);
+    const ABREV_GRUPO = { 'REGENTE LOUVOR': 'Regente', 'EQUIPE LOUVOR': 'Equipe', 'MENSAGEM MUSICAL': 'Mensagem musical' };
+
+    function chaveDe(data, grupo, nome) { return `${data}||${grupo}||${nome}`; }
+    function splitNomes(raw) { return !raw ? [] : raw.split(',').map(s => s.trim()).filter(Boolean); }
+    function ehRevisavel(nome) { return !NAO_REVISAVEL.has(nome.toUpperCase()); }
+
+    // --- Parse do rascunho.md ---
+    function parseRascunho(md) {
+      const linhas = md.split(/\r?\n/).filter(l => /^\|\s*\d{2}\/\d{2}\/\d{4}\s*\|/.test(l));
+      return linhas.map(l => {
+        const c = l.split('|').map(x => x.trim());
+        return {
+          data: c[1], dia: c[2],
+          preg: c[4] || '-', av: c[5] || '-',
+          grupos: {
+            'REGENTE LOUVOR': splitNomes(c[6]),
+            'EQUIPE LOUVOR': splitNomes(c[7]),
+            'MENSAGEM MUSICAL': splitNomes(c[8]),
+          },
+        };
+      });
+    }
+
+    // --- Render ---
+    function render() {
+      const cont = document.getElementById('conteudo');
+      cont.innerHTML = '';
+
+      for (const culto of cultos) {
+        const div = document.createElement('div');
+        div.className = 'culto';
+        div.dataset.data = culto.data;
+        const head = document.createElement('div');
+        head.className = 'culto-head';
+        head.innerHTML =
+          `<div><span class="data">${culto.data}</span><span class="dia">${culto.dia}</span></div>` +
+          `<div class="contexto">Preg: ${culto.preg}<br>AV: ${culto.av}</div>`;
+        div.appendChild(head);
+
+        const body = document.createElement('div');
+        body.className = 'culto-body';
+
+        for (const [grupo, nomes] of Object.entries(culto.grupos)) {
+          if (nomes.length === 0) continue;
+          const g = document.createElement('div');
+          g.className = 'grupo';
+          g.innerHTML = `<div class="grupo-titulo">${ABREV_GRUPO[grupo] || grupo}</div>`;
+          const wrap = document.createElement('div');
+          wrap.className = 'nomes';
+          g.appendChild(wrap);
+
+          for (const nome of nomes) {
+            const revisavel = ehRevisavel(nome);
+            const chave = chaveDe(culto.data, grupo, nome);
+            if (!revisao[chave]) revisao[chave] = { status: 'neutro', obs: '' };
+            const estado = revisao[chave];
+
+            const chip = document.createElement('div');
+            chip.className = 'chip' + (revisavel ? '' : ' fixo');
+            chip.dataset.status = estado.status;
+            chip.dataset.chave = chave;
+            chip.innerHTML = `<span class="marca"></span><span class="nome">${nome}</span>`;
+            atualizarMarca(chip, estado.status);
+            if (revisavel) {
+              chip.addEventListener('click', () => cicla(chave));
+              chip.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                // clique-direito só faz sentido para reprovado (escolher substituto)
+                if (revisao[chave]?.status !== 'reprovado') {
+                  toast('Reprove o nome (2 cliques) para escolher um substituto.');
+                  return;
+                }
+                abrirMenuSubstitutos(chave, e.clientX, e.clientY);
+              });
+            }
+            wrap.appendChild(chip);
+
+            if (revisavel) {
+              const obsLinha = document.createElement('div');
+              obsLinha.className = 'obs-linha' + (estado.status === 'reprovado' ? '' : ' hidden');
+              obsLinha.dataset.obsChave = chave;
+              const inp = document.createElement('input');
+              inp.type = 'text';
+              inp.placeholder = `Motivo da reprovação de ${nome}...`;
+              inp.value = estado.obs || '';
+              inp.addEventListener('input', () => { revisao[chave].obs = inp.value; persistLocal(); });
+              obsLinha.appendChild(inp);
+              g.appendChild(obsLinha);
+            }
+          }
+          body.appendChild(g);
+        }
+        div.appendChild(body);
+        cont.appendChild(div);
+        aplicarConcluido(culto, div);
+      }
+      // aplicar indicadores de substituto já escolhidos
+      for (const chave of Object.keys(revisao)) atualizarChipSubstituto(chave);
+      atualizarResumo();
+    }
+
+    // Um culto está "concluído" quando todos os seus participantes revisáveis
+    // já receberam um status (aprovado ou reprovado) — nenhum neutro.
+    function cultoConcluido(culto) {
+      let temRevisavel = false;
+      for (const [grupo, nomes] of Object.entries(culto.grupos)) {
+        for (const nome of nomes) {
+          if (!ehRevisavel(nome)) continue;
+          temRevisavel = true;
+          const st = revisao[chaveDe(culto.data, grupo, nome)]?.status || 'neutro';
+          if (st === 'neutro') return false;
+        }
+      }
+      return temRevisavel;
+    }
+    function aplicarConcluido(culto, div) {
+      const el = div || document.querySelector(`.culto[data-data="${cssEscape(culto.data)}"]`);
+      if (el) el.classList.toggle('concluido', cultoConcluido(culto));
+    }
+    function cultoPorData(data) { return cultos.find(c => c.data === data); }
+
+    function atualizarMarca(chip, status) {
+      const marca = chip.querySelector('.marca');
+      if (!marca) return;
+      if (status === 'aprovado') marca.textContent = '✓';
+      else if (status === 'aprovado-anterior') marca.textContent = '↩';
+      else if (status === 'reprovado') marca.textContent = '✕';
+      else marca.textContent = '';
+      chip.title = status === 'aprovado-anterior' ? 'Aprovado em uma revisão anterior — clique para alterar' : '';
+    }
+
+    function cicla(chave) {
+      // 'aprovado-anterior' entra no ciclo como se fosse 'aprovado' (próximo clique → reprovado)
+      const ordem = { neutro: 'aprovado', 'aprovado-anterior': 'reprovado', aprovado: 'reprovado', reprovado: 'neutro' };
+      revisao[chave].status = ordem[revisao[chave].status];
+      if (revisao[chave].status !== 'reprovado') { revisao[chave].obs = ''; delete revisao[chave].substituto; }
+      persistLocal();
+      const chip = document.querySelector(`.chip[data-chave="${cssEscape(chave)}"]`);
+      if (chip) { chip.dataset.status = revisao[chave].status; atualizarMarca(chip, revisao[chave].status); }
+      const obs = document.querySelector(`.obs-linha[data-obs-chave="${cssEscape(chave)}"]`);
+      if (obs) {
+        obs.classList.toggle('hidden', revisao[chave].status !== 'reprovado');
+        const inp = obs.querySelector('input');
+        if (revisao[chave].status === 'reprovado' && inp) inp.focus();
+        if (inp && revisao[chave].status !== 'reprovado') inp.value = '';
+      }
+      atualizarChipSubstituto(chave);
+      const dataDoChip = chave.split('||')[0];
+      const culto = cultoPorData(dataDoChip);
+      if (culto) aplicarConcluido(culto);
+      atualizarResumo();
+    }
+
+    function cssEscape(s) { return s.replace(/["\\]/g, '\\$&'); }
+
+    function contar() {
+      let total = 0, aprov = 0, reprov = 0;
+      for (const culto of cultos) {
+        for (const [grupo, nomes] of Object.entries(culto.grupos)) {
+          for (const nome of nomes) {
+            if (!ehRevisavel(nome)) continue;
+            total++;
+            const st = revisao[chaveDe(culto.data, grupo, nome)]?.status;
+            if (st === 'aprovado' || st === 'aprovado-anterior') aprov++;
+            else if (st === 'reprovado') reprov++;
+          }
+        }
+      }
+      return { total, aprov, reprov, pend: total - aprov - reprov };
+    }
+
+    function atualizarResumo() {
+      const { total, aprov, reprov, pend } = contar();
+      document.getElementById('bAprov').textContent = `✓ ${aprov}`;
+      document.getElementById('bReprov').textContent = `✕ ${reprov}`;
+      document.getElementById('bPend').textContent = `• ${pend}`;
+      const pa = total ? (aprov / total) * 100 : 0;
+      const pr = total ? (reprov / total) * 100 : 0;
+      document.getElementById('segAprov').style.width = pa + '%';
+      document.getElementById('segReprov').style.width = pr + '%';
+    }
+
+    // --- Ações em massa ---
+    function aprovarPendentes() {
+      for (const culto of cultos) {
+        for (const [grupo, nomes] of Object.entries(culto.grupos)) {
+          for (const nome of nomes) {
+            if (!ehRevisavel(nome)) continue;
+            const chave = chaveDe(culto.data, grupo, nome);
+            if ((revisao[chave]?.status || 'neutro') === 'neutro') revisao[chave] = { status: 'aprovado', obs: '' };
+          }
+        }
+      }
+      persistLocal(); render(); toast('Pendentes aprovados.');
+    }
+    function limparTudo() {
+      if (!confirm('Voltar todas as marcações ao estado neutro?')) return;
+      for (const k of Object.keys(revisao)) revisao[k] = { status: 'neutro', obs: '' };
+      persistLocal(); render(); toast('Revisão limpa.');
+    }
+
+    // --- Persistência local ---
+    function storageKey() { return `revisao_escala_${mesAtual}`; }
+    function persistLocal() {
+      if (!mesAtual) return;
+      localStorage.setItem(storageKey(), JSON.stringify(revisao));
+      document.getElementById('statusSalvo').textContent = 'Guardado no navegador — clique em Salvar revisão para exportar o JSON.';
+    }
+    function carregarLocal() {
+      const raw = localStorage.getItem(storageKey());
+      if (raw) { try { revisao = JSON.parse(raw); } catch {} }
+    }
+
+    // --- Toast ---
+    let toastTimer;
+    function toast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    // --- Dados auxiliares para sugestão de substitutos ---
+    async function carregarAuxiliares(mes) {
+      try {
+        const rc = await fetch(`../pessoas.json?_=${Date.now()}`, { cache: 'no-store' });
+        if (rc.ok) { const d = await rc.json(); cadastro = d.pessoas || []; }
+      } catch { cadastro = []; }
+      indispPorData = {}; indispMesInteiro = new Set();
+      try {
+        const rv = await fetch(`../escalas/${mes.slice(0,4)}/${mes.slice(5,7)}/insumos/indisponibilidade-cantores-vinculada.json?_=${Date.now()}`, { cache: 'no-store' });
+        if (rv.ok) {
+          const v = await rv.json();
+          for (const d of v.datas || []) {
+            if (d.data_referencia && /^\d{4}-\d{2}-\d{2}$/.test(d.data_referencia)) {
+              indispPorData[d.data_referencia] = new Set((d.indisponiveis_nomes || []).map(n => n.toUpperCase()));
+            }
+          }
+          for (const n of (v.indisponiveis_mes_inteiro?.nomes || [])) indispMesInteiro.add(n.toUpperCase());
+        }
+      } catch { /* sem indisponibilidade */ }
+    }
+
+    function dataBRparaIso(br) { const [d,m,a] = br.split('/'); return `${a}-${m}-${d}`; }
+
+    // Retorna candidatos disponíveis para um papel num culto (Cenário A: disponibilidade + habilitação + não duplicado).
+    function candidatosSubstitutos(culto, grupo, nomeReprovado) {
+      const iso = dataBRparaIso(culto.data);
+      const indisp = new Set([...(indispPorData[iso] || []), ...indispMesInteiro]);
+      // Onde cada pessoa já está no dia (para marcar permuta de papel, mas sem excluir)
+      const papelNoDia = new Map();
+      for (const [g, nomes] of Object.entries(culto.grupos)) for (const n of nomes) papelNoDia.set(n.toUpperCase(), g);
+      const dia = (culto.dia || '').toLowerCase();
+      const ehDomingo = dia.includes('domingo');
+
+      return cadastro.filter(p => {
+        if (!p.ativo) return false;
+        if (indisp.has(p.nome.toUpperCase())) return false;
+        // não substituir alguém por ele mesmo
+        if (nomeReprovado && p.nome.toUpperCase() === nomeReprovado.toUpperCase()) return false;
+        // se já está no MESMO papel neste dia, não faz sentido (duplicaria); mas em OUTRO papel é permuta válida
+        if (papelNoDia.get(p.nome.toUpperCase()) === grupo) return false;
+        // habilitação por papel
+        if (grupo === 'REGENTE LOUVOR' && !p.habilitacoes?.regente) return false;
+        if (grupo === 'EQUIPE LOUVOR' && !p.habilitacoes?.equipe) return false;
+        if (grupo === 'MENSAGEM MUSICAL') {
+          const mm = p.habilitacoes?.mensagem_musical || {};
+          if (ehDomingo ? !mm.domingo : !(mm.es || mm.culto)) return false;
+        }
+        return true;
+      }).map(p => {
+        const outroPapel = papelNoDia.get(p.nome.toUpperCase());
+        const tags = [];
+        if (outroPapel) tags.push('já no dia'); // permuta
+        if (p.incentivo?.ativo) tags.push('incentivo');
+        if (p.perfil_canto === 'participacao') tags.push('participação');
+        return { nome: p.nome, genero: p.genero, tag: tags.join(' · ') };
+      }).sort((a,b) => a.nome.localeCompare(b.nome));
+    }
+
+    // --- Menu de contexto ---
+    let menuEl = null;
+    function fecharMenu() { if (menuEl) { menuEl.remove(); menuEl = null; } }
+    // Fecha só em clique fora do menu (não fecha ao rolar nem ao clicar dentro/na barra do menu).
+    document.addEventListener('mousedown', (e) => {
+      if (menuEl && !menuEl.contains(e.target)) fecharMenu();
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') fecharMenu(); });
+
+    function abrirMenuSubstitutos(chave, x, y) {
+      fecharMenu();
+      const [data, grupo, nomeReprovado] = chave.split('||');
+      const culto = cultoPorData(data);
+      if (!culto) return;
+      const cands = candidatosSubstitutos(culto, grupo, nomeReprovado);
+
+      menuEl = document.createElement('div');
+      menuEl.className = 'menu-subst';
+      const atual = revisao[chave]?.substituto;
+      let html = `<div class="titulo">Substituir por (${grupo === 'REGENTE LOUVOR' ? 'regente' : grupo === 'MENSAGEM MUSICAL' ? 'MM' : 'equipe'} disponível)</div>`;
+      if (atual) html += `<div class="item limpar" data-acao="limpar">✕ Remover sugestão (${atual})</div>`;
+      if (cands.length === 0) html += `<div class="vazio-menu">Ninguém disponível para este papel neste dia.</div>`;
+      else for (const c of cands) {
+        html += `<div class="item" data-nome="${c.nome}"><span>${c.genero === 'M' ? '♂' : '♀'} ${c.nome}</span>${c.tag ? `<span class="tag">${c.tag}</span>` : ''}</div>`;
+      }
+      menuEl.innerHTML = html;
+      document.body.appendChild(menuEl);
+
+      // posiciona sem sair da tela
+      const rect = menuEl.getBoundingClientRect();
+      const px = Math.min(x, window.innerWidth - rect.width - 8);
+      const py = Math.min(y, window.innerHeight - rect.height - 8);
+      menuEl.style.left = px + 'px';
+      menuEl.style.top = py + 'px';
+
+      menuEl.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const item = e.target.closest('.item');
+        if (!item) return;
+        if (item.dataset.acao === 'limpar') { delete revisao[chave].substituto; }
+        else if (item.dataset.nome) { revisao[chave].substituto = item.dataset.nome; }
+        persistLocal();
+        atualizarChipSubstituto(chave);
+        fecharMenu();
+      });
+    }
+
+    function atualizarChipSubstituto(chave) {
+      const chip = document.querySelector(`.chip[data-chave="${cssEscape(chave)}"]`);
+      if (!chip) return;
+      let sub = chip.querySelector('.subst');
+      const nomeSub = revisao[chave]?.substituto;
+      if (nomeSub && revisao[chave]?.status === 'reprovado') {
+        if (!sub) { sub = document.createElement('span'); sub.className = 'subst'; chip.appendChild(sub); }
+        sub.textContent = '→ ' + nomeSub;
+      } else if (sub) { sub.remove(); }
+    }
+
+    // --- Baseline de aprovações anteriores ---
+    // Busca escalas/AAAA/MM/revisao-aprovados.json (gerado após cada rodada de revisão)
+    // e marca esses nomes como 'aprovado-anterior' se ainda estiverem no rascunho.
+    async function aplicarBaseline(mes) {
+      // Revisão final: ignora as aprovações anteriores (tudo volta a pendente)
+      if (localStorage.getItem(`revisao_final_${mes}`) === '1') return;
+      try {
+        const resp = await fetch(`../escalas/${mes.slice(0,4)}/${mes.slice(5,7)}/revisao-aprovados.json?_=${Date.now()}`, { cache: 'no-store' });
+        if (!resp.ok) return;
+        const base = await resp.json();
+        // conjunto de chaves presentes no rascunho atual
+        const chavesRascunho = new Set();
+        for (const c of cultos)
+          for (const [g, nomes] of Object.entries(c.grupos))
+            for (const n of nomes) chavesRascunho.add(chaveDe(c.data, g, n));
+        for (const a of base.aprovados || []) {
+          const chave = chaveDe(a.data, a.grupo, a.nome);
+          if (chavesRascunho.has(chave)) {
+            revisao[chave] = { status: 'aprovado-anterior', obs: '' };
+          }
+        }
+      } catch { /* sem baseline, segue normal */ }
+    }
+
+    // --- Carregar rascunho ---
+    async function carregarMes(mes) {
+      const aviso = document.getElementById('aviso');
+      aviso.classList.add('hidden');
+      try {
+        const resp = await fetch(`../escalas/${mes.slice(0,4)}/${mes.slice(5,7)}/rascunho.md?_=${Date.now()}`, { cache: 'no-store' });
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        const md = await resp.text();
+        mesAtual = mes;
+        cultos = parseRascunho(md);
+        if (cultos.length === 0) throw new Error('Nenhuma linha de culto encontrada no rascunho.');
+        revisao = {};
+        await carregarAuxiliares(mes); // cadastro + indisponibilidade (para sugerir substitutos)
+        await aplicarBaseline(mes);   // aprovações de revisões anteriores (ícone distinto)
+        carregarLocal();              // marcações da sessão atual sobrepõem o baseline
+        render();
+        document.getElementById('statusSalvo').textContent = `Rascunho de ${mes} carregado.`;
+        history.replaceState(null, '', `?mes=${mes}`);
+      } catch (err) {
+        cultos = []; document.getElementById('conteudo').innerHTML = '';
+        aviso.textContent = `Não consegui carregar o rascunho de ${mes}: ${err.message}. ` +
+          `Verifique se o servidor está rodando (npm run revisar) e se existe escalas/${mes.slice(0,4)}/${mes.slice(5,7)}/rascunho.md.`;
+        aviso.classList.remove('hidden');
+      }
+    }
+
+    // --- Salvar / Importar ---
+    function salvarJSON() {
+      if (!mesAtual) { toast('Carregue um mês primeiro.'); return; }
+      const saida = {
+        mes: mesAtual,
+        revisado_em: new Date().toISOString(),
+        cultos: cultos.map(c => ({
+          data: c.data,
+          grupos: Object.fromEntries(Object.entries(c.grupos).map(([g, nomes]) => [
+            g,
+            nomes.filter(n => ehRevisavel(n)).map(n => {
+              const e = revisao[chaveDe(c.data, g, n)] || { status: 'neutro', obs: '' };
+              // 'aprovado-anterior' conta como aprovado no resultado exportado
+              const status = e.status === 'aprovado-anterior' ? 'aprovado' : e.status;
+              const out = { nome: n, status, obs: e.obs || '' };
+              if (e.substituto && status === 'reprovado') out.substituto = e.substituto;
+              return out;
+            }),
+          ])),
+        })),
+      };
+      const blob = new Blob([JSON.stringify(saida, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      // Timestamp no nome (AAAAMMDD-HHMM) evita "(1)", "(2)" e deixa claro o mais recente
+      const d = new Date();
+      const ts = `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}-${String(d.getHours()).padStart(2,'0')}${String(d.getMinutes()).padStart(2,'0')}`;
+      a.download = `revisao-resultado-${mesAtual}-${ts}.json`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+      toast(`JSON salvo — mova para escalas/${mesAtual.slice(0,4)}/${mesAtual.slice(5,7)}/`);
+      document.getElementById('statusSalvo').textContent = `JSON salvo: revisao-resultado-${mesAtual}.json`;
+    }
+
+    function importarJSON(file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const dados = JSON.parse(reader.result);
+          if (dados.mes) document.getElementById('mes').value = dados.mes;
+          const novo = {};
+          for (const c of dados.cultos || []) {
+            for (const [g, arr] of Object.entries(c.grupos || {})) {
+              for (const item of arr) {
+                const reg = { status: item.status || 'neutro', obs: item.obs || '' };
+                if (item.substituto) reg.substituto = item.substituto;
+                novo[chaveDe(c.data, g, item.nome)] = reg;
+              }
+            }
+          }
+          if (dados.mes && dados.mes !== mesAtual) {
+            carregarMes(dados.mes).then(() => { revisao = novo; render(); persistLocal(); });
+          } else {
+            revisao = novo; if (cultos.length) render(); persistLocal();
+          }
+          toast('Revisão importada.');
+        } catch (err) { alert('Arquivo inválido: ' + err.message); }
+      };
+      reader.readAsText(file);
+    }
+
+    // --- Eventos ---
+    document.getElementById('carregar').addEventListener('click', () => {
+      const mes = document.getElementById('mes').value.trim();
+      if (/^\d{4}-\d{2}$/.test(mes)) carregarMes(mes);
+      else alert('Informe o mês no formato AAAA-MM (ex: 2026-09).');
+    });
+    document.getElementById('recarregarLimpo').addEventListener('click', () => {
+      const mes = document.getElementById('mes').value.trim();
+      if (!/^\d{4}-\d{2}$/.test(mes)) { alert('Informe o mês no formato AAAA-MM (ex: 2026-09).'); return; }
+      if (!confirm('Recarregar o rascunho mais recente e descartar as marcações que você fez neste mês?')) return;
+      localStorage.removeItem(`revisao_escala_${mes}`);
+      localStorage.removeItem(`revisao_final_${mes}`); // volta a exibir aprovações anteriores (↩)
+      revisao = {};
+      carregarMes(mes).then(() => toast('Rascunho recarregado e marcações descartadas.'));
+    });
+    document.getElementById('revisaoFinal').addEventListener('click', () => {
+      const mes = document.getElementById('mes').value.trim();
+      if (!/^\d{4}-\d{2}$/.test(mes)) { alert('Informe o mês no formato AAAA-MM (ex: 2026-09).'); return; }
+      if (!confirm('REVISÃO FINAL: zerar TUDO (marcações desta sessão E aprovações anteriores) para revisar nome a nome do zero?')) return;
+      localStorage.removeItem(`revisao_escala_${mes}`);
+      localStorage.setItem(`revisao_final_${mes}`, '1'); // faz o baseline ser ignorado
+      revisao = {};
+      carregarMes(mes).then(() => toast('Revisão final iniciada — todos os nomes estão pendentes.'));
+    });
+    document.getElementById('mes').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('carregar').click(); });
+    document.getElementById('salvar').addEventListener('click', salvarJSON);
+    document.getElementById('aprovarPendentes').addEventListener('click', aprovarPendentes);
+    document.getElementById('limparTudo').addEventListener('click', limparTudo);
+    document.getElementById('importar').addEventListener('click', () => document.getElementById('arquivoImport').click());
+    document.getElementById('arquivoImport').addEventListener('change', (e) => { if (e.target.files[0]) importarJSON(e.target.files[0]); });
+
+    // Auto-carregar via ?mes=
+    const params = new URLSearchParams(location.search);
+    const mesParam = params.get('mes');
+    if (mesParam && /^\d{4}-\d{2}$/.test(mesParam)) {
+      document.getElementById('mes').value = mesParam;
+      carregarMes(mesParam);
+    } else {
+      const hoje = new Date();
+      document.getElementById('mes').value = `${hoje.getFullYear()}-${String(hoje.getMonth()+1).padStart(2,'0')}`;
+    }
+  </script>
+</body>
+</html>

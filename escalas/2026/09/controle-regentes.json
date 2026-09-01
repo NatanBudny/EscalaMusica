@@ -1,0 +1,595 @@
+{
+  "gerado_em": "2026-09-01T23:19:37.487Z",
+  "periodo": "01-2026 a atual",
+  "tipo_controle": "regentes",
+  "legenda": {
+    "REGENCIAS": "Quantidade de vezes em que a pessoa apareceu como REGENTE LOUVOR."
+  },
+  "criterio_sugestao": "Priorizar menor quantidade total de regencias, respeitando disponibilidade real e as regras vigentes.",
+  "observacao": "O ranking considera apenas pessoas ativas e habilitadas para regencia no cadastro oficial de funcoes do louvor.",
+  "fonte": [
+    "old/2026/01-2026.json",
+    "old/2026/02-2026.json",
+    "old/2026/032026.json",
+    "old/2026/042026.json",
+    "old/2026/052026.json",
+    "old/2026/062026.json",
+    "old/2026/082026.json",
+    "atual.json"
+  ],
+  "nomes_nao_mapeados": [
+    {
+      "campo": "REGENTE LOUVOR",
+      "nome": "MIN. JOVEM",
+      "data": "23/08/2026"
+    },
+    {
+      "campo": "REGENTE LOUVOR",
+      "nome": "DESBRAVADORES",
+      "data": "19/09/2026"
+    }
+  ],
+  "ranking_menor_para_maior": [
+    {
+      "nome": "LIDIANE",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 0,
+      "TOTAL": 0,
+      "por_mes": {
+        "01-2026": {
+          "REGENCIAS": 0
+        },
+        "02-2026": {
+          "REGENCIAS": 0
+        },
+        "032026": {
+          "REGENCIAS": 0
+        },
+        "042026": {
+          "REGENCIAS": 0
+        },
+        "052026": {
+          "REGENCIAS": 0
+        },
+        "062026": {
+          "REGENCIAS": 0
+        },
+        "082026": {
+          "REGENCIAS": 0
+        },
+        "atual": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "ARIADNY",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 1,
+      "TOTAL": 1,
+      "por_mes": {
+        "01-2026": {
+          "REGENCIAS": 0
+        },
+        "02-2026": {
+          "REGENCIAS": 0
+        },
+        "032026": {
+          "REGENCIAS": 0
+        },
+        "042026": {
+          "REGENCIAS": 0
+        },
+        "052026": {
+          "REGENCIAS": 0
+        },
+        "062026": {
+          "REGENCIAS": 1
+        },
+        "082026": {
+          "REGENCIAS": 0
+        },
+        "atual": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "MARIA ELOISA",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 1,
+      "TOTAL": 1,
+      "por_mes": {
+        "01-2026": {
+          "REGENCIAS": 0
+        },
+        "02-2026": {
+          "REGENCIAS": 0
+        },
+        "032026": {
+          "REGENCIAS": 0
+        },
+        "042026": {
+          "REGENCIAS": 0
+        },
+        "052026": {
+          "REGENCIAS": 0
+        },
+        "062026": {
+          "REGENCIAS": 0
+        },
+        "082026": {
+          "REGENCIAS": 0
+        },
+        "atual": {
+          "REGENCIAS": 1
+        }
+      }
+    },
+    {
+      "nome": "NILSINHO",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 1,
+      "TOTAL": 1,
+      "por_mes": {
+        "01-2026": {
+          "REGENCIAS": 0
+        },
+        "02-2026": {
+          "REGENCIAS": 0
+        },
+        "032026": {
+          "REGENCIAS": 0
+        },
+        "042026": {
+          "REGENCIAS": 1
+        },
+        "052026": {
+          "REGENCIAS": 0
+        },
+        "062026": {
+          "REGENCIAS": 0
+        },
+        "082026": {
+          "REGENCIAS": 0
+        },
+        "atual": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "YASSER",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 1,
+      "TOTAL": 1,
+      "por_mes": {
+        "01-2026": {
+          "REGENCIAS": 0
+        },
+        "02-2026": {
+          "REGENCIAS": 0
+        },
+        "032026": {
+          "REGENCIAS": 1
+        },
+        "042026": {
+          "REGENCIAS": 0
+        },
+        "052026": {
+          "REGENCIAS": 0
+        },
+        "062026": {
+          "REGENCIAS": 0
+        },
+        "082026": {
+          "REGENCIAS": 0
+        },
+        "atual": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "JESSIE",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 2,
+      "TOTAL": 2,
+      "por_mes": {
+        "01-2026": {
+          "REGENCIAS": 0
+        },
+        "02-2026": {
+          "REGENCIAS": 1
+        },
+        "032026": {
+          "REGENCIAS": 1
+        },
+        "042026": {
+          "REGENCIAS": 0
+        },
+        "052026": {
+          "REGENCIAS": 0
+        },
+        "062026": {
+          "REGENCIAS": 0
+        },
+        "082026": {
+          "REGENCIAS": 0
+        },
+        "atual": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "MARAIR",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 2,
+      "TOTAL": 2,
+      "por_mes": {
+        "01-2026": {
+          "REGENCIAS": 0
+        },
+        "02-2026": {
+          "REGENCIAS": 0
+        },
+        "032026": {
+          "REGENCIAS": 0
+        },
+        "042026": {
+          "REGENCIAS": 0
+        },
+        "052026": {
+          "REGENCIAS": 2
+        },
+        "062026": {
+          "REGENCIAS": 0
+        },
+        "082026": {
+          "REGENCIAS": 0
+        },
+        "atual": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "SILVANA",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 2,
+      "TOTAL": 2,
+      "por_mes": {
+        "01-2026": {
+          "REGENCIAS": 0
+        },
+        "02-2026": {
+          "REGENCIAS": 0
+        },
+        "032026": {
+          "REGENCIAS": 0
+        },
+        "042026": {
+          "REGENCIAS": 0
+        },
+        "052026": {
+          "REGENCIAS": 0
+        },
+        "062026": {
+          "REGENCIAS": 1
+        },
+        "082026": {
+          "REGENCIAS": 0
+        },
+        "atual": {
+          "REGENCIAS": 1
+        }
+      }
+    },
+    {
+      "nome": "ANDRE",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 3,
+      "TOTAL": 3,
+      "por_mes": {
+        "01-2026": {
+          "REGENCIAS": 1
+        },
+        "02-2026": {
+          "REGENCIAS": 0
+        },
+        "032026": {
+          "REGENCIAS": 0
+        },
+        "042026": {
+          "REGENCIAS": 0
+        },
+        "052026": {
+          "REGENCIAS": 0
+        },
+        "062026": {
+          "REGENCIAS": 0
+        },
+        "082026": {
+          "REGENCIAS": 2
+        },
+        "atual": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "JOAS",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 3,
+      "TOTAL": 3,
+      "por_mes": {
+        "01-2026": {
+          "REGENCIAS": 1
+        },
+        "02-2026": {
+          "REGENCIAS": 1
+        },
+        "032026": {
+          "REGENCIAS": 0
+        },
+        "042026": {
+          "REGENCIAS": 0
+        },
+        "052026": {
+          "REGENCIAS": 0
+        },
+        "062026": {
+          "REGENCIAS": 1
+        },
+        "082026": {
+          "REGENCIAS": 0
+        },
+        "atual": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "KHEYCIANE",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 3,
+      "TOTAL": 3,
+      "por_mes": {
+        "01-2026": {
+          "REGENCIAS": 0
+        },
+        "02-2026": {
+          "REGENCIAS": 1
+        },
+        "032026": {
+          "REGENCIAS": 0
+        },
+        "042026": {
+          "REGENCIAS": 0
+        },
+        "052026": {
+          "REGENCIAS": 1
+        },
+        "062026": {
+          "REGENCIAS": 0
+        },
+        "082026": {
+          "REGENCIAS": 0
+        },
+        "atual": {
+          "REGENCIAS": 1
+        }
+      }
+    },
+    {
+      "nome": "RICARDO HERREIRA",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 4,
+      "TOTAL": 4,
+      "por_mes": {
+        "01-2026": {
+          "REGENCIAS": 0
+        },
+        "02-2026": {
+          "REGENCIAS": 0
+        },
+        "032026": {
+          "REGENCIAS": 1
+        },
+        "042026": {
+          "REGENCIAS": 0
+        },
+        "052026": {
+          "REGENCIAS": 1
+        },
+        "062026": {
+          "REGENCIAS": 1
+        },
+        "082026": {
+          "REGENCIAS": 0
+        },
+        "atual": {
+          "REGENCIAS": 1
+        }
+      }
+    },
+    {
+      "nome": "CATHERINE",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 5,
+      "TOTAL": 5,
+      "por_mes": {
+        "01-2026": {
+          "REGENCIAS": 1
+        },
+        "02-2026": {
+          "REGENCIAS": 1
+        },
+        "032026": {
+          "REGENCIAS": 1
+        },
+        "042026": {
+          "REGENCIAS": 0
+        },
+        "052026": {
+          "REGENCIAS": 1
+        },
+        "062026": {
+          "REGENCIAS": 1
+        },
+        "082026": {
+          "REGENCIAS": 0
+        },
+        "atual": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "SUELLEN",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 7,
+      "TOTAL": 7,
+      "por_mes": {
+        "01-2026": {
+          "REGENCIAS": 2
+        },
+        "02-2026": {
+          "REGENCIAS": 1
+        },
+        "032026": {
+          "REGENCIAS": 0
+        },
+        "042026": {
+          "REGENCIAS": 0
+        },
+        "052026": {
+          "REGENCIAS": 1
+        },
+        "062026": {
+          "REGENCIAS": 2
+        },
+        "082026": {
+          "REGENCIAS": 0
+        },
+        "atual": {
+          "REGENCIAS": 1
+        }
+      }
+    },
+    {
+      "nome": "DANY KALLAS",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 8,
+      "TOTAL": 8,
+      "por_mes": {
+        "01-2026": {
+          "REGENCIAS": 0
+        },
+        "02-2026": {
+          "REGENCIAS": 2
+        },
+        "032026": {
+          "REGENCIAS": 0
+        },
+        "042026": {
+          "REGENCIAS": 1
+        },
+        "052026": {
+          "REGENCIAS": 1
+        },
+        "062026": {
+          "REGENCIAS": 1
+        },
+        "082026": {
+          "REGENCIAS": 2
+        },
+        "atual": {
+          "REGENCIAS": 1
+        }
+      }
+    },
+    {
+      "nome": "GIOVANA",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 8,
+      "TOTAL": 8,
+      "por_mes": {
+        "01-2026": {
+          "REGENCIAS": 2
+        },
+        "02-2026": {
+          "REGENCIAS": 2
+        },
+        "032026": {
+          "REGENCIAS": 1
+        },
+        "042026": {
+          "REGENCIAS": 1
+        },
+        "052026": {
+          "REGENCIAS": 1
+        },
+        "062026": {
+          "REGENCIAS": 0
+        },
+        "082026": {
+          "REGENCIAS": 1
+        },
+        "atual": {
+          "REGENCIAS": 0
+        }
+      }
+    },
+    {
+      "nome": "FABRICIO",
+      "ativo": true,
+      "pode_regencia": true,
+      "REGENCIAS": 9,
+      "TOTAL": 9,
+      "por_mes": {
+        "01-2026": {
+          "REGENCIAS": 2
+        },
+        "02-2026": {
+          "REGENCIAS": 1
+        },
+        "032026": {
+          "REGENCIAS": 3
+        },
+        "042026": {
+          "REGENCIAS": 0
+        },
+        "052026": {
+          "REGENCIAS": 1
+        },
+        "062026": {
+          "REGENCIAS": 0
+        },
+        "082026": {
+          "REGENCIAS": 2
+        },
+        "atual": {
+          "REGENCIAS": 0
+        }
+      }
+    }
+  ]
+}

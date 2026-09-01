@@ -24,6 +24,17 @@ const FIXOS = [
   { label: 'Anciao principal (Yasser)', nome: 'YASSER' }
 ];
 
+// Grupos/departamentos não têm telefone próprio: têm um RESPONSÁVEL de contato.
+// Quando um grupo aparece na escala, a mensagem vai para o responsável.
+// telefone: só dígitos (formato wa.me). nome: como será exibido na mensagem.
+const RESPONSAVEL_GRUPO = {
+  'CORAL INFANTIL': { responsavel: 'JESSIE', telefone: '' },   // telefone resolvido via contatos.json
+  'DESBRAVADORES': { responsavel: 'MAXWELL', telefone: '554396489680' },
+  'JOVENS': { responsavel: 'FABRICIO', telefone: '' },          // resolvido via contatos.json
+  // MANU C. é cantora infantil sem telefone próprio: contato via mãe (Silvana).
+  'MANU C.': { responsavel: 'SILVANA', telefone: '' }
+};
+
 const GRUPO_LOUVOR = 'https://chat.whatsapp.com/EsfZwmrdWntG9wxqoSN5zw';
 
 function normalizeNome(valor) {
@@ -175,9 +186,32 @@ const semContato = [];
 const { ano, mes } = extrairAnoMesDaEscala(escala);
 const mesAno = `${mes}/${ano}`;
 
+// Mapa de responsáveis com chave normalizada (independe de ponto/acento/caixa).
+const respGrupoNorm = new Map();
+for (const [grupo, def] of Object.entries(RESPONSAVEL_GRUPO)) {
+  respGrupoNorm.set(normalizeNome(grupo), def);
+}
+
 for (const membro of membrosOrdenados) {
   const encontrado = lookupContato.get(normalizeNome(membro.nomeEscala));
   const campos = Array.from(membro.campos).sort().join(', ');
+
+  // Grupo/departamento: resolve o contato pelo responsável definido em RESPONSAVEL_GRUPO.
+  const grupoResp = respGrupoNorm.get(normalizeNome(membro.nomeEscala));
+  if (!encontrado && grupoResp) {
+    const contatoResp = lookupContato.get(normalizeNome(grupoResp.responsavel));
+    const telefone = grupoResp.telefone || (contatoResp ? contatoResp.telefone : '');
+    if (telefone) {
+      const mensagem = montarMensagemPersonalizada({ nome: grupoResp.responsavel, mesAno, funcoes: `${campos} (${membro.nomeEscala})` });
+      comContato.push({
+        nomeEscala: membro.nomeEscala,
+        origemContato: `${grupoResp.responsavel} (resp. ${membro.nomeEscala})`,
+        campos,
+        link: montarLink(telefone, mensagem)
+      });
+      continue;
+    }
+  }
 
   if (encontrado) {
     const mensagem = montarMensagemPersonalizada({

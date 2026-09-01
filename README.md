@@ -31,7 +31,8 @@ O ciclo mensal de escala é suportado por scripts Node.js organizados por respon
 | `npm run iniciar:mes` | Cria a estrutura de diretórios para o novo mês |
 | `npm run vincular:indisponibilidade` | Resolve nomes informais da enquete WhatsApp para IDs via fuzzy match e propaga indisponibilidade entre casais |
 | `npm run sugerir:rascunho` | Solver determinístico que gera rascunho + justificativa com base em regras, histórico e disponibilidade |
-| `npm run ciclo:mensal` | Orquestra o ciclo completo de ponta a ponta |
+| `npm run analisar:participacao` | Calcula % participação, carga real e ICR de cada membro (RF027); gera `participacao-icr.md` e sinaliza sobrecarregados/esquecidos |
+| `npm run ciclo:mensal` | Orquestra o ciclo completo de ponta a ponta (já inclui a análise de participação após validar o rascunho) |
 
 ### Controle de Rotação
 
@@ -48,6 +49,7 @@ O ciclo mensal de escala é suportado por scripts Node.js organizados por respon
 | `npm run validar:regras` | Checa consistência entre REGRAS.md e regras.json |
 | `npm run validar:rascunho` | Valida rascunho contra as regras fundamentais |
 | `npm run validar:obs` | Garante que o campo OBS não contém informações internas |
+| `npm run analisar:participacao` | **Obrigatório (RF027)** antes de aprovar: calcula ICR e aponta desequilíbrios de carga |
 
 ### Publicação
 
@@ -202,10 +204,56 @@ Derivado de `pessoas.json` via `npm run gerar:contatos`. Formato:
 2. **Coletar indisponibilidade** — enquete no WhatsApp, salvar em `escalas/YYYY/MM/insumos/`
 3. **Vincular indisponibilidade** — fuzzy match nomes → IDs, propagar casais (`npm run vincular:indisponibilidade`)
 4. **Gerar rascunho** — solver aplica regras + histórico + disponibilidade (`npm run sugerir:rascunho`)
-5. **Revisar e ajustar** — diretor revisa rascunho com apoio do agente de escalas
-6. **Validar** — checar regras fundamentais (`npm run validar:rascunho`)
-7. **Publicar** — promover para `atual.json` e arquivar anterior em `old/` (`npm run publicar:fechamento`)
-8. **Pós-publicação** — gerar links WhatsApp de confirmação (`npm run gerar:links-publicacao`)
+5. **Validar** — checar regras fundamentais (`npm run validar:rascunho`)
+6. **Analisar participação (ICR)** — **obrigatório (RF027)**: `npm run analisar:participacao -- --mes=YYYY-MM`. Gera `escalas/YYYY/MM/participacao-icr.md`. Revisar sobrecarregados (ICR > 2.0) e esquecidos (ICR 0 estando disponíveis).
+7. **Revisar e ajustar** — diretor revisa o rascunho com apoio do agente de escalas. Para uma revisão clicável (aprovar/reprovar cada participante), abrir `revisao/index.html` (ver [Tela de revisão](#tela-de-revisão-do-rascunho)).
+8. **Publicar** — promover para `atual.json` e arquivar anterior em `old/` (`npm run publicar:fechamento`)
+9. **Pós-publicação** — gerar links WhatsApp de confirmação (`npm run gerar:links-publicacao`)
+
+> ⚠️ **Não rode `npm run ciclo:mensal` depois de ajustar o rascunho manualmente** — ele regenera o vínculo e o rascunho do zero, descartando as edições manuais. Após a revisão, use os comandos avulsos (`analisar:participacao`, `validar:rascunho`) ou vá direto para `publicar:fechamento`.
+
+---
+
+## Tela de revisão do rascunho
+
+Ferramenta interna para o diretor revisar o rascunho clicando em cada participante, sem editar o markdown à mão.
+
+**Como usar (jeito rápido):**
+
+```bash
+npm run revisar -- 2026-09   # sobe o servidor e abre a tela já no mês certo
+npm run revisar              # usa o mês atual
+```
+
+O comando sobe o servidor local e abre o navegador direto na tela de revisão do mês. Encerre com `Ctrl+C`.
+
+**Aplicar a revisão de forma determinística (sem edição manual):**
+
+Depois de salvar o JSON pela tela, aplique-o direto ao rascunho:
+
+```bash
+npm run aplicar:revisao -- --mes=2026-09 --input="caminho/revisao-resultado-....json" --dry   # inspeciona
+npm run aplicar:revisao -- --mes=2026-09 --input="caminho/revisao-resultado-....json"          # aplica
+```
+
+O script troca cada reprovado pelo substituto escolhido, **audita o resultado** (todas as regras via `scripts/lib/auditor-escala.js`) e só grava se não houver violação. Reprovados sem substituto são reportados como pendência (nada é inventado). Rode `npm run validar:rascunho` a qualquer momento para a auditoria completa (regras + disponibilidade + ICR).
+
+**Alternativa manual:**
+
+1. Suba o servidor local: `npm run dev`
+2. Abra `http://localhost:8000/revisao/index.html?mes=YYYY-MM` (ou informe o mês no campo e clique em **Carregar rascunho**)
+3. Para cada nome escalado, **clique para alternar o status**:
+   - 1 clique → **verde** (aprovado)
+   - 2 cliques → **vermelho** (reprovado; abre um campo para escrever a observação/motivo)
+   - 3 cliques → volta ao neutro
+   - Nomes de departamento (Jovens, Desbravadores, etc.) aparecem fixos e não são clicáveis
+4. As marcações ficam guardadas automaticamente no navegador (localStorage) enquanto você revisa
+5. Ao terminar, clique em **Salvar revisão (JSON)** — baixa `revisao-resultado-YYYY-MM.json`
+6. Mova esse arquivo para `escalas/YYYY/MM/` para que o agente de escalas possa lê-lo e aplicar as reprovações
+
+O botão **Importar revisão** recarrega um JSON salvo anteriormente, permitindo continuar de onde parou.
+
+**Formato do resultado** (`revisao-resultado-YYYY-MM.json`): cada culto lista, por grupo (REGENTE/EQUIPE/MENSAGEM MUSICAL), os participantes com `status` (`aprovado`/`reprovado`/`neutro`) e `obs`. O agente usa esse arquivo para saber quem trocar e por quê.
 
 ---
 

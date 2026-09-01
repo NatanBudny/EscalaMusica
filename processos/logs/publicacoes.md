@@ -9,3 +9,4 @@ Registro oficial das publicacoes de escala.
 | 2026-06-04 | atual.json (junho/2026) | Natan | Publicacao feita com npm run publicar:mensal; links gerados em escalas/2026/06/links-whatsapp.md. |
 | 2026-07-03 | atual.json (julho/2026) | Natan | Publicacao feita com npm run publicar:mensal; links gerados em escalas/2026/07/links-whatsapp.md. |
 | 2026-08-01 | atual.json (agosto/2026) | Natan | Publicacao manual com assistencia do agente; links gerados em escalas/2026/08/links-whatsapp.md. |
+| 2026-09-01 | atual.json (setembro/2026) | Natan | Publicacao via npm run publicar:fechamento (fluxo deterministico: valida rascunho, publica, valida regras/OBS, gera links, atualiza controles, limpa temporarios). Backup de agosto em old/2026/082026.json; links em escalas/2026/09/links-whatsapp.md. |

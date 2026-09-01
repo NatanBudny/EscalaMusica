@@ -112,6 +112,10 @@ function main() {
   const rascunhoPath = `escalas/${ano}/${mes}/rascunho.md`;
   executar(`node scripts/validacao/validar-rascunho.js ${rascunhoPath}`, 'validar rascunho');
 
+  // Etapa 3.5: Analisar participação / ICR (RF027 — obrigatório antes de apresentar o rascunho)
+  header('3.5', 'Analisar participação (ICR)');
+  executar(`node scripts/controle/analisar-participacao.js --mes=${mesAlvo}`, 'analisar participação (ICR)');
+
   // Parar aqui se --publicar não foi fornecido
   if (!publicar) {
     console.log('');

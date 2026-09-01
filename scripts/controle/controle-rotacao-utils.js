@@ -1,16 +1,35 @@
-import { existsSync, readFileSync, writeFileSync } from 'fs';
-import { resolve, dirname } from 'path';
+import { existsSync, readFileSync, writeFileSync, readdirSync } from 'fs';
+import { resolve, dirname, join, basename } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '../..');
 
-const PERIODOS = [
-  { rotulo: 'JAN', arquivo: 'old/2026/01-2026.json' },
-  { rotulo: 'FEV', arquivo: 'old/2026/02-2026.json' },
-  { rotulo: 'MAR', arquivo: 'old/2026/032026.json' },
-  { rotulo: 'ABR', arquivo: 'atual.json' },
-];
+/**
+ * Descobre dinamicamente os períodos históricos: todos os JSON em old/**
+ * mais o atual.json. Antes esta lista era fixa (jan-abr) e desatualizada.
+ * O rótulo do período é o nome do arquivo (ex: "01-2026", "atual").
+ */
+function descobrirPeriodos() {
+  const periodos = [];
+  const oldBase = resolve(ROOT, 'old');
+  if (existsSync(oldBase)) {
+    for (const anoDir of readdirSync(oldBase)) {
+      const anoPath = join(oldBase, anoDir);
+      let arquivos = [];
+      try { arquivos = readdirSync(anoPath); } catch { continue; }
+      for (const arq of arquivos.sort()) {
+        if (arq.endsWith('.json')) {
+          periodos.push({ rotulo: basename(arq, '.json'), arquivo: `old/${anoDir}/${arq}` });
+        }
+      }
+    }
+  }
+  periodos.push({ rotulo: 'atual', arquivo: 'atual.json' });
+  return periodos;
+}
+
+const PERIODOS = descobrirPeriodos();
 
 const IGNORAR = new Set([
   '',
@@ -188,7 +207,19 @@ export function imprimirResumo(titulo, ranking, colunas) {
   }
 }
 
-export function gerarControleMensagemMusical() {
+/** Deriva o caminho de saída do controle a partir de --mes (AAAA-MM). */
+function caminhoSaida(mesSaida, arquivo) {
+  const m = String(mesSaida || '').match(/^(\d{4})-(\d{2})$/);
+  const [, ano, mes] = m || [];
+  const pastaMes = ano ? `escalas/${ano}/${mes}` : 'escalas/2026/05';
+  return `${pastaMes}/${arquivo}`;
+}
+
+const PERIODO_LABEL = PERIODOS.length
+  ? `${PERIODOS[0].rotulo} a ${PERIODOS[PERIODOS.length - 1].rotulo}`
+  : '(sem periodos)';
+
+export function gerarControleMensagemMusical(mesSaida) {
   const chaves = ['ES', 'CULTO', 'DOMINGO'];
   const { cadastro, porNome, funcoes } = carregarCadastro();
   const nomesCadastro = (cadastro.pessoas || []).map((p) => normalizar(p.nome)).filter(Boolean);
@@ -248,7 +279,7 @@ export function gerarControleMensagemMusical() {
 
   const resultado = {
     gerado_em: new Date().toISOString(),
-    periodo: '2026-01 a 2026-04',
+    periodo: PERIODO_LABEL,
     tipo_controle: 'mensagem_musical',
     legenda: {
       ES: 'Mensagem Musical da Escola Sabatina (sabado manha, 1a posicao quando ha 2 no sabado).',
@@ -264,12 +295,12 @@ export function gerarControleMensagemMusical() {
     ranking_menor_para_maior: ranking,
   };
 
-  const saida = 'escalas/2026/05/controle-mensagem-musical.json';
+  const saida = caminhoSaida(mesSaida, 'controle-mensagem-musical.json');
   escreverResultado(saida, resultado);
   return { saida, ranking };
 }
 
-export function gerarControleRegentes() {
+export function gerarControleRegentes(mesSaida) {
   const chaves = ['REGENCIAS'];
   const { cadastro, porNome, funcoes } = carregarCadastro();
   const nomesCadastro = (cadastro.pessoas || []).map((p) => normalizar(p.nome)).filter(Boolean);
@@ -309,7 +340,7 @@ export function gerarControleRegentes() {
 
   const resultado = {
     gerado_em: new Date().toISOString(),
-    periodo: '2026-01 a 2026-04',
+    periodo: PERIODO_LABEL,
     tipo_controle: 'regentes',
     legenda: {
       REGENCIAS: 'Quantidade de vezes em que a pessoa apareceu como REGENTE LOUVOR.',
@@ -323,12 +354,12 @@ export function gerarControleRegentes() {
     ranking_menor_para_maior: ranking,
   };
 
-  const saida = 'escalas/2026/05/controle-regentes.json';
+  const saida = caminhoSaida(mesSaida, 'controle-regentes.json');
   escreverResultado(saida, resultado);
   return { saida, ranking };
 }
 
-export function gerarControleEquipeLouvor() {
+export function gerarControleEquipeLouvor(mesSaida) {
   const chaves = ['ESCALAS_EQUIPE'];
   const { cadastro, porNome, funcoes } = carregarCadastro();
   const nomesCadastro = (cadastro.pessoas || []).map((p) => normalizar(p.nome)).filter(Boolean);
@@ -369,7 +400,7 @@ export function gerarControleEquipeLouvor() {
 
   const resultado = {
     gerado_em: new Date().toISOString(),
-    periodo: '2026-01 a 2026-04',
+    periodo: PERIODO_LABEL,
     tipo_controle: 'equipe_louvor',
     legenda: {
       ESCALAS_EQUIPE: 'Quantidade de vezes em que a pessoa apareceu em EQUIPE LOUVOR.',
@@ -383,7 +414,7 @@ export function gerarControleEquipeLouvor() {
     ranking_menor_para_maior: ranking,
   };
 
-  const saida = 'escalas/2026/05/controle-equipe-louvor.json';
+  const saida = caminhoSaida(mesSaida, 'controle-equipe-louvor.json');
   escreverResultado(saida, resultado);
   return { saida, ranking };
 }

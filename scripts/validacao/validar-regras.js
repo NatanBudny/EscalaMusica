@@ -38,9 +38,11 @@ function aviso(msg)  { warnings.push(`  ${YELLOW}⚠${RESET}  ${msg}`); }
 
 // ─── 1. Carrega e valida o JSON ───────────────────────────────────────────────
 let json;
-const jsonNovo = resolve(ROOT, 'processos/regras/regras.snapshot.json');
-const jsonLegado = resolve(ROOT, 'docs/regras/regras.json');
-const jsonPath = existsSync(jsonNovo) ? jsonNovo : jsonLegado;
+// Fonte da verdade atual das regras: docs/regras/ (onde as regras são editadas).
+// processos/regras/ fica como fallback. TODO: unificar na migração para SQLite.
+const jsonPreferido = resolve(ROOT, 'docs/regras/regras.json');
+const jsonFallback = resolve(ROOT, 'processos/regras/regras.snapshot.json');
+const jsonPath = existsSync(jsonPreferido) ? jsonPreferido : jsonFallback;
 try {
   const raw = readFileSync(jsonPath, 'utf8');
   json = JSON.parse(raw);
@@ -52,9 +54,9 @@ try {
 
 // ─── 2. Carrega REGRAS.md ─────────────────────────────────────────────────────
 let md;
-const mdNovo = resolve(ROOT, 'processos/regras/REGRAS.md');
-const mdLegado = resolve(ROOT, 'docs/regras/REGRAS.md');
-const mdPath = existsSync(mdNovo) ? mdNovo : mdLegado;
+const mdPreferido = resolve(ROOT, 'docs/regras/REGRAS.md');
+const mdFallback = resolve(ROOT, 'processos/regras/REGRAS.md');
+const mdPath = existsSync(mdPreferido) ? mdPreferido : mdFallback;
 try {
   md = readFileSync(mdPath, 'utf8');
 } catch (e) {

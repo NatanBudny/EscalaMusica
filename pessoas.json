@@ -1,6 +1,6 @@
 {
   "versao": "1.0.0",
-  "proximo_id": 70,
+  "proximo_id": 73,
   "ultima_atualizacao": "2026-07-10",
   "grupos": {
     "familia_silva": {
@@ -199,7 +199,11 @@
       },
       "afastado": null,
       "vinculos": [],
-      "dias_permitidos": null
+      "dias_permitidos": null,
+      "incentivo": {
+        "ativo": true,
+        "intervalo_meses": 1.5
+      }
     },
     {
       "id": 9,
@@ -945,9 +949,9 @@
       "genero": "M",
       "ativo": true,
       "perfil_canto": "base",
-      "notas": "Consolidado: LUIS e o mesmo de LUIZ ANTONIO.",
+      "notas": "Consolidado: LUIS e o mesmo de LUIZ ANTONIO. Nao e regente (revisao set/2026).",
       "habilitacoes": {
-        "regente": true,
+        "regente": false,
         "equipe": true,
         "mensagem_musical": {
           "es": false,
@@ -1030,7 +1034,11 @@
       },
       "afastado": null,
       "vinculos": [],
-      "dias_permitidos": null
+      "dias_permitidos": null,
+      "incentivo": {
+        "ativo": true,
+        "intervalo_meses": 1.5
+      }
     },
     {
       "id": 43,
@@ -1052,7 +1060,11 @@
       },
       "afastado": null,
       "vinculos": [],
-      "dias_permitidos": null
+      "dias_permitidos": null,
+      "incentivo": {
+        "ativo": true,
+        "intervalo_meses": 1.5
+      }
     },
     {
       "id": 44,
@@ -1168,7 +1180,7 @@
     },
     {
       "id": 49,
-      "nome": "MARIA HELOISA",
+      "nome": "MARIA ELOISA",
       "aliases": [],
       "telefone": "554399703366",
       "genero": "F",
@@ -1416,7 +1428,11 @@
       },
       "afastado": null,
       "vinculos": [],
-      "dias_permitidos": null
+      "dias_permitidos": null,
+      "incentivo": {
+        "ativo": true,
+        "intervalo_meses": 1.5
+      }
     },
     {
       "id": 60,
@@ -1550,7 +1566,11 @@
       },
       "afastado": null,
       "vinculos": [],
-      "dias_permitidos": null
+      "dias_permitidos": null,
+      "incentivo": {
+        "ativo": true,
+        "intervalo_meses": 3
+      }
     },
     {
       "id": 66,
@@ -1639,6 +1659,78 @@
       "habilitacoes": {
         "regente": false,
         "equipe": true,
+        "mensagem_musical": {
+          "es": true,
+          "culto": true,
+          "domingo": true
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null,
+      "incentivo": {
+        "ativo": true,
+        "intervalo_meses": 1.5
+      }
+    },
+    {
+      "id": 70,
+      "nome": "STEPHANY",
+      "aliases": [
+        "Stephany Cionek"
+      ],
+      "telefone": "554399677434",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "participacao",
+      "notas": "Cadastrada em set/2026 a partir da enquete de indisponibilidade.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 71,
+      "nome": "DILSON CASTRO",
+      "aliases": [],
+      "telefone": "5543999519003",
+      "genero": "M",
+      "ativo": true,
+      "perfil_canto": "participacao",
+      "notas": "Responsavel pelos Desbravadores. Contato via YASSER (responsavel por ele). Cadastrado em set/2026 para MM do Dia Mundial dos Desbravadores.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": true,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 72,
+      "nome": "ROOSEVELT",
+      "aliases": [],
+      "telefone": "554398737596",
+      "genero": "M",
+      "ativo": true,
+      "perfil_canto": "participacao",
+      "notas": "Cadastrado em set/2026 para mensagem musical.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
         "mensagem_musical": {
           "es": true,
           "culto": true,

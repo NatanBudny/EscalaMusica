@@ -59,7 +59,13 @@ Resumo dos scripts envolvidos:
 - Consultar `pessoas.json` para informar motivo de exclusão (afastado, inativo, sem habilitação, indisponível na data)
 
 ### Análise de percentual de participação (OBRIGATÓRIO antes de finalizar rascunho)
-- Calcular para cada membro disponível:
+- Rodar o script dedicado (RF027):
+  ```bash
+  npm run analisar:participacao -- --mes=AAAA-MM
+  ```
+  Ele gera `escalas/AAAA/MM/participacao-icr.md` e imprime o resumo no console.
+  O `ciclo:mensal` também executa essa análise automaticamente (etapa 3.5).
+- Calcula para cada membro disponível:
   - **% Participação** = dias escalado ÷ dias disponível no mês
   - **Carga Real** = dias escalado ÷ total de cultos do mês
   - **ICR (Índice de Cobertura Relativa)** = dias escalado ÷ média ideal (~3 dias)
