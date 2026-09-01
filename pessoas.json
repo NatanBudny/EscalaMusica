@@ -1,6 +1,6 @@
 {
   "versao": "1.0.0",
-  "proximo_id": 75,
+  "proximo_id": 76,
   "ultima_atualizacao": "2026-07-10",
   "grupos": {
     "familia_silva": {
@@ -405,7 +405,9 @@
     {
       "id": 17,
       "nome": "DULCINEIA",
-      "aliases": [],
+      "aliases": [
+        "DULCI"
+      ],
       "telefone": "554396339940",
       "genero": "F",
       "ativo": false,
@@ -970,7 +972,8 @@
       "id": 40,
       "nome": "LUIZ DA SILVA",
       "aliases": [
-        "LUIZ"
+        "LUIZ",
+        "DA SILVA"
       ],
       "telefone": "554399722921",
       "genero": "M",
@@ -1779,6 +1782,28 @@
       "ativo": false,
       "perfil_canto": null,
       "notas": "Externo (pregador/audiovisual). Nao escalavel no louvor.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 75,
+      "nome": "ADELMO",
+      "aliases": [],
+      "telefone": "554399512450",
+      "genero": "M",
+      "ativo": false,
+      "perfil_canto": null,
+      "notas": "Anciao (escala externa). Nao escalavel no louvor.",
       "habilitacoes": {
         "regente": false,
         "equipe": false,
