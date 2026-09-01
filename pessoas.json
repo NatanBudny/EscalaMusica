@@ -1,6 +1,6 @@
 {
   "versao": "1.0.0",
-  "proximo_id": 73,
+  "proximo_id": 75,
   "ultima_atualizacao": "2026-07-10",
   "grupos": {
     "familia_silva": {
@@ -94,7 +94,9 @@
     {
       "id": 4,
       "nome": "ANDRE",
-      "aliases": [],
+      "aliases": [
+        "ANDRÉ HERREIRA"
+      ],
       "telefone": "5543920008370",
       "genero": "M",
       "ativo": true,
@@ -498,7 +500,8 @@
       "id": 21,
       "nome": "FABRICIO",
       "aliases": [
-        "FABRICIO 1"
+        "FABRICIO 1",
+        "JOVENS"
       ],
       "telefone": "554396670568",
       "genero": "M",
@@ -1018,11 +1021,11 @@
       "id": 42,
       "nome": "MANU C.",
       "aliases": [],
-      "telefone": null,
+      "telefone": "5511931474998",
       "genero": "F",
       "ativo": true,
       "perfil_canto": "participacao",
-      "notas": "",
+      "notas": "Contato via mãe (Silvana).",
       "habilitacoes": {
         "regente": false,
         "equipe": true,
@@ -1735,6 +1738,54 @@
           "es": true,
           "culto": true,
           "domingo": true
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 73,
+      "nome": "MAXWELL",
+      "aliases": [
+        "DESBRAVADORES"
+      ],
+      "telefone": "554396489680",
+      "genero": "M",
+      "ativo": false,
+      "perfil_canto": null,
+      "notas": "Contato de responsavel do departamento Desbravadores. Externo, nao escalavel.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 74,
+      "nome": "ENOQUE JR.",
+      "aliases": [
+        "JÚNIOR OLIVEIRA"
+      ],
+      "telefone": "554399053835",
+      "genero": "M",
+      "ativo": false,
+      "perfil_canto": null,
+      "notas": "Externo (pregador/audiovisual). Nao escalavel no louvor.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": false,
+          "culto": false,
+          "domingo": false
         }
       },
       "afastado": null,

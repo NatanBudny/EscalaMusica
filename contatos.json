@@ -15,7 +15,9 @@
   },
   "ANDRE": {
     "telefone": "https://wa.me/5543920008370",
-    "apelidos": []
+    "apelidos": [
+      "ANDRÉ HERREIRA"
+    ]
   },
   "ANISSA": {
     "telefone": "https://wa.me/554399706425",
@@ -89,6 +91,12 @@
     "telefone": "https://wa.me/554396598684",
     "apelidos": []
   },
+  "ENOQUE JR.": {
+    "telefone": "https://wa.me/554399053835",
+    "apelidos": [
+      "JÚNIOR OLIVEIRA"
+    ]
+  },
   "FABIOLA": {
     "telefone": "https://wa.me/5543999695238",
     "apelidos": [
@@ -98,7 +106,8 @@
   "FABRICIO": {
     "telefone": "https://wa.me/554396670568",
     "apelidos": [
-      "FABRICIO 1"
+      "FABRICIO 1",
+      "JOVENS"
     ]
   },
   "GABRIEL P.": {
@@ -189,6 +198,10 @@
     "telefone": "https://wa.me/554396485823",
     "apelidos": []
   },
+  "MANU C.": {
+    "telefone": "https://wa.me/5511931474998",
+    "apelidos": []
+  },
   "MARAIR": {
     "telefone": "https://wa.me/5543999082597",
     "apelidos": []
@@ -210,6 +223,12 @@
   "MARIA ELOISA": {
     "telefone": "https://wa.me/554399703366",
     "apelidos": []
+  },
+  "MAXWELL": {
+    "telefone": "https://wa.me/554396489680",
+    "apelidos": [
+      "DESBRAVADORES"
+    ]
   },
   "MIRELLA": {
     "telefone": "https://wa.me/5543996306944",
