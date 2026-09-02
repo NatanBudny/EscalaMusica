@@ -1,0 +1,12 @@
+{
+  "mes_ano": "09/2026",
+  "trocas": [
+    { "pessoa": "MARIA ELOISA", "tipo": "saiu", "detalhe": "Você não está mais na escala de 06/09 (regência) nem de 20/09 (equipe), pois marcou que não poderia nesses domingos. Obrigado por avisar!" },
+    { "pessoa": "SILVANA", "tipo": "saiu", "detalhe": "Você saiu da equipe de 05/09 para equilibrar as participações do mês. Segue escalada para reger em 27/09." },
+    { "pessoa": "RICARDO HERREIRA", "tipo": "mudou", "detalhe": "Houve ajuste: você agora REGE em 06/09 e canta na EQUIPE em 13/09. Confira na escala." },
+    { "pessoa": "SUELLEN", "tipo": "mudou", "detalhe": "Você passou a REGER o louvor em 13/09. Confira na escala." },
+    { "pessoa": "DANI HERREIRA", "tipo": "entrou", "detalhe": "Você entrou na EQUIPE de louvor de 06/09. Confira na escala." },
+    { "pessoa": "MARIA F.", "tipo": "entrou", "detalhe": "Você entrou na EQUIPE de louvor de 20/09. Confira na escala." },
+    { "pessoa": "JULIANA ALVES", "tipo": "entrou", "detalhe": "Você entrou na EQUIPE de louvor de 05/09. Confira na escala." }
+  ]
+}
