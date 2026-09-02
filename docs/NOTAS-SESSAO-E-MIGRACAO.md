@@ -200,14 +200,78 @@ Observações importantes:
 - [ ] **Consolidar regras** definitivamente na migração (encerra o BUG-8).
 - [ ] **BERNARDO e RONI** compartilham o mesmo telefone no cadastro (pai/filho) — revisar se
       deve ter números distintos.
+- [ ] **RAISSA é prioridade para outubro** — votou e tinha dias disponíveis em setembro, mas
+      não houve encaixe limpo (os sábados que ela podia eram de departamento — Desbravadores/Jovens
+      — ou tinham equipe fechada com casais). Escalar assim que possível em outubro.
+- [ ] **Rodar `conferir-telefones-csv.js` ao receber a nova enquete**, ANTES de montar a escala,
+      para corrigir de uma vez telefones divergentes do cadastro (ver seção 10 — bug do "9 extra").
 
 ---
 
 ## 9. Estado atual (fim da sessão 01/09/2026)
 
 - Escala de **setembro/2026 publicada** em `atual.json` (13 cultos). Backup de agosto em
-  `old/2026/082026.json`. Links em `escalas/2026/09/links-whatsapp.md` (31 com contato, 0 sem).
+  `old/2026/082026.json`. Links em `escalas/2026/09/links-whatsapp.md`.
 - ACOMP ajustado: PB em 05/09, 13/09, 20/09, 27/09; BANDA nos demais sáb/dom.
 - Publicação registrada em `processos/logs/publicacoes.md`.
 - Tudo commitado e enviado ao GitHub (`origin/main`).
 - `npm test`: 356 testes passando.
+
+---
+
+## 10. Revisão pós-publicação — conferência de indisponibilidade (sessão de 01/09/2026, parte 2)
+
+Um membro (Maria Eloisa) avisou que fora escalada em dias que votou não poder. A investigação
+revelou uma **causa raiz** e gerou várias ferramentas determinísticas novas.
+
+### 10.1 Causa raiz — por que votos eram ignorados
+1. **Nome do WhatsApp ≠ nome do cadastro.** A enquete traz o nome como está salvo no celular do
+   diretor (ex: "Maria iasd central", "Dani Kallas"). Sem esses nomes como **alias**, a vinculação
+   nome→pessoa falhava e o voto era descartado.
+2. **Bug do "9 extra" no telefone.** Vários cadastros tinham um `9` a mais depois do DDD
+   (ex: `5543999063257` em vez de `554399063257`), então o casamento por telefone falhava.
+   Corrigidos nesta sessão: **Dani Herreira, Marair, Rosana, Luiz Antonio, Giovana**.
+   `Maria F.` ganhou telefone (Maria Fernanda).
+3. **Telefones compartilhados (proposital):** Manu C./Silvana (`5511931474998`),
+   Stella/Mirian (`554399665418`), Juliana/Marcela/Mirella (`554396306944`). Nesses casos a
+   resolução por telefone é ambígua → **os scripts resolvem por nome/alias PRIMEIRO, telefone depois.**
+
+### 10.2 Correções na escala de setembro (conflitos resolvidos)
+- **06/09:** Maria Eloisa (regia) → **Ricardo** rege (acúmulo, ele já estava na equipe);
+  **Dani Herreira** entra na equipe repondo o Ricardo.
+- **13/09:** **Suellen** assume a regência; **Ricardo** vai para a equipe.
+- **20/09:** Maria Eloisa (equipe) → **Maria F.**
+- **05/09:** Silvana (equipe, carga 2) cede lugar a **Juliana Alves** (carga 0, estava de fora).
+- Resultado: **0 conflitos** de indisponibilidade (confirmado por `diagnostico-votos.js`).
+
+### 10.3 Aliases adicionados (de-para automático, nome do celular → pessoa)
+Maria Eloisa("MARIA IASD CENTRAL"), Dani Herreira("DANIELE HERREIRA"), Marair, Rosana, Luiz Antonio,
+Giovana, Maria F.("MARIA FERNANDA"), Voni, Suellen, Adelaide, Ariadny, Sirlene, Jessica, Nilsinho,
+Jesse, Fabricio, Dany Kallas("DANI KALLAS"), Jemelli, Andre, Alex, Raissa, Stella, Silvana, Juliana Alves.
+
+### 10.4 Scripts novos desta sessão (todos determinísticos, sem IA) — em `scripts/validacao/`
+- **`diagnostico-votos.js`** — tabela de-para (telefone | nome CSV | nome considerado | via) +
+  lista de conflitos (escalado em dia que votou não poder). Resolve nome/alias > telefone.
+- **`verificar-conflitos-indisponibilidade.js`** — checagem escala x votos (aceita --mes ou --csv).
+- **`conferir-telefones-csv.js`** — detecta telefones do CSV que não casam com o cadastro
+  (tolera a variação do 9º dígito) e aponta o provável dono. **Rodar todo mês antes de escalar.**
+- **`sugerir-permuta.js`** — para um conflito, lista (A) substitutos diretos e (B) permutas entre dias.
+- **`disponiveis-nao-escalados.js`** — quem votou, tem dia livre e ficou de fora (candidatos naturais).
+- **`estrategias-regente.js`** — estratégias de cascata para regência difícil: E1 acúmulo
+  (alguém da equipe do dia assume a regência), E3 permuta entre dias.
+- **`balancear-carga.js`** — quem canta 2+ vezes e poderia ceder lugar a quem está de fora.
+- **`scripts/publicacao/gerar-avisos-trocas.js`** — gera mensagens WhatsApp de aviso das trocas
+  a partir de um JSON (`escalas/AAAA/MM/avisos-trocas.json`). Saída em `avisos-trocas.md`.
+
+### 10.5 Aprendizados para a migração / próximos meses
+- O **de-para nome↔alias↔telefone** é o calcanhar de Aquiles do processo. No SQLite, ter uma tabela
+  `aliases` alimentada com os nomes exatos do WhatsApp resolve isso de vez.
+- A resolução deve ser **nome/alias exato primeiro, telefone depois** (por causa dos telefones
+  compartilhados propositais).
+- Fluxo mensal recomendado ganha um passo 0: **`conferir-telefones-csv.js`** logo ao receber a enquete.
+- `coverage/` foi removido do rastreamento do git (já estava no `.gitignore`).
+
+### 10.6 Estado final (fim da parte 2)
+- Escala de setembro consistente, 0 conflitos, links (32 com contato) e avisos de troca enviados.
+- Commits: `36bf037` (correções), `9573428` (links), `4278b23` (balanceamento),
+  `8ee798d` (untrack coverage), `5e679ac` (avisos de troca). Tudo em `origin/main`.
