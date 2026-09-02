@@ -26,7 +26,9 @@
     {
       "id": 1,
       "nome": "ADELAIDE",
-      "aliases": [],
+      "aliases": [
+        "ADELAIDE CENTRAL"
+      ],
       "telefone": "554399261005",
       "genero": "F",
       "ativo": false,
@@ -72,7 +74,9 @@
     {
       "id": 3,
       "nome": "ALEX",
-      "aliases": [],
+      "aliases": [
+        "ALEX IASD CENTRAL"
+      ],
       "telefone": "554396849723",
       "genero": "M",
       "ativo": true,
@@ -95,7 +99,8 @@
       "id": 4,
       "nome": "ANDRE",
       "aliases": [
-        "ANDRÉ HERREIRA"
+        "ANDRÉ HERREIRA",
+        "ANDRE HERREIRA IASD"
       ],
       "telefone": "5543920008370",
       "genero": "M",
@@ -140,7 +145,9 @@
     {
       "id": 6,
       "nome": "ARIADNY",
-      "aliases": [],
+      "aliases": [
+        "ARIADNY MANU IASD"
+      ],
       "telefone": "554396158329",
       "genero": "F",
       "ativo": true,
@@ -338,9 +345,10 @@
       "aliases": [
         "DANIELLE H",
         "DANIELLE HERREIRA",
-        "DANIELLE"
+        "DANIELLE",
+        "DANIELE HERREIRA"
       ],
-      "telefone": "5543999189819",
+      "telefone": "554399189819",
       "genero": "F",
       "ativo": true,
       "perfil_canto": "base",
@@ -361,7 +369,9 @@
     {
       "id": 15,
       "nome": "DANY KALLAS",
-      "aliases": [],
+      "aliases": [
+        "DANI KALLAS"
+      ],
       "telefone": "554399830142",
       "genero": "F",
       "ativo": true,
@@ -503,7 +513,8 @@
       "nome": "FABRICIO",
       "aliases": [
         "FABRICIO 1",
-        "JOVENS"
+        "JOVENS",
+        "FABRICIO IASD CENTRAL"
       ],
       "telefone": "554396670568",
       "genero": "M",
@@ -548,8 +559,10 @@
     {
       "id": 23,
       "nome": "GIOVANA",
-      "aliases": [],
-      "telefone": "5543984876102",
+      "aliases": [
+        "GIOVANA SPOLIANTE IASD CENTRAL"
+      ],
+      "telefone": "554384876102",
       "genero": "F",
       "ativo": true,
       "perfil_canto": "base",
@@ -640,7 +653,9 @@
     {
       "id": 27,
       "nome": "JEMELLI",
-      "aliases": [],
+      "aliases": [
+        "JEMELLI GATTI IASD CENTRAL"
+      ],
       "telefone": "554499552532",
       "genero": "F",
       "ativo": true,
@@ -662,7 +677,9 @@
     {
       "id": 28,
       "nome": "JESSE",
-      "aliases": [],
+      "aliases": [
+        "JESSE IASD CENTRAL"
+      ],
       "telefone": "554396181993",
       "genero": "M",
       "ativo": true,
@@ -689,7 +706,9 @@
     {
       "id": 29,
       "nome": "JESSICA",
-      "aliases": [],
+      "aliases": [
+        "JESSICA TANAKA IASD"
+      ],
       "telefone": "554399152336",
       "genero": "F",
       "ativo": true,
@@ -777,7 +796,8 @@
       "nome": "JULIANA ALVES",
       "aliases": [
         "JULIANA",
-        "JULIANA DO NILSINHO"
+        "JULIANA DO NILSINHO",
+        "JULIANA IASD CENTRAL DO NILSINHO"
       ],
       "telefone": "5543996306944",
       "genero": "F",
@@ -948,9 +968,10 @@
       "id": 39,
       "nome": "LUIZ ANTONIO",
       "aliases": [
-        "LUIS"
+        "LUIS",
+        "LUIZ IASD ANTONIO"
       ],
-      "telefone": "5543999609883",
+      "telefone": "554399609883",
       "genero": "M",
       "ativo": true,
       "perfil_canto": "base",
@@ -1075,8 +1096,10 @@
     {
       "id": 44,
       "nome": "MARAIR",
-      "aliases": [],
-      "telefone": "5543999082597",
+      "aliases": [
+        "MARAIR IASD CENTRAL"
+      ],
+      "telefone": "554399082597",
       "genero": "M",
       "ativo": true,
       "perfil_canto": "base",
@@ -1165,8 +1188,10 @@
     {
       "id": 48,
       "nome": "MARIA F.",
-      "aliases": [],
-      "telefone": null,
+      "aliases": [
+        "MARIA FERNANDA"
+      ],
+      "telefone": "554399187974",
       "genero": "F",
       "ativo": true,
       "perfil_canto": "participacao",
@@ -1187,7 +1212,9 @@
     {
       "id": 49,
       "nome": "MARIA ELOISA",
-      "aliases": [],
+      "aliases": [
+        "MARIA IASD CENTRAL"
+      ],
       "telefone": "554399703366",
       "genero": "F",
       "ativo": true,
@@ -1276,7 +1303,8 @@
       "id": 53,
       "nome": "NILSINHO",
       "aliases": [
-        "NILSON"
+        "NILSON",
+        "NILSINHO IASD CENTRAL"
       ],
       "telefone": "554396557195",
       "genero": "M",
@@ -1325,7 +1353,9 @@
     {
       "id": 55,
       "nome": "RAISSA",
-      "aliases": [],
+      "aliases": [
+        "RAISSA IASD CENTRAL"
+      ],
       "telefone": "554399784486",
       "genero": "F",
       "ativo": true,
@@ -1417,8 +1447,10 @@
     {
       "id": 59,
       "nome": "ROSANA",
-      "aliases": [],
-      "telefone": "5543999063257",
+      "aliases": [
+        "ROSANA SPOLIANTE IASD CENTRAL"
+      ],
+      "telefone": "554399063257",
       "genero": "F",
       "ativo": true,
       "perfil_canto": "participacao",
@@ -1465,7 +1497,9 @@
     {
       "id": 61,
       "nome": "SILVANA",
-      "aliases": [],
+      "aliases": [
+        "SILVANA IASD CENTRAL"
+      ],
       "telefone": "5511931474998",
       "genero": "F",
       "ativo": true,
@@ -1488,7 +1522,8 @@
       "id": 62,
       "nome": "SIRLENE",
       "aliases": [
-        "SIRLENE NICASTRO"
+        "SIRLENE NICASTRO",
+        "SIRLENE IASD"
       ],
       "telefone": "554398333496",
       "genero": "F",
@@ -1511,7 +1546,9 @@
     {
       "id": 63,
       "nome": "STELLA",
-      "aliases": [],
+      "aliases": [
+        "STELLA BUOSI IASD CENTRAL"
+      ],
       "telefone": "554399665418",
       "genero": "F",
       "ativo": true,
@@ -1533,7 +1570,9 @@
     {
       "id": 64,
       "nome": "SUELLEN",
-      "aliases": [],
+      "aliases": [
+        "SUELEN CENTRAL"
+      ],
       "telefone": "554398488720",
       "genero": "F",
       "ativo": true,
@@ -1584,7 +1623,8 @@
       "aliases": [
         "VONIVALDO",
         "VONI LEAO",
-        "VONIVALDO LEAO"
+        "VONIVALDO LEAO",
+        "VONI LEAO IASD"
       ],
       "telefone": "556984254032",
       "genero": "M",
