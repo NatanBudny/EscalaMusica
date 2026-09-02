@@ -1,7 +1,9 @@
 {
   "ADELAIDE": {
     "telefone": "https://wa.me/554399261005",
-    "apelidos": []
+    "apelidos": [
+      "ADELAIDE CENTRAL"
+    ]
   },
   "ADELMO": {
     "telefone": "https://wa.me/554399512450",
@@ -15,12 +17,15 @@
   },
   "ALEX": {
     "telefone": "https://wa.me/554396849723",
-    "apelidos": []
+    "apelidos": [
+      "ALEX IASD CENTRAL"
+    ]
   },
   "ANDRE": {
     "telefone": "https://wa.me/5543920008370",
     "apelidos": [
-      "ANDRÉ HERREIRA"
+      "ANDRÉ HERREIRA",
+      "ANDRE HERREIRA IASD"
     ]
   },
   "ANISSA": {
@@ -29,7 +34,9 @@
   },
   "ARIADNY": {
     "telefone": "https://wa.me/554396158329",
-    "apelidos": []
+    "apelidos": [
+      "ARIADNY MANU IASD"
+    ]
   },
   "BANDA": {
     "telefone": "https://wa.me/554399261005",
@@ -64,16 +71,19 @@
     "apelidos": []
   },
   "DANI HERREIRA": {
-    "telefone": "https://wa.me/5543999189819",
+    "telefone": "https://wa.me/554399189819",
     "apelidos": [
       "DANIELLE H",
       "DANIELLE HERREIRA",
-      "DANIELLE"
+      "DANIELLE",
+      "DANIELE HERREIRA"
     ]
   },
   "DANY KALLAS": {
     "telefone": "https://wa.me/554399830142",
-    "apelidos": []
+    "apelidos": [
+      "DANI KALLAS"
+    ]
   },
   "DIEGO": {
     "telefone": "https://wa.me/554388168906",
@@ -113,7 +123,8 @@
     "telefone": "https://wa.me/554396670568",
     "apelidos": [
       "FABRICIO 1",
-      "JOVENS"
+      "JOVENS",
+      "FABRICIO IASD CENTRAL"
     ]
   },
   "GABRIEL P.": {
@@ -121,8 +132,10 @@
     "apelidos": []
   },
   "GIOVANA": {
-    "telefone": "https://wa.me/5543984876102",
-    "apelidos": []
+    "telefone": "https://wa.me/554384876102",
+    "apelidos": [
+      "GIOVANA SPOLIANTE IASD CENTRAL"
+    ]
   },
   "HELOISE": {
     "telefone": "https://wa.me/554388020838",
@@ -134,15 +147,21 @@
   },
   "JEMELLI": {
     "telefone": "https://wa.me/554499552532",
-    "apelidos": []
+    "apelidos": [
+      "JEMELLI GATTI IASD CENTRAL"
+    ]
   },
   "JESSE": {
     "telefone": "https://wa.me/554396181993",
-    "apelidos": []
+    "apelidos": [
+      "JESSE IASD CENTRAL"
+    ]
   },
   "JESSICA": {
     "telefone": "https://wa.me/554399152336",
-    "apelidos": []
+    "apelidos": [
+      "JESSICA TANAKA IASD"
+    ]
   },
   "JESSIE": {
     "telefone": "https://wa.me/554399149664",
@@ -161,7 +180,8 @@
     "telefone": "https://wa.me/5543996306944",
     "apelidos": [
       "JULIANA",
-      "JULIANA DO NILSINHO"
+      "JULIANA DO NILSINHO",
+      "JULIANA IASD CENTRAL DO NILSINHO"
     ]
   },
   "JUNIOR": {
@@ -189,9 +209,10 @@
     "apelidos": []
   },
   "LUIZ ANTONIO": {
-    "telefone": "https://wa.me/5543999609883",
+    "telefone": "https://wa.me/554399609883",
     "apelidos": [
-      "LUIS"
+      "LUIS",
+      "LUIZ IASD ANTONIO"
     ]
   },
   "LUIZ DA SILVA": {
@@ -210,8 +231,10 @@
     "apelidos": []
   },
   "MARAIR": {
-    "telefone": "https://wa.me/5543999082597",
-    "apelidos": []
+    "telefone": "https://wa.me/554399082597",
+    "apelidos": [
+      "MARAIR IASD CENTRAL"
+    ]
   },
   "MARCELA": {
     "telefone": "https://wa.me/5543996306944",
@@ -229,7 +252,15 @@
   },
   "MARIA ELOISA": {
     "telefone": "https://wa.me/554399703366",
-    "apelidos": []
+    "apelidos": [
+      "MARIA IASD CENTRAL"
+    ]
+  },
+  "MARIA F.": {
+    "telefone": "https://wa.me/554399187974",
+    "apelidos": [
+      "MARIA FERNANDA"
+    ]
   },
   "MAXWELL": {
     "telefone": "https://wa.me/554396489680",
@@ -252,7 +283,8 @@
   "NILSINHO": {
     "telefone": "https://wa.me/554396557195",
     "apelidos": [
-      "NILSON"
+      "NILSON",
+      "NILSINHO IASD CENTRAL"
     ]
   },
   "PR. HOFNI": {
@@ -265,7 +297,9 @@
   },
   "RAISSA": {
     "telefone": "https://wa.me/554399784486",
-    "apelidos": []
+    "apelidos": [
+      "RAISSA IASD CENTRAL"
+    ]
   },
   "RICARDO HERREIRA": {
     "telefone": "https://wa.me/554396158431",
@@ -288,8 +322,10 @@
     "apelidos": []
   },
   "ROSANA": {
-    "telefone": "https://wa.me/5543999063257",
-    "apelidos": []
+    "telefone": "https://wa.me/554399063257",
+    "apelidos": [
+      "ROSANA SPOLIANTE IASD CENTRAL"
+    ]
   },
   "SAMUEL": {
     "telefone": "https://wa.me/554388653377",
@@ -297,17 +333,22 @@
   },
   "SILVANA": {
     "telefone": "https://wa.me/5511931474998",
-    "apelidos": []
+    "apelidos": [
+      "SILVANA IASD CENTRAL"
+    ]
   },
   "SIRLENE": {
     "telefone": "https://wa.me/554398333496",
     "apelidos": [
-      "SIRLENE NICASTRO"
+      "SIRLENE NICASTRO",
+      "SIRLENE IASD"
     ]
   },
   "STELLA": {
     "telefone": "https://wa.me/554399665418",
-    "apelidos": []
+    "apelidos": [
+      "STELLA BUOSI IASD CENTRAL"
+    ]
   },
   "STEPHANY": {
     "telefone": "https://wa.me/554399677434",
@@ -317,7 +358,9 @@
   },
   "SUELLEN": {
     "telefone": "https://wa.me/554398488720",
-    "apelidos": []
+    "apelidos": [
+      "SUELEN CENTRAL"
+    ]
   },
   "VANDERLEY": {
     "telefone": "https://wa.me/554488376153",
@@ -328,7 +371,8 @@
     "apelidos": [
       "VONIVALDO",
       "VONI LEAO",
-      "VONIVALDO LEAO"
+      "VONIVALDO LEAO",
+      "VONI LEAO IASD"
     ]
   },
   "YASSER": {
