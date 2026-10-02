@@ -1,0 +1,160 @@
+{
+  "contexto": "Indisponibilidade de cantores - Outubro 2026",
+  "origem": "Enquete do grupo: vote em quais dias voce NAO pode cantar",
+  "atualizado_em": "2026-10-01",
+  "datas": [
+    {
+      "data_referencia": "2026-10-03",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "Alex iasd central",
+        "Biel iasd central",
+        "Giovana spoliante iasd central",
+        "Kheyciane Iasd Central",
+        "Marair Iasd central",
+        "Maria iasd central",
+        "Rosana spoliante iasd central",
+        "alessandra donadon",
+        "vida ❤️"
+      ]
+    },
+    {
+      "data_referencia": "2026-10-04",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "Adelaide Central",
+        "André Herreira iasd",
+        "Dani Kallas",
+        "Giovana spoliante iasd central",
+        "Helô Moraes iasd central",
+        "Jemelli gatti iasd central",
+        "Jessé iasd central",
+        "Maria iasd central",
+        "Rosana spoliante iasd central",
+        "Stella Buosi Iasd central",
+        "Suelen Central",
+        "alessandra donadon",
+        "ariadny manu iasd",
+        "fabricio iasd central",
+        "vida ❤️"
+      ]
+    },
+    {
+      "data_referencia": "2026-10-10",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "Alex iasd central",
+        "Biel iasd central",
+        "Lidiane Iasd central",
+        "Marair Iasd central",
+        "Maria iasd central",
+        "Rosana spoliante iasd central",
+        "alessandra donadon"
+      ]
+    },
+    {
+      "data_referencia": "2026-10-11",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "André Herreira iasd",
+        "Biel iasd central",
+        "Dani Kallas",
+        "Daniele Herreira",
+        "Helô Moraes iasd central",
+        "Jemelli gatti iasd central",
+        "Jessé iasd central",
+        "Lidiane Iasd central",
+        "Maria iasd central",
+        "Stella Buosi Iasd central",
+        "Suelen Central",
+        "alessandra donadon",
+        "ariadny manu iasd",
+        "fabricio iasd central"
+      ]
+    },
+    {
+      "data_referencia": "2026-10-17",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "André Herreira iasd",
+        "Giovana spoliante iasd central",
+        "Kheyciane Iasd Central",
+        "Lidiane Iasd central",
+        "Rosana spoliante iasd central"
+      ]
+    },
+    {
+      "data_referencia": "2026-10-18",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "Dani Kallas",
+        "Giovana spoliante iasd central",
+        "Helô Moraes iasd central",
+        "Jemelli gatti iasd central",
+        "Jessé iasd central",
+        "Lidiane Iasd central",
+        "Maria iasd central",
+        "Silvana Iasd Central",
+        "Stella Buosi Iasd central",
+        "Suelen Central",
+        "ariadny manu iasd",
+        "fabricio iasd central"
+      ]
+    },
+    {
+      "data_referencia": "2026-10-24",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "Kheyciane Iasd Central",
+        "Rosana spoliante iasd central",
+        "Stephany Cionek"
+      ]
+    },
+    {
+      "data_referencia": "2026-10-25",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "André Herreira iasd",
+        "Dani Kallas",
+        "Daniele Herreira",
+        "Helô Moraes iasd central",
+        "Jemelli gatti iasd central",
+        "Jessé iasd central",
+        "Kheyciane Iasd Central",
+        "Maria iasd central",
+        "Stella Buosi Iasd central",
+        "ariadny manu iasd",
+        "fabricio iasd central"
+      ]
+    },
+    {
+      "data_referencia": "2026-10-31",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "Alex iasd central",
+        "Giovana spoliante iasd central",
+        "Kheyciane Iasd Central",
+        "Rosana spoliante iasd central",
+        "Stephany Cionek",
+        "alessandra donadon"
+      ]
+    },
+    {
+      "data_referencia": "geral",
+      "dia_semana": "todos",
+      "indisponiveis_tempo_indeterminado": [
+        "Kheyciane Iasd Central",
+        "Nilsinho iasd central",
+        "Ricardo Central",
+        "sirlene iasd",
+        "voni leao"
+      ],
+      "observacoes": [
+        "Nomes em indisponiveis_tempo_indeterminado marcaram 'NAO POSSO EM OUTUBRO' na enquete."
+      ],
+      "disponiveis_para_todos": [
+        ""
+      ]
+    }
+  ]
+}

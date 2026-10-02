@@ -1,0 +1,1706 @@
+{
+  "gerado_em": "2026-10-02T00:29:42.610Z",
+  "periodo": "01-2026 a atual",
+  "tipo_controle": "equipe_louvor",
+  "legenda": {
+    "ESCALAS_EQUIPE": "Quantidade de vezes em que a pessoa apareceu em EQUIPE LOUVOR."
+  },
+  "criterio_sugestao": "Priorizar menor quantidade total de escalas em equipe de louvor, respeitando disponibilidade real e as regras vigentes.",
+  "observacao": "O ranking considera apenas pessoas ativas e habilitadas para equipe no cadastro oficial de funcoes do louvor.",
+  "fonte": [
+    "old/2026/01-2026.json",
+    "old/2026/02-2026.json",
+    "old/2026/032026.json",
+    "old/2026/042026.json",
+    "old/2026/052026.json",
+    "old/2026/062026.json",
+    "old/2026/082026.json",
+    "old/2026/092026.json",
+    "atual.json"
+  ],
+  "nomes_nao_mapeados": [
+    {
+      "campo": "EQUIPE LOUVOR",
+      "nome": "FAMILIA JOAS",
+      "data": "18/01/2026"
+    },
+    {
+      "campo": "EQUIPE LOUVOR",
+      "nome": "FAMILIA JESSE",
+      "data": "18/01/2026"
+    },
+    {
+      "campo": "EQUIPE LOUVOR",
+      "nome": "MARIA HELOISA",
+      "data": "22/08/2026"
+    },
+    {
+      "campo": "EQUIPE LOUVOR",
+      "nome": "SIDNEY",
+      "data": "03/05/2026"
+    },
+    {
+      "campo": "EQUIPE LOUVOR",
+      "nome": "MIN. JOVEM",
+      "data": "23/08/2026"
+    }
+  ],
+  "ranking_menor_para_maior": [
+    {
+      "nome": "MARIA ELISA",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 0,
+      "TOTAL": 0,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "LAURA",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 1,
+      "TOTAL": 1,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "MANU S.",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 1,
+      "TOTAL": 1,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "VANDERLEY",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 1,
+      "TOTAL": 1,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "BERNARDO",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 2,
+      "TOTAL": 2,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "MANU C.",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 2,
+      "TOTAL": 2,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "MARIA F.",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 2,
+      "TOTAL": 2,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "RONI",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 2,
+      "TOTAL": 2,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "VONI",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 2,
+      "TOTAL": 2,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "YASSER",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 2,
+      "TOTAL": 2,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 1
+        }
+      }
+    },
+    {
+      "nome": "MARIA ELOISA",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 3,
+      "TOTAL": 3,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 3
+        }
+      }
+    },
+    {
+      "nome": "JULIANA ALVES",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 4,
+      "TOTAL": 4,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 1
+        }
+      }
+    },
+    {
+      "nome": "MIRELLA",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 4,
+      "TOTAL": 4,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "MIRIAN",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 4,
+      "TOTAL": 4,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 1
+        }
+      }
+    },
+    {
+      "nome": "ROSANA",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 4,
+      "TOTAL": 4,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "SIRLENE",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 4,
+      "TOTAL": 4,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "STEPHANY",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 4,
+      "TOTAL": 4,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 3
+        }
+      }
+    },
+    {
+      "nome": "BETE",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 5,
+      "TOTAL": 5,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 3
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "GABRIEL P.",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 5,
+      "TOTAL": 5,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 2
+        }
+      }
+    },
+    {
+      "nome": "MARCELA",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 5,
+      "TOTAL": 5,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "NILSINHO",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 5,
+      "TOTAL": 5,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "RAISSA",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 5,
+      "TOTAL": 5,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 2
+        }
+      }
+    },
+    {
+      "nome": "SILVANA",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 5,
+      "TOTAL": 5,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 1
+        }
+      }
+    },
+    {
+      "nome": "ANDRE",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 6,
+      "TOTAL": 6,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 3
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 1
+        }
+      }
+    },
+    {
+      "nome": "STELLA",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 6,
+      "TOTAL": 6,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 1
+        }
+      }
+    },
+    {
+      "nome": "ALESSANDRA DONADON",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 7,
+      "TOTAL": 7,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 2
+        }
+      }
+    },
+    {
+      "nome": "MARAIR",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 7,
+      "TOTAL": 7,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 3
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 1
+        }
+      }
+    },
+    {
+      "nome": "SUELLEN",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 7,
+      "TOTAL": 7,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 4
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "JESSIE",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 8,
+      "TOTAL": 8,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 1
+        }
+      }
+    },
+    {
+      "nome": "JOAS",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 8,
+      "TOTAL": 8,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 3
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 2
+        }
+      }
+    },
+    {
+      "nome": "LIDIANE",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 8,
+      "TOTAL": 8,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 3
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 1
+        }
+      }
+    },
+    {
+      "nome": "RICARDO HERREIRA",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 8,
+      "TOTAL": 8,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 3
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "HELOISE",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 9,
+      "TOTAL": 9,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 3
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 1
+        }
+      }
+    },
+    {
+      "nome": "JESSICA",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 9,
+      "TOTAL": 9,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 3
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 2
+        }
+      }
+    },
+    {
+      "nome": "GIOVANA",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 10,
+      "TOTAL": 10,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 3
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 1
+        }
+      }
+    },
+    {
+      "nome": "JESSE",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 10,
+      "TOTAL": 10,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 3
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 1
+        }
+      }
+    },
+    {
+      "nome": "CATHERINE",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 11,
+      "TOTAL": 11,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 3
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 1
+        }
+      }
+    },
+    {
+      "nome": "DANI HERREIRA",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 11,
+      "TOTAL": 11,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 3
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 3
+        }
+      }
+    },
+    {
+      "nome": "KHEYCIANE",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 12,
+      "TOTAL": 12,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 5
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 3
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "DANY KALLAS",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 13,
+      "TOTAL": 13,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 3
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 4
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 3
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "JEMELLI",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 13,
+      "TOTAL": 13,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 3
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 4
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 1
+        }
+      }
+    },
+    {
+      "nome": "LUIZ DA SILVA",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 13,
+      "TOTAL": 13,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 11
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "ALEX",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 14,
+      "TOTAL": 14,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 6
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 3
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 0
+        }
+      }
+    },
+    {
+      "nome": "FABRICIO",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 20,
+      "TOTAL": 20,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 4
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 4
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 3
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 1
+        }
+      }
+    },
+    {
+      "nome": "ARIADNY",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 26,
+      "TOTAL": 26,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 5
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 7
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 3
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 4
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 0
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 2
+        }
+      }
+    },
+    {
+      "nome": "LUIZ ANTONIO",
+      "ativo": true,
+      "pode_equipe": true,
+      "ESCALAS_EQUIPE": 35,
+      "TOTAL": 35,
+      "por_mes": {
+        "01-2026": {
+          "ESCALAS_EQUIPE": 7
+        },
+        "02-2026": {
+          "ESCALAS_EQUIPE": 1
+        },
+        "032026": {
+          "ESCALAS_EQUIPE": 6
+        },
+        "042026": {
+          "ESCALAS_EQUIPE": 3
+        },
+        "052026": {
+          "ESCALAS_EQUIPE": 5
+        },
+        "062026": {
+          "ESCALAS_EQUIPE": 3
+        },
+        "082026": {
+          "ESCALAS_EQUIPE": 4
+        },
+        "092026": {
+          "ESCALAS_EQUIPE": 2
+        },
+        "atual": {
+          "ESCALAS_EQUIPE": 4
+        }
+      }
+    }
+  ]
+}

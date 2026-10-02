@@ -1,0 +1,80 @@
+# Links WhatsApp - Publicacao 2026-10-02
+
+## Mensagem padrao
+
+```text
+Olá, {nome}. Você está na escala de {mes/ano}, como {funções}. Entre na escala, veja os dias.
+
+Dê um joinha nessa mensagem para confirmar que poderá participar.
+
+*Link da escala:*
+https://natanbudny.github.io/EscalaMusica/
+```
+
+## Membros da escala (Regencia, Equipe Louvor e Mensagem Musical)
+
+| Nome | Funcoes | Link |
+|---|---|---|
+| ALESSANDRA DONADON | EQUIPE LOUVOR | [Abrir](https://wa.me/554396195901?text=Ol%C3%A1%2C%20ALESSANDRA%20DONADON.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| ALEX | MENSAGEM MUSICAL | [Abrir](https://wa.me/554396849723?text=Ol%C3%A1%2C%20ALEX.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20MENSAGEM%20MUSICAL.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| ANDRE | EQUIPE LOUVOR, REGENTE LOUVOR | [Abrir](https://wa.me/5543920008370?text=Ol%C3%A1%2C%20ANDRE.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR%2C%20REGENTE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| ARIADNY | EQUIPE LOUVOR | [Abrir](https://wa.me/554396158329?text=Ol%C3%A1%2C%20ARIADNY.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| BERNARDO | MENSAGEM MUSICAL | [Abrir](https://wa.me/5543996579868?text=Ol%C3%A1%2C%20BERNARDO.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20MENSAGEM%20MUSICAL.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| CATHERINE | EQUIPE LOUVOR | [Abrir](https://wa.me/554391360091?text=Ol%C3%A1%2C%20CATHERINE.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| DANI HERREIRA | EQUIPE LOUVOR | [Abrir](https://wa.me/554399189819?text=Ol%C3%A1%2C%20DANI%20HERREIRA.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| DANY KALLAS | REGENTE LOUVOR | [Abrir](https://wa.me/554399830142?text=Ol%C3%A1%2C%20DANY%20KALLAS.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20REGENTE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| FABRICIO | EQUIPE LOUVOR, REGENTE LOUVOR | [Abrir](https://wa.me/554396670568?text=Ol%C3%A1%2C%20FABRICIO.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR%2C%20REGENTE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| GABRIEL P. | EQUIPE LOUVOR | [Abrir](https://wa.me/554499412470?text=Ol%C3%A1%2C%20GABRIEL%20P..%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| GIOVANA | EQUIPE LOUVOR, REGENTE LOUVOR | [Abrir](https://wa.me/554384876102?text=Ol%C3%A1%2C%20GIOVANA.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR%2C%20REGENTE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| HELOISE | EQUIPE LOUVOR | [Abrir](https://wa.me/554388020838?text=Ol%C3%A1%2C%20HELOISE.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| JEMELLI | EQUIPE LOUVOR, MENSAGEM MUSICAL | [Abrir](https://wa.me/554499552532?text=Ol%C3%A1%2C%20JEMELLI.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR%2C%20MENSAGEM%20MUSICAL.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| JESSE | EQUIPE LOUVOR | [Abrir](https://wa.me/554396181993?text=Ol%C3%A1%2C%20JESSE.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| JESSICA | EQUIPE LOUVOR | [Abrir](https://wa.me/554399152336?text=Ol%C3%A1%2C%20JESSICA.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| JESSIE | EQUIPE LOUVOR | [Abrir](https://wa.me/554399149664?text=Ol%C3%A1%2C%20JESSIE.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| JOAS | EQUIPE LOUVOR | [Abrir](https://wa.me/554399234367?text=Ol%C3%A1%2C%20JOAS.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| JOVENS | EQUIPE LOUVOR, REGENTE LOUVOR | [Abrir](https://wa.me/554396670568?text=Ol%C3%A1%2C%20JOVENS.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR%2C%20REGENTE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| JULIANA ALVES | EQUIPE LOUVOR | [Abrir](https://wa.me/5543996306944?text=Ol%C3%A1%2C%20JULIANA%20ALVES.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| JUNIOR FERREIRA | MENSAGEM MUSICAL | [Abrir](https://wa.me/554384479273?text=Ol%C3%A1%2C%20JUNIOR%20FERREIRA.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20MENSAGEM%20MUSICAL.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| LIDIANE | EQUIPE LOUVOR | [Abrir](https://wa.me/554396005175?text=Ol%C3%A1%2C%20LIDIANE.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| LUIZ ANTONIO | EQUIPE LOUVOR | [Abrir](https://wa.me/554399609883?text=Ol%C3%A1%2C%20LUIZ%20ANTONIO.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| MARAIR | EQUIPE LOUVOR, REGENTE LOUVOR | [Abrir](https://wa.me/554399082597?text=Ol%C3%A1%2C%20MARAIR.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR%2C%20REGENTE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| MARCELA | MENSAGEM MUSICAL | [Abrir](https://wa.me/5543996306944?text=Ol%C3%A1%2C%20MARCELA.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20MENSAGEM%20MUSICAL.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| MARIA ELOISA | EQUIPE LOUVOR | [Abrir](https://wa.me/554399703366?text=Ol%C3%A1%2C%20MARIA%20ELOISA.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| MIRELLA | MENSAGEM MUSICAL | [Abrir](https://wa.me/5543996306944?text=Ol%C3%A1%2C%20MIRELLA.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20MENSAGEM%20MUSICAL.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| MIRIAN | EQUIPE LOUVOR | [Abrir](https://wa.me/554399665418?text=Ol%C3%A1%2C%20MIRIAN.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| RAISSA | EQUIPE LOUVOR | [Abrir](https://wa.me/554399784486?text=Ol%C3%A1%2C%20RAISSA.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| ROOSEVELT | MENSAGEM MUSICAL | [Abrir](https://wa.me/554398737596?text=Ol%C3%A1%2C%20ROOSEVELT.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20MENSAGEM%20MUSICAL.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| SILVANA | EQUIPE LOUVOR, MENSAGEM MUSICAL | [Abrir](https://wa.me/5511931474998?text=Ol%C3%A1%2C%20SILVANA.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR%2C%20MENSAGEM%20MUSICAL.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| STELLA | EQUIPE LOUVOR | [Abrir](https://wa.me/554399665418?text=Ol%C3%A1%2C%20STELLA.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| STEPHANY | EQUIPE LOUVOR | [Abrir](https://wa.me/554399677434?text=Ol%C3%A1%2C%20STEPHANY.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| SUELLEN | REGENTE LOUVOR | [Abrir](https://wa.me/554398488720?text=Ol%C3%A1%2C%20SUELLEN.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20REGENTE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| YASSER | EQUIPE LOUVOR | [Abrir](https://wa.me/5543999519003?text=Ol%C3%A1%2C%20YASSER.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20EQUIPE%20LOUVOR.%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+
+## Contatos fixos
+
+| Contato | Nome | Link |
+|---|---|---|
+| Lider da banda (Adelaide) | ADELAIDE | [Abrir](https://wa.me/554399261005?text=Ol%C3%A1%2C%20ADELAIDE.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20Lider%20da%20banda%20(Adelaide).%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+| Anciao principal (Yasser) | YASSER | [Abrir](https://wa.me/5543999519003?text=Ol%C3%A1%2C%20YASSER.%20Voc%C3%AA%20est%C3%A1%20na%20escala%20de%2010%2F2026%2C%20como%20Anciao%20principal%20(Yasser).%20Entre%20na%20escala%2C%20veja%20os%20dias.%0A%0AD%C3%AA%20um%20joinha%20nessa%20mensagem%20para%20confirmar%20que%20poder%C3%A1%20participar.%0A%0A*Link%20da%20escala%3A*%0Ahttps%3A%2F%2Fnatanbudny.github.io%2FEscalaMusica%2F) |
+
+## Grupo do louvor
+
+| Item | Link |
+|---|---|
+| Convite do grupo | [Abrir](https://chat.whatsapp.com/EsfZwmrdWntG9wxqoSN5zw) |
+
+Observacao: o link de convite do grupo nao preenche mensagem automaticamente como o wa.me.
+
+## Sem contato cadastrado
+
+| Nome | Funcoes |
+|---|---|
+| ANDREIA | MENSAGEM MUSICAL |
+| CORAL KIDS | MENSAGEM MUSICAL |
+| JHON | MENSAGEM MUSICAL |
+| QUARTETO | MENSAGEM MUSICAL |
+
+## Fonte
+
+- Escala: atual.json
+- Contatos: contatos.json

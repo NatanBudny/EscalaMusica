@@ -1,0 +1,30 @@
+# Exported from Polls Exporter for WhatsApp Web — 2026-10-01
+Name                           | Phone Number      | Poll Result                                                                                   | Total
+Maria iasd central             | +55 4399703366    | 03/10 Sábado, 04/10 Domingo, 10/10 Sábado, 11/10 Domingo, 18/10 Domingo, 25/10 Domingo        | 6    
+Kheyciane Iasd Central         | +55 4388586342    | ⛔ NÃO posso em outubro, 03/10 Sábado, 17/10 Sábado, 24/10 Sábado, 25/10 Domingo, 31/10 Sábado | 6    
+Ricardo Central                | +55 4396158431    | ⛔ NÃO posso em outubro                                                                        | 1    
+Stephany Cionek                | +55 4399677434    | 24/10 Sábado, 31/10 Sábado                                                                    | 2    
+voni leao                      | +55 6984254032    | ⛔ NÃO posso em outubro                                                                        | 1    
+sirlene iasd                   | +55 4398333496    | ⛔ NÃO posso em outubro                                                                        | 1    
+Suelen Central                 | +55 4398488720    | 04/10 Domingo, 11/10 Domingo, 18/10 Domingo                                                   | 3    
+Silvana Iasd Central           | +55 11 93147 4998 | 18/10 Domingo                                                                                 | 1    
+Adelaide Central               | +55 4399261005    | 04/10 Domingo                                                                                 | 1    
+vida ❤️                        | +55 4391360091    | 03/10 Sábado, 04/10 Domingo                                                                   | 2    
+alessandra donadon             | +55 4396195901    | 03/10 Sábado, 04/10 Domingo, 10/10 Sábado, 11/10 Domingo, 31/10 Sábado                        | 5    
+Biel iasd central              | +55 4499412470    | 03/10 Sábado, 10/10 Sábado, 11/10 Domingo                                                     | 3    
+ariadny manu iasd              | +55 4396158329    | 04/10 Domingo, 11/10 Domingo, 18/10 Domingo, 25/10 Domingo                                    | 4    
+Helô Moraes iasd central       | +55 4388020838    | 04/10 Domingo, 11/10 Domingo, 18/10 Domingo, 25/10 Domingo                                    | 4    
+Jessé iasd central             | +55 4396181993    | 04/10 Domingo, 11/10 Domingo, 18/10 Domingo, 25/10 Domingo                                    | 4    
+Rosana spoliante iasd central  | +55 4399063257    | 03/10 Sábado, 04/10 Domingo, 10/10 Sábado, 17/10 Sábado, 24/10 Sábado, 31/10 Sábado           | 6    
+fabricio iasd central          | +55 4396670568    | 04/10 Domingo, 11/10 Domingo, 18/10 Domingo, 25/10 Domingo                                    | 4    
+Dani Kallas                    | +55 4399830142    | 04/10 Domingo, 11/10 Domingo, 18/10 Domingo, 25/10 Domingo                                    | 4    
+Marair Iasd central            | +55 4399082597    | 03/10 Sábado, 10/10 Sábado                                                                    | 2    
+Nilsinho iasd central          | +55 4396557195    | ⛔ NÃO posso em outubro                                                                        | 1    
+André Herreira iasd            | +55 43 92000 8370 | 04/10 Domingo, 11/10 Domingo, 17/10 Sábado, 25/10 Domingo                                     | 4    
+Lidiane Iasd central           | +55 4396005175    | 10/10 Sábado, 11/10 Domingo, 17/10 Sábado, 18/10 Domingo                                      | 4    
+Daniele Herreira               | +55 4399189819    | 11/10 Domingo, 25/10 Domingo                                                                  | 2    
+Jemelli gatti iasd central     | +55 4499552532    | 04/10 Domingo, 11/10 Domingo, 18/10 Domingo, 25/10 Domingo                                    | 4    
+Stella Buosi Iasd central      | +55 4399665418    | 04/10 Domingo, 11/10 Domingo, 18/10 Domingo, 25/10 Domingo                                    | 4    
+Giovana spoliante iasd central | +55 4384876102    | 03/10 Sábado, 04/10 Domingo, 17/10 Sábado, 18/10 Domingo, 31/10 Sábado                        | 5    
+Alex iasd central              | +55 4396849723    | 03/10 Sábado, 10/10 Sábado, 31/10 Sábado                                                      | 3    
+Total                          |                   |                                                                                               | 87   

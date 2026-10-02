@@ -87,6 +87,9 @@
       box-shadow: var(--sombra); overflow: hidden;
       transition: opacity .2s;
     }
+    /* Leve destaque nos cards de sábado (dia principal de louvor) */
+    .culto.sabado { border-color: #a5c8ef; box-shadow: 0 0 0 1px #a5c8ef, var(--sombra); }
+    .culto.sabado .culto-head { background: #eef4fc; }
     /* Card totalmente respondido: esmaece (apenas visual — continua editável) */
     .culto.concluido { opacity: .5; }
     .culto.concluido:hover, .culto.concluido:focus-within { opacity: 1; }
@@ -263,20 +266,28 @@
     function ehRevisavel(nome) { return !NAO_REVISAVEL.has(nome.toUpperCase()); }
 
     // --- Parse do rascunho.md ---
+    // IMPORTANTE: a revisão NUNCA carrega quartas-feiras. Cultos de quarta são
+    // publicados só com ancião/pregador/audiovisual (escala externa); não têm
+    // louvor, regente nem mensagem musical, então não há o que revisar neles.
+    function ehQuarta(dia) {
+      return /quarta/i.test(String(dia || '').normalize('NFD').replace(/[\u0300-\u036f]/g, ''));
+    }
     function parseRascunho(md) {
       const linhas = md.split(/\r?\n/).filter(l => /^\|\s*\d{2}\/\d{2}\/\d{4}\s*\|/.test(l));
-      return linhas.map(l => {
-        const c = l.split('|').map(x => x.trim());
-        return {
-          data: c[1], dia: c[2],
-          preg: c[4] || '-', av: c[5] || '-',
-          grupos: {
-            'REGENTE LOUVOR': splitNomes(c[6]),
-            'EQUIPE LOUVOR': splitNomes(c[7]),
-            'MENSAGEM MUSICAL': splitNomes(c[8]),
-          },
-        };
-      });
+      return linhas
+        .map(l => {
+          const c = l.split('|').map(x => x.trim());
+          return {
+            data: c[1], dia: c[2],
+            preg: c[4] || '-', av: c[5] || '-',
+            grupos: {
+              'REGENTE LOUVOR': splitNomes(c[6]),
+              'EQUIPE LOUVOR': splitNomes(c[7]),
+              'MENSAGEM MUSICAL': splitNomes(c[8]),
+            },
+          };
+        })
+        .filter(culto => !ehQuarta(culto.dia));
     }
 
     // --- Render ---
@@ -286,7 +297,7 @@
 
       for (const culto of cultos) {
         const div = document.createElement('div');
-        div.className = 'culto';
+        div.className = 'culto' + (/sab/i.test((culto.dia || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '')) ? ' sabado' : '');
         div.dataset.data = culto.data;
         const head = document.createElement('div');
         head.className = 'culto-head';
@@ -501,39 +512,126 @@
 
     function dataBRparaIso(br) { const [d,m,a] = br.split('/'); return `${a}-${m}-${d}`; }
 
-    // Retorna candidatos disponíveis para um papel num culto (Cenário A: disponibilidade + habilitação + não duplicado).
+    // Normaliza nome/alias para comparação robusta (sem acento, maiúsculo).
+    function normNome(s) {
+      return String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().replace(/[^A-Z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+    }
+    // Resolve um nome do rascunho (pode ser alias) para a pessoa do cadastro.
+    function pessoaPorNome(nome) {
+      const n = normNome(nome);
+      return cadastro.find(p => normNome(p.nome) === n || (p.aliases || []).some(a => normNome(a) === n)) || null;
+    }
+    // Conjunto de nomes/aliases indisponíveis (normalizados) para um dia ISO.
+    function indisponiveisNoDia(iso) {
+      const set = new Set();
+      for (const nm of [...(indispPorData[iso] || []), ...indispMesInteiro]) {
+        set.add(normNome(nm));
+        const p = pessoaPorNome(nm); // inclui aliases da mesma pessoa
+        if (p) { set.add(normNome(p.nome)); for (const a of p.aliases || []) set.add(normNome(a)); }
+      }
+      return set;
+    }
+    // Datas de culto do rascunho em ISO, ordenadas (para checar consecutivos).
+    function datasIsoOrdenadas() {
+      return cultos.map(c => dataBRparaIso(c.data)).sort();
+    }
+    function diasEntreIso(a, b) { return Math.abs((new Date(a) - new Date(b)) / 86400000); }
+
+    // Retorna candidatos VÁLIDOS para substituir num papel/culto. Aplica filtros DUROS:
+    //  - ativo e não afastado
+    //  - não indisponível no dia (data ou mês inteiro), resolvendo aliases
+    //  - NÃO já escalado em NENHUM papel neste mesmo dia (evita duplicar função)
+    //  - habilitação do papel (regente/equipe/mm conforme dia)
+    //  - dias_permitidos (ex: só sábado) e regra de domingo (Catherine/Ariadny)
+    //  - MM: não repetir mensagem musical no mês (RF014)
+    //  - não consecutivo (<=2 dias) em relação a outro culto onde já canta (RF013)
+    // Nomes de grupo/externos (CORAL, QUARTETO, JHON...) não entram: são texto, não pessoas.
     function candidatosSubstitutos(culto, grupo, nomeReprovado) {
       const iso = dataBRparaIso(culto.data);
-      const indisp = new Set([...(indispPorData[iso] || []), ...indispMesInteiro]);
-      // Onde cada pessoa já está no dia (para marcar permuta de papel, mas sem excluir)
-      const papelNoDia = new Map();
-      for (const [g, nomes] of Object.entries(culto.grupos)) for (const n of nomes) papelNoDia.set(n.toUpperCase(), g);
+      const indisp = indisponiveisNoDia(iso);
       const dia = (culto.dia || '').toLowerCase();
       const ehDomingo = dia.includes('domingo');
 
+      // Quem já está em QUALQUER papel neste dia (por nome e alias) — bloqueia duplicar.
+      const jaNoDia = new Set();
+      for (const [, nomes] of Object.entries(culto.grupos)) {
+        for (const n of nomes) {
+          jaNoDia.add(normNome(n));
+          const pp = pessoaPorNome(n);
+          if (pp) { jaNoDia.add(normNome(pp.nome)); for (const a of pp.aliases || []) jaNoDia.add(normNome(a)); }
+        }
+      }
+
+      // Pré-computar: em quais ISOs cada pessoa (por id) já canta, e se já faz MM no mês.
+      const datasIso = datasIsoOrdenadas();
+      const cantaEmIsoPorId = new Map(); // id -> Set(iso)
+      const mmNoMesPorId = new Set();    // id que já tem MM em algum culto
+      for (const c of cultos) {
+        const ci = dataBRparaIso(c.data);
+        for (const [g, nomes] of Object.entries(c.grupos)) {
+          for (const n of nomes) {
+            const pp = pessoaPorNome(n);
+            if (!pp) continue;
+            if (!cantaEmIsoPorId.has(pp.id)) cantaEmIsoPorId.set(pp.id, new Set());
+            cantaEmIsoPorId.get(pp.id).add(ci);
+            if (g === 'MENSAGEM MUSICAL') mmNoMesPorId.add(pp.id);
+          }
+        }
+      }
+
       return cadastro.filter(p => {
-        if (!p.ativo) return false;
-        if (indisp.has(p.nome.toUpperCase())) return false;
+        if (!p.ativo || p.afastado) return false;
+        const pn = normNome(p.nome);
+        const nomesP = [pn, ...(p.aliases || []).map(normNome)];
         // não substituir alguém por ele mesmo
-        if (nomeReprovado && p.nome.toUpperCase() === nomeReprovado.toUpperCase()) return false;
-        // se já está no MESMO papel neste dia, não faz sentido (duplicaria); mas em OUTRO papel é permuta válida
-        if (papelNoDia.get(p.nome.toUpperCase()) === grupo) return false;
+        if (nomeReprovado && nomesP.includes(normNome(nomeReprovado))) return false;
+        // indisponível no dia (data ou mês inteiro)
+        if (nomesP.some(n => indisp.has(n))) return false;
+        // já está em QUALQUER papel neste dia → não oferecer (evita acumular função)
+        if (nomesP.some(n => jaNoDia.has(n))) return false;
         // habilitação por papel
         if (grupo === 'REGENTE LOUVOR' && !p.habilitacoes?.regente) return false;
         if (grupo === 'EQUIPE LOUVOR' && !p.habilitacoes?.equipe) return false;
         if (grupo === 'MENSAGEM MUSICAL') {
           const mm = p.habilitacoes?.mensagem_musical || {};
           if (ehDomingo ? !mm.domingo : !(mm.es || mm.culto)) return false;
+          // RF014: não repetir MM no mês
+          if (mmNoMesPorId.has(p.id)) return false;
+        }
+        // dias_permitidos (ex: Juliana só sábado)
+        const diaChave = ehDomingo ? 'domingo' : (dia.includes('sab') ? 'sabado' : 'quarta');
+        if (Array.isArray(p.dias_permitidos) && !p.dias_permitidos.includes(diaChave)) return false;
+        // regras fixas de domingo
+        if (ehDomingo && (pn === 'CATHERINE' || pn === 'ARIADNY')) return false;
+        // RF013: consecutivos (<=2 dias) com outro culto onde já canta
+        const jaCanta = cantaEmIsoPorId.get(p.id);
+        if (jaCanta) {
+          for (const outroIso of jaCanta) {
+            if (outroIso !== iso && diasEntreIso(outroIso, iso) <= 2) return false;
+          }
         }
         return true;
       }).map(p => {
-        const outroPapel = papelNoDia.get(p.nome.toUpperCase());
         const tags = [];
-        if (outroPapel) tags.push('já no dia'); // permuta
         if (p.incentivo?.ativo) tags.push('incentivo');
         if (p.perfil_canto === 'participacao') tags.push('participação');
+        // AVISOS de vínculo (não bloqueiam — ajudam a decidir). Dependem de quem mais está no dia.
+        const pn = normNome(p.nome);
+        const nomesNoDia = jaNoDia; // já normalizado
+        // casais sempre_junto: se o par NÃO está no dia, avisa
+        for (const v of p.vinculos || []) {
+          if (v.tipo === 'sempre_junto') {
+            const par = cadastro.find(x => x.id === v.com_id);
+            if (par && !nomesNoDia.has(normNome(par.nome))) tags.push('⚠ precisa de ' + par.nome);
+          }
+        }
+        // Manu C. precisa de Silvana; Manu S. precisa de Jessica/Joás
+        if (pn === 'MANU C' && !nomesNoDia.has('SILVANA')) tags.push('⚠ precisa de Silvana');
+        if (pn === 'MANU S' && !nomesNoDia.has('JESSICA') && !nomesNoDia.has('JOAS')) tags.push('⚠ precisa de Jessica/Joás');
+        // Mirella/Marcela exigem Nilson no dia
+        if ((pn === 'MIRELLA' || pn === 'MARCELA') && !nomesNoDia.has('NILSINHO') && !nomesNoDia.has('NILSON')) tags.push('⚠ precisa de Nilson');
         return { nome: p.nome, genero: p.genero, tag: tags.join(' · ') };
-      }).sort((a,b) => a.nome.localeCompare(b.nome));
+      }).sort((a, b) => a.nome.localeCompare(b.nome));
     }
 
     // --- Menu de contexto ---

@@ -26,14 +26,16 @@
  * Departamentos (RF010/RF015) são ignorados na checagem individual.
  */
 
-const MM_TEXTO = new Set(['CORAL INFANTIL', 'DESBRAVADORES', 'JOVENS', 'AVENTUREIROS', 'DORCAS', 'DILSON CASTRO']);
+const MM_TEXTO = new Set(['CORAL INFANTIL', 'CORAL KIDS', 'DESBRAVADORES', 'JOVENS', 'AVENTUREIROS', 'DORCAS', 'DILSON CASTRO', 'QUARTETO', 'QUARTETO DE MARINGA', 'JHON', 'ANDREIA', 'JHON E ANDREIA', 'VOZ JUVENIL', 'MINISTERIO DA MULHER', 'M. MULHER']);
 const DEPARTAMENTOS = new Set(['JOVENS', 'AVENTUREIROS', 'DESBRAVADORES', 'DORCAS', 'M. MULHER', 'QUARTETO', 'MELHOR IDADE']);
 
 function norm(s) {
   return String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().replace(/\s+/g, ' ').trim();
 }
 function split(raw) {
-  return !raw ? [] : raw.split(',').map((s) => s.trim()).filter(Boolean);
+  // "-" (e variações como "—", "–") é marcador de "sem ninguém" (ex: MM das quartas),
+  // não um nome. Descartar para não contar como pessoa (RF014/PE009/ICR).
+  return !raw ? [] : raw.split(',').map((s) => s.trim()).filter((s) => s && !/^[-–—]+$/.test(s));
 }
 function toIso(br) { const [d, m, a] = (br || '').split('/'); return a ? `${a}-${m}-${d}` : ''; }
 function diasEntre(a, b) { return Math.abs((new Date(b) - new Date(a)) / 86400000); }
@@ -112,11 +114,16 @@ export function auditarEscala({ pessoas, indisponibilidade, cultos }) {
       if (p && (!p.ativo || p.afastado)) erros.push(`${c.data}: ${n} está inativo/afastado`);
     }
 
-    // dias específicos
-    if (noDia.some((n) => norm(n) === 'CATHERINE') && c.dia === 'domingo') erros.push(`${c.data}: RP017 — Catherine não canta domingo`);
-    if (noDia.some((n) => norm(n) === 'ARIADNY') && c.dia === 'domingo') erros.push(`${c.data}: RP007 — Ariadny não canta domingo`);
-    if (noDia.some((n) => norm(n) === 'ANISSA') && c.dia !== 'sabado') erros.push(`${c.data}: Anissa só canta sábado`);
-    if (noDia.some((n) => norm(n) === 'JULIANA ALVES') && c.dia !== 'sabado') erros.push(`${c.data}: RP006 — Juliana Alves só sábado`);
+    // dias específicos. Uma linha com "EXCECAO:" no OBS libera as regras de
+    // dia específico (RP006/RP007/RP017/Anissa) só para aquele culto — exceção
+    // pontual aprovada pelo diretor, sem alterar a regra geral do cadastro.
+    const excecaoDia = /EXCE[CÇ][AÃ]O/i.test(c.obs || '');
+    if (!excecaoDia) {
+      if (noDia.some((n) => norm(n) === 'CATHERINE') && c.dia === 'domingo') erros.push(`${c.data}: RP017 — Catherine não canta domingo`);
+      if (noDia.some((n) => norm(n) === 'ARIADNY') && c.dia === 'domingo') erros.push(`${c.data}: RP007 — Ariadny não canta domingo`);
+      if (noDia.some((n) => norm(n) === 'ANISSA') && c.dia !== 'sabado') erros.push(`${c.data}: Anissa só canta sábado`);
+      if (noDia.some((n) => norm(n) === 'JULIANA ALVES') && c.dia !== 'sabado') erros.push(`${c.data}: RP006 — Juliana Alves só sábado`);
+    }
 
     // casais
     const setDia = new Set(noDia.map(norm));
@@ -194,6 +201,7 @@ export function parseRascunho(md) {
         data: c[1], iso: toIso(c[1]), dia: norm(c[2]).toLowerCase(),
         anciao: c[3], pregador: c[4], av: c[5],
         reg: c[6], equipe: split(c[7]), mm: split(c[8]),
+        obs: c[9] || '',
       };
     });
 }

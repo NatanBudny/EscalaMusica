@@ -1,7 +1,7 @@
 {
   "versao": "1.0.0",
-  "proximo_id": 76,
-  "ultima_atualizacao": "2026-07-10",
+  "proximo_id": 77,
+  "ultima_atualizacao": "2026-10-01",
   "grupos": {
     "familia_silva": {
       "membros_ids": [
@@ -277,14 +277,14 @@
       "genero": "F",
       "ativo": true,
       "perfil_canto": "base",
-      "notas": "Atua somente em mensagem musical. Nao escalar em regencia ou equipe de louvor.",
+      "notas": "Atua somente em mensagem musical. Nao escalar em regencia ou equipe de louvor. NAO faz mensagem musical aos domingos (revisao out/2026).",
       "habilitacoes": {
         "regente": false,
         "equipe": false,
         "mensagem_musical": {
           "es": true,
           "culto": true,
-          "domingo": true
+          "domingo": false
         }
       },
       "afastado": null,
@@ -537,12 +537,15 @@
     {
       "id": 22,
       "nome": "GABRIEL P.",
-      "aliases": [],
+      "aliases": [
+        "BIEL IASD CENTRAL",
+        "BIEL"
+      ],
       "telefone": "554499412470",
       "genero": "M",
-      "ativo": false,
+      "ativo": true,
       "perfil_canto": "participacao",
-      "notas": "Afastado permanentemente das sugestoes de escala por baixa frequencia.",
+      "notas": "Reativado em out/2026: voltou a votar na enquete e sera reintegrado (1 sabado na equipe).",
       "habilitacoes": {
         "regente": false,
         "equipe": true,
@@ -583,7 +586,9 @@
     {
       "id": 24,
       "nome": "HELOISE",
-      "aliases": [],
+      "aliases": [
+        "HELO MORAES IASD CENTRAL"
+      ],
       "telefone": "554388020838",
       "genero": "F",
       "ativo": true,
@@ -851,16 +856,16 @@
       "aliases": [],
       "telefone": "554384479273",
       "genero": "M",
-      "ativo": false,
-      "perfil_canto": null,
-      "notas": "Usuario da escala externa (audiovisual). Nao usar para sugestao automatica de louvor.",
+      "ativo": true,
+      "perfil_canto": "participacao",
+      "notas": "Tambem faz audiovisual (escala externa). Faz mensagem musical apenas na Escola Sabatina (es) e aos domingos; nao no culto de sabado.",
       "habilitacoes": {
         "regente": false,
         "equipe": false,
         "mensagem_musical": {
-          "es": false,
+          "es": true,
           "culto": false,
-          "domingo": false
+          "domingo": true
         }
       },
       "afastado": null,
@@ -870,7 +875,9 @@
     {
       "id": 35,
       "nome": "KHEYCIANE",
-      "aliases": [],
+      "aliases": [
+        "KHEYCIANE IASD CENTRAL"
+      ],
       "telefone": "554388586342",
       "genero": "F",
       "ativo": true,
@@ -918,7 +925,9 @@
     {
       "id": 37,
       "nome": "LIDIANE",
-      "aliases": [],
+      "aliases": [
+        "LIDIANE IASD CENTRAL"
+      ],
       "telefone": "554396005175",
       "genero": "F",
       "ativo": true,
@@ -1378,7 +1387,8 @@
       "id": 56,
       "nome": "RICARDO HERREIRA",
       "aliases": [
-        "RICARDO"
+        "RICARDO",
+        "RICARDO CENTRAL"
       ],
       "telefone": "554396158431",
       "genero": "M",
@@ -1851,6 +1861,30 @@
           "es": false,
           "culto": false,
           "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null
+    },
+    {
+      "id": 76,
+      "nome": "MARIA ELISA",
+      "aliases": [
+        "MARIA ELISA IASD CENTRAL"
+      ],
+      "telefone": "554484460571",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "base",
+      "notas": "Cadastrada em out/2026 a partir da enquete. Participa de equipe de louvor e mensagem musical (ES, culto e domingo). A incluir na escala a partir de novembro/2026.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": true,
+        "mensagem_musical": {
+          "es": true,
+          "culto": true,
+          "domingo": true
         }
       },
       "afastado": null,

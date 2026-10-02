@@ -40,6 +40,8 @@ const steps = [
   { label: 'Publicar mes', command: publishCommand },
   { label: 'Validar regras', command: 'npm run validar:regras' },
   { label: 'Validar OBS', command: 'npm run validar:obs' },
+  // Atualizar contatos ANTES dos links, para refletir pessoas/aliases novos (TASK-12).
+  { label: 'Gerar contatos', command: 'npm run gerar:contatos' },
   { label: 'Gerar links', command: 'npm run gerar:links-publicacao' },
   // Controles de rotação: rodam APÓS publicar, para já incluir o mês recém-publicado no histórico.
   { label: 'Controle Mensagem Musical', command: `npm run controle:mm${mesArg}` },

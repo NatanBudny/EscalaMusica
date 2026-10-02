@@ -129,7 +129,10 @@
   },
   "GABRIEL P.": {
     "telefone": "https://wa.me/554499412470",
-    "apelidos": []
+    "apelidos": [
+      "BIEL IASD CENTRAL",
+      "BIEL"
+    ]
   },
   "GIOVANA": {
     "telefone": "https://wa.me/554384876102",
@@ -139,7 +142,9 @@
   },
   "HELOISE": {
     "telefone": "https://wa.me/554388020838",
-    "apelidos": []
+    "apelidos": [
+      "HELO MORAES IASD CENTRAL"
+    ]
   },
   "IGOR DUARTE": {
     "telefone": "https://wa.me/554398451640",
@@ -194,7 +199,9 @@
   },
   "KHEYCIANE": {
     "telefone": "https://wa.me/554388586342",
-    "apelidos": []
+    "apelidos": [
+      "KHEYCIANE IASD CENTRAL"
+    ]
   },
   "LAURA": {
     "telefone": "https://wa.me/554396284856",
@@ -202,7 +209,9 @@
   },
   "LIDIANE": {
     "telefone": "https://wa.me/554396005175",
-    "apelidos": []
+    "apelidos": [
+      "LIDIANE IASD CENTRAL"
+    ]
   },
   "LUAN": {
     "telefone": "https://wa.me/556699941638",
@@ -249,6 +258,12 @@
   "MARCOS GALUCH": {
     "telefone": "https://wa.me/5543998741000",
     "apelidos": []
+  },
+  "MARIA ELISA": {
+    "telefone": "https://wa.me/554484460571",
+    "apelidos": [
+      "MARIA ELISA IASD CENTRAL"
+    ]
   },
   "MARIA ELOISA": {
     "telefone": "https://wa.me/554399703366",
@@ -304,7 +319,8 @@
   "RICARDO HERREIRA": {
     "telefone": "https://wa.me/554396158431",
     "apelidos": [
-      "RICARDO"
+      "RICARDO",
+      "RICARDO CENTRAL"
     ]
   },
   "ROBERTO KOCH": {

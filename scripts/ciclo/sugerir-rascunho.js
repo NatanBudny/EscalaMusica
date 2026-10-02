@@ -311,8 +311,10 @@ function main() {
     if (pregadorId && !ehDepartamental(pregador)) externosCulto.pregador.push(pregadorId);
     contexto.externosPorCulto.set(data, externosCulto);
 
-    // RF005: Quarta-feira → skip (sem louvor)
-    if (dia_semana === 'quarta-feira') {
+    // RF005/RF006: Quarta-feira → skip (sem louvor). Aceita qualquer grafia
+    // ("Quarta", "quarta-feira", "QUARTA") vinda do acionato.
+    const ehQuartaFeira = /quarta/i.test(String(dia_semana || '').normalize('NFD').replace(/[\u0300-\u036f]/g, ''));
+    if (ehQuartaFeira) {
       console.log(`  ${data} (${dia_semana}) → ⏭️ sem louvor`);
       sugestoes.push({
         data,

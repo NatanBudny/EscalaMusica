@@ -255,6 +255,18 @@ function mergeObsAcionato(rows, acionatoJson) {
   }
 }
 
+// Preenche o campo "LOUVORES ES" (hino inicial da Escola Sabatina) por data,
+// a partir de um mapa { "AAAA-MM-DD": "numero titulo" }. Só grava se o campo
+// estiver vazio, para não sobrescrever algo definido manualmente.
+function mergeHinosEs(rows, hinosPorIso) {
+  for (const row of rows) {
+    const iso = toIsoDate(row.DATA);
+    if (hinosPorIso[iso] && !row['LOUVORES ES']) {
+      row['LOUVORES ES'] = String(hinosPorIso[iso]);
+    }
+  }
+}
+
 function compareBrDates(a, b) {
   return toIsoDate(a).localeCompare(toIsoDate(b));
 }
@@ -297,6 +309,13 @@ function run() {
   if (acionatoJson) {
     addMissingQuartas(rows, acionatoJson, audioMap);
     mergeObsAcionato(rows, acionatoJson);
+  }
+
+  // Hinos iniciais da Escola Sabatina (campo "LOUVORES ES"), lidos de hinos-es.json.
+  const hinosPath = resolve(mmDir, 'insumos', 'hinos-es.json');
+  const hinosJson = readJsonIfExists(hinosPath);
+  if (hinosJson && hinosJson.hinos) {
+    mergeHinosEs(rows, hinosJson.hinos);
   }
 
   rows.sort((a, b) => compareBrDates(a.DATA, b.DATA));
