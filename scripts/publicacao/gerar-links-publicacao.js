@@ -29,11 +29,18 @@ const FIXOS = [
 // telefone: só dígitos (formato wa.me). nome: como será exibido na mensagem.
 const RESPONSAVEL_GRUPO = {
   'CORAL INFANTIL': { responsavel: 'JESSIE', telefone: '' },   // telefone resolvido via contatos.json
+  'CORAL KIDS': { responsavel: 'JESSIE', telefone: '' },        // diretora do Coral Kids (contatos.json)
   'DESBRAVADORES': { responsavel: 'MAXWELL', telefone: '554396489680' },
   'JOVENS': { responsavel: 'FABRICIO', telefone: '' },          // resolvido via contatos.json
   // MANU C. é cantora infantil sem telefone próprio: contato via mãe (Silvana).
   'MANU C.': { responsavel: 'SILVANA', telefone: '' }
 };
+
+// Grupos/participações externas cujo aviso vai para o ANCIÃO da semana do culto
+// em que aparecem (não têm responsável fixo). Ex.: mensagem musical de visitantes.
+const EXTERNOS_VIA_ANCIAO = new Set([
+  'JHON', 'ANDREIA', 'JHON E ANDREIA', 'QUARTETO', 'QUARTETO DE MARINGA', 'VOZ JUVENIL',
+]);
 
 const GRUPO_LOUVOR = 'https://chat.whatsapp.com/EsfZwmrdWntG9wxqoSN5zw';
 
@@ -168,10 +175,12 @@ for (const culto of escala) {
       if (!membrosMap.has(chave)) {
         membrosMap.set(chave, {
           nomeEscala: nomeExibicao,
-          campos: new Set([campo])
+          campos: new Set([campo]),
+          ancioes: new Set(culto['ANCIÃO'] ? [String(culto['ANCIÃO']).trim()] : [])
         });
       } else {
         membrosMap.get(chave).campos.add(campo);
+        if (culto['ANCIÃO']) membrosMap.get(chave).ancioes.add(String(culto['ANCIÃO']).trim());
       }
     }
   }
@@ -211,6 +220,31 @@ for (const membro of membrosOrdenados) {
       });
       continue;
     }
+  }
+
+  // Externo sem responsável fixo (JHON, QUARTETO, VOZ JUVENIL...): avisa o ANCIÃO
+  // da semana do(s) culto(s) em que aparece.
+  if (!encontrado && EXTERNOS_VIA_ANCIAO.has(normalizeNome(membro.nomeEscala))) {
+    const ancioes = Array.from(membro.ancioes || []);
+    let resolvido = false;
+    for (const anciao of ancioes) {
+      const contatoAnciao = lookupContato.get(normalizeNome(anciao));
+      if (contatoAnciao) {
+        const mensagem = montarMensagemPersonalizada({ nome: anciao, mesAno, funcoes: `${campos} (${membro.nomeEscala})` });
+        comContato.push({
+          nomeEscala: membro.nomeEscala,
+          origemContato: `${anciao} (ancião da semana)`,
+          campos,
+          link: montarLink(contatoAnciao.telefone, mensagem)
+        });
+        resolvido = true;
+        break;
+      }
+    }
+    if (resolvido) continue;
+    // ancião sem contato cadastrado: cai em semContato com nota
+    semContato.push({ nomeEscala: membro.nomeEscala, campos: `${campos} (avisar ancião: ${ancioes.join(', ') || 'n/d'})` });
+    continue;
   }
 
   if (encontrado) {
