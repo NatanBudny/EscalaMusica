@@ -1,0 +1,125 @@
+{
+  "mes": "2026-12",
+  "fonte": "Escala oficial do acionato",
+  "atualizado_em": "2026-12-01",
+  "contexto": "Acionato - Dezembro 2026",
+  "itens": [
+    {
+      "data": "2026-12-02",
+      "dia": "quarta-feira",
+      "anciao": "",
+      "pregador": "",
+      "observacoes": "",
+      "modelo_louvor": "sem_louvor",
+      "extraordinario": false
+    },
+    {
+      "data": "2026-12-05",
+      "dia": "sabado",
+      "anciao": "",
+      "pregador": "",
+      "observacoes": "",
+      "modelo_louvor": "sabado",
+      "extraordinario": false
+    },
+    {
+      "data": "2026-12-06",
+      "dia": "domingo",
+      "anciao": "",
+      "pregador": "",
+      "observacoes": "",
+      "modelo_louvor": "domingo",
+      "extraordinario": false
+    },
+    {
+      "data": "2026-12-09",
+      "dia": "quarta-feira",
+      "anciao": "",
+      "pregador": "",
+      "observacoes": "",
+      "modelo_louvor": "sem_louvor",
+      "extraordinario": false
+    },
+    {
+      "data": "2026-12-12",
+      "dia": "sabado",
+      "anciao": "",
+      "pregador": "",
+      "observacoes": "",
+      "modelo_louvor": "sabado",
+      "extraordinario": false
+    },
+    {
+      "data": "2026-12-13",
+      "dia": "domingo",
+      "anciao": "",
+      "pregador": "",
+      "observacoes": "",
+      "modelo_louvor": "domingo",
+      "extraordinario": false
+    },
+    {
+      "data": "2026-12-16",
+      "dia": "quarta-feira",
+      "anciao": "",
+      "pregador": "",
+      "observacoes": "",
+      "modelo_louvor": "sem_louvor",
+      "extraordinario": false
+    },
+    {
+      "data": "2026-12-19",
+      "dia": "sabado",
+      "anciao": "",
+      "pregador": "",
+      "observacoes": "",
+      "modelo_louvor": "sabado",
+      "extraordinario": false
+    },
+    {
+      "data": "2026-12-20",
+      "dia": "domingo",
+      "anciao": "",
+      "pregador": "",
+      "observacoes": "",
+      "modelo_louvor": "domingo",
+      "extraordinario": false
+    },
+    {
+      "data": "2026-12-23",
+      "dia": "quarta-feira",
+      "anciao": "",
+      "pregador": "",
+      "observacoes": "",
+      "modelo_louvor": "sem_louvor",
+      "extraordinario": false
+    },
+    {
+      "data": "2026-12-26",
+      "dia": "sabado",
+      "anciao": "",
+      "pregador": "",
+      "observacoes": "",
+      "modelo_louvor": "sabado",
+      "extraordinario": false
+    },
+    {
+      "data": "2026-12-27",
+      "dia": "domingo",
+      "anciao": "",
+      "pregador": "",
+      "observacoes": "",
+      "modelo_louvor": "domingo",
+      "extraordinario": false
+    },
+    {
+      "data": "2026-12-30",
+      "dia": "quarta-feira",
+      "anciao": "",
+      "pregador": "",
+      "observacoes": "",
+      "modelo_louvor": "sem_louvor",
+      "extraordinario": false
+    }
+  ]
+}
