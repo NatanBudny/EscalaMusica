@@ -1,0 +1,60 @@
+# Suite final automatizada de regressao e contrato do aplicativo desktop
+# (tarefa 19.2).
+#
+# Executa, em um unico relatorio, toda a bateria: unitarios, testes de
+# propriedade (fast-check), componentes, contratos, compatibilidade do
+# visualizador, seguranca, migracao e publicacao/rollback (frontend via Vitest)
+# e a integracao do nucleo (Rust via cargo test). NENHUM teste aponta para o
+# destino publico vigente: tudo roda isolado (fixtures, temporarios, fakes).
+#
+# Este workflow NAO publica no GitHub Pages nem altera o visualizador.
+name: Desktop Regression (suite final)
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "desktop-app/**"
+      - ".github/workflows/desktop-regression.yml"
+  pull_request:
+    paths:
+      - "desktop-app/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: desktop-app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: desktop-app/package-lock.json
+      - run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Lint
+        run: npm run lint
+      - name: Testes (unit + propriedade + componentes + contratos)
+        run: npm run test
+
+  core:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: desktop-app/src-tauri
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: desktop-app/src-tauri
+      - name: Testes de integracao do nucleo (Rust)
+        run: cargo test

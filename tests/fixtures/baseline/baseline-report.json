@@ -1,0 +1,35 @@
+{
+  "reportVersion": "1.0.0",
+  "artifact": {
+    "atual": {
+      "recordCount": 3,
+      "scheduleKeys": [
+        "ACOMP",
+        "ANCIÃO",
+        "AUDIOVISUAL",
+        "DATA",
+        "DIA SEMANA",
+        "EQUIPE LOUVOR",
+        "LOUVORES CULTO",
+        "LOUVORES ES",
+        "MENSAGEM MUSICAL",
+        "OBS",
+        "PREGADOR",
+        "REGENTE LOUVOR",
+        "SUPORTE",
+        "TEMA CULTO"
+      ],
+      "weekdays": [
+        "domingo",
+        "quarta-feira",
+        "sábado"
+      ],
+      "contentHash": "9bced47129d9668588c6e911184a8bacf34406a79e7aef1f1078b0864bbfba31"
+    },
+    "contatos": {
+      "entryCount": 11,
+      "aliasCount": 2,
+      "contentHash": "5da59333ddfe9896f104fb613e64a098682aefcb578c1f374c00f71c125c0c82"
+    }
+  }
+}

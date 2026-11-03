@@ -1,0 +1,49 @@
+{
+  "productName": "Gestao Leiga de Escalas",
+  "version": "0.0.0",
+  "identifier": "org.escalamusica.gestao-leiga",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:1420",
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build"
+  },
+  "app": {
+    "withGlobalTauri": false,
+    "security": {
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' ipc: http://ipc.localhost",
+      "capabilities": ["minima-inicial"]
+    },
+    "windows": [
+      {
+        "label": "main",
+        "title": "Gestao Leiga de Escalas",
+        "width": 1100,
+        "height": 720,
+        "minWidth": 900,
+        "minHeight": 600,
+        "resizable": true
+      }
+    ]
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis", "app", "dmg"],
+    "icon": ["icons/icon.png"],
+    "longDescription": "Aplicativo desktop para a gestao leiga de escalas mensais, isolado do visualizador e dos arquivos publicos vigentes.",
+    "shortDescription": "Gestao Leiga de Escalas",
+    "category": "Productivity",
+    "windows": {
+      "webviewInstallMode": { "type": "downloadBootstrapper" },
+      "nsis": {
+        "installMode": "currentUser",
+        "languages": ["PortugueseBR"]
+      }
+    },
+    "macOS": {
+      "minimumSystemVersion": "12.0",
+      "signingIdentity": null,
+      "entitlements": null
+    }
+  }
+}

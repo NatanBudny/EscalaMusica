@@ -1,0 +1,24 @@
+{
+  "versao": 1,
+  "regras": {
+    "indisponibilidade": { "refs": ["RF026"], "ativa": true, "nivel": "bloqueio" },
+    "conflito_sonoplastia": { "refs": ["RF002"], "ativa": true, "nivel": "bloqueio" },
+    "conflito_regencia": { "refs": [], "ativa": true, "nivel": "bloqueio", "descricao": "Regente não acumula outra função no culto (citada como RF019 no código)" },
+    "repeticao_no_culto": { "refs": [], "ativa": true, "nivel": "bloqueio" },
+    "conflito_pregador": { "refs": ["RF004"], "ativa": true, "nivel": "aviso", "evitar_na_sugestao": true },
+    "equipe_e_mm_mesmo_culto": { "refs": [], "ativa": true, "nivel": "aviso", "evitar_na_sugestao": true },
+    "minimo_homens": { "refs": ["RF001"], "ativa": true, "nivel": "aviso", "valores": { "minimo": 1 } },
+    "mm_sabado": { "refs": ["RF012"], "ativa": true, "valores": { "quantidade": 2 } },
+    "mm_por_mes": { "refs": ["RF014"], "ativa": true, "nivel": "aviso", "valores": { "maximo": 1 } },
+    "consecutivo": { "refs": ["PE006", "PE009"], "ativa": true, "nivel": "aviso" },
+    "equipe_incompleta": { "refs": [], "ativa": true, "nivel": "aviso" },
+    "regente_vazio": { "refs": [], "ativa": true, "nivel": "bloqueio" },
+    "mm_vazia": { "refs": ["RF012"], "ativa": true, "nivel": "aviso" }
+  },
+  "equipe": { "tamanho": 5 },
+  "historico": { "janela_meses": 4 },
+  "score": {
+    "pesos": { "contadorRotacao": 1.0, "penalConsecutivo": 10.0, "penalMesmoMes": 20.0, "bonusGrupoRegente": -0.5, "penalPerfilParticipacao": 5.0, "penalRepeticaoRegente": 15.0, "diasDesdeUltima": -0.3 },
+    "janela_dias_normalizacao": 120
+  }
+}

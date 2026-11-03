@@ -12,6 +12,7 @@
 import { readFileSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { TERMOS_PROIBIDOS } from '../lib/obs-publico.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '../..');
@@ -22,26 +23,7 @@ const GREEN = '\x1b[32m';
 const RESET = '\x1b[0m';
 const BOLD = '\x1b[1m';
 
-const forbiddenPatterns = [
-  /\bdesenvolvimento\b/i,
-  /\binterno\b/i,
-  /\bprivad[oa]\b/i,
-  /\brascunho\b/i,
-  /\bdraft\b/i,
-  /\bpenden(te|cia)\b/i,
-  /\bajuste\b/i,
-  /\bsubstitui(cao|ção)\b/i,
-  /\bwhats(app)?\b/i,
-  /\btelefone\b/i,
-  /\bcontato\b/i,
-  /\be-?mail\b/i,
-  /\bsenha\b/i,
-  /\btoken\b/i,
-  /\bcpf\b/i,
-  /\brg\b/i,
-  /\btodo\b/i,
-  /\bobs\s*interna\b/i
-];
+const forbiddenPatterns = TERMOS_PROIBIDOS;
 
 let dados;
 try {

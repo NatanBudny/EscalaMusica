@@ -1,0 +1,28 @@
+[package]
+name = "gestao-leiga-de-escalas"
+version = "0.0.0"
+description = "Nucleo local do aplicativo de gestao leiga de escalas"
+authors = ["Equipe EscalaMusica"]
+edition = "2021"
+rust-version = "1.77.2"
+
+# O crate de biblioteca concentra os comandos tipados e e testavel sem UI.
+[lib]
+name = "gestao_leiga_core"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[dev-dependencies]
+# Diretorios temporarios para os testes de integracao de filesystem (11.12).
+tempfile = "3"
+
+[features]
+# Usada pelos binarios empacotados (producao). Mantida vazia no scaffold.
+custom-protocol = ["tauri/custom-protocol"]

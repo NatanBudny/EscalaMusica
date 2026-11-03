@@ -1,9 +1,14 @@
 import { readFileSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { normalizarNome } from '../../src/utils/name.js';
+import { problemasNome } from './texto-publico.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '../..');
+
+const MODOS_GRUPO = new Set(['funcao', 'culto_inteiro']);
+const FUNCOES_GRUPO = new Set(['regente', 'equipe', 'mm']);
 
 /**
  * Carrega e valida pessoas.json. Retorna estrutura indexada.
@@ -79,6 +84,19 @@ export function carregarPessoas(caminhoPessoas) {
   const gruposRaw = dados.grupos || {};
   const grupos = new Map();
 
+  // Índice normalizado de nomes/apelidos de pessoas, para checar colisão com
+  // nome_exibicao de grupos escaláveis.
+  const nomesNormPessoas = new Set();
+  for (const pessoa of pessoas) {
+    const k = normalizarNome(pessoa.nome);
+    if (k) nomesNormPessoas.add(k);
+    for (const alias of pessoa.aliases || []) {
+      const ka = normalizarNome(alias);
+      if (ka) nomesNormPessoas.add(ka);
+    }
+  }
+  const nomesExibicaoNorm = new Set();
+
   for (const [nomeGrupo, defGrupo] of Object.entries(gruposRaw)) {
     const membrosIds = defGrupo.membros_ids;
     if (!Array.isArray(membrosIds)) {
@@ -91,6 +109,52 @@ export function carregarPessoas(caminhoPessoas) {
         );
       }
     }
+
+    // Validações específicas de Grupo_Escalavel (escalavel: true).
+    if (defGrupo.escalavel === true) {
+      if (membrosIds.length === 0) {
+        throw new Error(`Grupo "${nomeGrupo}": grupo escalável precisa de ao menos um membro.`);
+      }
+      if (!porId.has(defGrupo.responsavel_id)) {
+        throw new Error(
+          `Grupo "${nomeGrupo}": responsável com ID ${defGrupo.responsavel_id} não existe no cadastro.`
+        );
+      }
+      const modo = defGrupo.modo == null ? 'funcao' : defGrupo.modo;
+      if (!MODOS_GRUPO.has(modo)) {
+        throw new Error(`Grupo "${nomeGrupo}": modo inválido "${modo}" (use funcao ou culto_inteiro).`);
+      }
+      const funcoes = defGrupo.funcoes == null ? ['mm'] : defGrupo.funcoes;
+      if (!Array.isArray(funcoes)) {
+        throw new Error(`Grupo "${nomeGrupo}": "funcoes" deve ser um array.`);
+      }
+      for (const f of funcoes) {
+        if (!FUNCOES_GRUPO.has(f)) {
+          throw new Error(`Grupo "${nomeGrupo}": função inválida "${f}" (use regente, equipe ou mm).`);
+        }
+      }
+      if (defGrupo.mensagem != null && typeof defGrupo.mensagem !== 'string') {
+        throw new Error(`Grupo "${nomeGrupo}": "mensagem" deve ser texto ou null.`);
+      }
+      const nomeExib = defGrupo.nome_exibicao;
+      const probs = problemasNome(nomeExib || '');
+      if (probs.length > 0) {
+        throw new Error(`Grupo "${nomeGrupo}": nome_exibicao inválido ("${nomeExib}"): ${probs.join(' ')}`);
+      }
+      const chaveNorm = normalizarNome(nomeExib);
+      if (nomesNormPessoas.has(chaveNorm)) {
+        throw new Error(
+          `Grupo "${nomeGrupo}": nome_exibicao "${nomeExib}" coincide com nome ou apelido de pessoa.`
+        );
+      }
+      if (nomesExibicaoNorm.has(chaveNorm)) {
+        throw new Error(
+          `Grupo "${nomeGrupo}": nome_exibicao "${nomeExib}" coincide com o de outro grupo.`
+        );
+      }
+      nomesExibicaoNorm.add(chaveNorm);
+    }
+
     grupos.set(nomeGrupo, defGrupo);
   }
 
@@ -120,6 +184,25 @@ export function carregarPessoas(caminhoPessoas) {
           throw new Error(
             `Vínculo "familia_requerida" da pessoa "${pessoa.nome}" (ID ${pessoa.id}) referencia grupo inexistente: "${vinculo.grupo}".`
           );
+        }
+      } else if (vinculo.tipo === 'precisa_de') {
+        const comIds = vinculo.com_ids;
+        if (!Array.isArray(comIds) || comIds.length === 0) {
+          throw new Error(
+            `Vínculo "precisa_de" da pessoa "${pessoa.nome}" (ID ${pessoa.id}) deve ter "com_ids" não vazio.`
+          );
+        }
+        for (const comId of comIds) {
+          if (!Number.isInteger(comId) || !porId.has(comId)) {
+            throw new Error(
+              `Vínculo "precisa_de" da pessoa "${pessoa.nome}" (ID ${pessoa.id}) referencia ID inexistente: ${comId}.`
+            );
+          }
+          if (comId === pessoa.id) {
+            throw new Error(
+              `Vínculo "precisa_de" da pessoa "${pessoa.nome}" (ID ${pessoa.id}) não pode referenciar a própria pessoa.`
+            );
+          }
         }
       }
     }

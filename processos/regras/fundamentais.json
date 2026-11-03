@@ -192,8 +192,8 @@
   },
   {
     "id": "RF023",
-    "descricao": "A tabela de mensagens de WhatsApp é etapa obrigatória de fechamento",
-    "detalhe": "Após publicar, regenerar e conferir escalas/AAAA/MM/links-whatsapp.md antes do encerramento do ciclo.",
+    "descricao": "A tela de WhatsApp do editor é etapa obrigatória do fechamento",
+    "detalhe": "Após a verificação do site, o editor abre a tela de WhatsApp do mês, que monta um envio por pessoa e por Grupo_Escalavel (ao responsável) com as Mensagens_WhatsApp editáveis, sem gerar arquivo. O arquivo escalas/AAAA/MM/links-whatsapp.md só é gerado pela linha de comando (scripts/publicacao/gerar-links-publicacao.js).",
     "papeis_afetados": [
       "links-whatsapp.md"
     ]
@@ -209,7 +209,7 @@
   {
     "id": "RF025",
     "descricao": "Usar o template padrão oficial da mensagem de WhatsApp",
-    "detalhe": "Olá, {nome}. Você está na escala de {mes/ano}, como {funções}. Entre na escala, veja os dias. Dê um joinha nessa mensagem para confirmar que poderá participar. Link da escala: https://natanbudny.github.io/EscalaMusica/",
+    "detalhe": "O template oficial das mensagens fica em processos/regras/mensagens-whatsapp.json (templates pessoa, grupo, culto_inteiro e fixo), editado na tela de regras do editor. Os placeholders obrigatórios {nome}, {mes/ano} e {funções} são preenchidos por scripts/lib/mensagens-whatsapp.js.",
     "papeis_afetados": [
       "template-whatsapp"
     ]

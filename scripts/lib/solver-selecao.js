@@ -12,9 +12,38 @@
 
 import { pessoasAtivasParaSlot } from './solver-filtros.js';
 import { sortByScore } from './solver-score.js';
+import { PARAMETROS_PADRAO, valorRegra } from './parametros.js';
 
-/** Tamanho alvo da equipe de louvor */
-const TAMANHO_EQUIPE = 5;
+/** Tamanho padrão alvo da equipe de louvor (= parametros.equipe.tamanho). */
+const TAMANHO_EQUIPE_PADRAO = PARAMETROS_PADRAO.equipe.tamanho;
+
+/** Parâmetros efetivos do contexto, com fallback nos padrões. */
+function parametrosDe(contexto) {
+  return (contexto && contexto.parametros) || PARAMETROS_PADRAO;
+}
+
+/** Tamanho da equipe segundo os parâmetros (fallback no padrão). */
+function tamanhoEquipeDe(contexto) {
+  const par = parametrosDe(contexto);
+  return (par.equipe && par.equipe.tamanho) || TAMANHO_EQUIPE_PADRAO;
+}
+
+/** Quantidade de MM no sábado segundo os parâmetros (fallback 2). */
+function quantidadeMmSabado(contexto) {
+  const par = parametrosDe(contexto);
+  const q = valorRegra(par, 'mm_sabado', 'quantidade', 2);
+  return q != null ? q : 2;
+}
+
+/** Resolve um valor de atribuição fixa (id numérico ou nome) para um id de pessoa. */
+function resolverIdAtribuicao(valor, contexto) {
+  if (valor == null || valor === '') return null;
+  if (typeof valor === 'number') return valor;
+  // Strings de grupo ('grupo:<chave>') não são escaláveis pelo solver.
+  if (typeof valor === 'string' && valor.startsWith('grupo:')) return null;
+  const pessoa = contexto.pessoas.porNome.get(String(valor).toUpperCase().trim());
+  return pessoa ? pessoa.id : null;
+}
 
 /**
  * Marca uma pessoa como escalada no contexto acumulado.
@@ -44,6 +73,17 @@ function marcarEscalado(contexto, pessoa, data, slot) {
   const entry = contexto.escaladosNesteMes.get(pessoa.id);
   entry.slots.add(slot);
   entry.count += 1;
+
+  // papeisPorCulto: Map<data, Map<id, Set<slot>>> — alimenta o filtro 8 por papel.
+  if (!contexto.papeisPorCulto) {
+    contexto.papeisPorCulto = new Map();
+  }
+  if (!contexto.papeisPorCulto.has(data)) {
+    contexto.papeisPorCulto.set(data, new Map());
+  }
+  const papeisCulto = contexto.papeisPorCulto.get(data);
+  if (!papeisCulto.has(pessoa.id)) papeisCulto.set(pessoa.id, new Set());
+  papeisCulto.get(pessoa.id).add(slot);
 }
 
 /**
@@ -153,28 +193,58 @@ function grupoRepresentadoNaEquipe(membrosIds, equipe, regente) {
  */
 export function sugerirCulto(culto, contexto) {
   const { data, dia_semana } = culto;
+  // O modelo de louvor determina as funções; na ausência, usa o dia da semana.
+  const modeloLouvor = culto.modelo_louvor || dia_semana;
+  const TAMANHO_EQUIPE = tamanhoEquipeDe(contexto);
   const justificativas = [];
   const porId = contexto.pessoas.porId;
   const grupos = contexto.pessoas.grupos;
 
+  // Fixos já escolhidos à mão para este culto (modo "só preencher vazios").
+  const fixos = culto.fixos || null;
+  const idFixo = (valor) => resolverIdAtribuicao(valor, contexto);
+
   // === FASE 1: REGENTE ===
   let regente = null;
 
-  const candidatosRegente = pessoasAtivasParaSlot('regente', data, contexto);
+  // Regente fixo: não sugere, só o marca no contexto.
+  const regenteFixoId = fixos ? idFixo(fixos.regente) : null;
+  if (regenteFixoId != null) {
+    regente = porId.get(regenteFixoId) || null;
+    if (regente) marcarEscalado(contexto, regente, data, 'regente');
+  }
 
-  if (candidatosRegente.length === 0) {
-    registrarAviso(justificativas, data, 'Nenhum regente disponível — culto PENDENTE');
-  } else {
-    const rankedRegentes = sortByScore(candidatosRegente, 'regente', data, contexto);
-    regente = rankedRegentes[0];
+  if (!regente) {
+    const candidatosRegente = pessoasAtivasParaSlot('regente', data, contexto);
 
-    registrarEscolha(justificativas, data, 'REGENTE', regente, rankedRegentes);
-    marcarEscalado(contexto, regente, data, 'regente');
+    if (candidatosRegente.length === 0) {
+      registrarAviso(justificativas, data, 'Nenhum regente disponível — culto PENDENTE');
+    } else {
+      const rankedRegentes = sortByScore(candidatosRegente, 'regente', data, contexto);
+      regente = rankedRegentes[0];
+
+      registrarEscolha(justificativas, data, 'REGENTE', regente, rankedRegentes);
+      marcarEscalado(contexto, regente, data, 'regente');
+    }
   }
 
   // === FASE 2: EQUIPE LOUVOR (5 pessoas) ===
   const equipe = [];
   let homensNaEquipe = 0;
+
+  // Equipe fixa (modo "só preencher vazios"): marca os já escolhidos e só
+  // preenche o que falta até o tamanho alvo.
+  if (fixos && Array.isArray(fixos.equipe)) {
+    for (const valor of fixos.equipe) {
+      const id = idFixo(valor);
+      if (id == null) continue;
+      const pessoa = porId.get(id);
+      if (!pessoa || equipe.some((p) => p.id === pessoa.id)) continue;
+      equipe.push(pessoa);
+      if (pessoa.genero === 'M') homensNaEquipe += 1;
+      marcarEscalado(contexto, pessoa, data, 'equipe');
+    }
+  }
 
   // Contar regente masculino para RF001 (regente é parte da formação mas reportado separado)
   // RF001 diz "mínimo 1 homem na equipe", equipe é separada do regente
@@ -366,56 +436,52 @@ export function sugerirCulto(culto, contexto) {
   const idsComprometidos = new Set(equipe.map((p) => p.id));
   if (regente) idsComprometidos.add(regente.id);
 
-  if (dia_semana === 'sabado') {
-    // Sábado: 2 MMs — primeiro mm_es, depois mm_culto (RF012)
+  // Valor fixo de uma MM de slot (para modo "só preencher vazios").
+  const mmFixoId = (slot) => {
+    if (!fixos || !fixos.mm) return null;
+    const v = Array.isArray(fixos.mm) ? undefined : fixos.mm[slot];
+    return v !== undefined ? idFixo(v) : null;
+  };
 
-    // MM ES (posição 1)
-    const candidatosES = pessoasAtivasParaSlot('mm_es', data, contexto).filter(
-      (p) => !idsComprometidos.has(p.id)
-    );
-
-    if (candidatosES.length > 0) {
-      const rankedES = sortByScore(candidatosES, 'mm_es', data, contexto);
-      const mmEs = rankedES[0];
-      mm.push(mmEs);
-      idsComprometidos.add(mmEs.id);
-      marcarEscalado(contexto, mmEs, data, 'mm_es');
-      registrarEscolha(justificativas, data, 'MM_ES', mmEs, rankedES);
-    } else {
-      registrarAviso(justificativas, data, 'Nenhum candidato disponível para MM ES (sábado)');
+  // Preenche um slot de MM: usa o fixo quando houver, senão escolhe por score.
+  const preencherMm = (slot, avisoVazio) => {
+    const fixoId = mmFixoId(slot);
+    if (fixoId != null) {
+      const pessoa = porId.get(fixoId);
+      if (pessoa && !idsComprometidos.has(pessoa.id)) {
+        mm.push(pessoa);
+        idsComprometidos.add(pessoa.id);
+        marcarEscalado(contexto, pessoa, data, slot);
+        return;
+      }
     }
-
-    // MM CULTO (posição 2)
-    const candidatosCulto = pessoasAtivasParaSlot('mm_culto', data, contexto).filter(
-      (p) => !idsComprometidos.has(p.id)
+    const candidatos = pessoasAtivasParaSlot(slot, data, contexto).filter(
+      (p) => !idsComprometidos.has(p.id),
     );
-
-    if (candidatosCulto.length > 0) {
-      const rankedCulto = sortByScore(candidatosCulto, 'mm_culto', data, contexto);
-      const mmCulto = rankedCulto[0];
-      mm.push(mmCulto);
-      idsComprometidos.add(mmCulto.id);
-      marcarEscalado(contexto, mmCulto, data, 'mm_culto');
-      registrarEscolha(justificativas, data, 'MM_CULTO', mmCulto, rankedCulto);
+    if (candidatos.length > 0) {
+      const ranked = sortByScore(candidatos, slot, data, contexto);
+      const escolhido = ranked[0];
+      mm.push(escolhido);
+      idsComprometidos.add(escolhido.id);
+      marcarEscalado(contexto, escolhido, data, slot);
+      registrarEscolha(justificativas, data, slot.toUpperCase(), escolhido, ranked);
     } else {
-      registrarAviso(justificativas, data, 'Nenhum candidato disponível para MM Culto (sábado)');
+      registrarAviso(justificativas, data, avisoVazio);
     }
-  } else if (dia_semana === 'domingo') {
-    // Domingo: 1 MM (mm_domingo)
-    const candidatosDom = pessoasAtivasParaSlot('mm_domingo', data, contexto).filter(
-      (p) => !idsComprometidos.has(p.id)
-    );
+  };
 
-    if (candidatosDom.length > 0) {
-      const rankedDom = sortByScore(candidatosDom, 'mm_domingo', data, contexto);
-      const mmDom = rankedDom[0];
-      mm.push(mmDom);
-      idsComprometidos.add(mmDom.id);
-      marcarEscalado(contexto, mmDom, data, 'mm_domingo');
-      registrarEscolha(justificativas, data, 'MM_DOMINGO', mmDom, rankedDom);
-    } else {
-      registrarAviso(justificativas, data, 'Nenhum candidato disponível para MM Domingo');
+  if (modeloLouvor === 'sabado') {
+    // Modelo sábado: N MMs (padrão 2) — primeiro mm_es, depois mm_culto (RF012).
+    const qtd = quantidadeMmSabado(contexto);
+    if (qtd >= 2) {
+      preencherMm('mm_es', 'Nenhum candidato disponível para MM ES (sábado)');
+      preencherMm('mm_culto', 'Nenhum candidato disponível para MM Culto (sábado)');
+    } else if (qtd === 1) {
+      preencherMm('mm_culto', 'Nenhum candidato disponível para MM Culto (sábado)');
     }
+  } else if (modeloLouvor === 'domingo') {
+    // Modelo domingo: 1 MM (mm_domingo).
+    preencherMm('mm_domingo', 'Nenhum candidato disponível para MM Domingo');
   }
 
   return { regente, equipe, mm, justificativas };

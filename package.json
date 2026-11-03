@@ -6,6 +6,7 @@
     "dev": "python scripts/local.py",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+    "inventariar:legado": "node scripts/inventario-legado.js",
     "validar:regras": "node scripts/validacao/validar-regras.js",
     "validar:rascunho": "node scripts/validacao/validar-rascunho.js",
     "validar:obs": "node scripts/validacao/validar-obs-publico.js",
@@ -26,10 +27,12 @@
     "vincular:indisponibilidade": "node scripts/ciclo/vincular-indisponibilidade.js",
     "sugerir:rascunho": "node scripts/ciclo/sugerir-rascunho.js",
     "iniciar:mes": "node scripts/ciclo/iniciar-mes.js",
-    "ciclo:mensal": "node scripts/ciclo/ciclo-mensal.js"
+    "ciclo:mensal": "node scripts/ciclo/ciclo-mensal.js",
+    "montar": "node montador/server.mjs"
   },
   "devDependencies": {
     "fast-check": "4.9.0",
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "playwright": "^1.64.1"
   }
 }

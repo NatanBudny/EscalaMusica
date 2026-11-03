@@ -1,0 +1,45 @@
+# Configuração do electron-builder para a Casca do editor de escala.
+#
+# Gera somente o instalador NSIS x64 para Windows (Requisito 32.1). O MinGit
+# embutido (vendor/mingit) e o askpass.cmd vão em extraResources, ficando em
+# <resources>/ no app empacotado — é de lá que main.mjs os localiza.
+#
+# Feature: melhoras-domingao (G. Instalador) — Requisitos 32.1, 32.2.
+
+appId: com.escalamusica.editor
+productName: Editor de Escala
+copyright: Escala Musica
+
+directories:
+  output: dist
+  buildResources: build
+
+# Arquivos do app empacotados no asar.
+files:
+  - main.mjs
+  - preload.cjs
+  - configuracao.html
+  - lib/**/*
+  - scripts/**/*
+  - mingit.json
+  - package.json
+
+# MinGit e askpass.cmd ficam fora do asar, em <resources>/.
+extraResources:
+  - from: vendor/mingit
+    to: mingit
+  - from: askpass.cmd
+    to: askpass.cmd
+
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true

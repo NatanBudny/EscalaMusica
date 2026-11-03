@@ -1,0 +1,6 @@
+{
+  "identifier": "minima-inicial",
+  "description": "Superficie IPC minima inicial. Permite apenas operacoes essenciais da janela principal. Nao concede shell, filesystem, dialogos de caminho arbitrario nem acesso de rede. Nenhum plugin que leia o legado (atual.json, contatos.json) ou o visualizador vigente e habilitado.",
+  "windows": ["main"],
+  "permissions": ["core:default"]
+}

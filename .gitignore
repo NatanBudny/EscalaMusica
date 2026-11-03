@@ -1,2 +1,4 @@
 node_modules/
 coverage/
+montador/backups-pessoas/
+.pessoas.tmp.json

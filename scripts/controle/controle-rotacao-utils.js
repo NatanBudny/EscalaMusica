@@ -31,6 +31,25 @@ function descobrirPeriodos() {
 
 const PERIODOS = descobrirPeriodos();
 
+// Saídas padrão de cada controle (mantêm o comportamento dos scripts controle:*).
+const SAIDAS_PADRAO = {
+  mensagem_musical: 'escalas/2026/05/controle-mensagem-musical.json',
+  regentes: 'escalas/2026/05/controle-regentes.json',
+  equipe_louvor: 'escalas/2026/05/controle-equipe-louvor.json',
+};
+
+// Departamentos tratados como "não pessoa" (espelha DEPARTAMENTOS de
+// montador/lib/regras.mjs). Entram em IGNORAR para não contarem na rotação.
+const DEPARTAMENTOS = [
+  'JOVENS',
+  'AVENTUREIROS',
+  'DESBRAVADORES',
+  'DORCAS',
+  'M. MULHER',
+  'QUARTETO',
+  'MELHOR IDADE',
+];
+
 const IGNORAR = new Set([
   '',
   '-',
@@ -38,8 +57,7 @@ const IGNORAR = new Set([
   'INDEFINIDO',
   'PG - DEFINIDO NA HORA',
   'PG- DEFINIDO NA HORA',
-  'JOVENS',
-  'AVENTUREIROS',
+  ...DEPARTAMENTOS,
 ]);
 
 export function normalizar(valor) {
@@ -57,8 +75,8 @@ function criarZeros(chaves) {
   return Object.fromEntries(chaves.map((chave) => [chave, 0]));
 }
 
-export function carregarCadastro() {
-  const caminhoPessoas = resolve(ROOT, 'pessoas.json');
+export function carregarCadastro(root = ROOT) {
+  const caminhoPessoas = resolve(root, 'pessoas.json');
 
   // Preferir pessoas.json (cadastro unificado) quando disponível
   if (existsSync(caminhoPessoas)) {
@@ -66,7 +84,7 @@ export function carregarCadastro() {
   }
 
   // Fallback: funcoes-louvor.json (formato legado)
-  return carregarDeFuncoesLouvor();
+  return carregarDeFuncoesLouvor(root);
 }
 
 function carregarDePessoas(caminhoPessoas) {
@@ -79,7 +97,7 @@ function carregarDePessoas(caminhoPessoas) {
     if (!canonico) continue;
 
     porNome.set(canonico, canonico);
-    for (const alias of pessoa.aliases || []) {
+    for (const alias of pessoa.aliases || pessoa.apelidos || []) {
       porNome.set(normalizar(alias), canonico);
     }
 
@@ -98,15 +116,35 @@ function carregarDePessoas(caminhoPessoas) {
     });
   }
 
+  // Grupos escaláveis são contados pelo nome_exibicao (como "FAMILIA NILSINHO").
+  const nomesGrupos = [];
+  const grupos = dados.grupos || {};
+  for (const chave of Object.keys(grupos)) {
+    const grupo = grupos[chave];
+    if (!grupo || grupo.escalavel === false) continue;
+    const canonico = normalizar(grupo.nome_exibicao);
+    if (!canonico) continue;
+    porNome.set(canonico, canonico);
+    nomesGrupos.push(canonico);
+    // Um grupo escalável pode ocupar qualquer função de louvor.
+    funcoes.set(canonico, {
+      ativo: true,
+      regente: true,
+      equipe: true,
+      grupo: true,
+      mm: { es: true, culto: true, dom: true },
+    });
+  }
+
   // Manter shape compatível: cadastro.pessoas deve existir para downstream
-  const cadastro = { pessoas: dados.pessoas || [] };
+  const cadastro = { pessoas: dados.pessoas || [], nomesGrupos };
 
   return { cadastro, porNome, funcoes };
 }
 
-function carregarDeFuncoesLouvor() {
-  const caminhoNovo = resolve(ROOT, 'processos/regras/cadastros/funcoes-louvor.json');
-  const caminhoLegado = resolve(ROOT, 'docs/regras/cadastro-funcoes-louvor.json');
+function carregarDeFuncoesLouvor(root = ROOT) {
+  const caminhoNovo = resolve(root, 'processos/regras/cadastros/funcoes-louvor.json');
+  const caminhoLegado = resolve(root, 'docs/regras/cadastro-funcoes-louvor.json');
   const caminho = existsSync(caminhoNovo) ? caminhoNovo : caminhoLegado;
   const cadastro = JSON.parse(readFileSync(caminho, 'utf8'));
   const porNome = new Map();
@@ -161,18 +199,18 @@ function resolverNome(nome, porNome, naoMapeados, campo, linha) {
   return null;
 }
 
-function carregarPeriodos() {
-  return PERIODOS.map((periodo) => ({
+function carregarPeriodos(periodos, root) {
+  return periodos.map((periodo) => ({
     ...periodo,
-    dados: JSON.parse(readFileSync(resolve(ROOT, periodo.arquivo), 'utf8')),
+    dados: JSON.parse(readFileSync(resolve(root, periodo.arquivo), 'utf8')),
   }));
 }
 
-function montarContagemBase(nomesCadastro, chaves) {
+function montarContagemBase(nomesCadastro, chaves, periodos) {
   return Object.fromEntries(
     nomesCadastro.map((nome) => [
       nome,
-      Object.fromEntries(PERIODOS.map((periodo) => [periodo.rotulo, criarZeros(chaves)])),
+      Object.fromEntries(periodos.map((periodo) => [periodo.rotulo, criarZeros(chaves)])),
     ])
   );
 }
@@ -188,8 +226,15 @@ function montarTotais(porMes, chaves) {
   return totais;
 }
 
-function escreverResultado(saidaRelativa, resultado) {
-  writeFileSync(resolve(ROOT, saidaRelativa), `${JSON.stringify(resultado, null, 2)}\n`, 'utf8');
+function escreverResultado(saidaRelativa, resultado, root) {
+  writeFileSync(resolve(root, saidaRelativa), `${JSON.stringify(resultado, null, 2)}\n`, 'utf8');
+}
+
+/** Lista de nomes do cadastro (pessoas + grupos escaláveis) já normalizados. */
+function nomesDoCadastro(cadastro) {
+  const nomes = (cadastro.pessoas || []).map((p) => normalizar(p.nome)).filter(Boolean);
+  for (const nomeGrupo of cadastro.nomesGrupos || []) nomes.push(nomeGrupo);
+  return [...new Set(nomes)];
 }
 
 export function imprimirResumo(titulo, ranking, colunas) {
@@ -207,6 +252,7 @@ export function imprimirResumo(titulo, ranking, colunas) {
   }
 }
 
+<<<<<<< Updated upstream
 /** Deriva o caminho de saída do controle a partir de --mes (AAAA-MM). */
 function caminhoSaida(mesSaida, arquivo) {
   const m = String(mesSaida || '').match(/^(\d{4})-(\d{2})$/);
@@ -220,13 +266,21 @@ const PERIODO_LABEL = PERIODOS.length
   : '(sem periodos)';
 
 export function gerarControleMensagemMusical(mesSaida) {
+=======
+export function gerarControleMensagemMusical({
+  periodos = PERIODOS,
+  saida = SAIDAS_PADRAO.mensagem_musical,
+  root = ROOT,
+  rotuloPeriodoTexto = '2026-01 a 2026-04',
+} = {}) {
+>>>>>>> Stashed changes
   const chaves = ['ES', 'CULTO', 'DOMINGO'];
-  const { cadastro, porNome, funcoes } = carregarCadastro();
-  const nomesCadastro = (cadastro.pessoas || []).map((p) => normalizar(p.nome)).filter(Boolean);
-  const contagem = montarContagemBase(nomesCadastro, chaves);
+  const { cadastro, porNome, funcoes } = carregarCadastro(root);
+  const nomesCadastro = nomesDoCadastro(cadastro);
+  const contagem = montarContagemBase(nomesCadastro, chaves, periodos);
   const naoMapeados = new Map();
 
-  for (const periodo of carregarPeriodos()) {
+  for (const periodo of carregarPeriodos(periodos, root)) {
     for (const linha of periodo.dados) {
       const dia = normalizar(linha['DIA SEMANA']);
       if (dia === 'QUARTA-FEIRA') continue;
@@ -279,7 +333,11 @@ export function gerarControleMensagemMusical(mesSaida) {
 
   const resultado = {
     gerado_em: new Date().toISOString(),
+<<<<<<< Updated upstream
     periodo: PERIODO_LABEL,
+=======
+    periodo: rotuloPeriodoTexto,
+>>>>>>> Stashed changes
     tipo_controle: 'mensagem_musical',
     legenda: {
       ES: 'Mensagem Musical da Escola Sabatina (sabado manha, 1a posicao quando ha 2 no sabado).',
@@ -290,24 +348,37 @@ export function gerarControleMensagemMusical(mesSaida) {
       'Slot ES: menor ES primeiro. Slot CULTO: menor CULTO primeiro. Slot DOM: menor DOMINGO primeiro. Disponibilidade real prevalece sobre tudo.',
     observacao:
       'O ranking considera apenas pessoas ativas e habilitadas no cadastro oficial de funcoes do louvor.',
-    fonte: PERIODOS.map((periodo) => periodo.arquivo),
+    fonte: periodos.map((periodo) => periodo.arquivo),
     nomes_nao_mapeados: [...naoMapeados.values()],
     ranking_menor_para_maior: ranking,
   };
 
+<<<<<<< Updated upstream
   const saida = caminhoSaida(mesSaida, 'controle-mensagem-musical.json');
   escreverResultado(saida, resultado);
   return { saida, ranking };
 }
 
 export function gerarControleRegentes(mesSaida) {
+=======
+  escreverResultado(saida, resultado, root);
+  return { saida, ranking };
+}
+
+export function gerarControleRegentes({
+  periodos = PERIODOS,
+  saida = SAIDAS_PADRAO.regentes,
+  root = ROOT,
+  rotuloPeriodoTexto = '2026-01 a 2026-04',
+} = {}) {
+>>>>>>> Stashed changes
   const chaves = ['REGENCIAS'];
-  const { cadastro, porNome, funcoes } = carregarCadastro();
-  const nomesCadastro = (cadastro.pessoas || []).map((p) => normalizar(p.nome)).filter(Boolean);
-  const contagem = montarContagemBase(nomesCadastro, chaves);
+  const { cadastro, porNome, funcoes } = carregarCadastro(root);
+  const nomesCadastro = nomesDoCadastro(cadastro);
+  const contagem = montarContagemBase(nomesCadastro, chaves, periodos);
   const naoMapeados = new Map();
 
-  for (const periodo of carregarPeriodos()) {
+  for (const periodo of carregarPeriodos(periodos, root)) {
     for (const linha of periodo.dados) {
       const nomeBruto = normalizar(linha['REGENTE LOUVOR']);
       if (!nomeBruto || IGNORAR.has(nomeBruto)) continue;
@@ -340,7 +411,11 @@ export function gerarControleRegentes(mesSaida) {
 
   const resultado = {
     gerado_em: new Date().toISOString(),
+<<<<<<< Updated upstream
     periodo: PERIODO_LABEL,
+=======
+    periodo: rotuloPeriodoTexto,
+>>>>>>> Stashed changes
     tipo_controle: 'regentes',
     legenda: {
       REGENCIAS: 'Quantidade de vezes em que a pessoa apareceu como REGENTE LOUVOR.',
@@ -349,24 +424,37 @@ export function gerarControleRegentes(mesSaida) {
       'Priorizar menor quantidade total de regencias, respeitando disponibilidade real e as regras vigentes.',
     observacao:
       'O ranking considera apenas pessoas ativas e habilitadas para regencia no cadastro oficial de funcoes do louvor.',
-    fonte: PERIODOS.map((periodo) => periodo.arquivo),
+    fonte: periodos.map((periodo) => periodo.arquivo),
     nomes_nao_mapeados: [...naoMapeados.values()],
     ranking_menor_para_maior: ranking,
   };
 
+<<<<<<< Updated upstream
   const saida = caminhoSaida(mesSaida, 'controle-regentes.json');
   escreverResultado(saida, resultado);
   return { saida, ranking };
 }
 
 export function gerarControleEquipeLouvor(mesSaida) {
+=======
+  escreverResultado(saida, resultado, root);
+  return { saida, ranking };
+}
+
+export function gerarControleEquipeLouvor({
+  periodos = PERIODOS,
+  saida = SAIDAS_PADRAO.equipe_louvor,
+  root = ROOT,
+  rotuloPeriodoTexto = '2026-01 a 2026-04',
+} = {}) {
+>>>>>>> Stashed changes
   const chaves = ['ESCALAS_EQUIPE'];
-  const { cadastro, porNome, funcoes } = carregarCadastro();
-  const nomesCadastro = (cadastro.pessoas || []).map((p) => normalizar(p.nome)).filter(Boolean);
-  const contagem = montarContagemBase(nomesCadastro, chaves);
+  const { cadastro, porNome, funcoes } = carregarCadastro(root);
+  const nomesCadastro = nomesDoCadastro(cadastro);
+  const contagem = montarContagemBase(nomesCadastro, chaves, periodos);
   const naoMapeados = new Map();
 
-  for (const periodo of carregarPeriodos()) {
+  for (const periodo of carregarPeriodos(periodos, root)) {
     for (const linha of periodo.dados) {
       const nomes = extrairPartes(linha['EQUIPE LOUVOR']);
 
@@ -400,7 +488,11 @@ export function gerarControleEquipeLouvor(mesSaida) {
 
   const resultado = {
     gerado_em: new Date().toISOString(),
+<<<<<<< Updated upstream
     periodo: PERIODO_LABEL,
+=======
+    periodo: rotuloPeriodoTexto,
+>>>>>>> Stashed changes
     tipo_controle: 'equipe_louvor',
     legenda: {
       ESCALAS_EQUIPE: 'Quantidade de vezes em que a pessoa apareceu em EQUIPE LOUVOR.',
@@ -409,12 +501,18 @@ export function gerarControleEquipeLouvor(mesSaida) {
       'Priorizar menor quantidade total de escalas em equipe de louvor, respeitando disponibilidade real e as regras vigentes.',
     observacao:
       'O ranking considera apenas pessoas ativas e habilitadas para equipe no cadastro oficial de funcoes do louvor.',
-    fonte: PERIODOS.map((periodo) => periodo.arquivo),
+    fonte: periodos.map((periodo) => periodo.arquivo),
     nomes_nao_mapeados: [...naoMapeados.values()],
     ranking_menor_para_maior: ranking,
   };
 
+<<<<<<< Updated upstream
   const saida = caminhoSaida(mesSaida, 'controle-equipe-louvor.json');
   escreverResultado(saida, resultado);
+=======
+  escreverResultado(saida, resultado, root);
+>>>>>>> Stashed changes
   return { saida, ranking };
 }
+
+export { PERIODOS as PERIODOS_PADRAO, SAIDAS_PADRAO, DEPARTAMENTOS };

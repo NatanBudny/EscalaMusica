@@ -22,9 +22,10 @@ import { carregarHistorico } from '../lib/solver-historico.js';
 import { sugerirCulto } from '../lib/solver-selecao.js';
 import { diaDaSemana } from '../lib/solver-filtros.js';
 import { formatarRascunhoMd, gerarJustificativa } from '../lib/solver-output.js';
+import { carregarParametros } from '../lib/parametros.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = resolve(__dirname, '../..');
+const ROOT_PADRAO = resolve(__dirname, '../..');
 
 // --- Departamentos reconhecidos (RF015) ---
 const DEPARTAMENTOS = new Set([
@@ -67,6 +68,9 @@ if (!mesMatch) {
 const [, ano, mes] = mesMatch;
 const mesAlvo = `${ano}-${mes}`;
 
+// Raiz do repositório (ou de uma fixture via --root, para o teste de regressão).
+const ROOT = args.root ? resolve(args.root) : ROOT_PADRAO;
+
 // Caminhos padrão
 const pessoasPath = args.pessoas ? resolve(args.pessoas) : resolve(ROOT, 'pessoas.json');
 const insumosBase = args.insumos
@@ -76,6 +80,7 @@ const insumosBase = args.insumos
 const vinculadaPath = resolve(insumosBase, 'indisponibilidade-cantores-vinculada.json');
 const acionatoPath = resolve(insumosBase, 'acionato.json');
 const atualPath = resolve(ROOT, 'atual.json');
+const parametrosPath = resolve(ROOT, 'processos/regras/parametros.json');
 const outputDir = resolve(ROOT, `escalas/${ano}/${mes}`);
 const rascunhoPath = resolve(outputDir, 'rascunho.md');
 const justificativaPath = resolve(outputDir, 'rascunho-justificativa.md');
@@ -199,12 +204,22 @@ function coletarPathsOld() {
   try {
     const anos = readdirSync(oldBase);
     for (const anoDir of anos) {
+      // old/ guarda apenas históricos por ano (ex.: old/2026). Ignora subpastas
+      // que não sejam de ano (ex.: backups de outros dados) para não ler JSONs
+      // que não são arrays de cultos.
+      if (!/^\d{4}$/.test(anoDir)) continue;
       const anoPath = resolve(oldBase, anoDir);
       try {
         const arquivos = readdirSync(anoPath);
         for (const arquivo of arquivos) {
-          if (arquivo.endsWith('.json')) {
-            paths.push(resolve(anoPath, arquivo));
+          if (!arquivo.endsWith('.json')) continue;
+          const full = resolve(anoPath, arquivo);
+          // Só inclui arquivos cujo conteúdo é array (formato de histórico).
+          try {
+            const conteudo = JSON.parse(readFileSync(full, 'utf8'));
+            if (Array.isArray(conteudo)) paths.push(full);
+          } catch {
+            // Arquivo ilegível/inválido: ignora com segurança.
           }
         }
       } catch {
@@ -266,10 +281,15 @@ function main() {
   const qtdMesInteiro = (indisponibilidade.indisponiveis_mes_inteiro?.ids || []).length;
   console.log(`  ✓ ${qtdDatas} data(s) com indisponibilidade, ${qtdMesInteiro} indisponível(eis) mês inteiro`);
 
-  // 3. Carregar histórico
+  // 3. Carregar parâmetros executáveis (ausente/inválido → padrão + aviso).
+  const { parametros, avisos: avisosParametros } = carregarParametros(parametrosPath);
+  for (const aviso of avisosParametros) console.warn(`AVISO: ${aviso}`);
+  const janelaMeses = (parametros.historico && parametros.historico.janela_meses) || 4;
+
+  // 4. Carregar histórico
   console.log('Carregando histórico...');
   const pathsOld = coletarPathsOld();
-  const historico = carregarHistorico(cadastro, pathsOld, atualPath);
+  const historico = carregarHistorico(cadastro, pathsOld, atualPath, janelaMeses);
   console.log(`  ✓ Histórico carregado (${pathsOld.length} período(s) antigo(s) + atual.json)`);
 
   // 4. Carregar acionato / extrair cultos
@@ -289,6 +309,7 @@ function main() {
     pessoas: cadastro,
     indisponibilidade,
     historico,
+    parametros,
     escaladosNesteMes: new Map(),
     escaladosPorCulto: new Map(),
     externosPorCulto: new Map(),

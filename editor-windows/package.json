@@ -1,0 +1,17 @@
+{
+  "name": "editor-windows",
+  "version": "1.0.0",
+  "description": "Casca Electron do editor de escala (só Windows): roda montador/server.mjs de dentro do clone.",
+  "private": true,
+  "type": "module",
+  "main": "main.mjs",
+  "scripts": {
+    "start": "electron .",
+    "baixar:mingit": "node scripts/baixar-mingit.mjs",
+    "empacotar": "electron-builder --win nsis --publish never"
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "versao": 1,
+  "templates": {
+    "pessoa": "Olá, {nome}! \n\nVocê está na escala de *{mes/ano}*, como {funções}.\n\nEntre na escala e veja os detalhes:\nhttps://natanbudny.github.io/EscalaMusica/\n\nDê um joinha nessa mensagem para confirmar que poderá participar",
+    "grupo": "Olá, {nome}! \n\nSua família está na escala de *{mes/ano}*, como {funções}.\n\nEntre na escala e veja os detalhes:\nhttps://natanbudny.github.io/EscalaMusica/\n\nDê um joinha nessa mensagem para confirmar que poderão participar",
+    "culto_inteiro": "Olá, {nome}! \n\nO Ministério Jovem está na escala de *{mes/ano}* no dia {data}, como {funções}.\n\nEntre na escala e veja os detalhes:\nhttps://natanbudny.github.io/EscalaMusica/\n\nDê um joinha nessa mensagem para confirmar que poderão participar",
+    "fixo": "Olá, {nome}! \n\nA escala de *{mes/ano}* foi publicada.\n\nEntre na escala e veja os detalhes:\nhttps://natanbudny.github.io/EscalaMusica/"
+  },
+  "fixos": [
+    { "nome": "ADELAIDE", "rotulo": "Líder da banda" },
+    { "nome": "YASSER", "rotulo": "Ancião principal" }
+  ],
+  "grupo_louvor": "https://chat.whatsapp.com/EsfZwmrdWntG9wxqoSN5zw"
+}

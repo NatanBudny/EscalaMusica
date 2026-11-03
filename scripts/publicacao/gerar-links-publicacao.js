@@ -1,15 +1,28 @@
 #!/usr/bin/env node
 
+// Gera escalas/AAAA/MM/links-whatsapp.md a partir de atual.json e contatos.json
+// (linha de comando). A lógica de montagem dos links vive em
+// scripts/lib/links-whatsapp.js (compartilhada com montador/lib/whatsapp.mjs,
+// que serve GET /api/whatsapp sem gravar arquivo). O texto das mensagens vem
+// das Mensagens_WhatsApp editáveis (processos/regras/mensagens-whatsapp.json),
+// não mais de um template fixo neste arquivo.
+
 import { mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
+
+import { carregarMensagens } from '../lib/mensagens-whatsapp.js';
+import { derivarContatos } from '../lib/contatos.js';
+import { montarListaEnvios } from '../lib/links-whatsapp.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '../..');
 
 const atualPath = resolve(ROOT, 'atual.json');
-const contatosPath = resolve(ROOT, 'contatos.json');
+const pessoasPath = resolve(ROOT, 'pessoas.json');
+const mensagensPath = resolve(ROOT, 'processos/regras/mensagens-whatsapp.json');
 
+<<<<<<< Updated upstream
 const MENSAGEM_TEMPLATE = [
   'Olá, {nome}. Você está na escala de {mes/ano}, como {funções}. Entre na escala, veja os dias.',
   '',
@@ -95,60 +108,67 @@ function parseCelulaNomes(celula, lookupContato) {
         .filter(Boolean);
       nomes.push(...splitE);
       continue;
+=======
+function lerJSON(caminho, obrigatorio = true) {
+  try {
+    return JSON.parse(readFileSync(caminho, 'utf8'));
+  } catch (err) {
+    if (obrigatorio) {
+      console.error(`Erro ao ler ${caminho}:`, err.message);
+      process.exit(1);
+>>>>>>> Stashed changes
     }
-
-    nomes.push(parte);
+    return null;
   }
+}
 
-  return nomes;
+/** Nome do responsável de cada Grupo_Escalavel (para o template `{nome}`). */
+function gruposComResponsavel(arquivoPessoas) {
+  const pessoas = Array.isArray(arquivoPessoas?.pessoas) ? arquivoPessoas.pessoas : [];
+  const porId = new Map(pessoas.map((p) => [p.id, p]));
+  const grupos = {};
+  for (const [chave, def] of Object.entries(arquivoPessoas?.grupos || {})) {
+    if (!def || def.escalavel !== true) continue;
+    const responsavel = porId.get(def.responsavel_id);
+    grupos[chave] = {
+      ...def,
+      nome_responsavel: responsavel ? responsavel.nome : def.nome_exibicao,
+    };
+  }
+  return grupos;
 }
 
 function hojeISO() {
   return new Date().toISOString().slice(0, 10);
 }
 
-function extrairAnoMesDaEscala(escalaAtual) {
-  for (const item of escalaAtual) {
-    const data = String(item?.DATA || '').trim();
-    const match = data.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
-    if (!match) continue;
-
-    const mes = match[2];
-    const ano = match[3];
-    return { ano, mes };
+function extrairAnoMesDaEscala(escala) {
+  for (const item of escala) {
+    const match = String(item?.DATA || '').trim().match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+    if (match) return { ano: match[3], mes: match[2] };
   }
-
   throw new Error('Nao foi possivel identificar ano/mes a partir de atual.json (campo DATA).');
 }
 
-let escala;
-let contatos;
-
-try {
-  escala = JSON.parse(readFileSync(atualPath, 'utf8'));
-} catch (err) {
-  console.error('Erro ao ler atual.json:', err.message);
-  process.exit(1);
+function toMdLink(url, label = 'Abrir') {
+  return `[${label}](${url})`;
 }
 
-try {
-  contatos = JSON.parse(readFileSync(contatosPath, 'utf8'));
-} catch (err) {
-  console.error('Erro ao ler contatos.json:', err.message);
-  process.exit(1);
-}
-
+const escala = lerJSON(atualPath);
 if (!Array.isArray(escala)) {
   console.error('Erro: atual.json precisa ser um array.');
   process.exit(1);
 }
 
-const lookupContato = new Map();
+const arquivoPessoas = lerJSON(pessoasPath);
+const contatos = derivarContatos(arquivoPessoas.pessoas || [], arquivoPessoas.grupos || {});
+const grupos = gruposComResponsavel(arquivoPessoas);
+const { mensagens, avisos } = carregarMensagens(mensagensPath);
+for (const aviso of avisos) console.warn(`Aviso: ${aviso}`);
 
-for (const [nomePrincipal, payload] of Object.entries(contatos)) {
-  const telefoneLimpo = limparTelefone(payload?.telefone);
-  if (!telefoneLimpo) continue;
+const { envios, semContato } = montarListaEnvios(escala, contatos, { mensagens, grupos });
 
+<<<<<<< Updated upstream
   const registro = {
     nomeContato: nomePrincipal,
     telefone: telefoneLimpo
@@ -283,28 +303,28 @@ const fixos = FIXOS.map((item) => {
   };
 });
 
+=======
+const { ano, mes } = extrairAnoMesDaEscala(escala);
+>>>>>>> Stashed changes
 const data = hojeISO();
 const pastaMes = resolve(ROOT, 'escalas', ano, mes);
 mkdirSync(pastaMes, { recursive: true });
-
 const arquivoSaida = 'links-whatsapp.md';
 const outPath = resolve(pastaMes, arquivoSaida);
 
+const pessoasEnvios = envios.filter((e) => e.tipo === 'pessoa' || e.tipo === 'grupo');
+const fixos = envios.filter((e) => e.tipo === 'fixo');
+const convite = envios.find((e) => e.tipo === 'convite');
+
 const linhas = [];
 linhas.push(`# Links WhatsApp - Publicacao ${data}`);
-linhas.push('');
-linhas.push('## Mensagem padrao');
-linhas.push('');
-linhas.push('```text');
-linhas.push(MENSAGEM_TEMPLATE);
-linhas.push('```');
 linhas.push('');
 linhas.push('## Membros da escala (Regencia, Equipe Louvor e Mensagem Musical)');
 linhas.push('');
 linhas.push('| Nome | Funcoes | Link |');
 linhas.push('|---|---|---|');
-for (const item of comContato) {
-  linhas.push(`| ${item.nomeEscala} | ${item.campos} | ${toMdLink(item.link)} |`);
+for (const item of pessoasEnvios) {
+  linhas.push(`| ${item.nome} | ${item.funcoes.join(', ')} | ${toMdLink(item.link)} |`);
 }
 
 linhas.push('');
@@ -312,13 +332,8 @@ linhas.push('## Contatos fixos');
 linhas.push('');
 linhas.push('| Contato | Nome | Link |');
 linhas.push('|---|---|---|');
-
 for (const item of fixos) {
-  if (item.link) {
-    linhas.push(`| ${item.label} | ${item.origemContato} | ${toMdLink(item.link)} |`);
-  } else {
-    linhas.push(`| ${item.label} | - | SEM CONTATO EM contatos.json |`);
-  }
+  linhas.push(`| ${item.rotulo || '-'} | ${item.nome} | ${toMdLink(item.link)} |`);
 }
 
 linhas.push('');
@@ -326,7 +341,7 @@ linhas.push('## Grupo do louvor');
 linhas.push('');
 linhas.push('| Item | Link |');
 linhas.push('|---|---|');
-linhas.push(`| Convite do grupo | ${toMdLink(GRUPO_LOUVOR)} |`);
+if (convite) linhas.push(`| Convite do grupo | ${toMdLink(convite.link)} |`);
 linhas.push('');
 linhas.push('Observacao: o link de convite do grupo nao preenche mensagem automaticamente como o wa.me.');
 
@@ -337,7 +352,7 @@ if (semContato.length > 0) {
   linhas.push('| Nome | Funcoes |');
   linhas.push('|---|---|');
   for (const item of semContato) {
-    linhas.push(`| ${item.nomeEscala} | ${item.campos} |`);
+    linhas.push(`| ${item.nome} | ${(item.funcoes || []).join(', ')} |`);
   }
 }
 
@@ -345,10 +360,10 @@ linhas.push('');
 linhas.push('## Fonte');
 linhas.push('');
 linhas.push('- Escala: atual.json');
-linhas.push('- Contatos: contatos.json');
+linhas.push('- Contatos: derivado de pessoas.json');
 
 writeFileSync(outPath, `${linhas.join('\n')}\n`, 'utf8');
 
 console.log(`Arquivo gerado: escalas/${ano}/${mes}/${arquivoSaida}`);
-console.log(`Com contato: ${comContato.length}`);
+console.log(`Com contato: ${pessoasEnvios.length + fixos.length}`);
 console.log(`Sem contato: ${semContato.length}`);

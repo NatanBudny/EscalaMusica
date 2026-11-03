@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; style-src 'unsafe-inline'; script-src 'self'"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Configurar o editor de escala</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: #0f172a;
+        color: #e2e8f0;
+      }
+      main {
+        width: min(560px, 92vw);
+        background: #1e293b;
+        border-radius: 16px;
+        padding: 32px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 1.4rem;
+      }
+      p.ajuda {
+        margin: 0 0 20px;
+        color: #94a3b8;
+        line-height: 1.5;
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px 14px;
+        border-radius: 10px;
+        border: 1px solid #334155;
+        background: #0f172a;
+        color: #e2e8f0;
+        font-size: 1rem;
+      }
+      input:focus {
+        outline: 2px solid #38bdf8;
+        border-color: #38bdf8;
+      }
+      button {
+        margin-top: 20px;
+        width: 100%;
+        padding: 12px 16px;
+        border: 0;
+        border-radius: 10px;
+        background: #38bdf8;
+        color: #082f49;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.6;
+        cursor: progress;
+      }
+      .estado {
+        margin-top: 18px;
+        min-height: 1.4em;
+        font-size: 0.95rem;
+      }
+      .estado.erro {
+        color: #fca5a5;
+      }
+      .estado.ok {
+        color: #86efac;
+      }
+      .estado.progresso {
+        color: #bae6fd;
+      }
+      .oculto {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Configurar o editor de escala</h1>
+      <p class="ajuda">
+        Cole um token de acesso do GitHub com permissão de escrita no
+        repositório da escala. O token fica guardado em segurança só neste
+        computador.
+      </p>
+
+      <label for="token">Token do GitHub</label>
+      <input
+        id="token"
+        type="password"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="ghp_..."
+      />
+
+      <button id="enviar" type="button">Entrar</button>
+      <button id="tentar" type="button" class="oculto">Tentar de novo</button>
+
+      <p id="estado" class="estado" role="status" aria-live="polite"></p>
+    </main>
+
+    <script src="configuracao.js"></script>
+  </body>
+</html>

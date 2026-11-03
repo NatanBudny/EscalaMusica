@@ -1,0 +1,13 @@
+# Dependencias e artefatos do frontend
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Artefatos do nucleo Rust / Tauri
+src-tauri/target/
+src-tauri/gen/
+
+# Cobertura e caches de teste
+coverage/
+.vitest/

@@ -1,0 +1,635 @@
+{
+  "pbtResults": {
+    "1.1 Teste de propriedade das requisições": {
+      "status": "passed",
+      "lastRunTimestamp": 1793566993745
+    },
+    "2.1 Teste de propriedade do commit seletivo": {
+      "status": "passed",
+      "lastRunTimestamp": 1793566994887
+    },
+    "2.2 Teste de propriedade da sincronização": {
+      "status": "passed",
+      "lastRunTimestamp": 1793566998497
+    },
+    "3.1 Teste de propriedade da derivação de contatos": {
+      "status": "passed",
+      "lastRunTimestamp": 1793574327334
+    },
+    "3.2 Teste de propriedade de falha no cadastro": {
+      "status": "passed",
+      "lastRunTimestamp": 1793574331174
+    },
+    "4.1 Teste de propriedade da migração": {
+      "status": "passed",
+      "lastRunTimestamp": 1793574334823
+    },
+    "6.1 Teste de propriedade do telefone": {
+      "status": "passed",
+      "lastRunTimestamp": 1793576571605
+    },
+    "6.2 Teste de propriedade das regras de salvamento": {
+      "status": "passed",
+      "lastRunTimestamp": 1793576575308
+    },
+    "7.1 Teste de propriedade dos vínculos": {
+      "status": "passed",
+      "lastRunTimestamp": 1793576624803
+    },
+    "8.1 Teste de propriedade dos grupos": {
+      "status": "passed",
+      "lastRunTimestamp": 1793576688101
+    },
+    "8.2 Teste de propriedade da derivação com grupos": {
+      "status": "passed",
+      "lastRunTimestamp": 1793576689101
+    },
+    "8.3 Teste de propriedade da migração com grupos": {
+      "status": "passed",
+      "lastRunTimestamp": 1793576690195
+    },
+    "9.1 Teste de propriedade dos filtros": {
+      "status": "passed",
+      "lastRunTimestamp": 1793576739749
+    },
+    "10.1 Teste de propriedade da exclusão": {
+      "status": "passed",
+      "lastRunTimestamp": 1793576881988
+    },
+    "11.1 Teste de propriedade do histórico": {
+      "status": "passed",
+      "lastRunTimestamp": 1793578915057
+    },
+    "12.1 Teste de propriedade dos padrões": {
+      "status": "passed",
+      "lastRunTimestamp": 1793588394745
+    },
+    "17.1 Teste de propriedade da associação": {
+      "status": "passed",
+      "lastRunTimestamp": 1793580791292
+    },
+    "17.2 Teste de propriedade da vinculada": {
+      "status": "passed",
+      "lastRunTimestamp": 1793580792333
+    },
+    "20.1 Teste de propriedade dos níveis": {
+      "status": "passed",
+      "lastRunTimestamp": 1793581914534
+    },
+    "20.2 Teste de propriedade da coerência": {
+      "status": "passed",
+      "lastRunTimestamp": 1793581918462
+    },
+    "20.3 Teste de propriedade do acúmulo no culto": {
+      "status": "passed",
+      "lastRunTimestamp": 1793581922101
+    },
+    "20.4 Teste de propriedade dos vínculos": {
+      "status": "passed",
+      "lastRunTimestamp": 1793581925807
+    },
+    "25.1 Teste de propriedade do filtro e do indicador": {
+      "status": "passed",
+      "lastRunTimestamp": 1793592230772
+    },
+    "25.2 Teste de propriedade do progresso": {
+      "status": "passed",
+      "lastRunTimestamp": 1793592234379
+    },
+    "33.1 Teste de propriedade do histórico das mensagens": {
+      "status": "passed",
+      "lastRunTimestamp": 1793596869314
+    }
+  },
+  "executionHistory": {
+    "Task 28: Checkpoint da montagem": [
+      {
+        "executionId": "75284bca-3098-4420-bc06-0f0722a03a77",
+        "chatSessionId": "sess_823acf7f-9e14-4b1f-a566-124d517bfdf6",
+        "timestamp": 1793565930134
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793584938408
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793593041746
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793593416639
+      }
+    ],
+    "Task 39: Checkpoint do envio": [
+      {
+        "executionId": "75284bca-3098-4420-bc06-0f0722a03a77",
+        "chatSessionId": "sess_823acf7f-9e14-4b1f-a566-124d517bfdf6",
+        "timestamp": 1793565930237
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793584938590
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793599957739
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793600163257
+      }
+    ],
+    "Task 43: Checkpoint final": [
+      {
+        "executionId": "75284bca-3098-4420-bc06-0f0722a03a77",
+        "chatSessionId": "sess_823acf7f-9e14-4b1f-a566-124d517bfdf6",
+        "timestamp": 1793565930353
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793584938693
+      }
+    ],
+    "Task 1: Segurança do servidor local e `.gitignore`": [
+      {
+        "executionId": "75284bca-3098-4420-bc06-0f0722a03a77",
+        "chatSessionId": "sess_823acf7f-9e14-4b1f-a566-124d517bfdf6",
+        "timestamp": 1793565946921
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793584957180
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793585047337
+      }
+    ],
+    "Task 2: Módulo git e commit seletivo na publicação atual": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793585062302
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793585325250
+      }
+    ],
+    "Task 3: Contatos derivados e cadastro comitando na hora": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793585329485
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793585479372
+      }
+    ],
+    "Task 4: Migração única do `contatos.json`": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793585482664
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793585720522
+      }
+    ],
+    "Task 5: Indicador \"não sincronizado\" no cadastro e aviso de privacidade": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793585724053
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793585989144
+      }
+    ],
+    "Task 6: Validações do cadastro com confirmação no WhatsApp": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793585993140
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793586189467
+      }
+    ],
+    "Task 7: Vínculos, `precisa_de` e migração das regras por nome": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793586194493
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793586515091
+      }
+    ],
+    "Task 8: Grupos escaláveis no cadastro": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793586519740
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793587108821
+      }
+    ],
+    "Task 9: Lista do cadastro com filtros, contador, última vez e habilitação de sonoplastia": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793587113212
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793587397219
+      }
+    ],
+    "Task 10: Desativar e excluir definitivamente": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793587401022
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793587780227
+      }
+    ],
+    "Task 11: Catálogo de regras e versionamento de texto": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793587784179
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793588059930
+      }
+    ],
+    "Task 12: Parâmetros executáveis e refatoração do solver com regressão de julho/2026": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793588064430
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793588422256
+      }
+    ],
+    "Task 13: Tela de regras": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793588426105
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793588715317
+      }
+    ],
+    "Task 14: Iniciar ou retomar o mês": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793588719266
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793589074024
+      }
+    ],
+    "Task 15: Tela de acionato e dia extraordinário": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793589077871
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793589366952
+      }
+    ],
+    "Task 16: Tela de sonoplastia": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793589370941
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793589734431
+      }
+    ],
+    "Task 17: Importação da indisponibilidade": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793589738913
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793590026784
+      }
+    ],
+    "Task 18: Grade, card e Banda/PB com estado por ID": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793590030985
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793590211094
+      }
+    ],
+    "Task 19: Filtro por dia na montagem": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793590214976
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793590314724
+      }
+    ],
+    "Task 20: Avaliação única para candidatos, substitutos e validação": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793590319017
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793590441905
+      }
+    ],
+    "Task 21: Interface de candidatos e substitutos": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793590445818
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793590672313
+      }
+    ],
+    "Task 22: Dia extraordinário de ponta a ponta": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793590676966
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793590784604
+      }
+    ],
+    "Task 23: Sugestão automática com confirmação e fixos": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793590788893
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793591038429
+      }
+    ],
+    "Task 24: Rascunho automático por ID e partida pela publicação": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793591043046
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793591880596
+      }
+    ],
+    "Task 25: Indicador da escala e progresso visual": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793591884854
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793592261329
+      }
+    ],
+    "Task 26: Observação pública editável no card": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793592265729
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793592620881
+      }
+    ],
+    "Task 27: Grupos escaláveis na montagem": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793592626070
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793593031848
+      }
+    ],
+    "Task 29: Revalidação completa antes do envio": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793593421242
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793594148950
+      }
+    ],
+    "Task 30: Conferência da escala online": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793594153188
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793594669107
+      }
+    ],
+    "Task 31: Fechamento completo em processo": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793594673295
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793595825799
+      }
+    ],
+    "Task 32: Verificação automática do site": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793595830046
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793596440945
+      }
+    ],
+    "Task 33: Mensagens de WhatsApp editáveis": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793596445239
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793597082985
+      }
+    ],
+    "Task 34: WhatsApp no servidor e texto da RF023": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793597087685
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793597669020
+      }
+    ],
+    "Task 35: Tela de WhatsApp com enviados": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793597673725
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793598074731
+      }
+    ],
+    "Task 36: Conclusão": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793598079086
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793598406945
+      }
+    ],
+    "Task 37: Ajustar escala publicada": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793598411285
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793599520884
+      }
+    ],
+    "Task 38: Verificação cruzada das regras de contexto": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793599525413
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793599953232
+      }
+    ],
+    "Task 40: Casca Electron rodando o montador do clone": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793600168457
+      },
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793600564460
+      }
+    ],
+    "Task 41: Primeira execução": [
+      {
+        "executionId": "f24ee84b-4746-43be-89ee-4e4f4abeff54",
+        "chatSessionId": "sess_3d863490-bca9-4eaf-975e-bb3b9d6714e0",
+        "timestamp": 1793600568817
+      },
+      {
+        "executionId": "f5ee4c1b-ffa5-4a64-86a0-9c0e718f03d9",
+        "chatSessionId": "sess_d0e57773-9055-4567-ac95-a6c5a329bfa5",
+        "timestamp": 1793709330474
+      }
+    ]
+  }
+}

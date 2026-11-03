@@ -1,0 +1,52 @@
+{
+  "versoes": [
+    {
+      "alvo": "RF025",
+      "tipo": "texto",
+      "numero": 1,
+      "origem": "original",
+      "textos": {
+        "descricao": "Usar o template padrão oficial da mensagem de WhatsApp",
+        "detalhe": "Olá, {nome}. Você está na escala de {mes/ano}, como {funções}. Entre na escala, veja os dias. Dê um joinha nessa mensagem para confirmar que poderá participar. Link da escala: https://natanbudny.github.io/EscalaMusica/"
+      },
+      "autor": "editor de escala",
+      "criado_em": "2026-11-02T05:17:08.635Z"
+    },
+    {
+      "alvo": "RF025",
+      "tipo": "texto",
+      "numero": 2,
+      "origem": "edicao",
+      "textos": {
+        "descricao": "Usar o template padrão oficial da mensagem de WhatsApp",
+        "detalhe": "O template oficial das mensagens fica em processos/regras/mensagens-whatsapp.json (templates pessoa, grupo, culto_inteiro e fixo), editado na tela de regras do editor. Os placeholders obrigatórios {nome}, {mes/ano} e {funções} são preenchidos por scripts/lib/mensagens-whatsapp.js."
+      },
+      "autor": "editor de escala",
+      "criado_em": "2026-11-02T05:17:08.635Z"
+    },
+    {
+      "alvo": "RF023",
+      "tipo": "texto",
+      "numero": 1,
+      "origem": "original",
+      "textos": {
+        "descricao": "A tabela de mensagens de WhatsApp é etapa obrigatória de fechamento",
+        "detalhe": "Após publicar, regenerar e conferir escalas/AAAA/MM/links-whatsapp.md antes do encerramento do ciclo."
+      },
+      "autor": "editor de escala",
+      "criado_em": "2026-11-02T05:30:04.511Z"
+    },
+    {
+      "alvo": "RF023",
+      "tipo": "texto",
+      "numero": 2,
+      "origem": "edicao",
+      "textos": {
+        "descricao": "A tela de WhatsApp do editor é etapa obrigatória do fechamento",
+        "detalhe": "Após a verificação do site, o editor abre a tela de WhatsApp do mês, que monta um envio por pessoa e por Grupo_Escalavel (ao responsável) com as Mensagens_WhatsApp editáveis, sem gerar arquivo. O arquivo escalas/AAAA/MM/links-whatsapp.md só é gerado pela linha de comando (scripts/publicacao/gerar-links-publicacao.js)."
+      },
+      "autor": "editor de escala",
+      "criado_em": "2026-11-02T05:30:04.511Z"
+    }
+  ]
+}

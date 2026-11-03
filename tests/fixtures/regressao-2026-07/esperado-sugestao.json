@@ -1,0 +1,221 @@
+[
+  {
+    "data": "2026-07-01",
+    "dia_semana": "quarta",
+    "tipo": "normal",
+    "regente": "LIDIANE",
+    "equipe": [
+      "YASSER",
+      "SUELLEN",
+      "LAURA",
+      "SIRLENE",
+      "VONI"
+    ],
+    "mm": [],
+    "anciao": "YASSER",
+    "pregador": "MARCOS LEANDRO",
+    "audiovisual": ""
+  },
+  {
+    "data": "2026-07-04",
+    "dia_semana": "sabado",
+    "tipo": "departamental",
+    "departamento": "QUARTETO",
+    "anciao": "ADELMO",
+    "pregador": "QUARTETO",
+    "audiovisual": ""
+  },
+  {
+    "data": "2026-07-05",
+    "dia_semana": "domingo",
+    "tipo": "normal",
+    "regente": "LUIZ ANTONIO",
+    "equipe": [
+      "BERNARDO",
+      "RONI",
+      "MARAIR",
+      "ANDRE",
+      "GIOVANA"
+    ],
+    "mm": [
+      "FABRICIO"
+    ],
+    "anciao": "ADELMO",
+    "pregador": "CLEVERSON",
+    "audiovisual": ""
+  },
+  {
+    "data": "2026-07-08",
+    "dia_semana": "quarta",
+    "tipo": "normal",
+    "regente": "MARIA HELOISA",
+    "equipe": [
+      "RICARDO HERREIRA",
+      "MARCELA",
+      "MIRELLA",
+      "JESSE",
+      "JESSIE"
+    ],
+    "mm": [],
+    "anciao": "ADELMO",
+    "pregador": "ANDRE HERRERA",
+    "audiovisual": ""
+  },
+  {
+    "data": "2026-07-11",
+    "dia_semana": "sabado",
+    "tipo": "normal",
+    "regente": "NILSINHO",
+    "equipe": [
+      "JULIANA ALVES",
+      "CATHERINE",
+      "JESSICA",
+      "JOAS",
+      "ALESSANDRA DONADON"
+    ],
+    "mm": [
+      "ANDRE",
+      "FABRICIO"
+    ],
+    "anciao": "CLEVERSON",
+    "pregador": "FELIPE CANASSA",
+    "audiovisual": ""
+  },
+  {
+    "data": "2026-07-12",
+    "dia_semana": "domingo",
+    "tipo": "normal",
+    "regente": "YASSER",
+    "equipe": [
+      "LIDIANE",
+      "RAISSA",
+      "MARIA HELOISA",
+      "SILVANA",
+      "MANU C."
+    ],
+    "mm": [
+      "MARCELA"
+    ],
+    "anciao": "CLEVERSON",
+    "pregador": "ADELMO",
+    "audiovisual": ""
+  },
+  {
+    "data": "2026-07-15",
+    "dia_semana": "quarta",
+    "tipo": "normal",
+    "regente": "MARAIR",
+    "equipe": [
+      "NILSINHO",
+      "MANU S.",
+      "MARIA F.",
+      "VANDERLEY",
+      "DANI HERREIRA"
+    ],
+    "mm": [],
+    "anciao": "CLEVERSON",
+    "pregador": "DULCE",
+    "audiovisual": ""
+  },
+  {
+    "data": "2026-07-18",
+    "dia_semana": "sabado",
+    "tipo": "normal",
+    "regente": "SILVANA",
+    "equipe": [
+      "ALEX",
+      "DANY KALLAS",
+      "MIRIAN",
+      "ROSANA",
+      "JEMELLI"
+    ],
+    "mm": [
+      "FABRICIO",
+      "ANDRE"
+    ],
+    "anciao": "DULCE",
+    "pregador": "PR. HOFNI",
+    "audiovisual": ""
+  },
+  {
+    "data": "2026-07-19",
+    "dia_semana": "domingo",
+    "tipo": "normal",
+    "regente": "GIOVANA",
+    "equipe": [
+      "HELOISE",
+      "LUIZ ANTONIO",
+      "FABRICIO",
+      "LAURA",
+      "SIRLENE"
+    ],
+    "mm": [
+      "RAISSA"
+    ],
+    "anciao": "DULCE",
+    "pregador": "SUELLEN",
+    "audiovisual": ""
+  },
+  {
+    "data": "2026-07-22",
+    "dia_semana": "quarta",
+    "tipo": "normal",
+    "regente": "RICARDO HERREIRA",
+    "equipe": [
+      "STELLA",
+      "ARIADNY",
+      "SUELLEN",
+      "YASSER",
+      "LIDIANE"
+    ],
+    "mm": [],
+    "anciao": "DULCE",
+    "pregador": "ROBERTO KOCH",
+    "audiovisual": ""
+  },
+  {
+    "data": "2026-07-25",
+    "dia_semana": "sabado",
+    "tipo": "departamental",
+    "departamento": "JOVENS",
+    "anciao": "DA SILVA",
+    "pregador": "JOVENS",
+    "audiovisual": ""
+  },
+  {
+    "data": "2026-07-26",
+    "dia_semana": "domingo",
+    "tipo": "normal",
+    "regente": "ANDRE",
+    "equipe": [
+      "SUELLEN",
+      "LAURA",
+      "SIRLENE",
+      "VONI",
+      "BERNARDO"
+    ],
+    "mm": [
+      "MIRELLA"
+    ],
+    "anciao": "DA SILVA",
+    "pregador": "CULTO MELHOR IDADE",
+    "audiovisual": ""
+  },
+  {
+    "data": "2026-07-29",
+    "dia_semana": "quarta",
+    "tipo": "normal",
+    "regente": "FABRICIO",
+    "equipe": [
+      "YASSER",
+      "LIDIANE",
+      "RONI",
+      "MARAIR",
+      "RICARDO HERREIRA"
+    ],
+    "mm": [],
+    "anciao": "DA SILVA",
+    "pregador": "MM",
+    "audiovisual": ""
+  }
+]

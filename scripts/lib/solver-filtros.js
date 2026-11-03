@@ -13,8 +13,31 @@
  * 8. Pessoa NÃO já escalada no mesmo culto em papel conflitante
  */
 
+import { PARAMETROS_PADRAO, evitarNaSugestao } from './parametros.js';
+
 /** Slots válidos reconhecidos pelo solver */
 const SLOTS_VALIDOS = new Set(['regente', 'equipe', 'mm_es', 'mm_culto', 'mm_domingo']);
+
+/** Parâmetros efetivos do contexto, com fallback nos padrões. */
+function parametrosDe(contexto) {
+  return (contexto && contexto.parametros) || PARAMETROS_PADRAO;
+}
+
+/**
+ * Normaliza o dia da semana real da data para comparar com dias_permitidos,
+ * tratando 'quarta' e 'quarta-feira' como o mesmo dia.
+ */
+function diaRealNormalizado(dataISO) {
+  const dia = diaDaSemana(dataISO);
+  return dia === 'quarta' ? 'quarta-feira' : dia;
+}
+
+/** Um valor de dias_permitidos casa com o dia real (quarta ~ quarta-feira)? */
+function diaPermitido(diasPermitidos, dataISO) {
+  const real = diaRealNormalizado(dataISO); // sempre 'quarta-feira' para quartas
+  const realCurto = real === 'quarta-feira' ? 'quarta' : real;
+  return diasPermitidos.some((d) => d === real || d === realCurto);
+}
 
 /**
  * Mapeia uma data ISO (YYYY-MM-DD) para o dia da semana em português.
@@ -89,51 +112,6 @@ function idsIndisponivelMesInteiro(indisponibilidade) {
 }
 
 /**
- * Retorna os IDs que estão em escala externa (audiovisual/pregador) para o culto.
- * Exceção RF004-A: ANCIÃO (pregador tipo ancião) não bloqueia.
- * @param {object} contexto - Contexto do solver
- * @param {string} data - ISO date
- * @returns {Set<number>} Set de IDs em escala externa
- */
-function idsEscalaExterna(contexto, data) {
-  const externos = new Set();
-
-  if (!contexto.externosPorCulto) return externos;
-
-  const cultoDados = contexto.externosPorCulto.get(data);
-  if (!cultoDados) return externos;
-
-  // Audiovisual sempre bloqueia
-  if (Array.isArray(cultoDados.audiovisual)) {
-    for (const id of cultoDados.audiovisual) {
-      if (typeof id === 'number') {
-        externos.add(id);
-      }
-    }
-  }
-
-  // Pregador bloqueia, exceto tipo ANCIÃO (RF004-A)
-  if (Array.isArray(cultoDados.pregador)) {
-    for (const entry of cultoDados.pregador) {
-      if (typeof entry === 'number') {
-        externos.add(entry);
-      } else if (typeof entry === 'object' && entry !== null) {
-        // Se for objeto com tipo, verificar exceção ANCIÃO
-        if (entry.tipo && entry.tipo.toUpperCase() === 'ANCIAO') {
-          // Ancião não bloqueia (RF004-A)
-          continue;
-        }
-        if (typeof entry.id === 'number') {
-          externos.add(entry.id);
-        }
-      }
-    }
-  }
-
-  return externos;
-}
-
-/**
  * Retorna os IDs já escalados no mesmo culto (mesma data) em papel conflitante.
  * @param {object} contexto - Contexto do solver
  * @param {string} data - ISO date
@@ -172,12 +150,17 @@ export function pessoasAtivasParaSlot(slot, data, contexto) {
 
   const todasPessoas = contexto.pessoas.pessoas;
   const indisponibilidade = contexto.indisponibilidade;
-  const diaDoEvento = diaDaSemana(data);
+  const par = parametrosDe(contexto);
+
+  // Parâmetros das regras de filtro (padrão = comportamento atual).
+  const evitarIndisponibilidade = evitarNaSugestao(par, 'indisponibilidade'); // bloqueio → true
+  const evitarSonoplastia = evitarNaSugestao(par, 'conflito_sonoplastia'); // bloqueio → true
+  const evitarPregador = evitarNaSugestao(par, 'conflito_pregador'); // aviso + evitar → true
 
   // Pré-computar sets de IDs para filtros 5-8
   const indisponiveisData = idsIndisponiveisNaData(indisponibilidade, data);
   const indisponivelMes = idsIndisponivelMesInteiro(indisponibilidade);
-  const externosCulto = idsEscalaExterna(contexto, data);
+  const { audiovisual: avSet, pregador: pregSet } = idsEscalaExternaSeparados(contexto, data);
   const jaEscalados = idsJaEscaladosNoCulto(contexto, data);
 
   const candidatos = [];
@@ -192,27 +175,98 @@ export function pessoasAtivasParaSlot(slot, data, contexto) {
     // Filtro 3: Habilitação correspondente ao slot
     if (!temHabilitacao(pessoa, slot)) continue;
 
-    // Filtro 4: dias_permitidos === null OU inclui o dia da semana
+    // Filtro 4: dias_permitidos === null OU inclui o dia real da data
+    //           (quarta e quarta-feira contam como o mesmo dia)
     if (pessoa.dias_permitidos !== null) {
-      if (!Array.isArray(pessoa.dias_permitidos) || !pessoa.dias_permitidos.includes(diaDoEvento)) {
+      if (!Array.isArray(pessoa.dias_permitidos) || !diaPermitido(pessoa.dias_permitidos, data)) {
         continue;
       }
     }
 
-    // Filtro 5: Não está indisponível na data específica
-    if (indisponiveisData.has(pessoa.id)) continue;
+    // Filtros 5-6: indisponibilidade (data e mês inteiro) — regra RF026.
+    if (evitarIndisponibilidade) {
+      if (indisponiveisData.has(pessoa.id)) continue;
+      if (indisponivelMes.has(pessoa.id)) continue;
+    }
 
-    // Filtro 6: Não está indisponível o mês inteiro
-    if (indisponivelMes.has(pessoa.id)) continue;
+    // Filtro 7a: sonoplastia/audiovisual do culto (RF002).
+    if (evitarSonoplastia && avSet.has(pessoa.id)) continue;
+    // Filtro 7b: pregador do culto, exceto ancião (RF004).
+    if (evitarPregador && pregSet.has(pessoa.id)) continue;
 
-    // Filtro 7: Não está em escala externa (audiovisual/pregador, exceto ancião)
-    if (externosCulto.has(pessoa.id)) continue;
-
-    // Filtro 8: Não já escalado no mesmo culto
-    if (jaEscalados.has(pessoa.id)) continue;
+    // Filtro 8: já escalado no mesmo culto em papel conflitante.
+    if (bloqueadoNoCulto(contexto, data, pessoa.id, slot, par, jaEscalados)) continue;
 
     candidatos.push(pessoa);
   }
 
   return candidatos;
+}
+
+/**
+ * Separa os IDs em escala externa do culto em audiovisual (sonoplastia) e
+ * pregador (exceto ancião), para aplicar parâmetros distintos.
+ */
+function idsEscalaExternaSeparados(contexto, data) {
+  const audiovisual = new Set();
+  const pregador = new Set();
+  const cultoDados = contexto.externosPorCulto && contexto.externosPorCulto.get(data);
+  if (!cultoDados) return { audiovisual, pregador };
+
+  if (Array.isArray(cultoDados.audiovisual)) {
+    for (const id of cultoDados.audiovisual) if (typeof id === 'number') audiovisual.add(id);
+  }
+  if (Array.isArray(cultoDados.pregador)) {
+    for (const entry of cultoDados.pregador) {
+      if (typeof entry === 'number') {
+        pregador.add(entry);
+      } else if (entry && typeof entry === 'object') {
+        if (entry.tipo && String(entry.tipo).toUpperCase() === 'ANCIAO') continue; // RF004-A
+        if (typeof entry.id === 'number') pregador.add(entry.id);
+      }
+    }
+  }
+  return { audiovisual, pregador };
+}
+
+/**
+ * Filtro 8: a pessoa já ocupa outra função no mesmo culto de forma conflitante?
+ * Usa contexto.papeisPorCulto (Map data → Map id → Set slot) quando presente,
+ * aplicando conflito_regencia / repeticao_no_culto / equipe_e_mm_mesmo_culto
+ * conforme os níveis dos parâmetros; caso contrário, cai no comportamento
+ * histórico (qualquer repetição no culto é bloqueio via escaladosPorCulto).
+ */
+function bloqueadoNoCulto(contexto, data, pessoaId, slot, par, jaEscalados) {
+  const papeisPorCulto = contexto.papeisPorCulto;
+  if (papeisPorCulto && papeisPorCulto.get(data)) {
+    const slotsOcupados = papeisPorCulto.get(data).get(pessoaId);
+    if (!slotsOcupados || slotsOcupados.size === 0) return false;
+    const outros = new Set([...slotsOcupados].filter((s) => s !== slot));
+    if (outros.size === 0) return false;
+
+    const regencia = ehBloqueioAtivo(par, 'conflito_regencia');
+    const repeticao = ehBloqueioAtivo(par, 'repeticao_no_culto');
+    const equipeMm = ehBloqueioAtivo(par, 'equipe_e_mm_mesmo_culto');
+
+    const envolveRegencia = slot === 'regente' || outros.has('regente');
+    if (envolveRegencia) return regencia; // regente acumulando = conflito_regencia
+
+    const slotsMm = new Set(['mm_es', 'mm_culto', 'mm_domingo']);
+    const souMm = slotsMm.has(slot);
+    const outroMm = [...outros].some((s) => slotsMm.has(s));
+    const outroEquipe = outros.has('equipe');
+    const ehEquipeEMm = (souMm && outroEquipe) || (slot === 'equipe' && outroMm);
+    if (ehEquipeEMm) return equipeMm;
+
+    return repeticao; // demais repetições
+  }
+
+  // Sem papeisPorCulto: comportamento histórico (Set de IDs já escalados).
+  return jaEscalados.has(pessoaId);
+}
+
+/** A regra está ativa com nível bloqueio? */
+function ehBloqueioAtivo(par, chave) {
+  const regra = par && par.regras && par.regras[chave];
+  return !!(regra && regra.ativa === true && regra.nivel === 'bloqueio');
 }

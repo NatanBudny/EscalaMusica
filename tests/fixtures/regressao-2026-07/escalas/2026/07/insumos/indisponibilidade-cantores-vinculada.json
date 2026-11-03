@@ -1,0 +1,335 @@
+{
+  "contexto": "Indisponibilidade vinculada - Julho 2026",
+  "gerado_em": "2026-07-10T23:22:02Z",
+  "gerado_por": "vincular-indisponibilidade.js",
+  "fonte": "escalas/2026/07/insumos/indisponibilidade-cantores.json",
+  "mapeamentos_aplicados": [
+    {
+      "nome_enquete": "Adelaide Central",
+      "pessoa_id": 1,
+      "nome_canonico": "ADELAIDE",
+      "confianca": 1
+    },
+    {
+      "nome_enquete": "alessandra donadon",
+      "pessoa_id": 2,
+      "nome_canonico": "ALESSANDRA DONADON",
+      "confianca": 1
+    },
+    {
+      "nome_enquete": "Alex iasd central",
+      "pessoa_id": 3,
+      "nome_canonico": "ALEX",
+      "confianca": 1
+    },
+    {
+      "nome_enquete": "Andre Herreira iasd",
+      "pessoa_id": 14,
+      "nome_canonico": "DANI HERREIRA",
+      "confianca": 0.72
+    },
+    {
+      "nome_enquete": "ariadnysouza",
+      "pessoa_id": 6,
+      "nome_canonico": "ARIADNY",
+      "confianca": 0.71
+    },
+    {
+      "nome_enquete": "Dani Kallas",
+      "pessoa_id": 15,
+      "nome_canonico": "DANY KALLAS",
+      "confianca": 0.8
+    },
+    {
+      "nome_enquete": "Jemelli gatti iasd central",
+      "pessoa_id": 27,
+      "nome_canonico": "JEMELLI",
+      "confianca": 0.67
+    },
+    {
+      "nome_enquete": "Jesse iasd central",
+      "pessoa_id": 28,
+      "nome_canonico": "JESSE",
+      "confianca": 1
+    },
+    {
+      "nome_enquete": "Kheyciane Iasd Central",
+      "pessoa_id": 35,
+      "nome_canonico": "KHEYCIANE",
+      "confianca": 1
+    },
+    {
+      "nome_enquete": "Lidiane Iasd central",
+      "pessoa_id": 37,
+      "nome_canonico": "LIDIANE",
+      "confianca": 1
+    },
+    {
+      "nome_enquete": "luiz iasd antonio",
+      "pessoa_id": 39,
+      "nome_canonico": "LUIZ ANTONIO",
+      "confianca": 0.81
+    },
+    {
+      "nome_enquete": "Marair Iasd central",
+      "pessoa_id": 44,
+      "nome_canonico": "MARAIR",
+      "confianca": 1
+    },
+    {
+      "nome_enquete": "Maria iasd central",
+      "pessoa_id": 48,
+      "nome_canonico": "MARIA F.",
+      "confianca": 0.73
+    },
+    {
+      "nome_enquete": "Nilsinho iasd central",
+      "pessoa_id": 53,
+      "nome_canonico": "NILSINHO",
+      "confianca": 1
+    },
+    {
+      "nome_enquete": "Ricardo Central",
+      "pessoa_id": 56,
+      "nome_canonico": "RICARDO HERREIRA",
+      "confianca": 1
+    },
+    {
+      "nome_enquete": "Silvana iasd Central",
+      "pessoa_id": 61,
+      "nome_canonico": "SILVANA",
+      "confianca": 1
+    },
+    {
+      "nome_enquete": "Stella Buosi Iasd central",
+      "pessoa_id": 63,
+      "nome_canonico": "STELLA",
+      "confianca": 0.63
+    },
+    {
+      "nome_enquete": "Suelen Central",
+      "pessoa_id": 64,
+      "nome_canonico": "SUELLEN",
+      "confianca": 0.91
+    }
+  ],
+  "propagacoes": [
+    {
+      "de_id": 28,
+      "para_id": 30,
+      "motivo": "vinculo sempre_junto (casal JESSE↔JESSIE)"
+    },
+    {
+      "de_id": 37,
+      "para_id": 67,
+      "motivo": "vinculo sempre_junto (casal LIDIANE↔YASSER)"
+    }
+  ],
+  "datas": [
+    {
+      "data_referencia": "2026-07-05",
+      "dia_semana": "domingo",
+      "indisponiveis_ids": [
+        2,
+        6,
+        15,
+        27,
+        28,
+        30,
+        35,
+        48,
+        53,
+        56,
+        61,
+        63
+      ],
+      "indisponiveis_nomes": [
+        "ALESSANDRA DONADON",
+        "ARIADNY",
+        "DANY KALLAS",
+        "JEMELLI",
+        "JESSE",
+        "JESSIE",
+        "KHEYCIANE",
+        "MARIA F.",
+        "NILSINHO",
+        "RICARDO HERREIRA",
+        "SILVANA",
+        "STELLA"
+      ]
+    },
+    {
+      "data_referencia": "2026-07-11",
+      "dia_semana": "sabado",
+      "indisponiveis_ids": [
+        14,
+        35,
+        56
+      ],
+      "indisponiveis_nomes": [
+        "DANI HERREIRA",
+        "KHEYCIANE",
+        "RICARDO HERREIRA"
+      ]
+    },
+    {
+      "data_referencia": "2026-07-12",
+      "dia_semana": "domingo",
+      "indisponiveis_ids": [
+        1,
+        2,
+        6,
+        27,
+        28,
+        30,
+        35,
+        48,
+        53,
+        56,
+        63,
+        64
+      ],
+      "indisponiveis_nomes": [
+        "ADELAIDE",
+        "ALESSANDRA DONADON",
+        "ARIADNY",
+        "JEMELLI",
+        "JESSE",
+        "JESSIE",
+        "KHEYCIANE",
+        "MARIA F.",
+        "NILSINHO",
+        "RICARDO HERREIRA",
+        "STELLA",
+        "SUELLEN"
+      ]
+    },
+    {
+      "data_referencia": "2026-07-18",
+      "dia_semana": "sabado",
+      "indisponiveis_ids": [
+        1,
+        2,
+        37,
+        39,
+        67
+      ],
+      "indisponiveis_nomes": [
+        "ADELAIDE",
+        "ALESSANDRA DONADON",
+        "LIDIANE",
+        "LUIZ ANTONIO",
+        "YASSER"
+      ]
+    },
+    {
+      "data_referencia": "2026-07-19",
+      "dia_semana": "domingo",
+      "indisponiveis_ids": [
+        1,
+        6,
+        27,
+        28,
+        30,
+        35,
+        37,
+        48,
+        53,
+        56,
+        63,
+        64,
+        67
+      ],
+      "indisponiveis_nomes": [
+        "ADELAIDE",
+        "ARIADNY",
+        "JEMELLI",
+        "JESSE",
+        "JESSIE",
+        "KHEYCIANE",
+        "LIDIANE",
+        "MARIA F.",
+        "NILSINHO",
+        "RICARDO HERREIRA",
+        "STELLA",
+        "SUELLEN",
+        "YASSER"
+      ]
+    },
+    {
+      "data_referencia": "2026-07-25",
+      "dia_semana": "sabado",
+      "indisponiveis_ids": [
+        2,
+        3,
+        6,
+        14,
+        35,
+        37,
+        44,
+        48,
+        67
+      ],
+      "indisponiveis_nomes": [
+        "ALESSANDRA DONADON",
+        "ALEX",
+        "ARIADNY",
+        "DANI HERREIRA",
+        "KHEYCIANE",
+        "LIDIANE",
+        "MARAIR",
+        "MARIA F.",
+        "YASSER"
+      ]
+    },
+    {
+      "data_referencia": "2026-07-26",
+      "dia_semana": "domingo",
+      "indisponiveis_ids": [
+        1,
+        2,
+        6,
+        14,
+        15,
+        27,
+        28,
+        30,
+        35,
+        37,
+        48,
+        53,
+        56,
+        63,
+        67
+      ],
+      "indisponiveis_nomes": [
+        "ADELAIDE",
+        "ALESSANDRA DONADON",
+        "ARIADNY",
+        "DANI HERREIRA",
+        "DANY KALLAS",
+        "JEMELLI",
+        "JESSE",
+        "JESSIE",
+        "KHEYCIANE",
+        "LIDIANE",
+        "MARIA F.",
+        "NILSINHO",
+        "RICARDO HERREIRA",
+        "STELLA",
+        "YASSER"
+      ]
+    }
+  ],
+  "indisponiveis_mes_inteiro": {
+    "ids": [
+      1,
+      35
+    ],
+    "nomes": [
+      "ADELAIDE",
+      "KHEYCIANE"
+    ],
+    "motivo": "indisponibilidade total declarada na enquete"
+  }
+}

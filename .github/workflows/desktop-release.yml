@@ -1,0 +1,95 @@
+# Build e assinatura dos instaladores do aplicativo desktop (tarefa 17.1).
+#
+# Produz instaladores assinados para Windows (NSIS, x64, com WebView2) e macOS
+# (Intel e Apple Silicon), com assinatura e notarizacao. Certificados, senhas e
+# a chave do updater ficam SOMENTE nos secrets do repositorio — nunca no codigo.
+#
+# Este workflow NAO publica nada no GitHub Pages nem toca o visualizador vigente:
+# ele apenas gera artefatos de instalacao para o operador. Dispara em tags
+# `desktop-v*` ou manualmente.
+name: Desktop Release (instaladores assinados)
+
+on:
+  push:
+    tags:
+      - "desktop-v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            bundles: nsis
+          - os: macos-latest
+            target: x86_64-apple-darwin
+            bundles: "app,dmg"
+          - os: macos-latest
+            target: aarch64-apple-darwin
+            bundles: "app,dmg"
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: desktop-app
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Instalar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: desktop-app/package-lock.json
+
+      - name: Instalar toolchain Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Cache de dependencias Rust
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: desktop-app/src-tauri
+
+      - name: Instalar dependencias do frontend
+        run: npm ci
+
+      - name: Verificacao rapida (typecheck + testes)
+        run: |
+          npm run typecheck
+          npm run test
+
+      - name: Build assinado do instalador
+        uses: tauri-apps/tauri-action@v0
+        env:
+          # Atualizador: chave e senha ficam nos secrets.
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+          # macOS: assinatura e notarizacao (somente nos runners macOS).
+          APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          # Windows: certificado de assinatura (Authenticode).
+          WINDOWS_CERTIFICATE: ${{ secrets.WINDOWS_CERTIFICATE }}
+          WINDOWS_CERTIFICATE_PASSWORD: ${{ secrets.WINDOWS_CERTIFICATE_PASSWORD }}
+        with:
+          projectPath: desktop-app
+          args: --target ${{ matrix.target }} --bundles ${{ matrix.bundles }}
+
+      - name: Publicar artefatos do instalador
+        uses: actions/upload-artifact@v4
+        with:
+          name: instalador-${{ matrix.target }}
+          path: |
+            desktop-app/src-tauri/target/${{ matrix.target }}/release/bundle/**/*
+          if-no-files-found: error

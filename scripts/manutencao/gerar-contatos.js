@@ -14,47 +14,28 @@
  *   }
  * }
  *
- * Somente pessoas com telefone preenchido são incluídas.
- * Chaves ordenadas alfabeticamente para consistência.
+ * Somente pessoas com telefone preenchido (e grupos escaláveis cujo responsável
+ * tem telefone) são incluídas. A lógica de derivação vive em
+ * `scripts/lib/contatos.js`, compartilhada com o editor de escala.
  */
 
-import { writeFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { carregarPessoas } from '../lib/cadastro.js';
+import { derivarContatos } from '../lib/contatos.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '../..');
 
 function gerarContatos() {
-  const { pessoas } = carregarPessoas();
-
-  const contatosObj = {};
-
-  for (const pessoa of pessoas) {
-    // Incluir somente pessoas com telefone preenchido
-    if (!pessoa.telefone) continue;
-
-    contatosObj[pessoa.nome] = {
-      telefone: `https://wa.me/${pessoa.telefone}`,
-      apelidos: pessoa.aliases || []
-    };
-  }
-
-  // Ordenar chaves alfabeticamente para consistência
-  const chavesOrdenadas = Object.keys(contatosObj).sort((a, b) =>
-    a.localeCompare(b, 'pt-BR', { sensitivity: 'base' })
-  );
-
-  const resultado = {};
-  for (const chave of chavesOrdenadas) {
-    resultado[chave] = contatosObj[chave];
-  }
+  const arquivo = JSON.parse(readFileSync(resolve(ROOT, 'pessoas.json'), 'utf8'));
+  const resultado = derivarContatos(arquivo.pessoas, arquivo.grupos || {});
 
   const outPath = resolve(ROOT, 'contatos.json');
   writeFileSync(outPath, JSON.stringify(resultado, null, 2) + '\n', 'utf8');
 
-  console.log(`contatos.json gerado com ${chavesOrdenadas.length} entradas.`);
+  const total = Object.keys(resultado).length;
+  console.log(`contatos.json gerado com ${total} entradas.`);
   console.log(`Arquivo: ${outPath}`);
 }
 

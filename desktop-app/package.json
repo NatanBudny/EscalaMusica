@@ -1,0 +1,50 @@
+{
+  "name": "gestao-leiga-de-escalas-desktop",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Aplicativo desktop isolado (Tauri 2 + React/TypeScript + nucleo Rust) para a gestao leiga de escalas. Nao acessa nem altera o visualizador ou os arquivos publicos vigentes.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --max-warnings 0",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --check .",
+    "format:write": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "tauri": "tauri",
+    "dist:windows": "tauri build --target x86_64-pc-windows-msvc --bundles nsis",
+    "dist:macos:intel": "tauri build --target x86_64-apple-darwin --bundles app dmg",
+    "dist:macos:arm": "tauri build --target aarch64-apple-darwin --bundles app dmg"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.1.1",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@tauri-apps/cli": "^2.1.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "fast-check": "^4.10.2",
+    "jsdom": "^25.0.1",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.1",
+    "vite": "^6.0.5",
+    "vitest": "^2.1.8"
+  }
+}

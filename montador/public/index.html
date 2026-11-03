@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Montador de Escala de Música</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="estilo.css" />
+</head>
+<body>
+  <div class="app-wrapper">
+    <header class="header-bar">
+      <h1 class="header-title">Escala de Música<span class="dot">.</span></h1>
+      <span id="statusBadge" class="status-badge"></span>
+    </header>
+
+    <!-- MENU INICIAL -->
+    <section id="telaMenu" class="tela">
+      <div class="menu-card">
+        <h2 class="menu-title">O que você quer fazer?</h2>
+        <p class="menu-subtitle">Monte a escala de música do mês e publique com um clique.</p>
+
+        <label class="campo-label" for="inputMes">Mês da escala</label>
+        <input type="month" id="inputMes" class="campo-input" />
+
+        <button id="btnMontar" class="primary-btn">Montar escala de música</button>
+        <button id="btnGerenciar" class="secondary-btn">Gerenciar pessoas</button>
+        <button id="btnRegras" class="secondary-btn">Regras</button>
+        <button id="btnAjustarPublicada" class="secondary-btn">Ajustar escala publicada</button>
+      </div>
+    </section>
+
+    <!-- TELA DE CHECKLIST DE INSUMOS (Task 14) -->
+    <section id="telaInsumos" class="tela" hidden>
+      <div class="toolbar">
+        <button id="btnVoltarInsumos" class="control-btn">← Voltar</button>
+        <span id="tituloInsumos" class="toolbar-title"></span>
+        <div class="toolbar-spacer"></div>
+      </div>
+      <div class="menu-card">
+        <h2 class="menu-title">Insumos do mês</h2>
+        <p class="menu-subtitle">Confira o que já está pronto antes de montar a escala.</p>
+        <ul id="checklistInsumos" class="checklist-insumos"></ul>
+        <button id="btnEditarAcionato" class="secondary-btn">Editar acionato</button>
+        <button id="btnEditarSonoplastia" class="secondary-btn">Editar sonoplastia</button>
+        <button id="btnImportarEnquete" class="secondary-btn">Importar enquete</button>
+        <button id="btnIrMontagem" class="primary-btn">Ir para a montagem</button>
+      </div>
+    </section>
+
+    <!-- TELA DE ACIONATO E DIA EXTRAORDINÁRIO (Task 15) -->
+    <section id="telaAcionato" class="tela" hidden>
+      <div class="toolbar">
+        <button id="btnVoltarAcionato" class="control-btn">← Voltar</button>
+        <span id="tituloAcionato" class="toolbar-title"></span>
+        <div class="toolbar-spacer"></div>
+        <button id="btnSalvarAcionato" class="primary-btn">Salvar acionato</button>
+      </div>
+      <div class="menu-card menu-card-wide">
+        <h2 class="menu-title">Acionato do mês</h2>
+        <p class="menu-subtitle">Ancião, pregador e observações públicas por culto. As observações aparecem na escala online.</p>
+        <div class="acionato-tabela-wrap">
+          <table id="tabelaAcionato" class="acionato-tabela">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Dia</th>
+                <th>Modelo</th>
+                <th>Ancião</th>
+                <th>Pregador</th>
+                <th>Observações</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="corpoAcionato"></tbody>
+          </table>
+        </div>
+
+        <fieldset class="form-fieldset acionato-extra">
+          <legend>Incluir dia extraordinário</legend>
+          <div class="form-grid">
+            <div class="form-campo">
+              <label class="campo-label" for="acExtraData">Data</label>
+              <input type="date" id="acExtraData" class="campo-input" />
+            </div>
+            <div class="form-campo">
+              <label class="campo-label" for="acExtraModelo">Modelo de louvor</label>
+              <select id="acExtraModelo" class="campo-input">
+                <option value="sabado">Como sábado</option>
+                <option value="domingo">Como domingo</option>
+                <option value="sem_louvor">Sem louvor</option>
+              </select>
+            </div>
+            <div class="form-campo acionato-extra-botao">
+              <button id="btnIncluirExtra" class="control-btn">+ Incluir dia</button>
+            </div>
+          </div>
+          <p id="acExtraErro" class="form-erro" hidden></p>
+        </fieldset>
+
+        <p id="acionatoErro" class="form-erro" hidden></p>
+      </div>
+    </section>
+
+    <!-- TELA DE SONOPLASTIA (Task 16) -->
+    <section id="telaSonoplastia" class="tela" hidden>
+      <div class="toolbar">
+        <button id="btnVoltarSonoplastia" class="control-btn">← Voltar</button>
+        <span id="tituloSonoplastia" class="toolbar-title"></span>
+        <div class="toolbar-spacer"></div>
+        <button id="btnSalvarSonoplastia" class="primary-btn">Salvar sonoplastia</button>
+      </div>
+      <div class="menu-card menu-card-wide">
+        <h2 class="menu-title">Sonoplastia do mês</h2>
+        <p class="menu-subtitle">Sonoplasta e suporte de cada culto (inclusive quartas). Escolha uma pessoa do cadastro com habilitação de sonoplastia ou digite um texto livre (publicado sem link).</p>
+        <div class="acionato-tabela-wrap">
+          <table id="tabelaSonoplastia" class="acionato-tabela">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Dia</th>
+                <th>Sonoplasta</th>
+                <th>Suporte (opcional)</th>
+                <th>Observações</th>
+              </tr>
+            </thead>
+            <tbody id="corpoSonoplastia"></tbody>
+          </table>
+        </div>
+        <p id="sonoplastiaErro" class="form-erro" hidden></p>
+      </div>
+    </section>
+
+    <!-- TELA DE IMPORTAÇÃO DA INDISPONIBILIDADE (Task 17) -->
+    <section id="telaEnquete" class="tela" hidden>
+      <div class="toolbar">
+        <button id="btnVoltarEnquete" class="control-btn">← Voltar</button>
+        <span id="tituloEnquete" class="toolbar-title"></span>
+        <div class="toolbar-spacer"></div>
+        <button id="btnGravarEnquete" class="primary-btn" hidden>Gravar importação</button>
+      </div>
+      <div class="menu-card menu-card-wide">
+        <h2 class="menu-title">Importar a enquete de indisponibilidade</h2>
+        <p class="menu-subtitle">Anexe o arquivo <code>indisponibilidade-cantores.json</code> exportado da enquete dos cantores. Cada votante é associado a uma pessoa do cadastro; os casos ambíguos aparecem para você resolver.</p>
+
+        <div class="enquete-anexo">
+          <input type="file" id="arqEnquete" accept="application/json,.json" />
+          <p id="enqueteErro" class="form-erro" hidden></p>
+          <p id="enqueteIgnoradas" class="form-aviso" hidden></p>
+        </div>
+
+        <div id="enqueteAnalise" hidden>
+          <h3 class="menu-subtitle">Votantes</h3>
+          <ul id="listaEnquete" class="enquete-lista"></ul>
+        </div>
+
+        <div id="enqueteRelatorio" class="enquete-relatorio" hidden></div>
+      </div>
+    </section>
+
+    <!-- TELA DE GESTÃO DE PESSOAS -->
+    <section id="telaPessoas" class="tela" hidden>
+      <div class="toolbar">
+        <button id="btnVoltarPessoas" class="control-btn">← Voltar</button>
+        <span class="toolbar-title">Pessoas da música</span>
+        <div class="toolbar-spacer"></div>
+        <span id="syncIndicador" class="sync-indicador" hidden>
+          <span id="syncTexto" class="sync-texto"></span>
+          <button id="btnTentarDeNovo" class="control-btn">Tentar de novo</button>
+        </span>
+        <input type="search" id="buscaPessoas" class="campo-input busca-inline" placeholder="Buscar por nome ou apelido" />
+        <button id="btnFiltros" class="control-btn">Filtros</button>
+        <button id="btnGrupos" class="control-btn">Grupos</button>
+        <button id="btnNovaPessoa" class="primary-btn">+ Nova pessoa</button>
+      </div>
+
+      <!-- Filtros avançados (ocultos atrás do botão "Filtros") -->
+      <div id="painelFiltros" class="painel-filtros" hidden>
+        <div class="filtro-grupo">
+          <span class="filtro-titulo">Função</span>
+          <label class="check"><input type="checkbox" class="f-funcao" value="regente" /> Regente</label>
+          <label class="check"><input type="checkbox" class="f-funcao" value="equipe" /> Equipe</label>
+          <label class="check"><input type="checkbox" class="f-funcao" value="mm" /> Mensagem musical</label>
+          <label class="check"><input type="checkbox" class="f-funcao" value="sonoplastia" /> Sonoplastia</label>
+        </div>
+        <div class="filtro-grupo">
+          <span class="filtro-titulo">Situação</span>
+          <select id="fSituacao" class="campo-input">
+            <option value="">Todas</option>
+            <option value="ativo">Ativo</option>
+            <option value="inativo">Inativo</option>
+          </select>
+        </div>
+        <div class="filtro-grupo">
+          <span class="filtro-titulo">Afastado</span>
+          <select id="fAfastado" class="campo-input">
+            <option value="">Tanto faz</option>
+            <option value="sim">Só afastados</option>
+            <option value="nao">Sem afastados</option>
+          </select>
+        </div>
+        <div class="filtro-grupo">
+          <span class="filtro-titulo">Dias permitidos</span>
+          <label class="check"><input type="checkbox" class="f-dia" value="sabado" /> Sábado</label>
+          <label class="check"><input type="checkbox" class="f-dia" value="domingo" /> Domingo</label>
+        </div>
+        <div class="filtro-grupo">
+          <span class="filtro-titulo">Perfil de canto</span>
+          <select id="fPerfil" class="campo-input">
+            <option value="">Todos</option>
+            <option value="base">Base</option>
+            <option value="participacao">Participação</option>
+          </select>
+        </div>
+        <button id="btnLimparFiltros" class="control-btn">Limpar</button>
+      </div>
+
+      <p id="contadorPessoas" class="contador-pessoas"></p>
+
+      <div id="migracoesPendentes" class="migracoes-pendentes"></div>
+      <div id="listaPessoas" class="lista-pessoas"></div>
+    </section>
+
+    <!-- MODAL DE PESSOA (criar/editar) -->
+    <div id="modalPessoa" class="modal" hidden>
+      <div class="modal-backdrop" data-fechar-pessoa></div>
+      <div class="modal-box modal-box-lg">
+        <button class="modal-close" data-fechar-pessoa>&times;</button>
+        <h3 id="modalPessoaTitulo" class="modal-title">Nova pessoa</h3>
+        <div class="form-grid">
+          <div class="form-campo">
+            <label class="campo-label">Nome completo</label>
+            <input type="text" id="pfNome" class="campo-input" placeholder="Ex.: MARIA SILVA" />
+          </div>
+          <div class="form-campo">
+            <label class="campo-label">Apelidos (separados por vírgula)</label>
+            <input type="text" id="pfAliases" class="campo-input" placeholder="Ex.: MARIA, MARI" />
+          </div>
+          <div class="form-campo">
+            <label class="campo-label">Telefone (WhatsApp)</label>
+            <input type="text" id="pfTelefone" class="campo-input" placeholder="Ex.: 5543999998888" />
+          </div>
+          <div class="form-campo">
+            <label class="campo-label">Gênero</label>
+            <select id="pfGenero" class="campo-input">
+              <option value="F">Feminino</option>
+              <option value="M">Masculino</option>
+            </select>
+          </div>
+          <div class="form-campo">
+            <label class="campo-label">Perfil de canto</label>
+            <select id="pfPerfil" class="campo-input">
+              <option value="base">Base (canta normalmente)</option>
+              <option value="participacao">Participação (frequência baixa)</option>
+              <option value="">Não se aplica</option>
+            </select>
+          </div>
+          <div class="form-campo">
+            <label class="campo-label">Situação</label>
+            <select id="pfAtivo" class="campo-input">
+              <option value="true">Ativo</option>
+              <option value="false">Inativo</option>
+            </select>
+          </div>
+        </div>
+
+        <fieldset class="form-fieldset">
+          <legend>O que a pessoa faz</legend>
+          <label class="check"><input type="checkbox" id="pfRegente" /> Pode reger</label>
+          <label class="check"><input type="checkbox" id="pfEquipe" /> Canta na equipe de louvor</label>
+          <div class="sub-check">
+            <span class="sub-titulo">Mensagem musical:</span>
+            <label class="check"><input type="checkbox" id="pfMmEs" /> Escola Sabatina (sábado manhã)</label>
+            <label class="check"><input type="checkbox" id="pfMmCulto" /> Culto (sábado)</label>
+            <label class="check"><input type="checkbox" id="pfMmDomingo" /> Domingo</label>
+          </div>
+          <label class="check"><input type="checkbox" id="pfSonoplastia" /> Sonoplastia (mesa de som)</label>
+        </fieldset>
+
+        <fieldset class="form-fieldset">
+          <legend>Dias em que pode servir (deixe tudo desmarcado = qualquer dia)</legend>
+          <label class="check"><input type="checkbox" id="pfDiaSabado" value="sabado" /> Só/também sábado</label>
+          <label class="check"><input type="checkbox" id="pfDiaDomingo" value="domingo" /> Só/também domingo</label>
+          <p class="modal-hint">Marque apenas se a pessoa tiver restrição de dia. Ex.: "só sábados" = marque apenas sábado.</p>
+        </fieldset>
+
+        <fieldset class="form-fieldset">
+          <legend>Afastamento temporário</legend>
+          <label class="check"><input type="checkbox" id="pfAfastado" /> Está afastada</label>
+          <div class="form-grid">
+            <div class="form-campo">
+              <label class="campo-label">Até (opcional)</label>
+              <input type="date" id="pfAfastadoAte" class="campo-input" />
+            </div>
+            <div class="form-campo">
+              <label class="campo-label">Motivo (opcional)</label>
+              <input type="text" id="pfAfastadoMotivo" class="campo-input" placeholder="Ex.: licença maternidade" />
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-fieldset" id="pfVinculosFieldset">
+          <legend>Vínculos</legend>
+          <div class="form-campo">
+            <label class="campo-label">Sempre junto (casal) — segure Ctrl para marcar mais de uma</label>
+            <select id="pfSempreJunto" class="campo-input" multiple size="4"></select>
+          </div>
+          <div class="form-campo">
+            <label class="campo-label">Família requerida (grupo)</label>
+            <select id="pfFamilia" class="campo-input">
+              <option value="">(nenhuma)</option>
+            </select>
+          </div>
+          <div class="form-campo">
+            <label class="campo-label">Precisa de pelo menos uma destas pessoas no culto</label>
+            <select id="pfPrecisaDe" class="campo-input" multiple size="4"></select>
+          </div>
+          <p class="modal-hint">"Sempre junto" é aplicado nas duas pessoas. "Precisa de" é só aviso, não bloqueia.</p>
+        </fieldset>
+
+        <div class="form-campo">
+          <label class="campo-label">Notas internas (opcional)</label>
+          <input type="text" id="pfNotas" class="campo-input" placeholder="Anotação de referência" />
+          <p class="campo-hint aviso-publico">⚠️ Visível publicamente: este texto pode aparecer na escala online.</p>
+        </div>
+
+        <p id="pfErro" class="form-erro" hidden></p>
+
+        <div class="form-acoes">
+          <button id="btnDesativarPessoa" class="danger-btn" hidden>Desativar</button>
+          <button id="btnExcluirPessoa" class="danger-btn" hidden>Excluir definitivamente</button>
+          <div class="toolbar-spacer"></div>
+          <button data-fechar-pessoa class="control-btn">Cancelar</button>
+          <button id="btnSalvarPessoa" class="primary-btn">Salvar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TELA DE GRUPOS ESCALÁVEIS -->
+    <section id="telaGrupos" class="tela" hidden>
+      <div class="toolbar">
+        <button id="btnVoltarGrupos" class="control-btn">← Voltar</button>
+        <span class="toolbar-title">Grupos escaláveis</span>
+        <div class="toolbar-spacer"></div>
+        <button id="btnNovoGrupo" class="primary-btn">+ Novo grupo</button>
+      </div>
+      <p class="modal-hint">Famílias e ministérios escalados como uma unidade. A mensagem vai para o responsável.</p>
+      <div id="listaGrupos" class="lista-pessoas"></div>
+    </section>
+
+    <!-- MODAL DE GRUPO (criar/editar) -->
+    <div id="modalGrupo" class="modal" hidden>
+      <div class="modal-backdrop" data-fechar-grupo></div>
+      <div class="modal-box modal-box-lg">
+        <button class="modal-close" data-fechar-grupo>&times;</button>
+        <h3 id="modalGrupoTitulo" class="modal-title">Novo grupo</h3>
+        <div class="form-grid">
+          <div class="form-campo">
+            <label class="campo-label">Nome publicado (nome_exibicao)</label>
+            <input type="text" id="gfNome" class="campo-input" placeholder="Ex.: FAMILIA NILSINHO" />
+          </div>
+          <div class="form-campo">
+            <label class="campo-label">Chave interna (sem espaços)</label>
+            <input type="text" id="gfChave" class="campo-input" placeholder="Ex.: familia_nilsinho" />
+          </div>
+        </div>
+        <div class="form-campo">
+          <label class="campo-label">Membros — segure Ctrl para marcar mais de uma</label>
+          <select id="gfMembros" class="campo-input" multiple size="6"></select>
+        </div>
+        <div class="form-campo">
+          <label class="campo-label">Responsável (recebe a mensagem)</label>
+          <select id="gfResponsavel" class="campo-input"></select>
+        </div>
+        <div class="form-grid">
+          <div class="form-campo">
+            <label class="campo-label">Modo</label>
+            <select id="gfModo" class="campo-input">
+              <option value="funcao">Ocupa uma função (MM, equipe...)</option>
+              <option value="culto_inteiro">Assume o culto inteiro</option>
+            </select>
+          </div>
+        </div>
+        <fieldset class="form-fieldset" id="gfFuncoesFieldset">
+          <legend>Funções que o grupo pode ocupar (modo "função")</legend>
+          <label class="check"><input type="checkbox" class="gf-funcao" value="regente" /> Regente</label>
+          <label class="check"><input type="checkbox" class="gf-funcao" value="equipe" /> Equipe</label>
+          <label class="check"><input type="checkbox" class="gf-funcao" value="mm" /> Mensagem musical</label>
+        </fieldset>
+        <div class="form-campo">
+          <label class="campo-label">Mensagem personalizada (opcional)</label>
+          <input type="text" id="gfMensagem" class="campo-input" placeholder="Deixe vazio para usar o template padrão" />
+        </div>
+        <p id="gfErro" class="form-erro" hidden></p>
+        <div class="form-acoes">
+          <button id="btnRemoverGrupo" class="danger-btn" hidden>Remover grupo</button>
+          <div class="toolbar-spacer"></div>
+          <button data-fechar-grupo class="control-btn">Cancelar</button>
+          <button id="btnSalvarGrupo" class="primary-btn">Salvar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DE CONFIRMAÇÃO DO WHATSAPP (Task 6) -->
+    <div id="modalConfirmaZap" class="modal" hidden>
+      <div class="modal-backdrop"></div>
+      <div class="modal-box">
+        <h3 class="modal-title">Confirme o WhatsApp</h3>
+        <p id="confirmaZapTexto" class="modal-hint"></p>
+        <p id="confirmaZapCompartilhado" class="campo-hint aviso-publico" hidden></p>
+        <div class="form-acoes">
+          <button id="btnZapNao" class="control-btn">Não, voltar</button>
+          <div class="toolbar-spacer"></div>
+          <button id="btnZapSim" class="primary-btn">Sim, abriu a pessoa certa</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DE RECUPERAÇÃO DO RASCUNHO (Task 24) -->
+    <div id="modalRascunho" class="modal" hidden>
+      <div class="modal-backdrop"></div>
+      <div class="modal-box">
+        <h3 class="modal-title">Rascunho encontrado</h3>
+        <p class="modal-hint">Há um rascunho salvo deste mês neste computador. Quer recuperar o que estava montando ou começar uma nova montagem?</p>
+        <div class="form-acoes" style="flex-direction: column; align-items: stretch; gap: 8px;">
+          <button id="btnRascunhoRecuperar" class="primary-btn">Recuperar rascunho</button>
+          <button id="btnRascunhoNova" class="control-btn">Nova montagem</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DA SUGESTÃO AUTOMÁTICA (Task 23) -->
+    <div id="modalSugestao" class="modal" hidden>
+      <div class="modal-backdrop" data-fechar-sugestao></div>
+      <div class="modal-box">
+        <button class="modal-close" data-fechar-sugestao>&times;</button>
+        <h3 class="modal-title">Sugestão automática</h3>
+        <p class="modal-hint">Já há atribuições na escala. O que você quer fazer?</p>
+        <div class="form-acoes" style="flex-direction: column; align-items: stretch; gap: 8px;">
+          <button id="btnSugerirVazios" class="primary-btn">Só preencher vazios</button>
+          <button id="btnSugerirTudo" class="control-btn">Sobrescrever tudo</button>
+          <button id="btnSugerirCancelar" class="control-btn" data-fechar-sugestao>Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TELA DE REGRAS (Task 13) -->
+    <section id="telaRegras" class="tela" hidden>
+      <div class="toolbar">
+        <button id="btnVoltarRegras" class="control-btn">← Voltar</button>
+        <span class="toolbar-title">Regras e parâmetros</span>
+        <div class="toolbar-spacer"></div>
+        <input type="search" id="buscaRegras" class="campo-input busca-inline" placeholder="Buscar regra por id ou texto" />
+      </div>
+
+      <!-- Aviso de parametros.json inválido -->
+      <div id="regrasAvisoParametros" class="aviso-parametros" hidden></div>
+
+      <!-- Editor de parâmetros gerais -->
+      <div class="regras-painel">
+        <h3 class="regras-painel-titulo">Parâmetros gerais</h3>
+        <div class="form-grid">
+          <div class="form-campo">
+            <label class="campo-label" for="paramEquipeTamanho">Tamanho da equipe</label>
+            <input type="number" id="paramEquipeTamanho" class="campo-input" min="1" max="12" />
+          </div>
+          <div class="form-campo">
+            <label class="campo-label" for="paramJanelaMeses">Janela de histórico (meses)</label>
+            <input type="number" id="paramJanelaMeses" class="campo-input" min="1" max="24" />
+          </div>
+          <div class="form-campo">
+            <label class="campo-label" for="paramMmSabado">MM no sábado</label>
+            <input type="number" id="paramMmSabado" class="campo-input" min="1" max="3" />
+          </div>
+          <div class="form-campo">
+            <label class="campo-label" for="paramMinHomens">Mínimo de homens</label>
+            <input type="number" id="paramMinHomens" class="campo-input" min="0" max="5" />
+          </div>
+        </div>
+        <fieldset class="form-fieldset">
+          <legend>Pesos do score</legend>
+          <div id="regrasPesos" class="regras-pesos"></div>
+        </fieldset>
+        <div class="form-acoes">
+          <div class="toolbar-spacer"></div>
+          <button id="btnSalvarParametros" class="primary-btn">Salvar parâmetros</button>
+        </div>
+      </div>
+
+      <!-- Mensagens de WhatsApp editáveis (Task 33) -->
+      <div class="regras-painel">
+        <h3 class="regras-painel-titulo">Mensagens de WhatsApp</h3>
+        <p class="campo-hint">
+          Texto enviado no WhatsApp para cada pessoa, família, Ministério Jovem e contatos fixos.
+          Placeholders: <code>{nome}</code>, <code>{mes/ano}</code>, <code>{funções}</code>,
+          <code>{data}</code> e <code>{grupo}</code>.
+        </p>
+
+        <!-- Aviso de mensagens-whatsapp.json ausente ou inválido -->
+        <div id="mensagensAviso" class="aviso-parametros" hidden></div>
+
+        <div class="form-grid">
+          <div class="form-campo form-campo-largo">
+            <label class="campo-label" for="msgTemplatePessoa">Template: pessoa</label>
+            <textarea id="msgTemplatePessoa" class="campo-input msg-template" data-template="pessoa" rows="5"></textarea>
+          </div>
+          <div class="form-campo form-campo-largo">
+            <label class="campo-label" for="msgTemplateGrupo">Template: grupo (família)</label>
+            <textarea id="msgTemplateGrupo" class="campo-input msg-template" data-template="grupo" rows="5"></textarea>
+          </div>
+          <div class="form-campo form-campo-largo">
+            <label class="campo-label" for="msgTemplateCultoInteiro">Template: culto inteiro (Ministério Jovem)</label>
+            <textarea id="msgTemplateCultoInteiro" class="campo-input msg-template" data-template="culto_inteiro" rows="5"></textarea>
+          </div>
+          <div class="form-campo form-campo-largo">
+            <label class="campo-label" for="msgTemplateFixo">Template: contatos fixos</label>
+            <textarea id="msgTemplateFixo" class="campo-input msg-template" data-template="fixo" rows="4"></textarea>
+          </div>
+        </div>
+
+        <div class="form-campo">
+          <label class="campo-label">Contatos fixos</label>
+          <div id="msgFixos" class="msg-fixos"></div>
+          <button id="btnMsgAddFixo" class="control-btn" type="button">+ Contato fixo</button>
+        </div>
+
+        <div class="form-campo form-campo-largo">
+          <label class="campo-label" for="msgGrupoLouvor">Link do grupo do louvor</label>
+          <input type="url" id="msgGrupoLouvor" class="campo-input" placeholder="https://chat.whatsapp.com/..." />
+        </div>
+
+        <div class="form-campo form-campo-largo">
+          <label class="campo-label">Prévia (exemplo)</label>
+          <pre id="msgPrevia" class="msg-previa"></pre>
+        </div>
+
+        <p id="msgErro" class="form-erro" hidden></p>
+        <div class="form-acoes">
+          <button id="btnMsgHistorico" class="control-btn" type="button">Histórico</button>
+          <div class="toolbar-spacer"></div>
+          <button id="btnSalvarMensagens" class="primary-btn" type="button">Salvar mensagens</button>
+        </div>
+      </div>
+
+      <!-- Lista de regras por categoria -->
+      <div id="listaRegras" class="regras-lista"></div>
+    </section>
+
+    <!-- MODAL DE HISTÓRICO DE UMA REGRA -->
+    <div id="modalHistorico" class="modal" hidden>
+      <div class="modal-backdrop" data-fechar-historico></div>
+      <div class="modal-box modal-box-lg">
+        <button class="modal-close" data-fechar-historico>&times;</button>
+        <h3 id="modalHistoricoTitulo" class="modal-title">Histórico</h3>
+        <div id="historicoLista" class="historico-lista"></div>
+        <div class="form-acoes">
+          <div class="toolbar-spacer"></div>
+          <button data-fechar-historico class="control-btn">Fechar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TELA DE AJUSTAR ESCALA PUBLICADA (Task 37 / RF 28) -->
+    <section id="telaAjuste" class="tela" hidden>
+      <div class="toolbar">
+        <button id="btnVoltarAjuste" class="control-btn">← Voltar</button>
+        <span id="tituloAjuste" class="toolbar-title">Ajustar escala publicada</span>
+        <div class="toolbar-spacer"></div>
+      </div>
+      <div class="menu-card menu-card-wide">
+        <h2 class="menu-title">Ajustar escala publicada</h2>
+        <p class="menu-subtitle">Corrija um campo de um culto já publicado. O ajuste revalida com as regras do envio (inclusive a conferência dos links), grava só o campo alterado e verifica o site — sem passar pela tela de WhatsApp.</p>
+
+        <div id="ajusteVazio" class="vazio" hidden>Nenhuma escala publicada para ajustar.</div>
+
+        <div class="ajuste-layout" id="ajusteLayout" hidden>
+          <div class="ajuste-lista-wrap">
+            <h3 class="aside-titulo">Cultos publicados</h3>
+            <ul id="ajusteListaCultos" class="ajuste-lista-cultos"></ul>
+          </div>
+
+          <div class="ajuste-editor" id="ajusteEditor" hidden>
+            <h3 id="ajusteEditorTitulo" class="aside-titulo"></h3>
+
+            <div class="form-campo">
+              <label class="campo-label" for="ajusteCampo">Campo a ajustar</label>
+              <select id="ajusteCampo" class="campo-input">
+                <option value="REGENTE LOUVOR">Regente de louvor</option>
+                <option value="EQUIPE LOUVOR">Equipe de louvor</option>
+                <option value="MENSAGEM MUSICAL">Mensagem musical</option>
+                <option value="OBS">Observação pública</option>
+                <option value="ACOMP">Banda / PB</option>
+              </select>
+            </div>
+
+            <!-- Editor de nome (REGENTE / EQUIPE / MM): lista de ocupantes -->
+            <div id="ajusteCampoNome" class="form-campo" hidden>
+              <label class="campo-label">Pessoas / grupos escalados</label>
+              <div id="ajusteOcupantes" class="ajuste-ocupantes"></div>
+              <div class="ajuste-add-ocupante">
+                <select id="ajusteSeletorOcupante" class="campo-input"></select>
+                <button id="btnAjusteAddOcupante" class="control-btn" type="button">+ Adicionar</button>
+              </div>
+              <p class="modal-hint">O nome publicado é o nome da pessoa ou o nome do grupo. Para mensagem musical no sábado, a 1ª linha é a ES e a 2ª é a do culto.</p>
+            </div>
+
+            <!-- Editor de OBS -->
+            <div id="ajusteCampoObs" class="form-campo" hidden>
+              <label class="campo-label" for="ajusteObs">Observação</label>
+              <textarea id="ajusteObs" class="campo-input" rows="3"></textarea>
+              <div id="ajusteObsProblemas" class="culto-obs-problemas" hidden></div>
+            </div>
+
+            <!-- Editor de Banda/PB -->
+            <div id="ajusteCampoAcomp" class="form-campo" hidden>
+              <label class="campo-label" for="ajusteAcomp">Acompanhamento</label>
+              <select id="ajusteAcomp" class="campo-input">
+                <option value="BANDA">BANDA</option>
+                <option value="PB">PB</option>
+              </select>
+            </div>
+
+            <div class="form-acoes">
+              <button id="btnAjustePrevia" class="control-btn" type="button">Prévia</button>
+              <div class="toolbar-spacer"></div>
+              <button id="btnAjusteSalvar" class="primary-btn" type="button" disabled>Salvar ajuste</button>
+            </div>
+
+            <div id="ajustePainelRevalidacao" class="revalidacao" hidden></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TELA DE MONTAGEM -->
+    <section id="telaMontagem" class="tela" hidden>
+      <div class="toolbar">
+        <button id="btnVoltar" class="control-btn">← Voltar</button>
+        <span id="tituloMes" class="toolbar-title"></span>
+        <div class="toolbar-spacer"></div>
+        <button id="btnSugerir" class="control-btn">Sugestão automática</button>
+        <button id="btnValidar" class="control-btn">Validar</button>
+        <button id="btnRevalidar" class="control-btn">Revalidar para envio</button>
+        <button id="btnPublicar" class="primary-btn">Publicar no site</button>
+      </div>
+
+      <div id="barraProgresso" class="barra-progresso" hidden>
+        <div class="progresso-trilha">
+          <div id="progressoBarra" class="progresso-barra"></div>
+        </div>
+        <span id="progressoContador" class="progresso-contador"></span>
+        <span id="indicadorSync" class="indicador-sync" hidden>● não sincronizado</span>
+      </div>
+
+      <div id="filtrosDia" class="filtros-dia"></div>
+
+      <div id="painelValidacao" class="validacao" hidden></div>
+
+      <div id="painelRevalidacao" class="revalidacao" hidden></div>
+
+      <div class="montagem-layout">
+        <div id="gradeMontagem" class="grade"></div>
+
+        <aside id="painelParticipacao" class="participacao-aside">
+          <h3 class="aside-titulo">Participação recente</h3>
+          <div class="aside-periodo">
+            <label for="selMeses">Período:</label>
+            <select id="selMeses">
+              <option value="2">2 meses + atual</option>
+              <option value="3">3 meses + atual</option>
+              <option value="4" selected>4 meses + atual</option>
+              <option value="6">6 meses + atual</option>
+              <option value="12">12 meses + atual</option>
+            </select>
+          </div>
+          <p class="aside-sub">Quem votou que não podia não conta contra. Contagem por função: <b>R</b> regência · <b>L</b> louvor · <b>M</b> mensagem.</p>
+          <div id="participacaoLista" class="participacao-lista">
+            <p class="vazio">Carregando...</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- MODAL DE VERIFICAÇÃO DO SITE (Task 32) -->
+    <div id="modalVerificacao" class="modal" hidden>
+      <div class="modal-backdrop"></div>
+      <div class="modal-box modal-box-lg">
+        <h3 class="modal-title">Verificação do site</h3>
+        <p id="verifEstado" class="modal-hint">Aguardando publicação...</p>
+
+        <div id="verifTabelaWrap" hidden>
+          <p class="modal-hint">Cada nome publicado e o número que o link abre:</p>
+          <div class="acionato-tabela-wrap">
+            <table class="acionato-tabela">
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Campo</th>
+                  <th>Nome na escala</th>
+                  <th>Número que o link abre</th>
+                </tr>
+              </thead>
+              <tbody id="verifTabelaCorpo"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <ul id="verifErros" class="validacao-lista" hidden></ul>
+
+        <div class="form-acoes" style="flex-direction: column; align-items: stretch; gap: 8px;">
+          <button id="btnViEscala" class="primary-btn" disabled>Vi a escala atualizada</button>
+          <button id="btnContinuarVerificando" class="control-btn" hidden>Continuar verificando</button>
+          <button id="btnTentarEnvioVerif" class="control-btn" hidden>Tentar de novo</button>
+          <button id="btnFecharVerificacao" class="control-btn">Fechar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TELA DE WHATSAPP (Task 35) -->
+    <div id="modalWhatsapp" class="modal" hidden>
+      <div class="modal-backdrop"></div>
+      <div class="modal-box modal-box-lg">
+        <h3 id="whatsTitulo" class="modal-title">Mensagens de WhatsApp</h3>
+        <p class="modal-hint">Clique num contato para abrir o WhatsApp com a mensagem pronta. Depois de enviar, ele desce para "Enviados".</p>
+
+        <p id="whatsAvisos" class="form-erro" hidden></p>
+
+        <h4 class="whats-secao-titulo">Pendentes (<span id="whatsPendentesContador">0</span>)</h4>
+        <ul id="whatsPendentes" class="whats-lista"></ul>
+        <p id="whatsPendentesVazio" class="vazio" hidden>Tudo enviado! 🎉</p>
+
+        <button id="btnWhatsEnviados" class="control-btn whats-toggle" type="button" aria-expanded="false">
+          ▸ Enviados (<span id="whatsEnviadosContador">0</span>)
+        </button>
+        <ul id="whatsEnviados" class="whats-lista" hidden></ul>
+
+        <div class="form-acoes" style="flex-direction: column; align-items: stretch; gap: 8px;">
+          <button id="btnConcluirWhats" class="primary-btn">Concluir</button>
+          <button id="btnFecharWhatsapp" class="control-btn">Fechar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TELA DE CONCLUSÃO (Task 36 / RF 27.1) -->
+    <div id="modalConclusao" class="modal" hidden>
+      <div class="modal-backdrop"></div>
+      <div class="conclusao-box">
+        <div class="conclusao-check" aria-hidden="true">✓</div>
+        <h2 id="conclusaoTitulo" class="conclusao-titulo">Escala concluída, te vejo na próxima</h2>
+        <a id="conclusaoLink" class="conclusao-link" href="#" target="_blank" rel="noopener">Ver a escala online</a>
+        <button id="btnFecharConclusao" class="control-btn conclusao-fechar">Fechar</button>
+      </div>
+    </div>
+
+    <!-- OVERLAY DE CARREGAMENTO -->
+    <div id="overlay" class="overlay" hidden>
+      <div class="overlay-box">
+        <div class="spinner"></div>
+        <span id="overlayTexto">Carregando...</span>
+      </div>
+    </div>
+
+    <!-- SELETOR DE PESSOA (MODAL) -->
+    <div id="seletor" class="modal" hidden>
+      <div class="modal-backdrop" data-fechar></div>
+      <div class="modal-box">
+        <button class="modal-close" data-fechar>&times;</button>
+        <h3 id="seletorTitulo" class="modal-title"></h3>
+        <p class="modal-hint">Só aparecem pessoas que podem servir nesta data e função (indisponíveis e não habilitados já ficam de fora).</p>
+        <p id="seletorContador" class="modal-contador"></p>
+        <input type="search" id="seletorBusca" class="campo-input" placeholder="Filtrar por nome (opcional)" />
+        <ul id="seletorLista" class="seletor-lista"></ul>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

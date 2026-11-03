@@ -1,0 +1,9 @@
+# Mantem quebras de linha LF nos dados/código, evitando ruído de CRLF no Windows
+# (ex.: git marcar atual.json inteiro como alterado por conta do autocrlf).
+* text=auto eol=lf
+*.json text eol=lf
+*.js text eol=lf
+*.mjs text eol=lf
+*.md text eol=lf
+*.html text eol=lf
+*.css text eol=lf

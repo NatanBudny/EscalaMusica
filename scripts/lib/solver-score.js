@@ -16,16 +16,27 @@
  * Desempate: menor pessoa.id vence (determinismo garantido).
  */
 
-/** Pesos dos componentes do score */
-const PESOS = {
-  contadorRotacao: 1.0,
-  penalConsecutivo: 10.0,
-  penalMesmoMes: 20.0,
-  bonusGrupoRegente: -0.5,
-  penalPerfilParticipacao: 5.0,
-  penalRepeticaoRegente: 15.0,
-  diasDesdeUltima: -0.3,
-};
+import { PARAMETROS_PADRAO } from './parametros.js';
+
+/** Pesos padrão dos componentes do score (iguais aos de parametros.json). */
+const PESOS = PARAMETROS_PADRAO.score.pesos;
+
+/** Janela padrão (dias) para normalizar "dias desde a última escala". */
+const JANELA_DIAS_PADRAO = PARAMETROS_PADRAO.score.janela_dias_normalizacao;
+
+/** Pesos efetivos do contexto (parametros.score.pesos) com fallback nos padrões. */
+function pesosDe(contexto) {
+  return (contexto && contexto.parametros && contexto.parametros.score && contexto.parametros.score.pesos) || PESOS;
+}
+
+/** Janela de normalização efetiva do contexto, com fallback no padrão. */
+function janelaDiasDe(contexto) {
+  const j =
+    contexto && contexto.parametros && contexto.parametros.score
+      ? contexto.parametros.score.janela_dias_normalizacao
+      : null;
+  return j != null ? j : JANELA_DIAS_PADRAO;
+}
 
 /**
  * Retorna o contador de rotação histórico para uma pessoa num dado slot.
@@ -166,8 +177,8 @@ function calcDiasDesdeUltima(pessoa, slot, data, contexto) {
 
   if (diffDias <= 0) return 0;
 
-  // Normalizar: considerar janela de 120 dias (4 meses)
-  const JANELA_DIAS = 120;
+  // Normalizar: janela de dias vinda dos parâmetros (padrão 120 = 4 meses)
+  const JANELA_DIAS = janelaDiasDe(contexto);
   return Math.min(diffDias / JANELA_DIAS, 1);
 }
 
@@ -182,6 +193,7 @@ function calcDiasDesdeUltima(pessoa, slot, data, contexto) {
  */
 export function scoreCandidato(pessoa, slot, data, contexto) {
   const historicoPessoa = contexto.historico?.get(pessoa.id);
+  const PESOS = pesosDe(contexto);
 
   const contadorRotacao = getContadorRotacao(historicoPessoa, slot);
   const penalConsecutivo = calcPenalConsecutivo(pessoa, data, contexto);

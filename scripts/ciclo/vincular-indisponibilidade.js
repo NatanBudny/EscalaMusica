@@ -21,6 +21,7 @@ import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { carregarPessoas } from '../lib/cadastro.js';
 import { resolverPessoaPorNome } from '../lib/fuzzy-match.js';
+import { nomesDaEnquete, montarVinculada } from '../lib/indisponibilidade.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '../..');
@@ -103,39 +104,18 @@ function main() {
     process.exit(1);
   }
 
-  // 3. Process all names from the survey
-  const mapeamentos = new Map(); // nome_enquete → { pessoa_id, nome_canonico, confianca }
+  // 3. Process all names from the survey (fuzzy match → Map de mapeamentos)
+  const mapeamentos = new Map(); // nome_enquete → { pessoa_id, confianca }
   const nomesNaoResolvidos = [];
 
-  // Collect all unique names from the survey
-  const todosNomes = new Set();
-  for (const entrada of enquete.datas || []) {
-    const nomes = entrada.indisponiveis || entrada.indisponiveis_tempo_indeterminado || [];
-    for (const nome of nomes) {
-      if (nome && nome.trim()) {
-        todosNomes.add(nome.trim());
-      }
-    }
-  }
-  // Also collect from indisponiveis_mes_inteiro if at top level
-  if (Array.isArray(enquete.indisponiveis_mes_inteiro)) {
-    for (const nome of enquete.indisponiveis_mes_inteiro) {
-      if (nome && nome.trim()) {
-        todosNomes.add(nome.trim());
-      }
-    }
-  }
+  const todosNomes = nomesDaEnquete(enquete);
+  log(`Nomes únicos na enquete: ${todosNomes.length}`);
 
-  log(`Nomes únicos na enquete: ${todosNomes.size}`);
-
-  // Resolve each name
   for (const nomeEnquete of todosNomes) {
     const resultado = resolverPessoaPorNome(nomeEnquete, porNome, threshold);
-
     if (resultado) {
       mapeamentos.set(nomeEnquete, {
         pessoa_id: resultado.pessoa.id,
-        nome_canonico: resultado.pessoa.nome,
         confianca: Math.round(resultado.confianca * 100) / 100,
       });
       log(`  ✓ "${nomeEnquete}" → ${resultado.pessoa.nome} (ID ${resultado.pessoa.id}, confiança ${(resultado.confianca * 100).toFixed(0)}%)`);
@@ -152,165 +132,20 @@ function main() {
     }
   }
 
-  // 4. Build propagation list (sempre_junto couples)
-  const propagacoes = [];
-  const propagacaoSet = new Set(); // Track "deId→paraId" to avoid duplicates
-
-  // For each mapped person, check if they have sempre_junto links
-  for (const [, mapping] of mapeamentos) {
-    const pessoa = porId.get(mapping.pessoa_id);
-    if (!pessoa || !pessoa.vinculos) continue;
-
-    for (const vinculo of pessoa.vinculos) {
-      if (vinculo.tipo === 'sempre_junto') {
-        const chave = `${pessoa.id}→${vinculo.com_id}`;
-        const chaveInversa = `${vinculo.com_id}→${pessoa.id}`;
-
-        // Only add if not already tracked (avoid A→B and B→A both appearing)
-        if (!propagacaoSet.has(chave) && !propagacaoSet.has(chaveInversa)) {
-          const parceiro = porId.get(vinculo.com_id);
-          if (parceiro) {
-            propagacaoSet.add(chave);
-            propagacoes.push({
-              de_id: pessoa.id,
-              para_id: vinculo.com_id,
-              motivo: `vinculo sempre_junto (casal ${pessoa.nome}↔${parceiro.nome})`,
-            });
-            log(`  ↔ Propagação: ${pessoa.nome} (ID ${pessoa.id}) → ${parceiro.nome} (ID ${vinculo.com_id})`);
-          }
-        }
-      }
-    }
-  }
-
-  // 5. Build output dates with IDs
-  const datasOutput = [];
-
-  for (const entrada of enquete.datas || []) {
-    // Skip the "geral" entry - it maps to indisponiveis_mes_inteiro
-    if (entrada.data_referencia === 'geral') continue;
-
-    const nomesData = entrada.indisponiveis || [];
-    const idsSet = new Set();
-    const nomesResolvidosData = [];
-
-    for (const nome of nomesData) {
-      if (!nome || !nome.trim()) continue;
-      const mapping = mapeamentos.get(nome.trim());
-      if (mapping) {
-        idsSet.add(mapping.pessoa_id);
-        nomesResolvidosData.push(mapping.nome_canonico);
-      }
-    }
-
-    // Propagate sempre_junto: if person A is unavailable, add partner B
-    const idsParaPropagar = [...idsSet];
-    for (const id of idsParaPropagar) {
-      const pessoa = porId.get(id);
-      if (!pessoa || !pessoa.vinculos) continue;
-
-      for (const vinculo of pessoa.vinculos) {
-        if (vinculo.tipo === 'sempre_junto' && !idsSet.has(vinculo.com_id)) {
-          const parceiro = porId.get(vinculo.com_id);
-          if (parceiro) {
-            idsSet.add(vinculo.com_id);
-            nomesResolvidosData.push(parceiro.nome);
-            log(`  ↔ Data ${entrada.data_referencia}: propagando ${pessoa.nome} → ${parceiro.nome}`);
-          }
-        }
-      }
-    }
-
-    datasOutput.push({
-      data_referencia: entrada.data_referencia,
-      dia_semana: entrada.dia_semana || getDiaSemana(entrada.data_referencia),
-      indisponiveis_ids: [...idsSet].sort((a, b) => a - b),
-      indisponiveis_nomes: nomesResolvidosData.sort(),
-    });
-  }
-
-  // 6. Build indisponiveis_mes_inteiro
-  let indisponiveisMesInteiro = null;
-
-  // Check for "geral" entry in datas array
-  const entradaGeral = (enquete.datas || []).find((d) => d.data_referencia === 'geral');
-  const nomesMesInteiro = entradaGeral
-    ? entradaGeral.indisponiveis_tempo_indeterminado || entradaGeral.indisponiveis || []
-    : Array.isArray(enquete.indisponiveis_mes_inteiro)
-      ? enquete.indisponiveis_mes_inteiro
-      : [];
-
-  if (nomesMesInteiro.length > 0) {
-    const idsMesInteiro = new Set();
-    const nomesMesInteiroResolvidos = [];
-
-    for (const nome of nomesMesInteiro) {
-      if (!nome || !nome.trim()) continue;
-      const mapping = mapeamentos.get(nome.trim());
-      if (mapping) {
-        idsMesInteiro.add(mapping.pessoa_id);
-        nomesMesInteiroResolvidos.push(mapping.nome_canonico);
-      }
-    }
-
-    // Propagate sempre_junto for month-wide unavailability
-    const idsParaPropagar = [...idsMesInteiro];
-    for (const id of idsParaPropagar) {
-      const pessoa = porId.get(id);
-      if (!pessoa || !pessoa.vinculos) continue;
-
-      for (const vinculo of pessoa.vinculos) {
-        if (vinculo.tipo === 'sempre_junto' && !idsMesInteiro.has(vinculo.com_id)) {
-          const parceiro = porId.get(vinculo.com_id);
-          if (parceiro) {
-            idsMesInteiro.add(vinculo.com_id);
-            nomesMesInteiroResolvidos.push(parceiro.nome);
-            log(`  ↔ Mês inteiro: propagando ${pessoa.nome} → ${parceiro.nome}`);
-          }
-        }
-      }
-    }
-
-    if (idsMesInteiro.size > 0) {
-      indisponiveisMesInteiro = {
-        ids: [...idsMesInteiro].sort((a, b) => a - b),
-        nomes: nomesMesInteiroResolvidos.sort(),
-        motivo: 'indisponibilidade total declarada na enquete',
-      };
-    }
-  }
-
-  // 7. Build mapeamentos_aplicados array for output
-  const mapeamentosOutput = [];
-  for (const [nomeEnquete, mapping] of mapeamentos) {
-    mapeamentosOutput.push({
-      nome_enquete: nomeEnquete,
-      pessoa_id: mapping.pessoa_id,
-      nome_canonico: mapping.nome_canonico,
-      confianca: mapping.confianca,
-    });
-  }
-  // Sort by nome_enquete for deterministic output
-  mapeamentosOutput.sort((a, b) => a.nome_enquete.localeCompare(b.nome_enquete));
-
-  // 8. Assemble final output
+  // 4-8. Monta a saída vinculada (lógica pura compartilhada com o editor).
   const relativeFonte = inputPath.startsWith(ROOT)
     ? inputPath.slice(ROOT.length + 1).replace(/\\/g, '/')
     : inputPath.replace(/\\/g, '/');
 
-  const output = {
-    contexto: `Indisponibilidade vinculada - ${capitalize(getMesNome(parseInt(mes)))} ${ano}`,
-    gerado_em: new Date().toISOString().replace(/\.\d{3}Z$/, 'Z'),
-    gerado_por: 'vincular-indisponibilidade.js',
+  const output = montarVinculada(enquete, cadastro, mapeamentos, {
     fonte: relativeFonte,
-    mapeamentos_aplicados: mapeamentosOutput,
-    propagacoes,
-    datas: datasOutput,
-  };
+    mes: `${ano}-${mes}`,
+  });
 
-  if (indisponiveisMesInteiro) {
-    output.indisponiveis_mes_inteiro = indisponiveisMesInteiro;
-  }
+  const mapeamentosOutput = output.mapeamentos_aplicados;
+  const propagacoes = output.propagacoes;
+  const datasOutput = output.datas;
+  const indisponiveisMesInteiro = output.indisponiveis_mes_inteiro || null;
 
   // 9. Write output
   try {

@@ -1,0 +1,91 @@
+# Instalador Windows do editor de escala: build + smoke test no GitHub Actions.
+#
+# Gera o instalador NSIS pelo electron-builder em windows-latest, roda a suíte
+# de testes da raiz, baixa e confere o MinGit, empacota o app e executa um
+# smoke test (inicia o Servidor_Local pelo app empacotado, consulta /api/saude
+# e / e roda `git --version` do MinGit). O artefato só sobe se o smoke passar;
+# em tags editor-v* publica uma release com a nota do SmartScreen.
+#
+# Feature: melhoras-domingao (G. Instalador) — Requisitos 32.1, 32.2, 32.3,
+# 32.4, 32.5.
+
+name: Instalador editor Windows
+
+on:
+  push:
+    tags:
+      - 'editor-v*'
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'editor-windows/**'
+      - 'montador/**'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar dependências da raiz
+        run: npm ci
+
+      - name: Rodar testes da raiz
+        run: npm test
+
+      - name: Instalar dependências do editor-windows
+        working-directory: editor-windows
+        run: npm ci
+
+      - name: Baixar e conferir o MinGit
+        working-directory: editor-windows
+        run: node scripts/baixar-mingit.mjs
+
+      - name: Empacotar instalador (electron-builder)
+        working-directory: editor-windows
+        run: npx electron-builder --win nsis --publish never
+
+      - name: Smoke test do app empacotado
+        working-directory: editor-windows
+        shell: pwsh
+        env:
+          ESCALA_REPO_DIR: ${{ github.workspace }}
+        run: |
+          $exe = Join-Path (Resolve-Path 'dist/win-unpacked') 'Editor de Escala.exe'
+          Write-Host "Executando smoke: $exe"
+          & $exe --smoke
+          if ($LASTEXITCODE -ne 0) {
+            Write-Error "Smoke test falhou (código $LASTEXITCODE)."
+            exit 1
+          }
+          Write-Host "Smoke test passou."
+
+      - name: Enviar instalador como artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: instalador-windows
+          path: editor-windows/dist/*.exe
+          if-no-files-found: error
+
+      - name: Publicar release (tags editor-v*)
+        if: startsWith(github.ref, 'refs/tags/editor-v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: editor-windows/dist/*.exe
+          body: |
+            Instalador do Editor de Escala para Windows.
+
+            O instalador não tem certificado de assinatura. Na primeira execução
+            o Windows SmartScreen pode avisar "O Windows protegeu o computador".
+            Clique em "Mais informações" e depois em "Executar assim mesmo" para
+            instalar.
