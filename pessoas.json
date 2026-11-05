@@ -1,7 +1,7 @@
 {
   "versao": "1.0.0",
-  "proximo_id": 77,
-  "ultima_atualizacao": "2026-10-01",
+  "proximo_id": 79,
+  "ultima_atualizacao": "2026-11-05",
   "grupos": {
     "familia_silva": {
       "membros_ids": [
@@ -164,7 +164,9 @@
       },
       "afastado": null,
       "vinculos": [],
-      "dias_permitidos": null
+      "dias_permitidos": [
+        "sabado"
+      ]
     },
     {
       "id": 7,
@@ -416,7 +418,8 @@
       "id": 17,
       "nome": "DULCINEIA",
       "aliases": [
-        "DULCI"
+        "DULCI",
+        "DULCE"
       ],
       "telefone": "554396339940",
       "genero": "F",
@@ -868,7 +871,11 @@
           "domingo": true
         }
       },
-      "afastado": null,
+      "afastado": {
+        "ativo": true,
+        "ate": "2026-11-30",
+        "motivo": "saúde (diretor, 05/11/2026)"
+      },
       "vinculos": [],
       "dias_permitidos": null
     },
@@ -949,7 +956,8 @@
           "com_id": 67
         }
       ],
-      "dias_permitidos": null
+      "dias_permitidos": null,
+      "limite_mensal": 1
     },
     {
       "id": 38,
@@ -984,7 +992,7 @@
       "genero": "M",
       "ativo": true,
       "perfil_canto": "base",
-      "notas": "Consolidado: LUIS e o mesmo de LUIZ ANTONIO. Nao e regente (revisao set/2026).",
+      "notas": "Consolidado: LUIS e o mesmo de LUIZ ANTONIO. Nao e regente (revisao set/2026). Faz sonoplastia: \"Luiz\" na escala de sonoplastia é sempre ele (diretor, 05/11/2026).",
       "habilitacoes": {
         "regente": false,
         "equipe": true,
@@ -992,7 +1000,8 @@
           "es": false,
           "culto": false,
           "domingo": false
-        }
+        },
+        "sonoplastia": true
       },
       "afastado": null,
       "vinculos": [],
@@ -1069,7 +1078,14 @@
         }
       },
       "afastado": null,
-      "vinculos": [],
+      "vinculos": [
+        {
+          "tipo": "precisa_de",
+          "com_ids": [
+            61
+          ]
+        }
+      ],
       "dias_permitidos": null,
       "incentivo": {
         "ativo": true,
@@ -1080,11 +1096,11 @@
       "id": 43,
       "nome": "MANU S.",
       "aliases": [],
-      "telefone": null,
+      "telefone": "554399152336",
       "genero": "F",
       "ativo": true,
       "perfil_canto": "participacao",
-      "notas": "",
+      "notas": "Contato via Jessica (mãe) (diretor, 05/11/2026).",
       "habilitacoes": {
         "regente": false,
         "equipe": true,
@@ -1095,12 +1111,21 @@
         }
       },
       "afastado": null,
-      "vinculos": [],
+      "vinculos": [
+        {
+          "tipo": "precisa_de",
+          "com_ids": [
+            29,
+            31
+          ]
+        }
+      ],
       "dias_permitidos": null,
       "incentivo": {
         "ativo": true,
         "intervalo_meses": 1.5
-      }
+      },
+      "contato_via_id": 29
     },
     {
       "id": 44,
@@ -1145,7 +1170,14 @@
         }
       },
       "afastado": null,
-      "vinculos": [],
+      "vinculos": [
+        {
+          "tipo": "precisa_de",
+          "com_ids": [
+            53
+          ]
+        }
+      ],
       "dias_permitidos": null
     },
     {
@@ -1204,7 +1236,7 @@
       "genero": "F",
       "ativo": true,
       "perfil_canto": "participacao",
-      "notas": "",
+      "notas": "Restrição de canto até segunda ordem; motivo com o Yasser (diretor, 05/11/2026).",
       "habilitacoes": {
         "regente": false,
         "equipe": true,
@@ -1214,7 +1246,11 @@
           "domingo": false
         }
       },
-      "afastado": null,
+      "afastado": {
+        "ativo": true,
+        "ate": null,
+        "motivo": "restrição de canto até segunda ordem — ver Yasser"
+      },
       "vinculos": [],
       "dias_permitidos": null
     },
@@ -1261,7 +1297,14 @@
         }
       },
       "afastado": null,
-      "vinculos": [],
+      "vinculos": [
+        {
+          "tipo": "precisa_de",
+          "com_ids": [
+            53
+          ]
+        }
+      ],
       "dias_permitidos": null
     },
     {
@@ -1284,7 +1327,8 @@
       },
       "afastado": null,
       "vinculos": [],
-      "dias_permitidos": null
+      "dias_permitidos": null,
+      "limite_mensal": 1
     },
     {
       "id": 52,
@@ -1609,7 +1653,7 @@
       "genero": "M",
       "ativo": true,
       "perfil_canto": "participacao",
-      "notas": "",
+      "notas": "Viaja aos domingos: só sábado (diretor, 05/11/2026).",
       "habilitacoes": {
         "regente": false,
         "equipe": true,
@@ -1621,7 +1665,9 @@
       },
       "afastado": null,
       "vinculos": [],
-      "dias_permitidos": null,
+      "dias_permitidos": [
+        "sabado"
+      ],
       "incentivo": {
         "ativo": true,
         "intervalo_meses": 3
@@ -1877,7 +1923,7 @@
       "genero": "F",
       "ativo": true,
       "perfil_canto": "base",
-      "notas": "Cadastrada em out/2026 a partir da enquete. Participa de equipe de louvor e mensagem musical (ES, culto e domingo). A incluir na escala a partir de novembro/2026.",
+      "notas": "Cadastrada em out/2026 a partir da enquete. Participa de equipe de louvor e mensagem musical (ES, culto e domingo). A incluir na escala a partir de novembro/2026. Não canta aos domingos (diretor, 05/11/2026).",
       "habilitacoes": {
         "regente": false,
         "equipe": true,
@@ -1889,7 +1935,57 @@
       },
       "afastado": null,
       "vinculos": [],
+      "dias_permitidos": [
+        "sabado"
+      ]
+    },
+    {
+      "id": 77,
+      "nome": "FRANCIELI SASTRE",
+      "aliases": [],
+      "telefone": "5551982627460",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "participacao",
+      "notas": "Cadastrada em nov/2026 a pedido do diretor para Mensagem Musical (ES e Culto) de 21/11/2026.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": true,
+          "culto": true,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
       "dias_permitidos": null
+    },
+    {
+      "id": 78,
+      "nome": "LILIAN",
+      "aliases": [],
+      "telefone": "554399890085",
+      "genero": "F",
+      "ativo": true,
+      "perfil_canto": "participacao",
+      "notas": "Cadastrada em nov/2026 a pedido do diretor para Mensagem Musical (ES e Culto) de 14/11/2026. Contato via Carla Ribeiro.",
+      "habilitacoes": {
+        "regente": false,
+        "equipe": false,
+        "mensagem_musical": {
+          "es": true,
+          "culto": true,
+          "domingo": false
+        }
+      },
+      "afastado": null,
+      "vinculos": [],
+      "dias_permitidos": null,
+      "contato_via_id": 11
     }
-  ]
+  ],
+  "migracoes": {
+    "regras_por_nome": "2026-11-05"
+  }
 }

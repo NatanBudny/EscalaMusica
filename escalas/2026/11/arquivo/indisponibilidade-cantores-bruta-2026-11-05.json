@@ -1,0 +1,167 @@
+{
+  "contexto": "Indisponibilidade de cantores - Novembro 2026",
+  "origem": "Enquete do grupo: vote em quais dias voce NAO pode cantar",
+  "atualizado_em": "2026-11-01",
+  "datas": [
+    {
+      "data_referencia": "2026-11-01",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "\"André Herreira\"",
+        "\"Eu\"",
+        "\"Gabriel\"",
+        "\"Jemelli Gatti\"",
+        "\"Jessica Tanaka\"",
+        "\"Kheyciane\"",
+        "\"Maria\"",
+        "\"Rosana Spoliante\"",
+        "\"Stella Buosi\"",
+        "\"Stephany Celoni\"",
+        "\"Suelen Calizotti\"",
+        "\"ariadnysouza\"",
+        "\"𝓗𝓮𝓵𝓸𝓲𝓼𝓮\""
+      ]
+    },
+    {
+      "data_referencia": "2026-11-07",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "\"Alex Nunes\"",
+        "\"Catherine Rossetti\"",
+        "\"Jemelli Gatti\"",
+        "\"Maria\"",
+        "\"Rosana Spoliante\"",
+        "\"Stephany Celoni\""
+      ]
+    },
+    {
+      "data_referencia": "2026-11-08",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "\"Catherine Rossetti\"",
+        "\"DanielleH.\"",
+        "\"Gabriel\"",
+        "\"Jemelli Gatti\"",
+        "\"Maria Elisa 🤍\"",
+        "\"Maria\"",
+        "\"Stella Buosi\"",
+        "\"Stephany Celoni\"",
+        "\"ariadnysouza\"",
+        "\"𝓗𝓮𝓵𝓸𝓲𝓼𝓮\""
+      ]
+    },
+    {
+      "data_referencia": "2026-11-14",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "\"Alex Nunes\"",
+        "\"Kheyciane\"",
+        "\"Lidi\"",
+        "\"Maria Elisa 🤍\"",
+        "\"Rosana Spoliante\"",
+        "\"Silvana Cristofoleti\""
+      ]
+    },
+    {
+      "data_referencia": "2026-11-15",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "\"André Herreira\"",
+        "\"Eu\"",
+        "\"Gabriel\"",
+        "\"Jemelli Gatti\"",
+        "\"Jessica Tanaka\"",
+        "\"Jéssie F. C. Da Silva\"",
+        "\"Kheyciane\"",
+        "\"Lidi\"",
+        "\"Maria\"",
+        "\"Rosana Spoliante\"",
+        "\"Silvana Cristofoleti\"",
+        "\"Stella Buosi\"",
+        "\"Stephany Celoni\"",
+        "\"Suelen Calizotti\"",
+        "\"ariadnysouza\"",
+        "\"𝓗𝓮𝓵𝓸𝓲𝓼𝓮\""
+      ]
+    },
+    {
+      "data_referencia": "2026-11-21",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "\"Gabriel\"",
+        "\"Kheyciane\"",
+        "\"Lidi\"",
+        "\"Rosana Spoliante\"",
+        "\"Silvana Cristofoleti\"",
+        "\"Suelen Calizotti\""
+      ]
+    },
+    {
+      "data_referencia": "2026-11-22",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "\"DanielleH.\"",
+        "\"Eu\"",
+        "\"Gabriel\"",
+        "\"Jemelli Gatti\"",
+        "\"Jessica Tanaka\"",
+        "\"Jéssie F. C. Da Silva\"",
+        "\"Kheyciane\"",
+        "\"Lidi\"",
+        "\"Maria Elisa 🤍\"",
+        "\"Maria\"",
+        "\"Silvana Cristofoleti\"",
+        "\"Stella Buosi\"",
+        "\"Stephany Celoni\"",
+        "\"Suelen Calizotti\"",
+        "\"ariadnysouza\"",
+        "\"𝓗𝓮𝓵𝓸𝓲𝓼𝓮\""
+      ]
+    },
+    {
+      "data_referencia": "2026-11-28",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "\"Maria Elisa 🤍\"",
+        "\"Maria\"",
+        "\"Rosana Spoliante\"",
+        "\"Suelen Calizotti\""
+      ]
+    },
+    {
+      "data_referencia": "2026-11-29",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "\"Catherine Rossetti\"",
+        "\"Eu\"",
+        "\"Gabriel\"",
+        "\"Jemelli Gatti\"",
+        "\"Kheyciane\"",
+        "\"Maria\"",
+        "\"Stella Buosi\"",
+        "\"Stephany Celoni\"",
+        "\"Suelen Calizotti\"",
+        "\"ariadnysouza\"",
+        "\"𝓗𝓮𝓵𝓸𝓲𝓼𝓮\""
+      ]
+    },
+    {
+      "data_referencia": "geral",
+      "dia_semana": "todos",
+      "indisponiveis_tempo_indeterminado": [
+        "\"Alessandra\"",
+        "\"Marair Daiame \"",
+        "\"Nilson Henrique\"",
+        "\"Ricardo Herreira\"",
+        "\"Sirlene Nicastro\"",
+        "\"꧁•⊹٭𝚅𝚘𝚗𝚒 𝙻𝚎ã𝚘٭⊹•꧂\""
+      ],
+      "observacoes": [
+        "Nomes em indisponiveis_tempo_indeterminado marcaram 'NAO POSSO EM NOVEMBRO' na enquete."
+      ],
+      "disponiveis_para_todos": [
+        ""
+      ]
+    }
+  ]
+}

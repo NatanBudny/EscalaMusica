@@ -1,0 +1,384 @@
+{
+  "mes": "2026-11",
+  "revisado_em": "2026-11-05T19:32:05.534Z",
+  "cultos": [
+    {
+      "data": "07/11/2026",
+      "grupos": {
+        "REGENTE LOUVOR": [
+          {
+            "nome": "DANY KALLAS",
+            "status": "aprovado",
+            "obs": ""
+          }
+        ],
+        "EQUIPE LOUVOR": [
+          {
+            "nome": "JESSICA",
+            "status": "reprovado",
+            "obs": "trocar por jessie"
+          },
+          {
+            "nome": "ARIADNY",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "BERNARDO",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "STELLA",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "JOAS",
+            "status": "reprovado",
+            "obs": "trocar por jessé"
+          }
+        ],
+        "MENSAGEM MUSICAL": [
+          {
+            "nome": "ANDRE",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "FABRICIO",
+            "status": "aprovado",
+            "obs": ""
+          }
+        ]
+      }
+    },
+    {
+      "data": "08/11/2026",
+      "grupos": {
+        "REGENTE LOUVOR": [
+          {
+            "nome": "KHEYCIANE",
+            "status": "aprovado",
+            "obs": ""
+          }
+        ],
+        "EQUIPE LOUVOR": [
+          {
+            "nome": "JESSE",
+            "status": "reprovado",
+            "obs": "trocar por outra que possa"
+          },
+          {
+            "nome": "JESSIE",
+            "status": "reprovado",
+            "obs": "trocar por outro que possa "
+          },
+          {
+            "nome": "RONI",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "SILVANA",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "SUELLEN",
+            "status": "aprovado",
+            "obs": ""
+          }
+        ],
+        "MENSAGEM MUSICAL": [
+          {
+            "nome": "RAISSA",
+            "status": "aprovado",
+            "obs": ""
+          }
+        ]
+      }
+    },
+    {
+      "data": "14/11/2026",
+      "grupos": {
+        "REGENTE LOUVOR": [
+          {
+            "nome": "SUELLEN",
+            "status": "aprovado",
+            "obs": ""
+          }
+        ],
+        "EQUIPE LOUVOR": [
+          {
+            "nome": "RONI",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "JEMELLI",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "JULIANA ALVES",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "GABRIEL P.",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "HELOISE",
+            "status": "aprovado",
+            "obs": ""
+          }
+        ],
+        "MENSAGEM MUSICAL": [
+          {
+            "nome": "LILIAN",
+            "status": "aprovado",
+            "obs": ""
+          }
+        ]
+      }
+    },
+    {
+      "data": "15/11/2026",
+      "grupos": {
+        "REGENTE LOUVOR": [
+          {
+            "nome": "GIOVANA",
+            "status": "reprovado",
+            "obs": "trocar por outro que possa "
+          }
+        ],
+        "EQUIPE LOUVOR": [
+          {
+            "nome": "MARIA F.",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "VANDERLEY",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "ALEX",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "DANI HERREIRA",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "DANY KALLAS",
+            "status": "aprovado",
+            "obs": ""
+          }
+        ],
+        "MENSAGEM MUSICAL": [
+          {
+            "nome": "MARIA ELISA",
+            "status": "aprovado",
+            "obs": ""
+          }
+        ]
+      }
+    },
+    {
+      "data": "21/11/2026",
+      "grupos": {
+        "REGENTE LOUVOR": [
+          {
+            "nome": "FABRICIO",
+            "status": "aprovado",
+            "obs": ""
+          }
+        ],
+        "EQUIPE LOUVOR": [
+          {
+            "nome": "CATHERINE",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "ALEX",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "JESSIE",
+            "status": "reprovado",
+            "obs": "trocar jessie por jessica"
+          },
+          {
+            "nome": "JESSE",
+            "status": "reprovado",
+            "obs": "trocar jesse por joas"
+          },
+          {
+            "nome": "MARIA ELOISA",
+            "status": "aprovado",
+            "obs": ""
+          }
+        ],
+        "MENSAGEM MUSICAL": [
+          {
+            "nome": "FRANCIELI SASTRE",
+            "status": "aprovado",
+            "obs": ""
+          }
+        ]
+      }
+    },
+    {
+      "data": "22/11/2026",
+      "grupos": {
+        "REGENTE LOUVOR": [
+          {
+            "nome": "DANY KALLAS",
+            "status": "aprovado",
+            "obs": ""
+          }
+        ],
+        "EQUIPE LOUVOR": [
+          {
+            "nome": "ROSANA",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "ANDRE",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "LUIZ ANTONIO",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "RAISSA",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "MIRIAN",
+            "status": "aprovado",
+            "obs": ""
+          }
+        ],
+        "MENSAGEM MUSICAL": [
+          {
+            "nome": "RONI",
+            "status": "aprovado",
+            "obs": ""
+          }
+        ]
+      }
+    },
+    {
+      "data": "28/11/2026",
+      "grupos": {
+        "REGENTE LOUVOR": [
+          {
+            "nome": "ANDRE",
+            "status": "aprovado",
+            "obs": ""
+          }
+        ],
+        "EQUIPE LOUVOR": [
+          {
+            "nome": "JESSICA",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "GABRIEL P.",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "KHEYCIANE",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "JULIANA ALVES",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "JOAS",
+            "status": "aprovado",
+            "obs": ""
+          }
+        ],
+        "MENSAGEM MUSICAL": [
+          {
+            "nome": "JEMELLI",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "CARLA RIBEIRO",
+            "status": "aprovado",
+            "obs": ""
+          }
+        ]
+      }
+    },
+    {
+      "data": "29/11/2026",
+      "grupos": {
+        "REGENTE LOUVOR": [
+          {
+            "nome": "SILVANA",
+            "status": "aprovado",
+            "obs": ""
+          }
+        ],
+        "EQUIPE LOUVOR": [
+          {
+            "nome": "YASSER",
+            "status": "reprovado",
+            "obs": "trocar por outro que possa "
+          },
+          {
+            "nome": "MANU C.",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "LUIZ ANTONIO",
+            "status": "aprovado",
+            "obs": ""
+          },
+          {
+            "nome": "LIDIANE",
+            "status": "reprovado",
+            "obs": "trocr por outro que possa "
+          },
+          {
+            "nome": "MARIA ELISA",
+            "status": "aprovado",
+            "obs": ""
+          }
+        ],
+        "MENSAGEM MUSICAL": [
+          {
+            "nome": "DANI HERREIRA",
+            "status": "aprovado",
+            "obs": ""
+          }
+        ]
+      }
+    }
+  ]
+}

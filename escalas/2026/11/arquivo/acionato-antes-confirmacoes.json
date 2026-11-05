@@ -1,0 +1,139 @@
+{
+  "mes": "2026-11",
+  "fonte": "Escala oficial do acionato (NOVEMBRO26.docx (2).pdf) + Sonoplastia Novembro.pdf",
+  "atualizado_em": "2026-11-05",
+  "contexto": "Acionato - Novembro 2026",
+  "itens": [
+    {
+      "data": "2026-11-01",
+      "dia": "domingo",
+      "anciao": "YASSER",
+      "pregador": "RONI",
+      "audiovisual": "ANDRÉ",
+      "observacoes": "",
+      "modelo_louvor": "domingo",
+      "extraordinario": false
+    },
+    {
+      "data": "2026-11-04",
+      "dia": "quarta-feira",
+      "anciao": "YASSER",
+      "pregador": "VOZ JUVENIL",
+      "audiovisual": "VOLUNTÁRIO",
+      "observacoes": "",
+      "modelo_louvor": "sem_louvor",
+      "extraordinario": false
+    },
+    {
+      "data": "2026-11-07",
+      "dia": "sabado",
+      "anciao": "ADELMO",
+      "pregador": "PR. MAURICI",
+      "audiovisual": "DIEGO",
+      "observacoes": "",
+      "modelo_louvor": "sabado",
+      "extraordinario": false
+    },
+    {
+      "data": "2026-11-08",
+      "dia": "domingo",
+      "anciao": "ADELMO",
+      "pregador": "PR. AURICI",
+      "audiovisual": "ALEX",
+      "observacoes": "",
+      "modelo_louvor": "domingo",
+      "extraordinario": false
+    },
+    {
+      "data": "2026-11-11",
+      "dia": "quarta-feira",
+      "anciao": "ADELMO",
+      "pregador": "MM",
+      "audiovisual": "VOLUNTÁRIO",
+      "observacoes": "",
+      "modelo_louvor": "sem_louvor",
+      "extraordinario": false
+    },
+    {
+      "data": "2026-11-14",
+      "dia": "sabado",
+      "anciao": "CLEVERSON",
+      "pregador": "PR. HOFNI",
+      "audiovisual": "SAMUEL",
+      "observacoes": "",
+      "modelo_louvor": "sabado",
+      "extraordinario": false,
+      "acomp": "PB"
+    },
+    {
+      "data": "2026-11-15",
+      "dia": "domingo",
+      "anciao": "CLEVERSON",
+      "pregador": "MARCOS L",
+      "audiovisual": "LUIZ",
+      "observacoes": "",
+      "modelo_louvor": "domingo",
+      "extraordinario": false
+    },
+    {
+      "data": "2026-11-18",
+      "dia": "quarta-feira",
+      "anciao": "CLEVERSON",
+      "pregador": "VOZ JUVENIL",
+      "audiovisual": "VOLUNTÁRIO",
+      "observacoes": "",
+      "modelo_louvor": "sem_louvor",
+      "extraordinario": false
+    },
+    {
+      "data": "2026-11-21",
+      "dia": "sabado",
+      "anciao": "DULCE",
+      "pregador": "GIOVANA",
+      "audiovisual": "JÚNIOR OLIVEIRA",
+      "observacoes": "",
+      "modelo_louvor": "sabado",
+      "extraordinario": false
+    },
+    {
+      "data": "2026-11-22",
+      "dia": "domingo",
+      "anciao": "DULCE",
+      "pregador": "RICARDO",
+      "audiovisual": "ALEX",
+      "observacoes": "",
+      "modelo_louvor": "domingo",
+      "extraordinario": false
+    },
+    {
+      "data": "2026-11-25",
+      "dia": "quarta-feira",
+      "anciao": "DULCE",
+      "pregador": "MM",
+      "audiovisual": "VOLUNTÁRIO",
+      "observacoes": "",
+      "modelo_louvor": "sem_louvor",
+      "extraordinario": false
+    },
+    {
+      "data": "2026-11-28",
+      "dia": "sabado",
+      "anciao": "DA SILVA",
+      "pregador": "MORDOMIA",
+      "audiovisual": "DIEGO",
+      "observacoes": "",
+      "modelo_louvor": "sabado",
+      "extraordinario": false
+    },
+    {
+      "data": "2026-11-29",
+      "dia": "domingo",
+      "anciao": "DA SILVA",
+      "pregador": "DULCE",
+      "audiovisual": "ALEX",
+      "observacoes": "",
+      "modelo_louvor": "domingo",
+      "extraordinario": false
+    }
+  ]
+}

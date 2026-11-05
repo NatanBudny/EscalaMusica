@@ -1,0 +1,168 @@
+{
+  "contexto": "Indisponibilidade de cantores - Novembro 2026",
+  "origem": "Enquete do grupo: vote em quais dias voce NAO pode cantar",
+  "atualizado_em": "2026-11-01",
+  "datas": [
+    {
+      "data_referencia": "2026-11-01",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "ANDRE",
+        "ARIADNY",
+        "FABRICIO",
+        "GABRIEL P.",
+        "HELOISE",
+        "JEMELLI",
+        "JESSICA",
+        "KHEYCIANE",
+        "MARIA ELOISA",
+        "ROSANA",
+        "STELLA",
+        "STEPHANY",
+        "SUELLEN"
+      ]
+    },
+    {
+      "data_referencia": "2026-11-07",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "ALEX",
+        "CATHERINE",
+        "JEMELLI",
+        "MARIA ELOISA",
+        "ROSANA",
+        "STEPHANY"
+      ]
+    },
+    {
+      "data_referencia": "2026-11-08",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "ARIADNY",
+        "CATHERINE",
+        "DANI HERREIRA",
+        "GABRIEL P.",
+        "HELOISE",
+        "JEMELLI",
+        "MARIA ELISA",
+        "MARIA ELOISA",
+        "STELLA",
+        "STEPHANY"
+      ]
+    },
+    {
+      "data_referencia": "2026-11-14",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "ALEX",
+        "KHEYCIANE",
+        "LIDIANE",
+        "MARIA ELISA",
+        "ROSANA",
+        "SILVANA"
+      ]
+    },
+    {
+      "data_referencia": "2026-11-15",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "ANDRE",
+        "ARIADNY",
+        "FABRICIO",
+        "GABRIEL P.",
+        "HELOISE",
+        "JEMELLI",
+        "JESSICA",
+        "JESSIE",
+        "KHEYCIANE",
+        "LIDIANE",
+        "MARIA ELOISA",
+        "ROSANA",
+        "SILVANA",
+        "STELLA",
+        "STEPHANY",
+        "SUELLEN"
+      ]
+    },
+    {
+      "data_referencia": "2026-11-21",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "GABRIEL P.",
+        "KHEYCIANE",
+        "LIDIANE",
+        "ROSANA",
+        "SILVANA",
+        "SUELLEN"
+      ]
+    },
+    {
+      "data_referencia": "2026-11-22",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "ARIADNY",
+        "DANI HERREIRA",
+        "FABRICIO",
+        "GABRIEL P.",
+        "HELOISE",
+        "JEMELLI",
+        "JESSICA",
+        "JESSIE",
+        "KHEYCIANE",
+        "LIDIANE",
+        "MARIA ELISA",
+        "MARIA ELOISA",
+        "SILVANA",
+        "STELLA",
+        "STEPHANY",
+        "SUELLEN"
+      ]
+    },
+    {
+      "data_referencia": "2026-11-28",
+      "dia_semana": "sabado",
+      "indisponiveis": [
+        "MARIA ELISA",
+        "MARIA ELOISA",
+        "ROSANA",
+        "SUELLEN"
+      ]
+    },
+    {
+      "data_referencia": "2026-11-29",
+      "dia_semana": "domingo",
+      "indisponiveis": [
+        "ARIADNY",
+        "CATHERINE",
+        "FABRICIO",
+        "GABRIEL P.",
+        "HELOISE",
+        "JEMELLI",
+        "KHEYCIANE",
+        "MARIA ELOISA",
+        "STELLA",
+        "STEPHANY",
+        "SUELLEN"
+      ]
+    },
+    {
+      "data_referencia": "geral",
+      "dia_semana": "todos",
+      "indisponiveis_tempo_indeterminado": [
+        "ALESSANDRA DONADON",
+        "MARAIR",
+        "NILSINHO",
+        "RICARDO HERREIRA",
+        "SIRLENE",
+        "VONI"
+      ],
+      "observacoes": [
+        "Nomes em indisponiveis_tempo_indeterminado marcaram 'NAO POSSO EM NOVEMBRO' na enquete."
+      ],
+      "disponiveis_para_todos": [
+        ""
+      ]
+    }
+  ],
+  "observacao_vinculo": "Nomes convertidos para o nome canonico de pessoas.json pelo telefone do votante (telefones compartilhados STELLA/MIRIAN e SILVANA/MANU C. resolvidos pelo nome). Versao bruta em arquivo/."
+}

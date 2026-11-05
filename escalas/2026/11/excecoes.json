@@ -1,0 +1,16 @@
+{
+  "mes": "2026-11",
+  "excecoes": [
+    {
+      "id": "vinculo|2026-11-29|equipe|43",
+      "regra": "vinculo",
+      "refs": [],
+      "data": "2026-11-29",
+      "funcao": "equipe",
+      "texto": "29/11/2026: MANU S. sem Jessica/Joás no culto; mantida a pedido do diretor (revisão de 05/11/2026).",
+      "origem": "revisao",
+      "confirmado_por": "Natan",
+      "confirmado_em": "2026-11-05T20:14:40.096Z"
+    }
+  ]
+}
