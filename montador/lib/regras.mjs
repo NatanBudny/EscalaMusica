@@ -36,7 +36,7 @@ import {
   avaliarCulto,
   resolverOcupante,
 } from './avaliacao.mjs';
-import { slotsDoCulto, tipoDoCulto, ehOcupanteGrupo } from './contexto.mjs';
+import { slotsDoCulto, tipoDoCulto, ehOcupanteGrupo, departamentoDoCulto } from './contexto.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 export const ROOT = resolve(__dirname, '../..');
@@ -185,6 +185,11 @@ export function cultosDoMes(mesAlvo, cadastro, root = ROOT) {
             obs: item.observacoes || item.OBS || '',
             modelo_louvor: modeloLouvor,
             extraordinario: item.extraordinario === true,
+            // Só quando o acionato já traz o campo (copiado da escala do
+            // ancionato); sem ele, vale a regra antiga pelo pregador.
+            ...(Object.prototype.hasOwnProperty.call(item, 'louvor_departamento')
+              ? { louvor_departamento: String(item.louvor_departamento || '') }
+              : {}),
           };
         })
         .filter(Boolean)
@@ -487,7 +492,7 @@ export function candidatosParaCelula(base, cultos, data, slot, opts = {}) {
   }
 
   // Não elegíveis (bloqueio) — só pessoas habilitadas para o slot (não poluir).
-  for (const { p, bloqueios } of infoPessoa.values()) {
+  for (const { p, bloqueios, avisos } of infoPessoa.values()) {
     if (bloqueios.length === 0) continue;
     // Ignora quem nem é habilitada (não interessa listar).
     if (bloqueios.length === 1 && bloqueios[0].chave === 'habilitacao') continue;
@@ -496,7 +501,10 @@ export function candidatosParaCelula(base, cultos, data, slot, opts = {}) {
       id: p.id,
       nome: p.nome,
       genero: p.genero,
-      motivoBloqueio: bloqueios[0].texto,
+      motivoBloqueio: bloqueios.map((m) => m.texto).join('; '),
+      // Para o diretor escolher mesmo assim, confirmando a exceção (05/11/2026).
+      bloqueios: bloqueios.map((m) => ({ chave: m.chave, texto: m.texto })),
+      avisos: avisos.map((m) => m.texto),
     });
   }
   naoElegiveis.sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
@@ -515,7 +523,14 @@ export function candidatosParaCelula(base, cultos, data, slot, opts = {}) {
     };
     if (bloqueios.length > 0) {
       if (bloqueios.length === 1 && bloqueios[0].chave === 'habilitacao') continue;
-      naoElegiveis.push({ tipo: 'grupo', chave, nome: g.nome_exibicao, motivoBloqueio: bloqueios[0].texto });
+      naoElegiveis.push({
+        tipo: 'grupo',
+        chave,
+        nome: g.nome_exibicao,
+        motivoBloqueio: bloqueios.map((m) => m.texto).join('; '),
+        bloqueios: bloqueios.map((m) => ({ chave: m.chave, texto: m.texto })),
+        avisos: avisos.map((m) => m.texto),
+      });
     } else if (avisos.length > 0) {
       elegiveisComAviso.push(item);
     } else {
@@ -687,12 +702,13 @@ export function sugerirMes(base, opts = {}) {
       continue;
     }
 
-    if (ehDepartamental(pregador)) {
+    const departamento = departamentoDoCulto(culto);
+    if (departamento) {
       sugestoes.push({
         data,
         dia_semana,
         tipo: 'departamental',
-        departamento: pregador.toUpperCase().trim(),
+        departamento,
         anciao,
         pregador,
         audiovisual,
@@ -941,7 +957,9 @@ export function validarEscala(base, cultos) {
           continue;
         }
 
-        const { bloqueios, avisos: avs } = avaliarAtribuicao(base, estado, data, slot, ocupante);
+        const { bloqueios, avisos: avs } = avaliarAtribuicao(base, estado, data, slot, ocupante, {
+          modo: 'validacao',
+        });
         const nome = nomeDoOcupante(ocupante, base);
         const ocId = typeof ocupante === 'number' ? ocupante : ocupante;
         for (const m of [...bloqueios, ...avs]) {

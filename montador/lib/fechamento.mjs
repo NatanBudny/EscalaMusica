@@ -35,6 +35,7 @@ import { gerarLinhasAtual, backupAtual } from './publicar.mjs';
 import { revalidarParaEnvio } from './revalidacao.mjs';
 import { atualizarControles } from './controles.mjs';
 import { derivarContatos } from '../../scripts/lib/contatos.js';
+import { separarExcecoes, registroExcecoes, caminhoExcecoes } from './excecoes.mjs';
 
 /** Insumos preservados pela limpeza (iguais ao coletor-lixo-pos-publicacao.js). */
 const INSUMOS_PRESERVADOS = new Set([
@@ -175,11 +176,15 @@ export function alvosLimpeza(mes, { root = ROOT } = {}) {
 }
 
 /** Linha do log de publicações (RF008). */
-export function linhaLog(mes, autor, agora = new Date()) {
+export function linhaLog(mes, autor, agora = new Date(), qtdExcecoes = 0) {
   const [ano, mm] = String(mes).split('-');
   const data = agora.toISOString().slice(0, 10);
   const nomeMes = `${mm}/${ano}`;
-  return `| ${data} | atual.json (${nomeMes}) | ${autor} | Fechamento pelo editor de escala. |`;
+  const extra =
+    qtdExcecoes > 0
+      ? ` ${qtdExcecoes} exceção(ões) confirmada(s) pelo diretor (ver ${caminhoExcecoes(mes)}).`
+      : '';
+  return `| ${data} | atual.json (${nomeMes}) | ${autor} | Fechamento pelo editor de escala.${extra} |`;
 }
 
 /** Rótulo "MM-AAAA" usado na mensagem de commit. */
@@ -218,7 +223,7 @@ function gruposBrutosDoBase(base) {
  * @throws {ErroFechamento} 409/422 quando a revalidação bloqueia
  */
 export async function fechar(
-  { mes, cultos, ciencias = [] },
+  { mes, cultos, ciencias = [], excecoes = [] },
   { root = ROOT, git = criarGit({ cwd: root }), agora = new Date() } = {},
 ) {
   // 1. Sincroniza antes de gerar os arquivos.
@@ -238,8 +243,10 @@ export async function fechar(
     Array.isArray(cultos) ? cultos : [],
     { root },
   );
-  if (erros.length > 0) {
-    throw new ErroFechamento({ status: 422, erros });
+  // Bloqueios de regra com exceção confirmada pelo diretor não impedem o envio.
+  const { pendentes, confirmadas } = separarExcecoes(erros, excecoes);
+  if (pendentes.length > 0) {
+    throw new ErroFechamento({ status: 422, erros: pendentes });
   }
   const semCiencia = avisos.filter((a) => !ciencias.includes(a.id));
   if (semCiencia.length > 0) {
@@ -248,7 +255,12 @@ export async function fechar(
 
   // 3. Grava os arquivos, registrando tudo para restaurar em falha.
   const tocados = new Tocados(root);
+  const autor = typeof git.autor === 'function' ? await git.autor() : '';
   try {
+    // Registro das exceções confirmadas (fora do site, nunca na OBS pública).
+    const registro = registroExcecoes(mes, confirmadas, { root, autor, origem: 'fechamento', agora });
+    if (registro) tocados.escrever(registro.rel, registro.dados);
+
     // Backup do atual.json anterior (quando é de outro mês).
     const backupRel = backupAtual({ root });
     if (backupRel) tocados.registrar(backupRel);
@@ -267,7 +279,7 @@ export async function fechar(
     });
     tocados.registrar(...controles);
 
-    tocados.acrescentar(LOG_PUBLICACOES, linhaLog(mes, await git.autor(), agora));
+    tocados.acrescentar(LOG_PUBLICACOES, linhaLog(mes, autor, agora, confirmadas.length));
 
     tocados.remover(...alvosLimpeza(mes, { root }));
   } catch (e) {
@@ -285,11 +297,12 @@ export async function fechar(
   const envio = await git.enviar();
 
   return {
-    ok: erros.length === 0,
+    ok: pendentes.length === 0,
     mes,
     cultos: linhasAtual.length,
     arquivos: tocados.caminhos(),
     avisos,
+    excecoes: confirmadas,
     conferencia: { tabela: (conferencia && conferencia.tabela) || [] },
     commit: commit && (commit.commit || commit.semAlteracoes ? commit : undefined),
     push: envio && envio.push,

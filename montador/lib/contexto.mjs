@@ -34,16 +34,45 @@ export function tipoDoCulto(culto) {
   if (!culto) return 'louvor';
   const dia = normalizarDia(culto.dia_semana || culto.dia);
   if (dia === 'quarta-feira') return 'quarta';
-  if (ehDepartamental(culto.pregador)) return 'departamental';
+  if (departamentoDoCulto(culto)) return 'departamental';
   if ((culto.modelo_louvor || '') === 'sem_louvor') return 'sem_louvor';
   return 'louvor';
 }
 
-/** Mesmo enum para uma linha de atual.json (campos em maiúsculas). */
+/** Nome canônico (maiúsculo, sem espaços nas pontas) de um departamento. */
+function nomeDepartamento(texto) {
+  return String(texto || '').toUpperCase().trim();
+}
+
+/**
+ * Departamento que assume o louvor do culto, ou '' (louvor da nossa equipe).
+ *
+ * Decisão de 05/11/2026: quem assume o louvor vem da escala do ancionato e o
+ * operador só copia, no campo `louvor_departamento` do acionato. Quando o campo
+ * existe (mesmo vazio), vale ele. Acionatos gravados antes desse campo usam a
+ * regra antiga: pregador que é departamento assume o louvor.
+ */
+export function departamentoDoCulto(culto) {
+  if (!culto) return '';
+  if (Object.prototype.hasOwnProperty.call(culto, 'louvor_departamento') && culto.louvor_departamento != null) {
+    return nomeDepartamento(culto.louvor_departamento);
+  }
+  return ehDepartamental(culto.pregador) ? nomeDepartamento(culto.pregador) : '';
+}
+
+/**
+ * Mesmo enum para uma linha de atual.json (campos em maiúsculas). O que conta é
+ * o que foi publicado no louvor: regente com nome de departamento = culto do
+ * departamento (ex.: 10/10/2026, JOVENS com pregador PR. HOFNI). Pregador
+ * departamento com regente da equipe é culto normal (ex.: 31/10/2026, QUARTETO
+ * pregando e Suellen regendo). Sem regente, vale o pregador (regra antiga).
+ */
 export function tipoDaLinhaAtual(linha) {
   if (!linha) return 'louvor';
   const dia = normalizarDia(linha['DIA SEMANA'] || linha.dia_semana);
   if (dia === 'quarta-feira') return 'quarta';
+  const regente = String(linha['REGENTE LOUVOR'] || linha.regente || '').trim();
+  if (regente && regente !== '-') return ehDepartamental(regente) ? 'departamental' : 'louvor';
   const pregador = linha.PREGADOR || linha.pregador;
   if (ehDepartamental(pregador)) return 'departamental';
   return 'louvor';

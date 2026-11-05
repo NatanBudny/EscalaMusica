@@ -70,6 +70,7 @@
                 <th>Modelo</th>
                 <th>Ancião</th>
                 <th>Pregador</th>
+                <th title="Copie da escala do ancionato">Louvor por</th>
                 <th>Observações</th>
                 <th></th>
               </tr>
@@ -239,6 +240,12 @@
             <input type="text" id="pfAliases" class="campo-input" placeholder="Ex.: MARIA, MARI" />
           </div>
           <div class="form-campo">
+            <label class="campo-label" for="pfContatoVia">WhatsApp de quem?</label>
+            <select id="pfContatoVia" class="campo-input">
+              <option value="">Telefone próprio</option>
+            </select>
+          </div>
+          <div class="form-campo">
             <label class="campo-label">Telefone (WhatsApp)</label>
             <input type="text" id="pfTelefone" class="campo-input" placeholder="Ex.: 5543999998888" />
           </div>
@@ -287,6 +294,15 @@
         </fieldset>
 
         <fieldset class="form-fieldset">
+          <legend>Frequência</legend>
+          <div class="form-campo">
+            <label class="campo-label" for="pfLimiteMensal">Máximo de escalas no mês (deixe vazio = sem limite)</label>
+            <input type="number" id="pfLimiteMensal" class="campo-input" min="1" max="31" step="1" placeholder="Ex.: 1" />
+          </div>
+          <p class="modal-hint">Conta cada culto em que a pessoa aparece (regência, equipe ou mensagem musical). A sugestão automática respeita o limite; na montagem manual aparece o nível definido em Regras.</p>
+        </fieldset>
+
+        <fieldset class="form-fieldset">
           <legend>Afastamento temporário</legend>
           <label class="check"><input type="checkbox" id="pfAfastado" /> Está afastada</label>
           <div class="form-grid">
@@ -317,7 +333,7 @@
             <label class="campo-label">Precisa de pelo menos uma destas pessoas no culto</label>
             <select id="pfPrecisaDe" class="campo-input" multiple size="4"></select>
           </div>
-          <p class="modal-hint">"Sempre junto" é aplicado nas duas pessoas. "Precisa de" é só aviso, não bloqueia.</p>
+          <p class="modal-hint">"Sempre junto" é aplicado nas duas pessoas. Na hora de escolher, o vínculo aparece como lembrete; na revalidação para envio vale o nível da regra "vínculo" em Regras (hoje: bloqueio, que o diretor pode liberar como exceção).</p>
         </fieldset>
 
         <div class="form-campo">
@@ -479,6 +495,17 @@
             <input type="number" id="paramMinHomens" class="campo-input" min="0" max="5" />
           </div>
         </div>
+        <fieldset class="form-fieldset">
+          <legend>Nível de cada regra</legend>
+          <p class="campo-hint">
+            <b>Bloqueio</b>: impede publicar, a não ser que o diretor confirme a exceção.
+            <b>Aviso</b>: deixa publicar, mas pede ciência. Desmarque "ligada" para a regra não ser conferida.
+          </p>
+          <table class="regras-niveis">
+            <thead><tr><th>Regra</th><th>Ligada</th><th>Nível</th></tr></thead>
+            <tbody id="regrasNiveis"></tbody>
+          </table>
+        </fieldset>
         <fieldset class="form-fieldset">
           <legend>Pesos do score</legend>
           <div id="regrasPesos" class="regras-pesos"></div>
@@ -772,6 +799,46 @@
         <p id="seletorContador" class="modal-contador"></p>
         <input type="search" id="seletorBusca" class="campo-input" placeholder="Filtrar por nome (opcional)" />
         <ul id="seletorLista" class="seletor-lista"></ul>
+        <div class="form-acoes">
+          <span class="campo-hint">Não achou? Convidado ou pessoa nova precisa de cadastro com contato.</span>
+          <div class="toolbar-spacer"></div>
+          <button id="btnCadastrarConvidado" type="button" class="control-btn">+ Cadastrar pessoa ou convidado</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cadastro rápido de convidado a partir do seletor (decisão de 05/11/2026) -->
+    <div id="modalConvidado" class="modal" hidden>
+      <div class="modal-backdrop" data-fechar-convidado></div>
+      <div class="modal-box">
+        <button class="modal-close" data-fechar-convidado>&times;</button>
+        <h3 class="modal-title">Cadastrar pessoa ou convidado</h3>
+        <p id="convidadoFuncao" class="modal-hint"></p>
+        <div class="form-campo">
+          <label class="campo-label" for="cvNome">Nome como vai aparecer na escala</label>
+          <input type="text" id="cvNome" class="campo-input" placeholder="Ex.: LILIAN" />
+        </div>
+        <div class="form-campo">
+          <label class="campo-label" for="cvGenero">Gênero</label>
+          <select id="cvGenero" class="campo-input">
+            <option value="F">Feminino</option>
+            <option value="M">Masculino</option>
+          </select>
+        </div>
+        <fieldset class="form-fieldset">
+          <legend>Contato no WhatsApp (obrigatório)</legend>
+          <label class="check"><input type="radio" name="cvContato" id="cvContatoProprio" value="proprio" checked /> Telefone próprio</label>
+          <input type="text" id="cvTelefone" class="campo-input" placeholder="Ex.: 5543999998888" />
+          <label class="check"><input type="radio" name="cvContato" id="cvContatoVia" value="via" /> Usar o WhatsApp de uma pessoa já cadastrada</label>
+          <select id="cvVia" class="campo-input" disabled></select>
+          <p class="modal-hint">A mensagem de confirmação da escala vai para esse número.</p>
+        </fieldset>
+        <p id="cvErro" class="form-erro" hidden></p>
+        <div class="form-acoes">
+          <div class="toolbar-spacer"></div>
+          <button data-fechar-convidado class="control-btn">Cancelar</button>
+          <button id="btnSalvarConvidado" class="primary-btn">Cadastrar e escalar</button>
+        </div>
       </div>
     </div>
   </div>

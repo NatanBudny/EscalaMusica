@@ -215,6 +215,29 @@ Priorizar no máximo 1 escala por mês para esse perfil e permitir até 2 apenas
 
 ---
 
+## Decisões de 05/11/2026 — como o montador aplica as regras
+
+> Decididas pelo diretor (Natan) na passagem para o novo responsável, que monta a escala pelo montador web (`npm run montar`, tela local no navegador).
+> O nível (bloqueio ou aviso) de cada regra fica em `processos/regras/parametros.json` e pode ser mudado na tela **Regras → Nível de cada regra**.
+> **Bloqueio** impede publicar, a não ser que o diretor confirme a exceção. **Aviso** deixa publicar, mas pede ciência.
+
+1. **Bloqueio, com exceção do diretor:** equipe sem o mínimo de homens (RF001), mais de uma mensagem musical no mês (RF014), pregador do culto cantando (RF004), mesma pessoa na equipe e na mensagem musical, equipe incompleta, e vínculo não atendido (casal, família ou "precisa de").
+2. **Vínculos ficam no cadastro de cada pessoa** (tela Pessoas → Vínculos), não em texto:
+   - Manu C. precisa da Silvana no culto.
+   - Manu S. precisa da Jessica ou do Joás.
+   - Mirella e Marcela precisam do Nilson, inclusive para a mensagem musical.
+   - Casais (RP003, RP004, RP005) e família Silva (RP009, RP016) continuam como estão.
+
+   Na hora de escolher, o vínculo aparece só como lembrete, porque o par ainda pode ser escolhido depois. Na revalidação para envio vale o nível da regra "vínculo".
+3. **Limite de escalas no mês fica no cadastro** (campo "Máximo de escalas no mês"): Mirian (RP015) e Lidiane (RP007) com 1. Passar do limite é aviso, e a sugestão automática não passa dele.
+4. **Cantar em cultos seguidos** é preferência, não obrigação: evitar quando houver bastante gente disponível; com pouca gente, pode repetir. No montador é aviso.
+5. **Culto de departamento** é o que a escala do ancionato disser. O operador só copia, na coluna "Louvor por" do acionato. O pregador sozinho não decide: o Quarteto pregou em 31/10/2026 e a equipe cantou; em 10/10/2026 o Pr. Hofni pregou e os Jovens assumiram o louvor.
+6. **Convidado ou pessoa nova** precisa de cadastro com contato antes de entrar na escala: telefone próprio ou o WhatsApp de uma pessoa já cadastrada (ex.: Lilian pelo contato da Carla Ribeiro). O seletor da montagem tem o botão "+ Cadastrar pessoa ou convidado".
+7. **Exceção do diretor:** quem está bloqueado por regra pode ser escolhido em "Não elegíveis → escolher como exceção", depois de o diretor confirmar que está violando a regra de propósito. Na revalidação, cada regra violada tem uma caixa para confirmar a exceção. As exceções ficam registradas em `escalas/AAAA/MM/excecoes.json` e na linha do log de publicações, nunca na OBS pública. Não aceitam exceção: nome fora do cadastro, falta de telefone, OBS pública inválida, link de WhatsApp errado e culto sem regente.
+8. A escalação da Juliana Alves num domingo (18/10/2026) foi exceção. A regra RP006 (só sábado) continua valendo.
+
+---
+
 ## TI — Time e Papéis
 
 > Definição dos papéis existentes e quem pode exercê-los.

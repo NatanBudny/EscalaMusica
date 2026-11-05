@@ -71,7 +71,15 @@ function montarPessoa(dados, idExistente) {
     };
   }
 
+  // Campos do pessoas.json que a tela não edita (ex.: incentivo) são mantidos
+  // como estavam: na edição, `dados` já chega mesclado com o registro salvo.
+  const preservados = {};
+  for (const [chave, valor] of Object.entries(dados || {})) {
+    if (!CAMPOS_GERIDOS.has(chave)) preservados[chave] = valor;
+  }
+
   return {
+    ...preservados,
     id: idExistente,
     nome: normalizarNome(dados.nome),
     aliases: Array.isArray(dados.aliases)
@@ -95,7 +103,75 @@ function montarPessoa(dados, idExistente) {
     afastado,
     vinculos: Array.isArray(dados.vinculos) ? dados.vinculos : [],
     dias_permitidos: diasPermitidos && diasPermitidos.length > 0 ? diasPermitidos : null,
+    limite_mensal: normalizarLimiteMensal(dados.limite_mensal),
+    // Contato pelo WhatsApp de outra pessoa (ex.: convidada sem telefone
+    // próprio). Ausente = telefone próprio.
+    ...(Number.isInteger(dados.contato_via_id) ? { contato_via_id: dados.contato_via_id } : {}),
   };
+}
+
+/**
+ * Resolve "contato via outra pessoa": copia o telefone da pessoa vinculada.
+ * Devolve os dados ajustados, ou um erro em português quando o vínculo não
+ * serve (pessoa inexistente, a própria pessoa ou sem telefone).
+ *
+ * @param {object} arquivo - pessoas.json
+ * @param {object} dados - campos da tela (podem trazer contato_via_id)
+ * @param {number|null} id - pessoa editada (null = nova)
+ * @returns {{ dados: object, via: object|null, erro: string|null }}
+ */
+function aplicarContatoVia(arquivo, dados, id) {
+  const bruto = dados ? dados.contato_via_id : null;
+  if (bruto == null || bruto === '') {
+    const { contato_via_id: _ignorado, ...resto } = dados || {};
+    return { dados: resto, via: null, erro: null };
+  }
+  const viaId = Number(bruto);
+  const via = Number.isInteger(viaId) ? arquivo.pessoas.find((p) => p.id === viaId) : null;
+  if (!via) return { dados, via: null, erro: 'A pessoa escolhida como contato não existe no cadastro.' };
+  if (id != null && via.id === id) return { dados, via: null, erro: 'O contato precisa ser de outra pessoa.' };
+  const tel = normalizarTelefone(via.telefone);
+  if (!tel) return { dados, via: null, erro: `${via.nome} não tem telefone no cadastro para servir de contato.` };
+  return { dados: { ...dados, contato_via_id: via.id, telefone: tel }, via, erro: null };
+}
+
+/**
+ * Mantém o telefone de quem usa o contato de outra pessoa igual ao telefone
+ * atual dessa pessoa (ex.: a mãe trocou de número). Muta o arquivo.
+ */
+function sincronizarContatosVia(arquivo) {
+  const porId = new Map(arquivo.pessoas.map((p) => [p.id, p]));
+  for (const p of arquivo.pessoas) {
+    if (!Number.isInteger(p.contato_via_id)) continue;
+    const via = porId.get(p.contato_via_id);
+    const tel = via ? normalizarTelefone(via.telefone) : '';
+    if (tel) p.telefone = tel;
+  }
+}
+
+/** Campos que montarPessoa monta a partir da tela (os demais são preservados). */
+const CAMPOS_GERIDOS = new Set([
+  'id',
+  'nome',
+  'aliases',
+  'telefone',
+  'genero',
+  'ativo',
+  'perfil_canto',
+  'notas',
+  'habilitacoes',
+  'afastado',
+  'vinculos',
+  'dias_permitidos',
+  'limite_mensal',
+  'contato_via_id',
+]);
+
+/** Máximo de escalas no mês: inteiro de 1 a 31, ou null (sem limite). */
+function normalizarLimiteMensal(valor) {
+  if (valor == null || valor === '') return null;
+  const n = Number(valor);
+  return Number.isInteger(n) && n >= 1 && n <= 31 ? n : null;
 }
 
 /**
@@ -105,6 +181,8 @@ function montarPessoa(dados, idExistente) {
  * @returns {{ arquivos: string[] }} caminhos relativos tocados
  */
 export function gravarValidado(arquivo, root = ROOT) {
+  sincronizarContatosVia(arquivo);
+
   // Recalcula proximo_id (P2): max(ids)+1.
   const maxId = Math.max(0, ...arquivo.pessoas.map((p) => p.id));
   arquivo.proximo_id = maxId + 1;
@@ -200,11 +278,16 @@ function nomesExibicaoDeGrupos(grupos) {
  * @param {{ root?: string }} [opts]
  * @returns {{ erros: string[], avisos: string[], telefoneCompartilhadoCom: string[] }}
  */
-export function verificarPessoa(dados, id = null, { root = ROOT } = {}) {
+export function verificarPessoa(dadosTela, id = null, { root = ROOT } = {}) {
   const arquivo = lerArquivo(root);
   const grupos = arquivo.grupos || {};
   const erros = [];
   const avisos = [];
+
+  // Contato via outra pessoa: valida o vínculo e usa o telefone dela.
+  const contato = aplicarContatoVia(arquivo, dadosTela || {}, id);
+  if (contato.erro) erros.push(contato.erro);
+  const dados = contato.dados;
 
   const nome = normalizarNome(dados.nome);
   const aliases = Array.isArray(dados.aliases)
@@ -226,6 +309,11 @@ export function verificarPessoa(dados, id = null, { root = ROOT } = {}) {
     erros.push(
       'Telefone inválido. Esperado: 55 + DDD (2 dígitos) + número de 8 ou 9 dígitos. Ex.: 5543999998888.',
     );
+  }
+
+  // Máximo de escalas no mês: vazio (sem limite) ou inteiro de 1 a 31.
+  if (dados.limite_mensal != null && dados.limite_mensal !== '' && normalizarLimiteMensal(dados.limite_mensal) == null) {
+    erros.push('Máximo de escalas no mês deve ser um número inteiro de 1 a 31 (ou vazio para sem limite).');
   }
 
   // 2) Duplicidade exata e normalizada contra outras pessoas e nome_exibicao de grupos.
@@ -295,11 +383,11 @@ function telefoneSalvo(arquivo, id) {
  * @returns {{ pessoa: object, arquivos: string[] }}
  */
 export function salvarPessoa(
-  dados,
+  dadosTela,
   { id = null, confirmacaoTelefone = false, confirmarAvisos = false, root = ROOT } = {},
 ) {
   const arquivo = lerArquivo(root);
-  const { erros, avisos } = verificarPessoa(dados, id, { root });
+  const { erros, avisos } = verificarPessoa(dadosTela, id, { root });
 
   if (erros.length > 0) {
     throw new Error(erros.join(' '));
@@ -310,10 +398,14 @@ export function salvarPessoa(
     throw err;
   }
 
-  // Telefone novo/alterado exige confirmação no WhatsApp.
+  // Contato via outra pessoa: o telefone é o dela (já confirmado no cadastro).
+  const { dados, via } = aplicarContatoVia(arquivo, dadosTela, id);
+
+  // Telefone novo/alterado exige confirmação no WhatsApp (exceto contato via
+  // outra pessoa, cujo número já foi confirmado no cadastro dela).
   const telNovo = normalizarTelefone(dados.telefone);
   const telAntigo = telefoneSalvo(arquivo, id);
-  if (telNovo && telNovo !== telAntigo && confirmacaoTelefone !== true) {
+  if (!via && telNovo && telNovo !== telAntigo && confirmacaoTelefone !== true) {
     throw new Error('Confirme no WhatsApp o telefone novo ou alterado antes de salvar.');
   }
 
@@ -328,7 +420,10 @@ export function salvarPessoa(
 
   const idx = arquivo.pessoas.findIndex((p) => p.id === id);
   if (idx === -1) throw new Error(`Pessoa com ID ${id} não encontrada.`);
-  const atualizada = montarPessoa({ ...arquivo.pessoas[idx], ...dados }, id);
+  const mesclado = { ...arquivo.pessoas[idx], ...dados };
+  // A tela mandou "telefone próprio" (contato_via_id vazio): desfaz o vínculo.
+  if (dadosTela && 'contato_via_id' in dadosTela && !via) delete mesclado.contato_via_id;
+  const atualizada = montarPessoa(mesclado, id);
   if (!atualizada.nome) throw new Error('Nome é obrigatório.');
   arquivo.pessoas[idx] = atualizada;
   const { arquivos } = gravarValidado(arquivo, root);

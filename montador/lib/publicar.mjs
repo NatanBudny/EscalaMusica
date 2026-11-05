@@ -13,7 +13,7 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { ROOT, toBrDate } from './regras.mjs';
-import { tipoDoCulto, tipoDaLinhaAtual, slotsDoCulto } from './contexto.mjs';
+import { tipoDoCulto, tipoDaLinhaAtual, slotsDoCulto, departamentoDoCulto } from './contexto.mjs';
 import { normalizarNome } from '../../src/utils/name.js';
 
 export const CAMPOS_ATUAL = [
@@ -123,7 +123,7 @@ export function cultoParaAtual(culto, base = {}, anterior = null) {
     equipe = '-';
     mm = '-';
   } else if (tipo === 'departamental') {
-    const dep = (culto.departamento || culto.pregador || '').toUpperCase().trim();
+    const dep = (culto.departamento || departamentoDoCulto(culto) || culto.pregador || '').toUpperCase().trim();
     regente = dep;
     equipe = dep;
     mm = dep;

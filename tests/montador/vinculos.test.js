@@ -136,8 +136,26 @@ describe('Property 8: Vínculos válidos e simétricos', () => {
   });
 });
 
+/**
+ * Cópia do pessoas.json real como estava antes da migração regras_por_nome
+ * (aplicada em 05/11/2026): sem a marca, sem os precisa_de das quatro
+ * pessoas e sem a restrição de sábado da Ariadny. Assim o teste não depende de
+ * a migração ainda estar pendente no repositório.
+ */
+function pessoasAntesDaMigracao() {
+  const arquivo = JSON.parse(readFileSync(resolve(ROOT, 'pessoas.json'), 'utf8'));
+  if (arquivo.migracoes) delete arquivo.migracoes.regras_por_nome;
+  for (const p of arquivo.pessoas) {
+    if (['MANU C.', 'MANU S.', 'MIRELLA', 'MARCELA'].includes(p.nome)) {
+      p.vinculos = (p.vinculos || []).filter((v) => v.tipo !== 'precisa_de');
+    }
+    if (p.nome === 'ARIADNY') p.dias_permitidos = null;
+  }
+  return arquivo;
+}
+
 describe('Task 7.2: migração das regras por nome sobre o pessoas.json real', () => {
-  const pessoasArquivo = JSON.parse(readFileSync(resolve(ROOT, 'pessoas.json'), 'utf8'));
+  const pessoasArquivo = pessoasAntesDaMigracao();
 
   function porNome(arquivo, nome) {
     return arquivo.pessoas.find((p) => p.nome === nome);

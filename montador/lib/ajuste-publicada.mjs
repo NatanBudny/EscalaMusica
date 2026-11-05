@@ -29,10 +29,11 @@
 // Feature: melhoras-domingao (F. Envio) — Task 37; Properties 31, 36;
 // Requisitos 28.1 a 28.5.
 
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { resolve, dirname } from 'node:path';
 
 import { ROOT, carregarContexto, toBrDate } from './regras.mjs';
+import { separarExcecoes, registroExcecoes } from './excecoes.mjs';
 import { criarGit } from './git.mjs';
 import { cultosDeAtual, cultoParaAtual, CAMPOS_ATUAL } from './publicar.mjs';
 import { revalidarParaEnvio } from './revalidacao.mjs';
@@ -278,7 +279,7 @@ function ordenarChaves(linha) {
  * @throws {ErroFechamento} 422 (erro de revalidação) ou 409 (aviso sem ciência)
  */
 export async function ajustar(
-  { data, campo, valor, ciencias = [] },
+  { data, campo, valor, ciencias = [], excecoes = [] },
   { root = ROOT, git = criarGit({ cwd: root }) } = {},
 ) {
   const forma = problemaDeForma({ data, campo, valor });
@@ -315,8 +316,10 @@ export async function ajustar(
     root,
   );
 
-  if (erros.length > 0) {
-    throw new ErroFechamento({ status: 422, erros });
+  // Bloqueios de regra com exceção confirmada pelo diretor não impedem o ajuste.
+  const { pendentes, confirmadas } = separarExcecoes(erros, excecoes);
+  if (pendentes.length > 0) {
+    throw new ErroFechamento({ status: 422, erros: pendentes });
   }
   const semCiencia = avisos.filter((a) => !ciencias.includes(a.id));
   if (semCiencia.length > 0) {
@@ -343,6 +346,23 @@ export async function ajustar(
   });
 
   const arquivos = ['atual.json', ...controles];
+
+  // Registro das exceções confirmadas no ajuste (fora do site).
+  const registro =
+    confirmadas.length > 0
+      ? registroExcecoes(mes, confirmadas, {
+          root,
+          autor: typeof git.autor === 'function' ? await git.autor() : '',
+          origem: `ajuste ${alvoBR} ${campo}`,
+        })
+      : null;
+  if (registro) {
+    const abs = resolve(root, registro.rel);
+    mkdirSync(dirname(abs), { recursive: true });
+    writeFileSync(abs, `${JSON.stringify(registro.dados, null, 2)}\n`, 'utf8');
+    arquivos.push(registro.rel);
+  }
+
   const commit = await git.commitSeletivo(
     arquivos,
     `Ajusta escala publicada ${alvoBR} — ${campo} (editor de escala)`,

@@ -156,6 +156,7 @@ export function pessoasAtivasParaSlot(slot, data, contexto) {
   const evitarIndisponibilidade = evitarNaSugestao(par, 'indisponibilidade'); // bloqueio → true
   const evitarSonoplastia = evitarNaSugestao(par, 'conflito_sonoplastia'); // bloqueio → true
   const evitarPregador = evitarNaSugestao(par, 'conflito_pregador'); // aviso + evitar → true
+  const evitarLimiteMensal = evitarNaSugestao(par, 'limite_mensal'); // limite_mensal do cadastro
 
   // Pré-computar sets de IDs para filtros 5-8
   const indisponiveisData = idsIndisponiveisNaData(indisponibilidade, data);
@@ -196,6 +197,10 @@ export function pessoasAtivasParaSlot(slot, data, contexto) {
 
     // Filtro 8: já escalado no mesmo culto em papel conflitante.
     if (bloqueadoNoCulto(contexto, data, pessoa.id, slot, par, jaEscalados)) continue;
+
+    // Filtro 9: limite de escalas no mês do cadastro (limite_mensal), contando
+    // os outros cultos do mês em que a pessoa já está.
+    if (evitarLimiteMensal && atingiuLimiteMensal(contexto, data, pessoa)) continue;
 
     candidatos.push(pessoa);
   }
@@ -266,6 +271,23 @@ function bloqueadoNoCulto(contexto, data, pessoaId, slot, par, jaEscalados) {
 }
 
 /** A regra está ativa com nível bloqueio? */
+/**
+ * A pessoa já está em `limite_mensal` cultos do mês (sem contar `data`)?
+ * Pessoa sem limite_mensal (null/ausente) nunca atinge o limite.
+ */
+function atingiuLimiteMensal(contexto, data, pessoa) {
+  const limite = Number(pessoa.limite_mensal);
+  if (!Number.isInteger(limite) || limite <= 0) return false;
+  const porCulto = contexto.escaladosPorCulto;
+  if (!porCulto) return false;
+  let total = 0;
+  for (const [dataCulto, ids] of porCulto) {
+    if (dataCulto === data) continue;
+    if (ids && ids.has(pessoa.id)) total += 1;
+  }
+  return total >= limite;
+}
+
 function ehBloqueioAtivo(par, chave) {
   const regra = par && par.regras && par.regras[chave];
   return !!(regra && regra.ativa === true && regra.nivel === 'bloqueio');

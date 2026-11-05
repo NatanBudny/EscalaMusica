@@ -578,6 +578,24 @@ body {
   background: var(--bg-subtle);
 }
 .seletor-motivo { color: var(--danger); font-weight: 600; font-size: 11px; }
+/* Não elegível escolhível como exceção do diretor. */
+.seletor-item-excecao {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 8px;
+  width: 100%;
+  text-align: left;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.seletor-item-excecao:hover .seletor-excecao-acao,
+.seletor-item-excecao:focus .seletor-excecao-acao { text-decoration: underline; }
+.seletor-excecao-acao { font-size: 11px; color: var(--text-muted); font-style: italic; }
 
 /* Card com aviso visível (atribuições escolhidas com aviso). */
 .culto-aviso {
@@ -682,6 +700,9 @@ body {
 /* Modal seletor */
 .modal { position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; }
 .modal-backdrop { position: absolute; inset: 0; background: rgb(0 0 0 / 0.45); backdrop-filter: blur(2px); }
+/* Cadastro de convidado abre por cima do seletor; a confirmação do WhatsApp, por cima dele. */
+#modalConvidado { z-index: 61; }
+#modalConfirmaZap { z-index: 62; }
 .modal-box { position: relative; background: var(--bg-card); border-radius: var(--radius-lg); padding: 24px; width: min(440px, 92vw); max-height: 88vh; overflow-y: auto; box-shadow: var(--shadow-lg); display: flex; flex-direction: column; animation: zoomIn 0.25s ease-out; }
 .modal-close { position: absolute; top: 12px; right: 16px; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-muted); line-height: 1; }
 .modal-close:hover { color: var(--danger); }
@@ -917,6 +938,22 @@ body {
 .regras-painel-titulo {
   margin: 0 0 12px;
   font-size: 1.05rem;
+}
+.regras-niveis {
+  width: 100%;
+  border-collapse: collapse;
+}
+.regras-niveis th,
+.regras-niveis td {
+  text-align: left;
+  padding: 4px 8px;
+  border-bottom: 1px solid #eee;
+}
+.regras-niveis td:nth-child(2) {
+  text-align: center;
+}
+.regras-niveis select {
+  min-width: 110px;
 }
 .regras-pesos {
   display: grid;

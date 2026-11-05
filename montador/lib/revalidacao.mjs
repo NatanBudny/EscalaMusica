@@ -32,6 +32,7 @@ import { problemasObs } from '../../scripts/lib/texto-publico.js';
 import { derivarContatos } from '../../scripts/lib/contatos.js';
 import { analisarEnquete } from './indisponibilidade.mjs';
 import { conferirLinks } from './conferencia.mjs';
+import { marcarExcecionaveis } from './excecoes.mjs';
 
 /** Campos de louvor publicados cujos nomes exigem telefone no cadastro. */
 const CAMPOS_LOUVOR = ['REGENTE LOUVOR', 'EQUIPE LOUVOR', 'MENSAGEM MUSICAL'];
@@ -240,7 +241,8 @@ export function revalidarParaEnvio(base, cultos, { root = ROOT } = {}) {
   const conferencia = conferirLinks(linhasAtual, contatos, base);
 
   const erros = [
-    ...validacaoEscala.erros,
+    // Bloqueios de regra podem ser liberados por exceção do diretor.
+    ...marcarExcecionaveis(validacaoEscala.erros),
     ...travaTelefone(linhasAtual, base),
     ...verificarObs(linhasAtual),
     ...catalogo.erros,

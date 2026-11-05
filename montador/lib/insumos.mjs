@@ -14,7 +14,7 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { ROOT } from './regras.mjs';
-import { modeloPorDiaSemana } from './contexto.mjs';
+import { modeloPorDiaSemana, departamentoDoCulto, DEPARTAMENTOS } from './contexto.mjs';
 import { carregarPessoas } from '../../scripts/lib/cadastro.js';
 import { problemasNome } from '../../scripts/lib/texto-publico.js';
 
@@ -69,6 +69,9 @@ export function lerAcionato(mes, { root = ROOT } = {}) {
         ? item.modelo_louvor
         : modeloPorDiaSemana(item.dia),
     extraordinario: item.extraordinario === true,
+    // Departamento que assume o louvor, copiado da escala do ancionato. Em
+    // acionato antigo (sem o campo) mostra o que a regra antiga decidiria.
+    louvor_departamento: departamentoDoCulto(item),
   }));
   return {
     mes: dados.mes || mes,
@@ -107,6 +110,12 @@ export function validarAcionato(mes, acionato) {
     if (!MODELOS_VALIDOS.has(modelo)) {
       problemas.push(`Modelo de louvor inválido em "${data}": "${modelo}".`);
     }
+    const dep = String(item.louvor_departamento || '').toUpperCase().trim();
+    if (dep && !DEPARTAMENTOS.has(dep)) {
+      problemas.push(
+        `Departamento "${item.louvor_departamento}" em "${data}" não está na lista (${[...DEPARTAMENTOS].join(', ')}).`,
+      );
+    }
   }
   return problemas;
 }
@@ -133,6 +142,8 @@ export function salvarAcionato(mes, acionato, { root = ROOT } = {}) {
       observacoes: item.observacoes || '',
       modelo_louvor: item.modelo_louvor || modeloPorDiaSemana(item.dia),
       extraordinario: item.extraordinario === true,
+      // Sempre explícito ao gravar pela tela: '' = louvor da nossa equipe.
+      louvor_departamento: String(item.louvor_departamento || '').toUpperCase().trim(),
     }))
     .sort((a, b) => a.data.localeCompare(b.data));
 

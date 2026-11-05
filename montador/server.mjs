@@ -22,7 +22,7 @@ import {
   sugerirMes,
   validarEscala,
 } from './lib/regras.mjs';
-import { tipoDoCulto, slotsDoCulto, paraParticipacao } from './lib/contexto.mjs';
+import { tipoDoCulto, slotsDoCulto, paraParticipacao, DEPARTAMENTOS } from './lib/contexto.mjs';
 import { gerarLinhasAtual, cultosDeAtual } from './lib/publicar.mjs';
 import { revalidarParaEnvio } from './lib/revalidacao.mjs';
 import { fechar, ErroFechamento } from './lib/fechamento.mjs';
@@ -285,7 +285,7 @@ export function criarServidor({ porta = PORT_PADRAO, git = criarGit() } = {}) {
       }
 
       if (req.method === 'POST' && url.pathname === '/api/fechar') {
-        const { mes, cultos, ciencias } = body;
+        const { mes, cultos, ciencias, excecoes } = body;
         if (!mes || !MES_RE.test(mes) || !Array.isArray(cultos)) {
           sendJson(res, 400, { erro: 'mes e cultos sao obrigatorios.' });
           return;
@@ -293,9 +293,15 @@ export function criarServidor({ porta = PORT_PADRAO, git = criarGit() } = {}) {
         try {
           // Fechamento completo em processo: revalida (com conferência de
           // links), grava atual.json/contatos.json/controles/log, limpa os
-          // insumos, comita só os arquivos tocados e envia.
+          // insumos, comita só os arquivos tocados e envia. `excecoes` são os
+          // bloqueios de regra que o diretor confirmou violar de propósito.
           const relatorio = await fechar(
-            { mes, cultos, ciencias: Array.isArray(ciencias) ? ciencias : [] },
+            {
+              mes,
+              cultos,
+              ciencias: Array.isArray(ciencias) ? ciencias : [],
+              excecoes: Array.isArray(excecoes) ? excecoes : [],
+            },
             { git },
           );
           sendJson(res, 200, relatorio);
@@ -348,10 +354,16 @@ export function criarServidor({ porta = PORT_PADRAO, git = criarGit() } = {}) {
         // Grava só o campo alterado, recalcula os controles, comita atual.json
         // e os controles, envia e deixa a UI seguir para a verificação do site
         // (sem WhatsApp).
-        const { data, campo, valor, ciencias } = body;
+        const { data, campo, valor, ciencias, excecoes } = body;
         try {
           const resultado = await ajustar(
-            { data, campo, valor, ciencias: Array.isArray(ciencias) ? ciencias : [] },
+            {
+              data,
+              campo,
+              valor,
+              ciencias: Array.isArray(ciencias) ? ciencias : [],
+              excecoes: Array.isArray(excecoes) ? excecoes : [],
+            },
             { git },
           );
           sendJson(res, 200, resultado);
@@ -759,7 +771,11 @@ export function criarServidor({ porta = PORT_PADRAO, git = criarGit() } = {}) {
           return;
         }
         if (req.method === 'GET') {
-          sendJson(res, 200, lerAcionato(mes) || { mes, itens: [] });
+          // `departamentos`: opções de "louvor assumido por" na tela do acionato.
+          sendJson(res, 200, {
+            ...(lerAcionato(mes) || { mes, itens: [] }),
+            departamentos: [...DEPARTAMENTOS],
+          });
           return;
         }
         if (req.method === 'PUT') {

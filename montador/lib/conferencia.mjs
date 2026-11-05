@@ -106,17 +106,28 @@ export function entradasQueCasam(contatos, nome) {
 function indicesDoCadastro(base) {
   const pessoaPorNome = new Map();
   const pessoaPorNomeNorm = new Map();
+  // Apelido normalizado → pessoa, só quando o apelido é de uma pessoa só (o
+  // viewer também linka por apelido: buscarContato).
+  const pessoaPorApelidoNorm = new Map();
+  const apelidoRepetido = new Set();
   for (const p of (base.cadastro && base.cadastro.pessoas) || []) {
     pessoaPorNome.set(String(p.nome || '').trim(), p);
     pessoaPorNomeNorm.set(normalizarNome(String(p.nome || '')), p);
+    for (const ap of p.aliases || []) {
+      const k = normalizarNome(String(ap || ''));
+      if (!k) continue;
+      if (pessoaPorApelidoNorm.has(k) && pessoaPorApelidoNorm.get(k).id !== p.id) apelidoRepetido.add(k);
+      else pessoaPorApelidoNorm.set(k, p);
+    }
   }
+  for (const k of apelidoRepetido) pessoaPorApelidoNorm.delete(k);
   const grupoPorNome = new Map();
   const grupos = base.grupos instanceof Map ? base.grupos : new Map();
   for (const g of grupos.values()) {
     if (g && g.nome_exibicao) grupoPorNome.set(String(g.nome_exibicao).trim(), g);
   }
   const porId = (base.cadastro && base.cadastro.porId) || new Map();
-  return { pessoaPorNome, pessoaPorNomeNorm, grupoPorNome, porId };
+  return { pessoaPorNome, pessoaPorNomeNorm, pessoaPorApelidoNorm, grupoPorNome, porId };
 }
 
 /**
@@ -133,7 +144,14 @@ function indicesDoCadastro(base) {
  * @returns {{ telefone?: string, semLink?: boolean, livre?: boolean, foraDoCadastro?: boolean }}
  */
 function designado(indices, campo, nome) {
-  const { pessoaPorNome, pessoaPorNomeNorm, grupoPorNome, porId } = indices;
+  const { pessoaPorNome, pessoaPorNomeNorm, pessoaPorApelidoNorm, grupoPorNome, porId } = indices;
+  // Escala externa (sonoplastia, ancião, pregador) chega como foi escrita na
+  // escala do outro departamento, muitas vezes pelo apelido (ex.: "JÚNIOR
+  // OLIVEIRA" = ENOQUE JR.). Nome exato primeiro; depois apelido único.
+  const externo = (texto) =>
+    pessoaPorNomeNorm.get(normalizarNome(texto)) ||
+    (pessoaPorApelidoNorm && pessoaPorApelidoNorm.get(normalizarNome(texto))) ||
+    null;
 
   if (CAMPOS_LOUVOR.has(campo)) {
     const pessoa = pessoaPorNome.get(nome.trim());
@@ -150,13 +168,13 @@ function designado(indices, campo, nome) {
     // "Mesmo nome" é comparado com a normalização do viewer (buscarContato
     // também é insensível a acento/caixa), senão "JÚNIOR FERREIRA" não casaria
     // com a pessoa "JUNIOR FERREIRA" e geraria falso positivo.
-    const pessoa = pessoaPorNomeNorm.get(normalizarNome(nome));
+    const pessoa = externo(nome);
     if (pessoa) return { telefone: digitos(pessoa.telefone) };
     return { semLink: true };
   }
 
   // ANCIÃO / PREGADOR.
-  const pessoa = pessoaPorNomeNorm.get(normalizarNome(nome));
+  const pessoa = externo(nome);
   if (pessoa) return { telefone: digitos(pessoa.telefone) };
   return { livre: true };
 }

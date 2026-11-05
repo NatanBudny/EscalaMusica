@@ -33,6 +33,11 @@ export const PARAMETROS_PADRAO = {
     equipe_incompleta: { refs: [], ativa: true, nivel: 'aviso' },
     regente_vazio: { refs: [], ativa: true, nivel: 'bloqueio' },
     mm_vazia: { refs: ['RF012'], ativa: true, nivel: 'aviso' },
+    // Vínculos do cadastro (casal, família, "precisa de"). Na escolha da pessoa
+    // é sempre lembrete; este nível vale na validação do culto montado.
+    vinculo: { refs: ['RP003', 'RP004', 'RP005', 'RP009', 'RP016'], ativa: true, nivel: 'aviso' },
+    // Limite de escalas no mês definido no cadastro da pessoa (limite_mensal).
+    limite_mensal: { refs: ['RP007', 'RP015'], ativa: true, nivel: 'aviso', evitar_na_sugestao: true },
   },
   equipe: { tamanho: 5 },
   historico: { janela_meses: 4 },

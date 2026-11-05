@@ -29,7 +29,42 @@ const estado = {
   // ciências (RF 21.6, 21.7).
   ultimaRevalidacao: null,
   ciencias: new Set(),
+  // Exceções confirmadas pelo diretor: ids de bloqueio de regra que ele decidiu
+  // violar de propósito (ex.: pessoa só de sábado num domingo). Sobrevivem a
+  // mudanças na escala; quando o bloqueio some, a exceção some junto.
+  excecoes: new Set(),
 };
+
+/** Chave do localStorage das exceções confirmadas do mês. */
+function chaveExcecoes(mes) {
+  return `${chaveRascunho(mes)}:excecoes`;
+}
+
+/** Lê as exceções confirmadas do mês (Set de ids). */
+function lerExcecoes(mes) {
+  try {
+    const texto = localStorage.getItem(chaveExcecoes(mes));
+    const lista = texto ? JSON.parse(texto) : [];
+    return new Set(Array.isArray(lista) ? lista : []);
+  } catch {
+    return new Set();
+  }
+}
+
+/** Grava as exceções confirmadas do mês. */
+function salvarExcecoes() {
+  if (!estado.mes) return;
+  try {
+    localStorage.setItem(chaveExcecoes(estado.mes), JSON.stringify([...estado.excecoes]));
+  } catch {
+    /* sem storage: as exceções valem só nesta sessão */
+  }
+}
+
+/** Erros que ainda impedem o envio (sem exceção confirmada). */
+function errosPendentes(erros, excecoes) {
+  return (erros || []).filter((e) => !(e && e.excecionavel === true && excecoes.has(e.id)));
+}
 
 // ---------------------------------------------------------------------------
 // Rascunho automático por ID no localStorage (Task 24 / RF 19)
@@ -155,6 +190,8 @@ function lerRascunho(mes) {
 function apagarRascunho(mes) {
   try {
     localStorage.removeItem(chaveRascunho(mes));
+    localStorage.removeItem(chaveExcecoes(mes));
+    if (estado.mes === mes) estado.excecoes = new Set();
   } catch {
     /* sem storage: nada a apagar */
   }
@@ -929,7 +966,13 @@ function renderCandidatos(grupos) {
     for (const c of naoElegiveis) {
       const li = document.createElement('li');
       li.className = 'seletor-inelegivel';
-      li.innerHTML = `<span>${c.nome}</span><span class="seletor-motivo">${c.motivoBloqueio || ''}</span>`;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'seletor-item seletor-item-excecao';
+      btn.title = 'Escolher mesmo assim (exceção do diretor)';
+      btn.innerHTML = `<span>${escaparHtml(c.nome)}</span><span class="seletor-motivo">${escaparHtml(c.motivoBloqueio || '')}</span><span class="seletor-excecao-acao">escolher como exceção</span>`;
+      btn.addEventListener('click', () => escolherComoExcecao(c));
+      li.appendChild(btn);
       inner.appendChild(li);
     }
     detalhes.appendChild(inner);
@@ -941,6 +984,190 @@ function renderCandidatos(grupos) {
 function fecharSeletor() {
   el('seletor').hidden = true;
   estado.seletorAlvo = null;
+}
+
+// ---------------------------------------------------------------------------
+// Cadastro rápido de convidado a partir do seletor (decisão de 05/11/2026)
+// ---------------------------------------------------------------------------
+
+// Alvo do seletor no momento em que o cadastro foi aberto e pessoas com
+// telefone (para "usar o WhatsApp de ...").
+const convidado = { alvo: null, pessoasComTelefone: [] };
+
+/** Habilitações da pessoa nova conforme a função em que ela vai entrar. */
+function habilitacoesParaSlot(slot) {
+  const hab = {
+    regente: slot === 'regente',
+    equipe: slot === 'equipe',
+    mensagem_musical: { es: false, culto: false, domingo: false },
+    sonoplastia: false,
+  };
+  // Convidado de sábado costuma cantar nas duas mensagens (ES e culto).
+  if (slot === 'mm_es' || slot === 'mm_culto') {
+    hab.mensagem_musical.es = true;
+    hab.mensagem_musical.culto = true;
+  }
+  if (slot === 'mm_domingo') hab.mensagem_musical.domingo = true;
+  return hab;
+}
+
+async function abrirCadastroConvidado() {
+  if (!estado.seletorAlvo) return;
+  const { idx, def } = estado.seletorAlvo;
+  const culto = estado.cultos[idx];
+  convidado.alvo = { ...estado.seletorAlvo };
+  el('convidadoFuncao').textContent = `Vai entrar em ${def.label} — ${brData(culto.data)}. Fica cadastrada só para esta função; dá para ajustar depois em Pessoas.`;
+  el('cvNome').value = (el('seletorBusca').value || '').trim().toUpperCase();
+  el('cvGenero').value = 'F';
+  el('cvTelefone').value = '';
+  el('cvContatoProprio').checked = true;
+  el('cvErro').hidden = true;
+  const sel = el('cvVia');
+  sel.disabled = true;
+  sel.innerHTML = '<option value="">Carregando...</option>';
+  el('modalConvidado').hidden = false;
+  el('cvNome').focus();
+  try {
+    const { pessoas } = await api('/api/pessoas');
+    convidado.pessoasComTelefone = (pessoas || [])
+      .filter((p) => soDigitos(p.telefone))
+      .sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
+    sel.innerHTML =
+      '<option value="">Escolha a pessoa</option>' +
+      convidado.pessoasComTelefone.map((p) => `<option value="${p.id}">${escaparHtml(p.nome)}</option>`).join('');
+  } catch (err) {
+    sel.innerHTML = '<option value="">Não foi possível carregar as pessoas</option>';
+  }
+  atualizarContatoConvidado();
+}
+
+function fecharCadastroConvidado() {
+  el('modalConvidado').hidden = true;
+  convidado.alvo = null;
+}
+
+/** Habilita o telefone ou o "WhatsApp de ..." conforme a opção marcada. */
+function atualizarContatoConvidado() {
+  const via = el('cvContatoVia').checked;
+  el('cvTelefone').disabled = via;
+  el('cvVia').disabled = !via;
+}
+
+function erroConvidado(msg) {
+  el('cvErro').textContent = msg;
+  el('cvErro').hidden = false;
+}
+
+async function salvarConvidado() {
+  if (!convidado.alvo) return;
+  const { idx, def, substituindo } = convidado.alvo;
+  el('cvErro').hidden = true;
+  const nome = el('cvNome').value.trim();
+  if (!nome) {
+    erroConvidado('Informe o nome.');
+    return;
+  }
+  const usaVia = el('cvContatoVia').checked;
+  const viaId = usaVia && el('cvVia').value ? Number(el('cvVia').value) : null;
+  const telefone = usaVia ? '' : soDigitos(el('cvTelefone').value);
+  if (usaVia && !viaId) {
+    erroConvidado('Escolha de quem é o WhatsApp.');
+    return;
+  }
+  if (!usaVia && !telefone) {
+    erroConvidado('Informe o telefone ou escolha "Usar o WhatsApp de uma pessoa já cadastrada".');
+    return;
+  }
+  const via = viaId ? convidado.pessoasComTelefone.find((p) => p.id === viaId) : null;
+  const hoje = new Date().toISOString().slice(0, 10);
+  const dados = {
+    nome,
+    aliases: [],
+    telefone,
+    contato_via_id: viaId,
+    genero: el('cvGenero').value,
+    perfil_canto: 'participacao',
+    ativo: true,
+    habilitacoes: habilitacoesParaSlot(def.slot),
+    dias_permitidos: null,
+    limite_mensal: null,
+    afastado: null,
+    notas: `Cadastrada pela montagem em ${hoje}${via ? `. Contato via ${via.nome}` : ''}.`,
+  };
+
+  let verificacao;
+  try {
+    verificacao = await api('/api/pessoas/verificar', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ dados, id: null }),
+    });
+  } catch (err) {
+    erroConvidado(err.message);
+    return;
+  }
+  if (verificacao.erros && verificacao.erros.length > 0) {
+    erroConvidado(verificacao.erros.join(' '));
+    return;
+  }
+  let confirmarAvisos = false;
+  if (verificacao.avisos && verificacao.avisos.length > 0) {
+    if (!confirm(`Atenção:\n- ${verificacao.avisos.join('\n- ')}\n\nCadastrar mesmo assim?`)) return;
+    confirmarAvisos = true;
+  }
+  let confirmacaoTelefone = false;
+  if (!usaVia) {
+    const ok = await confirmarWhatsApp(telefone, verificacao.telefoneCompartilhadoCom || []);
+    if (!ok) return;
+    confirmacaoTelefone = true;
+  }
+
+  mostrarOverlay('Cadastrando...');
+  try {
+    const resp = await api('/api/pessoas', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ dados, confirmacaoTelefone, confirmarAvisos }),
+    });
+    const pessoa = resp.pessoa;
+    estado.pessoasPorId.set(pessoa.id, { id: pessoa.id, nome: pessoa.nome, genero: pessoa.genero });
+    fecharCadastroConvidado();
+    aplicarOcupante(idx, def, pessoa.id, substituindo, []);
+    fecharSeletor();
+    setStatus(`${pessoa.nome} cadastrada e escalada.`, 'ok');
+    await atualizarSync();
+  } catch (err) {
+    erroConvidado(err.message);
+  } finally {
+    esconderOverlay();
+  }
+}
+
+/**
+ * Escolhe uma pessoa (ou grupo) bloqueada por regra, depois de o diretor
+ * confirmar que está violando a regra de propósito. Registra a exceção de cada
+ * bloqueio com o mesmo id que a validação usa
+ * (`chave|data|slot|ocupante`), para a revalidação de envio já trazê-la marcada.
+ */
+function escolherComoExcecao(c) {
+  if (!estado.seletorAlvo) return;
+  const { idx, def, substituindo } = estado.seletorAlvo;
+  const culto = estado.cultos[idx];
+  const motivos = (c.bloqueios || []).map((b) => b.texto);
+  const texto =
+    `${c.nome} não pode entrar aqui pelas regras:\n- ${motivos.join('\n- ') || c.motivoBloqueio || ''}\n\n` +
+    'Você confirma que está violando esta regra de propósito (exceção do diretor)?\n' +
+    'A exceção fica registrada no histórico do mês, fora da escala publicada.';
+  if (!confirm(texto)) return;
+
+  const ocupante = c.tipo === 'grupo' ? `grupo:${c.chave}` : c.id;
+  for (const b of c.bloqueios || []) {
+    estado.excecoes.add(`${b.chave}|${culto.data}|${def.slot}|${ocupante}`);
+  }
+  salvarExcecoes();
+  const avisos = [...motivos.map((m) => `exceção confirmada: ${m}`), ...(c.avisos || [])];
+  aplicarOcupante(idx, def, ocupante, substituindo, avisos);
+  fecharSeletor();
 }
 
 // ---------------------------------------------------------------------------
@@ -1000,7 +1227,7 @@ function renderChecklistInsumos(insumos) {
 // ---------------------------------------------------------------------------
 
 // Estado local da tela de acionato: lista de itens editáveis.
-const acionato = { itens: [] };
+const acionato = { itens: [], departamentos: [] };
 
 const MODELO_LABEL = {
   sabado: 'Como sábado',
@@ -1022,6 +1249,7 @@ async function abrirAcionato() {
   mostrarOverlay('Carregando acionato...');
   try {
     const dados = await api(`/api/mes/${estado.mes}/acionato`);
+    acionato.departamentos = Array.isArray(dados.departamentos) ? dados.departamentos : [];
     acionato.itens = (dados.itens || []).map((it) => ({
       data: it.data,
       dia: it.dia || diaDaSemanaISO(it.data),
@@ -1030,6 +1258,7 @@ async function abrirAcionato() {
       observacoes: it.observacoes || '',
       modelo_louvor: it.modelo_louvor || 'sem_louvor',
       extraordinario: it.extraordinario === true,
+      louvor_departamento: it.louvor_departamento || '',
     }));
     acionato.itens.sort((a, b) => a.data.localeCompare(b.data));
     el('tituloAcionato').textContent = formatarMesTitulo(estado.mes);
@@ -1099,6 +1328,28 @@ function renderAcionato() {
     tdPregador.appendChild(inPregador);
     tr.appendChild(tdPregador);
 
+    // Quem assume o louvor: copiar da escala do ancionato (05/11/2026).
+    const tdLouvor = document.createElement('td');
+    if (item.modelo_louvor === 'sem_louvor' || String(item.dia).startsWith('quarta')) {
+      tdLouvor.textContent = '—';
+    } else {
+      const selDep = document.createElement('select');
+      selDep.className = 'campo-input acionato-departamento';
+      selDep.title = 'Copie da escala do ancionato quando um departamento assume o louvor';
+      const opcoes = ['', ...(acionato.departamentos || [])];
+      if (item.louvor_departamento && !opcoes.includes(item.louvor_departamento)) opcoes.push(item.louvor_departamento);
+      for (const dep of opcoes) {
+        const op = document.createElement('option');
+        op.value = dep;
+        op.textContent = dep || 'Nossa equipe';
+        if (dep === (item.louvor_departamento || '')) op.selected = true;
+        selDep.appendChild(op);
+      }
+      selDep.addEventListener('change', () => { item.louvor_departamento = selDep.value; });
+      tdLouvor.appendChild(selDep);
+    }
+    tr.appendChild(tdLouvor);
+
     const tdObs = document.createElement('td');
     const inObs = document.createElement('textarea');
     inObs.className = 'campo-input acionato-obs';
@@ -1155,6 +1406,7 @@ function incluirDiaExtraordinario() {
     observacoes: '',
     modelo_louvor: modelo,
     extraordinario: true,
+    louvor_departamento: '',
   });
   acionato.itens.sort((a, b) => a.data.localeCompare(b.data));
   renderAcionato();
@@ -1696,6 +1948,7 @@ async function carregarMes(mes) {
     estado.gruposPorChave = dados.grupos || {};
     estado.filtro = { dias: new Set(), data: null, extraordinarios: false };
     estado.foraDoCadastro = new Set();
+    estado.excecoes = lerExcecoes(mes);
     el('tituloMes').textContent = formatarMesTitulo(mes);
     el('telaMenu').hidden = true;
     el('telaInsumos').hidden = true;
@@ -2254,7 +2507,10 @@ function mostrarValidacao({ erros, avisos }) {
     html = '<h4>Validação</h4><ul><li class="aviso" style="color:var(--success)">Tudo certo! Nenhum problema encontrado.</li></ul>';
   } else {
     html = '<h4>Validação</h4><ul>';
-    for (const e of erros) html += `<li class="erro">⛔ ${texto(e)}</li>`;
+    for (const e of erros) {
+      const excecao = e && e.id && estado.excecoes.has(e.id) ? ' <small>(exceção confirmada pelo diretor)</small>' : '';
+      html += `<li class="erro">⛔ ${texto(e)}${excecao}</li>`;
+    }
     for (const a of avisos) html += `<li class="aviso">⚠️ ${texto(a)}</li>`;
     html += '</ul>';
   }
@@ -2296,12 +2552,37 @@ async function revalidarEnvio() {
   }
 }
 
-/** Verdadeiro quando é seguro enviar: zero erros e toda ciência marcada. */
+/**
+ * Verdadeiro quando é seguro enviar: nenhum erro sem exceção confirmada e toda
+ * ciência marcada.
+ */
 function podeEnviar() {
   const r = estado.ultimaRevalidacao;
   if (!r) return false;
-  if ((r.erros || []).length > 0) return false;
+  if (errosPendentes(r.erros, estado.excecoes).length > 0) return false;
   return (r.avisos || []).every((a) => estado.ciencias.has(a.id));
+}
+
+/** Exceções confirmadas que correspondem a erros da revalidação atual. */
+function excecoesDaRevalidacao(r, excecoes) {
+  return (r && r.erros ? r.erros : [])
+    .filter((e) => e && e.excecionavel === true && excecoes.has(e.id))
+    .map((e) => e.id);
+}
+
+/**
+ * HTML da lista de erros de regra que o diretor pode liberar como exceção,
+ * cada um com sua caixa de confirmação (`classe` distingue envio e ajuste).
+ */
+function htmlErrosExcecionaveis(erros, excecoes, classe, texto) {
+  if (erros.length === 0) return '';
+  let html =
+    '<p class="revalidacao-sub">Regras violadas (impedem o envio, a não ser que o diretor confirme a exceção):</p><ul class="revalidacao-erros">';
+  for (const e of erros) {
+    const marcado = excecoes.has(e.id) ? ' checked' : '';
+    html += `<li class="erro"><label><input type="checkbox" class="${classe}" data-erro="${encodeURIComponent(e.id)}"${marcado}> <span>⛔ ${escaparHtml(texto(e))} <small>— marque para confirmar que está violando esta regra de propósito</small></span></label></li>`;
+  }
+  return `${html}</ul>`;
 }
 
 /**
@@ -2335,11 +2616,14 @@ function mostrarRevalidacao(resultado) {
       }
       html += '</ul>';
     }
-    if (errosOutros.length > 0) {
-      html += '<p class="revalidacao-sub">Erros (impedem o envio):</p><ul class="revalidacao-erros">';
-      for (const e of errosOutros) html += `<li class="erro">⛔ ${texto(e)}</li>`;
+    const errosFixos = errosOutros.filter((e) => e.excecionavel !== true);
+    const errosRegra = errosOutros.filter((e) => e.excecionavel === true);
+    if (errosFixos.length > 0) {
+      html += '<p class="revalidacao-sub">Erros (impedem o envio; precisam ser corrigidos):</p><ul class="revalidacao-erros">';
+      for (const e of errosFixos) html += `<li class="erro">⛔ ${texto(e)}</li>`;
       html += '</ul>';
     }
+    html += htmlErrosExcecionaveis(errosRegra, estado.excecoes, 'excecao-check', texto);
     if (avisos.length > 0) {
       html += '<p class="revalidacao-sub">Avisos (marque ciência de cada um):</p><ul class="revalidacao-avisos">';
       for (const a of avisos) {
@@ -2352,6 +2636,16 @@ function mostrarRevalidacao(resultado) {
     }
   }
   painel.innerHTML = html;
+
+  painel.querySelectorAll('.excecao-check').forEach((cb) => {
+    cb.addEventListener('change', () => {
+      const id = decodeURIComponent(cb.dataset.erro);
+      if (cb.checked) estado.excecoes.add(id);
+      else estado.excecoes.delete(id);
+      salvarExcecoes();
+      atualizarBotaoEnviar();
+    });
+  });
 
   painel.querySelectorAll('.ciencia-check').forEach((cb) => {
     cb.addEventListener('change', () => {
@@ -2376,8 +2670,11 @@ async function publicar() {
   const resultado = await revalidarEnvio();
   if (!resultado) return;
   if (!podeEnviar()) {
-    if ((resultado.erros || []).length > 0) {
+    const pendentes = errosPendentes(resultado.erros, estado.excecoes);
+    if (pendentes.some((e) => e.excecionavel !== true)) {
       alert('Há erros que impedem a publicação. Corrija os itens em vermelho e tente de novo.');
+    } else if (pendentes.length > 0) {
+      alert('Há regras violadas. Corrija ou marque a confirmação de exceção de cada uma antes de enviar.');
     } else {
       alert('Marque a ciência de cada aviso antes de enviar.');
     }
@@ -2388,7 +2685,11 @@ async function publicar() {
     (resultado.avisos || []).length > 0
       ? `\n\nAvisos (com ciência):\n- ${resultado.avisos.map(textoAviso).join('\n- ')}`
       : '';
-  if (!confirm(`Publicar a escala de ${formatarMesTitulo(estado.mes)} no site?${avisoTxt}\n\nIsto grava o atual.json e publica no GitHub.`)) {
+  const excecoesEnvio = excecoesDaRevalidacao(resultado, estado.excecoes);
+  const excecaoTxt = excecoesEnvio.length > 0
+    ? `\n\nExceções confirmadas pelo diretor:\n- ${resultado.erros.filter((e) => excecoesEnvio.includes(e.id)).map(textoAviso).join('\n- ')}`
+    : '';
+  if (!confirm(`Publicar a escala de ${formatarMesTitulo(estado.mes)} no site?${avisoTxt}${excecaoTxt}\n\nIsto grava o atual.json e publica no GitHub.`)) {
     return;
   }
 
@@ -2404,6 +2705,7 @@ async function publicar() {
         mes: estado.mes,
         cultos: estado.cultos,
         ciencias: [...estado.ciencias],
+        excecoes: excecoesEnvio,
       }),
     });
     mostrarRelatorioFechamento(relatorio);
@@ -3206,6 +3508,7 @@ function abrirFormPessoa(pessoa) {
   el('pfNome').value = p.nome || '';
   el('pfAliases').value = (p.aliases || []).join(', ');
   el('pfTelefone').value = p.telefone || '';
+  popularContatoVia(p);
   el('pfGenero').value = p.genero || 'F';
   el('pfPerfil').value = p.perfil_canto == null ? '' : p.perfil_canto;
   el('pfAtivo').value = p.ativo === false ? 'false' : 'true';
@@ -3218,6 +3521,7 @@ function abrirFormPessoa(pessoa) {
   const dias = p.dias_permitidos || [];
   el('pfDiaSabado').checked = dias.includes('sabado');
   el('pfDiaDomingo').checked = dias.includes('domingo');
+  el('pfLimiteMensal').value = p.limite_mensal == null ? '' : String(p.limite_mensal);
   el('pfAfastado').checked = !!(p.afastado && p.afastado.ativo);
   el('pfAfastadoAte').value = (p.afastado && p.afastado.ate) || '';
   el('pfAfastadoMotivo').value = (p.afastado && p.afastado.motivo) || '';
@@ -3261,6 +3565,40 @@ function popularVinculos(p) {
       .join('');
 }
 
+/**
+ * Preenche "WhatsApp de quem?" com as pessoas que têm telefone. Escolher uma
+ * pessoa trava o campo telefone: o número passa a ser o dela.
+ */
+function popularContatoVia(p) {
+  const sel = el('pfContatoVia');
+  if (!sel) return;
+  const comTelefone = gestao.pessoas
+    .filter((x) => x.id !== p.id && soDigitos(x.telefone))
+    .sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
+  sel.innerHTML =
+    '<option value="">Telefone próprio</option>' +
+    comTelefone
+      .map((x) => `<option value="${x.id}"${x.id === p.contato_via_id ? ' selected' : ''}>WhatsApp de ${escaparHtml(x.nome)}</option>`)
+      .join('');
+  sel.onchange = atualizarCampoTelefoneVia;
+  atualizarCampoTelefoneVia();
+}
+
+/** Trava/destrava o telefone conforme "WhatsApp de quem?". */
+function atualizarCampoTelefoneVia() {
+  const sel = el('pfContatoVia');
+  const tel = el('pfTelefone');
+  if (!sel || !tel) return;
+  const viaId = sel.value ? Number(sel.value) : null;
+  if (viaId) {
+    const via = gestao.pessoas.find((x) => x.id === viaId);
+    tel.value = via ? via.telefone || '' : '';
+    tel.disabled = true;
+  } else {
+    tel.disabled = false;
+  }
+}
+
 /** Coleta os vínculos escolhidos no formulário. */
 function coletarVinculos() {
   const sempreJunto = [...el('pfSempreJunto').selectedOptions].map((o) => Number(o.value));
@@ -3283,6 +3621,7 @@ function coletarFormPessoa() {
     nome: el('pfNome').value,
     aliases: el('pfAliases').value.split(',').map((s) => s.trim()).filter(Boolean),
     telefone: el('pfTelefone').value,
+    contato_via_id: el('pfContatoVia') && el('pfContatoVia').value ? Number(el('pfContatoVia').value) : null,
     genero: el('pfGenero').value,
     perfil_canto: el('pfPerfil').value || null,
     ativo: el('pfAtivo').value === 'true',
@@ -3297,6 +3636,7 @@ function coletarFormPessoa() {
       sonoplastia: el('pfSonoplastia').checked,
     },
     dias_permitidos: dias.length ? dias : null,
+    limite_mensal: el('pfLimiteMensal').value.trim() === '' ? null : Number(el('pfLimiteMensal').value),
     afastado: el('pfAfastado').checked
       ? { ativo: true, ate: el('pfAfastadoAte').value || null, motivo: el('pfAfastadoMotivo').value || '' }
       : null,
@@ -3345,9 +3685,10 @@ async function salvarPessoa() {
   }
 
   // 3) Telefone novo/alterado: abrir WhatsApp e confirmar.
+  // (Contato via outra pessoa: o número já foi confirmado no cadastro dela.)
   const telNovo = soDigitos(dados.telefone);
   const telAntigo = soDigitos(gestao.telefoneOriginal);
-  if (telNovo && telNovo !== telAntigo) {
+  if (!dados.contato_via_id && telNovo && telNovo !== telAntigo) {
     const ok = await confirmarWhatsApp(telNovo, verificacao.telefoneCompartilhadoCom || []);
     if (!ok) return; // "não": volta ao formulário sem salvar
     await gravarPessoa(dados, { confirmacaoTelefone: true, confirmarAvisos });
@@ -3678,6 +4019,24 @@ const PESO_LABEL = {
   diasDesdeUltima: 'Dias desde a última',
 };
 
+/** Nome em português de cada regra de parametros.json (editor de níveis). */
+const REGRA_PARAM_LABEL = {
+  indisponibilidade: 'Escalar quem votou que não pode (enquete)',
+  conflito_sonoplastia: 'Pessoa na sonoplastia do mesmo culto',
+  conflito_regencia: 'Regente em outra função do mesmo culto',
+  repeticao_no_culto: 'Mesma pessoa em duas funções do culto',
+  conflito_pregador: 'Pregador do culto cantando no louvor',
+  equipe_e_mm_mesmo_culto: 'Equipe e mensagem musical no mesmo culto',
+  minimo_homens: 'Equipe sem o mínimo de homens',
+  mm_por_mes: 'Mais mensagens musicais no mês que o máximo',
+  consecutivo: 'Cantou no culto anterior',
+  equipe_incompleta: 'Equipe incompleta',
+  regente_vazio: 'Culto sem regente',
+  mm_vazia: 'Mensagem musical vazia',
+  vinculo: 'Casal, família ou "precisa de" sem a outra pessoa no culto',
+  limite_mensal: 'Passou do limite de escalas no mês (cadastro da pessoa)',
+};
+
 function escaparHtml(texto) {
   return String(texto == null ? '' : texto)
     .replace(/&/g, '&amp;')
@@ -3724,6 +4083,28 @@ function preencherEditorParametros(p) {
     (p.regras && p.regras.mm_sabado && p.regras.mm_sabado.valores && p.regras.mm_sabado.valores.quantidade) || 2;
   el('paramMinHomens').value =
     (p.regras && p.regras.minimo_homens && p.regras.minimo_homens.valores && p.regras.minimo_homens.valores.minimo) || 1;
+
+  // Nível de cada regra (bloqueio/aviso) e se está ligada. Regras sem nível
+  // (ex.: mm_sabado, que só tem valores) ficam fora desta tabela.
+  const niveisBox = el('regrasNiveis');
+  if (niveisBox) {
+    niveisBox.innerHTML = '';
+    for (const [chave, def] of Object.entries((p && p.regras) || {})) {
+      if (!def || !def.nivel) continue;
+      const refs = (def.refs || []).length ? ` <small>(${escaparHtml(def.refs.join(', '))})</small>` : '';
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${escaparHtml(REGRA_PARAM_LABEL[chave] || chave)}${refs}</td>
+        <td><input type="checkbox" class="param-ativa" data-regra="${escaparHtml(chave)}"${def.ativa === true ? ' checked' : ''} /></td>
+        <td>
+          <select class="campo-input param-nivel" data-regra="${escaparHtml(chave)}">
+            <option value="bloqueio"${def.nivel === 'bloqueio' ? ' selected' : ''}>Bloqueio</option>
+            <option value="aviso"${def.nivel === 'aviso' ? ' selected' : ''}>Aviso</option>
+          </select>
+        </td>`;
+      niveisBox.appendChild(tr);
+    }
+  }
 
   const pesosBox = el('regrasPesos');
   pesosBox.innerHTML = '';
@@ -3903,6 +4284,14 @@ async function salvarParametrosUI() {
   }
   if (p.regras && p.regras.minimo_homens) {
     p.regras.minimo_homens.valores = { ...(p.regras.minimo_homens.valores || {}), minimo: Number(el('paramMinHomens').value) };
+  }
+  for (const cb of document.querySelectorAll('.param-ativa')) {
+    const def = p.regras && p.regras[cb.dataset.regra];
+    if (def) def.ativa = cb.checked;
+  }
+  for (const sel of document.querySelectorAll('.param-nivel')) {
+    const def = p.regras && p.regras[sel.dataset.regra];
+    if (def) def.nivel = sel.value;
   }
   p.score = p.score || {};
   p.score.pesos = { ...(p.score.pesos || {}) };
@@ -4103,6 +4492,7 @@ const ajuste = {
   ocupantes: [], // lista de ocupantes (id | 'grupo:<chave>') em edição
   previa: null, // { erros, avisos, conferencia }
   ciencias: new Set(),
+  excecoes: new Set(), // ids de bloqueio de regra liberados pelo diretor
 };
 
 const AJUSTE_CAMPOS_NOME = new Set(['REGENTE LOUVOR', 'EQUIPE LOUVOR', 'MENSAGEM MUSICAL']);
@@ -4146,6 +4536,7 @@ async function abrirAjustePublicada() {
     ajuste.dataIso = null;
     ajuste.previa = null;
     ajuste.ciencias = new Set();
+  ajuste.excecoes = new Set();
 
     if (!mes || ajuste.linhas.length === 0) {
       el('ajusteVazio').hidden = false;
@@ -4190,6 +4581,7 @@ function selecionarCultoAjuste(iso) {
   ajuste.dataIso = iso;
   ajuste.previa = null;
   ajuste.ciencias = new Set();
+  ajuste.excecoes = new Set();
   el('ajustePainelRevalidacao').hidden = true;
   el('ajustePainelRevalidacao').innerHTML = '';
   renderAjusteListaCultos();
@@ -4224,6 +4616,7 @@ function carregarCampoAjuste() {
   // Zera a prévia (trocou de campo): precisa prever de novo antes de salvar.
   ajuste.previa = null;
   ajuste.ciencias = new Set();
+  ajuste.excecoes = new Set();
   el('ajustePainelRevalidacao').hidden = true;
   el('ajustePainelRevalidacao').innerHTML = '';
   atualizarBotaoSalvarAjuste();
@@ -4375,6 +4768,8 @@ async function previaAjuste() {
     ajuste.previa = resultado;
     const idsAtuais = new Set((resultado.avisos || []).map((a) => a.id));
     ajuste.ciencias = new Set([...ajuste.ciencias].filter((id) => idsAtuais.has(id)));
+    const errosAtuais = new Set((resultado.erros || []).map((e) => e.id));
+    ajuste.excecoes = new Set([...ajuste.excecoes].filter((id) => errosAtuais.has(id)));
     mostrarRevalidacaoAjuste(resultado);
   } catch (err) {
     alert('Erro ao revalidar o ajuste: ' + err.message);
@@ -4409,11 +4804,14 @@ function mostrarRevalidacaoAjuste(resultado) {
       }
       html += '</ul>';
     }
-    if (errosOutros.length > 0) {
-      html += '<p class="revalidacao-sub">Erros (impedem o ajuste):</p><ul class="revalidacao-erros">';
-      for (const e of errosOutros) html += `<li class="erro">⛔ ${texto(e)}</li>`;
+    const errosFixos = errosOutros.filter((e) => e.excecionavel !== true);
+    const errosRegra = errosOutros.filter((e) => e.excecionavel === true);
+    if (errosFixos.length > 0) {
+      html += '<p class="revalidacao-sub">Erros (impedem o ajuste; precisam ser corrigidos):</p><ul class="revalidacao-erros">';
+      for (const e of errosFixos) html += `<li class="erro">⛔ ${texto(e)}</li>`;
       html += '</ul>';
     }
+    html += htmlErrosExcecionaveis(errosRegra, ajuste.excecoes, 'excecao-ajuste', texto);
     if (avisos.length > 0) {
       html += '<p class="revalidacao-sub">Avisos (marque ciência de cada um):</p><ul class="revalidacao-avisos">';
       for (const a of avisos) {
@@ -4426,6 +4824,15 @@ function mostrarRevalidacaoAjuste(resultado) {
     }
   }
   painel.innerHTML = html;
+
+  painel.querySelectorAll('.excecao-ajuste').forEach((cb) => {
+    cb.addEventListener('change', () => {
+      const id = decodeURIComponent(cb.dataset.erro);
+      if (cb.checked) ajuste.excecoes.add(id);
+      else ajuste.excecoes.delete(id);
+      atualizarBotaoSalvarAjuste();
+    });
+  });
 
   painel.querySelectorAll('.ciencia-ajuste').forEach((cb) => {
     cb.addEventListener('change', () => {
@@ -4443,7 +4850,7 @@ function mostrarRevalidacaoAjuste(resultado) {
 function podeSalvarAjuste() {
   const r = ajuste.previa;
   if (!r) return false;
-  if ((r.erros || []).length > 0) return false;
+  if (errosPendentes(r.erros, ajuste.excecoes).length > 0) return false;
   return (r.avisos || []).every((a) => ajuste.ciencias.has(a.id));
 }
 
@@ -4456,7 +4863,9 @@ function atualizarBotaoSalvarAjuste() {
 async function salvarAjuste() {
   if (!podeSalvarAjuste()) {
     if (!ajuste.previa) alert('Clique em "Prévia" antes de salvar.');
-    else if ((ajuste.previa.erros || []).length > 0) alert('Corrija os erros em vermelho antes de salvar.');
+    else if (errosPendentes(ajuste.previa.erros, ajuste.excecoes).length > 0) {
+      alert('Corrija os erros em vermelho ou confirme a exceção de cada regra violada antes de salvar.');
+    }
     else alert('Marque a ciência de cada aviso antes de salvar.');
     return;
   }
@@ -4470,6 +4879,7 @@ async function salvarAjuste() {
         campo: ajuste.campo,
         valor: valorDoAjuste(),
         ciencias: [...ajuste.ciencias],
+        excecoes: excecoesDaRevalidacao(ajuste.previa, ajuste.excecoes),
       }),
     });
     setStatus('Ajuste publicado', 'ok');
@@ -4702,8 +5112,20 @@ function init() {
     fechar.addEventListener('click', fecharSeletor);
   }
   el('seletorBusca').addEventListener('input', aplicarBusca);
+
+  // Cadastro rápido de convidado (contato obrigatório).
+  el('btnCadastrarConvidado').addEventListener('click', abrirCadastroConvidado);
+  el('btnSalvarConvidado').addEventListener('click', salvarConvidado);
+  el('cvContatoProprio').addEventListener('change', atualizarContatoConvidado);
+  el('cvContatoVia').addEventListener('change', atualizarContatoConvidado);
+  for (const fechar of document.querySelectorAll('[data-fechar-convidado]')) {
+    fechar.addEventListener('click', fecharCadastroConvidado);
+  }
+
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') fecharSeletor();
+    if (e.key !== 'Escape') return;
+    if (!el('modalConvidado').hidden) fecharCadastroConvidado();
+    else fecharSeletor();
   });
 }
 

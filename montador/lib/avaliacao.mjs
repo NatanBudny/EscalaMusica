@@ -20,6 +20,9 @@ import { gruposEscalaveis } from './grupos.mjs';
 /** Slots de mensagem musical. */
 const SLOTS_MM = new Set(['mm_es', 'mm_culto', 'mm_domingo']);
 
+/** Regras novas que, ausentes de um parametros.json antigo, valem como aviso. */
+const CHAVES_COM_AVISO_PADRAO = new Set(['vinculo', 'limite_mensal']);
+
 /** Converte uma data ISO para DD/MM/AAAA (mensagens de validação). */
 function toBrDate(iso) {
   const [ano, mes, dia] = String(iso || '').split('-');
@@ -236,6 +239,15 @@ export function criarEstadoMes(base, cultos) {
       return total;
     },
 
+    /** Em quantos cultos de louvor do mês o ocupante está, sem contar `exceto` (data). */
+    cultosNoMes(ocupante, { exceto } = {}) {
+      const set = cultosDeLouvorComOcupante.get(chaveOc(ocupante));
+      if (!set) return 0;
+      let total = 0;
+      for (const d of set) if (d !== exceto) total += 1;
+      return total;
+    },
+
     /** O ocupante participou do culto de louvor imediatamente anterior a `data`? */
     noCultoAnterior(data, ocupante) {
       const idx = datasLouvor.indexOf(data);
@@ -298,7 +310,7 @@ function fixoAviso(chave, texto) {
  * @param {number|string} ocupante - pessoaId | 'grupo:<chave>'
  * @returns {{ bloqueios: object[], avisos: object[] }}
  */
-export function avaliarAtribuicao(base, estado, data, slot, ocupante) {
+export function avaliarAtribuicao(base, estado, data, slot, ocupante, { modo = 'candidato' } = {}) {
   if (ehOcupanteGrupo(ocupante)) {
     return avaliarGrupo(base, estado, data, slot, ocupante.slice('grupo:'.length));
   }
@@ -311,9 +323,12 @@ export function avaliarAtribuicao(base, estado, data, slot, ocupante) {
   const a = [];
 
   const add = (chave, texto) => {
-    const n = nivelDe(par, chave);
+    // Regra ausente de um parametros.json antigo (vinculo, limite_mensal) vale
+    // como aviso; regra presente e desligada (ativa: false) não gera motivo.
+    const presente = !!(par.regras && par.regras[chave]);
+    const n = presente ? nivelDe(par, chave) : CHAVES_COM_AVISO_PADRAO.has(chave) ? 'aviso' : null;
     if (!n) return;
-    const refs = (par.regras && par.regras[chave] && par.regras[chave].refs) || [];
+    const refs = (presente && par.regras[chave].refs) || [];
     (n === 'bloqueio' ? b : a).push({ chave, refs, nivel: n, texto });
   };
 
@@ -361,9 +376,25 @@ export function avaliarAtribuicao(base, estado, data, slot, ocupante) {
 
   if (estado.noCultoAnterior(data, ocupante)) add('consecutivo', 'cantou no culto anterior');
 
-  // Avisos de vínculo não atendido no culto.
+  // Limite de escalas no mês definido no cadastro (limite_mensal).
+  const limite = Number(p.limite_mensal);
+  if (Number.isInteger(limite) && limite > 0) {
+    const jaTem = estado.cultosNoMes(ocupante, { exceto: data });
+    if (jaTem >= limite) add('limite_mensal', `já tem ${jaTem} escala(s) no mês (limite do cadastro: ${limite})`);
+  }
+
+  // Vínculo não atendido no culto. Na escolha (modo 'candidato') é só lembrete:
+  // o par/família ainda pode ser escolhido depois. Na validação da escala
+  // montada vale o nível de parametros.json (regra 'vinculo').
   for (const texto of vinculosNaoAtendidos(base, estado, data, p)) {
-    a.push({ chave: 'vinculo', refs: [], nivel: 'aviso', texto });
+    const regraVinculo = par.regras && par.regras.vinculo;
+    if (regraVinculo && regraVinculo.ativa !== true) continue; // desligada na tela de regras
+    if (modo === 'validacao') {
+      add('vinculo', texto);
+    } else {
+      const refs = (regraVinculo && regraVinculo.refs) || [];
+      a.push({ chave: 'vinculo', refs, nivel: 'aviso', texto });
+    }
   }
 
   // Aviso: membro de Grupo_Escalavel já escalado no culto.
