@@ -40,6 +40,8 @@ import { separarExcecoes, registroExcecoes, caminhoExcecoes } from './excecoes.m
 /** Insumos preservados pela limpeza (iguais ao coletor-lixo-pos-publicacao.js). */
 const INSUMOS_PRESERVADOS = new Set([
   'indisponibilidade-cantores.json',
+  // Mantido para o ajuste da escala publicada conferir a enquete (05/11/2026).
+  'indisponibilidade-cantores-vinculada.json',
   'mapeamento-indisponibilidade-contatos.md',
 ]);
 
