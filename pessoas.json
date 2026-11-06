@@ -1,7 +1,7 @@
 {
   "versao": "1.0.0",
   "proximo_id": 79,
-  "ultima_atualizacao": "2026-11-05",
+  "ultima_atualizacao": "2026-11-06",
   "grupos": {
     "familia_silva": {
       "membros_ids": [
@@ -1785,13 +1785,13 @@
       "genero": "F",
       "ativo": true,
       "perfil_canto": "participacao",
-      "notas": "Cadastrada em set/2026 a partir da enquete de indisponibilidade.",
+      "notas": "Cadastrada em set/2026 a partir da enquete de indisponibilidade. Habilitada para mensagem musical de sábado (diretor, 05/11/2026).",
       "habilitacoes": {
         "regente": false,
         "equipe": true,
         "mensagem_musical": {
-          "es": false,
-          "culto": false,
+          "es": true,
+          "culto": true,
           "domingo": false
         }
       },
